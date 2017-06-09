@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shishuo.cms.dao.MenuDao">
+
+	<resultMap id="withchildren" type="com.shishuo.cms.entity.Menu" extends="baseMap">
+		<collection property="children" ofType="com.shishuo.cms.entity.Menu">
+			<id column="cid" property="id"/>
+			<result column="cname" property="name"/>
+			<result column="cpid" property="pid"/>
+			<result column="curl" property="url"/>
+			<result column="csort" property="sort"/>
+			<result column="cstatus" property="status"/>
+		</collection>
+	</resultMap>
+
+	<resultMap id="baseMap" type="com.shishuo.cms.entity.Menu">
+		<id column="id" property="id" />
+		<result column="name" property="name"/>
+		<result column="url" property="url"/>
+		<result column="pid" property="pid"/>
+		<result column="status" property="status"/>
+		<result column="sort" property="sort"/>
+	</resultMap>
+
+	<!-- ############################## -->
+	<!-- ###### 增加 ###### -->
+	<!-- ############################## -->
+
+	<insert id="add" parameterType="com.shishuo.cms.entity.Menu" useGeneratedKeys="true" keyProperty="id">
+		insert into
+		menu(id,name,url,pid,sort,status)
+		value(#{id},#{name},#{url},#{pid},#{sort},#{status})
+	</insert>
+
+	<!-- ############################## -->
+	<!-- ###### 删除 ###### -->
+	<!-- ############################## -->
+
+	<delete id="delete" parameterType="long">
+		delete from menu where
+		id=#{id}
+	</delete>
+
+	<!-- ############################## -->
+	<!-- ###### 修改 ###### -->
+	<!-- ############################## -->
+
+	<update id="update">
+		update menu set name=#{name},url=#{url},status=#{status}
+		where id=#{id}
+	</update>
+	<!-- ############################## -->
+	<!-- ###### 查询 ###### -->
+	<!-- ############################## -->
+
+	<select id="getAll" resultMap="withchildren">
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid where p.pid = 0
+	</select>
+
+	<select id="getAllDisplay" resultMap="withchildren">
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
+	</select>
+
+	<select id="getAllParents" resultMap="baseMap">
+		select * from menu where pid = 0
+	</select>
+
+	<select id="getWithChildById" resultMap="withchildren">
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid where p.id = #{id}
+	</select>
+
+	<select id="getById" resultType="com.shishuo.cms.entity.Menu">
+		select * from menu where id = #{id}
+	</select>
+
+	<update id="modifySortById">
+		update menu set sort=#{1} where id = #{0}
+	</update>
+
+	<select id="getCountOfChilden" resultType="int">
+		select COUNT(*) from menu where pid = #{pid}
+	</select>
+
+</mapper>  
