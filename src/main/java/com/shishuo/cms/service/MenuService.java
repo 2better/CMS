@@ -2,6 +2,7 @@ package com.shishuo.cms.service;
 
 import com.shishuo.cms.dao.MenuDao;
 import com.shishuo.cms.entity.Menu;
+import com.shishuo.cms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,9 +21,13 @@ public class MenuService
     private MenuDao menuDao;
 
     @CacheEvict(value = "menu", allEntries = true)
-    public void add(Menu menu)
+    public void add(Menu menu,int createUrl)
     {
+        long id = IDUtils.genId();
+        menu.setId(id);
         menu.setSort(1);
+        if(createUrl!=0)
+            menu.setUrl("/manage/article/list.htm?menuId="+id);
         menuDao.add(menu);
     }
 
@@ -58,8 +63,10 @@ public class MenuService
     }
 
     @CacheEvict(value = "menu", allEntries = true)
-    public void update(Menu menu)
+    public void update(Menu menu,int createUrl)
     {
+        if(createUrl!=0)
+            menu.setUrl("/manage/article/list.htm?menuId="+menu.getId());
         menuDao.update(menu);
     }
 

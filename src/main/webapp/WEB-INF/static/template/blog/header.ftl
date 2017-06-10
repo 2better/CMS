@@ -38,7 +38,7 @@
 <div class="header">
     <div class="header-content">
         <div class="logo">
-            <a href="/001lt269/index.html"></a>
+            <a href="${BASE_PATH}/index.htm"></a>
         </div>
         <h3>
             创新理论与创新管理研究中心
@@ -47,7 +47,7 @@
         </h3>
         <!--搜索-->
         <div class="search">
-            <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
+            <span class="widget"><i>${.now?string('yyyy年MM月dd日')}</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
             <input id="keywords" name="keywords" class="input-text" type="text" x-webkit-speech="" placeholder="请输入关键字搜索" onkeydown="if(event.keyCode==13){SiteSearch('/001lt269/search.html', '#keywords');return false};"
             />
             <input class="input-btn" type="submit" value="" onclick="SiteSearch('/001lt269/search.html', '#keywords');" />

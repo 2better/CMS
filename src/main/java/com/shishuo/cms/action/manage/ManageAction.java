@@ -10,13 +10,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.shishuo.cms.entity.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shishuo.cms.entity.Admin;
-import com.shishuo.cms.entity.vo.ArticleVo;
 
 /**
  * @author lqq
@@ -35,9 +35,8 @@ public class ManageAction extends ManageBaseAction {
 		modelMap.put("articleCount", 0);
 		modelMap.put("downloadCount", 0);
 		modelMap.put("userCount", 0);
-		List<ArticleVo> articleList = articleService
-				.getArticleListByAdminIdAndFolderId(admin.getAdminId(), 0,
-						null, 0, 10);
+		List<Article> articleList = articleService
+				.getArticleListByAdminId(admin.getAdminId(),0, 10);
 		modelMap.put("articleList", articleList);
 		return "manage/index";
 	}

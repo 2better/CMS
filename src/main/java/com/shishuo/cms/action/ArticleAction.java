@@ -6,6 +6,7 @@
 
 package com.shishuo.cms.action;
 
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.shishuo.cms.entity.vo.ArticleVo;
 
 import java.util.List;
 
@@ -33,18 +33,17 @@ public class ArticleAction extends BaseAction {
 
 	@RequestMapping(value = "/{articleId}.htm", method = RequestMethod.GET)
 	public String article(@PathVariable long articleId,
-			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		try {
-			ArticleVo article = fileService.getArticleById(articleId);
+			Article article = fileService.getArticleById(articleId);
 			List<Menu> menuList = menuService.getAllDisplay();
+			Menu menu = menuService.getByid(article.getMenuId());
+			List<Menu> menus = menuService.getWithChildById(menu.getPid());
 			modelMap.put("menuList",menuList);
-			modelMap.addAttribute("p", p);
+			modelMap.put("menus",menus.get(0));
 			modelMap.addAttribute("article", article);
-			return themeService.getArticleTemplate(article.getFolderId(),
-					articleId);
+			return themeService.getArticleTemplate();
 		} catch (Exception e) {
-			modelMap.addAttribute("g_folderId", 0);
 			return themeService.get404();
 		}
 	}

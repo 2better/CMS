@@ -26,6 +26,12 @@
 	                              </input>
 	                          </div>
 	                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-3  control-label">由系统生成URl</label>
+                                <div class="col-sm-2">
+                                    <input type="checkbox"  class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
+                                </div>
+                            </div>
                         	<div class="form-group">
 	                          <label class="col-sm-2 col-sm-2 control-label">URL</label>
 	                          <div class="col-sm-10">
@@ -62,6 +68,14 @@
 <!--main content end-->
 <script type="text/javascript">
 	$(function() {
+
+        /*$("#createUrl").change(function () {
+            if($("#createUrl").is(':checked'))
+                $("#ename").attr("disabled","disabled");
+            else
+                $("#ename").removeAttr("disabled");
+        });*/
+
 		$('#update_folder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {

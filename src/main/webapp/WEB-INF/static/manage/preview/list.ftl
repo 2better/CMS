@@ -37,7 +37,6 @@
 	<!--main content start-->
 	<section id="main-content">
 		<section class="wrapper">
-		<#if SESSION_ADMIN.isAdmin>
 			<div class="row">
 	                  <div class="col-lg-12">
 	                      <!--breadcrumbs start -->
@@ -49,7 +48,7 @@
 	                      <!--breadcrumbs end -->
 	                  </div>
 	              </div>
-              </#if>		
+
         	<!-- page start-->
             <section class="panel">
 	                <header class="panel-heading">

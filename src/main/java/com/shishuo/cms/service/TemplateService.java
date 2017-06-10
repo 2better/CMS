@@ -104,19 +104,13 @@ public class TemplateService {
 	 * @return
 	 * @throws TemplateNotFoundException
 	 */
-	public String getArticleTemplate(long folderId, long articleId)
+	public String getArticleTemplate()
 			throws TemplateNotFoundException{
-		List<String> themeOrderList = new ArrayList<String>();
-		themeOrderList.add(FILE_TEMPLATE_PREFIX);
-		String themeString = FILE_TEMPLATE_PREFIX;
-		themeOrderList.add(themeString + "-" + articleId);
-		// 模板顺序反转
-		Collections.reverse(themeOrderList);
-		for (String theme : themeOrderList) {
-			if (this.isExist(theme)) {
-				return this.getTemplatePath(theme);
+
+			if (this.isExist(FILE_TEMPLATE_PREFIX)) {
+				return this.getTemplatePath(FILE_TEMPLATE_PREFIX);
 			}
-		}
+
 		throw new TemplateNotFoundException("模板文件："
 				+ this.getTemplatePath(FILE_TEMPLATE_PREFIX) + " 不存在！！");
 	}

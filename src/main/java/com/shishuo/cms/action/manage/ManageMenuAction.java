@@ -54,8 +54,9 @@ public class ManageMenuAction extends ManageBaseAction
     public JsonVo<String> add(
             @RequestParam(value = "pid", defaultValue = "0") long pid,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "url") String url,
-            @RequestParam(value = "status") FolderConstant.status status) {
+            @RequestParam(value = "url",defaultValue = "") String url,
+            @RequestParam(value = "status") FolderConstant.status status,
+            @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();
         try {
             if (StringUtils.isBlank(name)) {
@@ -70,7 +71,7 @@ public class ManageMenuAction extends ManageBaseAction
             menu.setStatus(status);
             menu.setUrl(url);
 
-            menuService.add(menu);
+            menuService.add(menu,createUrl);
 
             json.setResult(true);
         } catch (Exception e) {
@@ -119,8 +120,9 @@ public class ManageMenuAction extends ManageBaseAction
     public JsonVo<String> update(
             @RequestParam(value = "id") long id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "url") String url,
-            @RequestParam(value = "status") FolderConstant.status status) {
+            @RequestParam(value = "url",required = false) String url,
+            @RequestParam(value = "status") FolderConstant.status status,
+            @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();
         try {
             if (name.equals("")) {
@@ -134,7 +136,7 @@ public class ManageMenuAction extends ManageBaseAction
             menu.setStatus(status);
             menu.setId(id);
 
-            menuService.update(menu);
+            menuService.update(menu,createUrl);
 
             json.setResult(true);
         } catch (Exception e) {

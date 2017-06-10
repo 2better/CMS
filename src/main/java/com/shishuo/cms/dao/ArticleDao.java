@@ -11,10 +11,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.shishuo.cms.constant.ArticleConstant;
-import com.shishuo.cms.constant.ArticleConstant.check;
 import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.entity.vo.ArticleVo;
+
 
 /**
  * 文件服务
@@ -34,7 +32,7 @@ public interface ArticleDao {
 	 * 
 	 * @return Integer
 	 */
-	public int addArticle(Article article);
+	public void addArticle(Article article);
 
 	// ///////////////////////////////
 	// ///// 刪除 ////////
@@ -59,29 +57,6 @@ public interface ArticleDao {
 	 */
 	public int updateArticle(Article article);
 
-	/**
-	 * 更新浏览人数
-	 * 
-	 * @param articleId
-	 * @param viewCount
-	 * @return int
-	 */
-	public int updateViewCount(@Param("articleId") long articleId,
-			@Param("viewCount") int viewCount);
-
-	/**
-	 * 更新评论数
-	 * 
-	 * @param articleId
-	 * @param commentCount
-	 * @return int
-	 */
-
-	public int updateCommentCount(@Param("articleId") long articleId,
-			@Param("commentCount") int commentCount);
-
-	public int updateCheck(@Param("articleId") long articleId,
-			@Param("check") check check);
 
 	// ///////////////////////////////
 	// ///// 查詢 ////////
@@ -93,25 +68,8 @@ public interface ArticleDao {
 	 * @param articleId
 	 * @return File
 	 */
-	public ArticleVo getArticleById(@Param("articleId") long articleId);
+	public Article getArticleById(@Param("articleId") long articleId);
 
-	/**
-	 * 得到目录的文件的列表
-	 * 
-	 * @param foderId
-	 * @return List<FileVo>
-	 */
-	public List<ArticleVo> getArticleListOfDisplayByPath(
-			@Param("path") String path, @Param("offset") long offset,
-			@Param("rows") long rows);
-
-	/**
-	 * 得到目录的所有文件的数量
-	 * 
-	 * @param foderId
-	 * @return Integer
-	 */
-	public int getArticleCountOfDisplayByPath(@Param("path") String path);
 
 	/**
 	 * 得到某种显示的文件的列表
@@ -119,9 +77,8 @@ public interface ArticleDao {
 	 * @param foderId
 	 * @return List<FileVo>
 	 */
-	public List<ArticleVo> getArticleListByAdminIdAndPath(
-			@Param("adminId") long adminId, @Param("path") String path,
-			@Param("check") ArticleConstant.check check,
+	public List<Article> getArticleListByAdminId(
+			@Param("adminId") long adminId,
 			@Param("offset") long offset, @Param("rows") long rows);
 
 	/**
@@ -131,15 +88,21 @@ public interface ArticleDao {
 	 * @param fourthFolderId
 	 * @return
 	 */
-	public int getArticleCountByAdminIdAndPath(@Param("adminId") long adminId,
-			@Param("path") String path,
-			@Param("check") ArticleConstant.check check);
+	public int getArticleCountByAdminId(@Param("adminId") long adminId);
 
 	/**
 	 * @param adminId
 	 * @param path
 	 * @return
 	 */
-	public int getArticleCountByFolderId(@Param("folderId") long folderId);
+	public int getArticleCountByMenuId(@Param("menuId") long menuId);
+
+	public List<Article> getArticleListByMenuId(
+			@Param("menuId") long menuId,
+			@Param("offset") long offset, @Param("rows") long rows);
+
+	public List<Article> findByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("offset") int offset, @Param("rows") int rows);
+
+	int allCountByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status);
 
 }

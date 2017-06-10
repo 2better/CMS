@@ -84,7 +84,7 @@
                             </span>
                           </header>
                           <ul class="list-group">
-                          <#list folderAll as firstFolder>
+                          <#--<#list folderAll as firstFolder>
                           	<li class="list-group-item">
                           		<div style="width:50% float:left">
                           			${firstFolder.pathName}
@@ -96,7 +96,7 @@
 									</a>
                   				</div>
                   			</li>
-                          </#list>
+                          </#list>-->
                           </ul>
                       </section>
                   </div>
