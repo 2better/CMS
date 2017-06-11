@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.shishuo.cms.entity.Admin;
-import com.shishuo.cms.entity.vo.AdminVo;
 
 /**
  * 管理员
@@ -100,6 +99,6 @@ public interface AdminDao {
 	 * @return Admin
 	 * 
 	 */
-	public AdminVo getAdminByName(@Param("name") String name);
+	public Admin getAdminByName(@Param("name") String name);
 
 }

@@ -1,5 +1,7 @@
 package com.shishuo.cms.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,6 +12,8 @@ import java.util.Date;
 public class Document
 {
     private long id;
+    private long adminId;
+    private String adminName;
     private String name;
     private String type;
     private String path;
@@ -62,5 +66,27 @@ public class Document
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public long getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(long adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public String getCreatedView() {
+        if(this.created == null ) return "";
+        DateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+        return df.format(this.created);
     }
 }

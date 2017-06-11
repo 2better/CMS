@@ -205,6 +205,19 @@
 			<version>3.0.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+
 	</dependencies>
 
 
@@ -288,7 +301,7 @@
 		</resources>
 	</build>
 	<properties>
-		<webapp.port>8080</webapp.port>
+		<webapp.port>80</webapp.port>
 		<webapp.stopPort>9090</webapp.stopPort>
 		<webapp.path>/</webapp.path>
 	</properties>

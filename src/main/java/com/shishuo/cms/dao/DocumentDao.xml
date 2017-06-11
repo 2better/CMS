@@ -5,6 +5,8 @@
 
 	<resultMap id="baseMap" type="com.shishuo.cms.entity.Document">
 		<id column="id" property="id" />
+		<result column="adminId" property="adminId"/>
+		<result column="adminName" property="adminName"/>
 		<result column="name" property="name"/>
 		<result column="type" property="type"/>
 		<result column="path" property="path"/>
@@ -13,15 +15,11 @@
 	</resultMap>
 
 
-	<insert id="add" parameterType="com.shishuo.cms.entity.Document" useGeneratedKeys="true" keyProperty="id">
+	<insert id="add" parameterType="com.shishuo.cms.entity.Document">
 		insert into
-		document(id,name,type,path,preview,created)
-		values(#{id},#{name},#{type},#{path},#{preview},#{created})
+		document(id,adminId,adminName,name,type,path,preview,created)
+		values(#{id},#{adminId},#{adminName},#{name},#{type},#{path},#{preview},#{created})
 	</insert>
-
-	<select id="getDocList" resultMap="baseMap">
-		select * from document
-	</select>
 
 	<select id="getById" resultType="com.shishuo.cms.entity.Document">
 		SELECT * from document WHERE id = #{id}
@@ -34,5 +32,30 @@
 	<delete id="delete" parameterType="long">
 		DELETE from document where id = #{id}
 	</delete>
+
+	<select id="findByCondition" resultMap="baseMap">
+		SELECT * from document
+		<where>
+			<if test="adminId!=-1">
+				and adminId = #{adminId}
+			</if>
+			<if test="keywords!=''">
+				and name like "%${keywords}%"
+			</if>
+		</where>
+		limit #{offset},#{rows}
+	</select>
+
+	<select id="allCountByCondition" resultType="int">
+		SELECT count(*) from document
+		<where>
+			<if test="adminId!=-1">
+				and adminId = #{adminId}
+			</if>
+			<if test="keywords!=''">
+				and name like "%${keywords}%"
+			</if>
+		</where>
+	</select>
 
 </mapper>  

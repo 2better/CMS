@@ -84,7 +84,7 @@
                             </span>
                           </header>
                           <ul class="list-group">
-                          <#list folderAll as firstFolder>
+                          <#--<#list folderAll as firstFolder>
                           	<li class="list-group-item">
                           		<div style="width:50% float:left">
                           			${firstFolder.pathName}
@@ -96,7 +96,7 @@
 									</a>
                   				</div>
                   			</li>
-                          </#list>
+                          </#list>-->
                           </ul>
                       </section>
                   </div>
@@ -109,14 +109,14 @@
                           </header>
                           <li class="list-group-item" style="background-color:#DFF0D8;"><a href="${BASE_PATH}/manage/article/add.htm">添加文章</a></li>
                           <ul class="list-group">
-                          	<#list articleList as article>
+                          	<#--<#list articleList as article>
                           		<li class="list-group-item" style="background-color:#FCF8E3;height:33px;">
                           			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}">${article.title}</a>
                           			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}" title="修改" style="float:right;">
                   						[修改]
                   					</a>
                           		</li>
-                          	</#list>
+                          	</#list>-->
                           </ul>
                       </section>
                   </div>

@@ -6,6 +6,8 @@
 
 package com.shishuo.cms.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.shishuo.cms.constant.ArticleConstant;
@@ -19,75 +21,17 @@ import com.shishuo.cms.constant.ArticleConstant;
 
 public class Article {
 
-	/**
-	 * 文件Id
-	 */
 	private long articleId;
-
-	/**
-	 * 所属目录的第一级Id
-	 */
-	private long folderId;
-
-	/**
-	 * 
-	 */
-	private String path;
-
-	/**
-	 * 管理员Id
-	 */
+	private long menuId;
+	private String menuName;
+	private String adminName;
 	private long adminId;
-
-	/**
-	 * 文件名称
-	 */
 	private String title;
-
-	/**
-	 * 文件名称
-	 */
-	private String summary;
-
-	/**
-	 * 文件内容
-	 */
 	private String content;
-
-	/**
-	 * 封面
-	 */
-	private String picture;
-
-	/**
-	 * 浏览人数
-	 */
-	private int viewCount;
-
-	/**
-	 * 评论人数
-	 */
-	private int commentCount;
-
-	/**
-	 * 文件状态
-	 */
 	private ArticleConstant.Status status;
-
-	/**
-	 * 审核
-	 */
-	private ArticleConstant.check check;
-
-	/**
-	 * 创建时间
-	 */
 	private Date createTime;
 
-	/**
-	 * 更新时间
-	 */
-	private Date updateTime;
+	private Menu menu = new Menu();
 
 	public long getArticleId() {
 		return articleId;
@@ -95,22 +39,6 @@ public class Article {
 
 	public void setArticleId(long articleId) {
 		this.articleId = articleId;
-	}
-
-	public long getFolderId() {
-		return folderId;
-	}
-
-	public void setFolderId(long folderId) {
-		this.folderId = folderId;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	public long getAdminId() {
@@ -129,14 +57,6 @@ public class Article {
 		this.title = title;
 	}
 
-	public String getSummary() {
-		return summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -145,29 +65,6 @@ public class Article {
 		this.content = content;
 	}
 
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
-	public int getViewCount() {
-		return viewCount;
-	}
-
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
-	}
-
-	public int getCommentCount() {
-		return commentCount;
-	}
-
-	public void setCommentCount(int commentCount) {
-		this.commentCount = commentCount;
-	}
 
 	public ArticleConstant.Status getStatus() {
 		return status;
@@ -175,14 +72,6 @@ public class Article {
 
 	public void setStatus(ArticleConstant.Status status) {
 		this.status = status;
-	}
-
-	public ArticleConstant.check getCheck() {
-		return check;
-	}
-
-	public void setCheck(ArticleConstant.check check) {
-		this.check = check;
 	}
 
 	public Date getCreateTime() {
@@ -193,11 +82,41 @@ public class Article {
 		this.createTime = createTime;
 	}
 
-	public Date getUpdateTime() {
-		return updateTime;
+	public long getMenuId() {
+		return menuId;
 	}
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
+	public void setMenuId(long menuId) {
+		this.menuId = menuId;
+	}
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
+
+	public String getCreateTimeView() {
+		if(this.createTime == null ) return "";
+		DateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+		return df.format(this.createTime);
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 }

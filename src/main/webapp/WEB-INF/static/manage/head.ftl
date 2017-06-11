@@ -83,10 +83,10 @@
 				<ul class="sidebar-menu" id="nav-accordion">
 					<#if SESSION_ADMIN.status= 0>
 					<li class="">
-						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/list.htm"> <i class="icon-book"></i> <span>文章列表</span></a>
+						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
 					</li>
                      <li class="">
-                       <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/list.htm"> <i class="icon-file"></i> <span>文档下载</span></a>
+                       <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
                     </li>
 					<li class="sub-menu">
 						<a href="${BASE_PATH}/manage/headline/list.htm" <#if menu="headline">class="active"</#if>> <i class="icon-desktop"></i> <span>首页头条</span></a>
@@ -98,19 +98,16 @@
 						<a <#if menu="admin_list">class="active"</#if> href="${BASE_PATH}/manage/admin/manage.htm"> <i class="icon-user"></i> <span>管理员管理</span></a>
 					</li>
 					<li class="">
-						<a <#if menu="update_password">class="active"</#if> href="${BASE_PATH}/manage/admin/update.htm"> <i class="icon-cogs"></i> <span>修改密码</span></a>
+						<a <#if menu="system">class="active"</#if> href="${BASE_PATH}/manage/config/basic.htm"> <i class="icon-cogs"></i> <span>系统设置</span></a>
 					</li>
 
 					<#else>
 					<li class="">
-						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/list.htm"> <i class="icon-book"></i> <span>文章列表</span></a>
+						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
 					</li>
                     <li class="">
-                        <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/list.htm"> <i class="icon-file"></i> <span>文档下载</span></a>
+                        <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
                      </li>
-					<li class="">
-						<a <#if menu="update_password">class="active"</#if> href="${BASE_PATH}/manage/admin/update.htm"> <i class="icon-home"></i> <span>修改密码</span></a>
-					</li>
 					</#if>
 
 				</ul>

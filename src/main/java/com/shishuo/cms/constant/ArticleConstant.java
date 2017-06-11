@@ -28,24 +28,7 @@ public class ArticleConstant {
 		 * /** 公开的
 		 */
 		display,
+		all
 	};
 
-	/**
-	 * 审核
-	 * 
-	 * @author Herbert
-	 * 
-	 */
-	public static enum check {
-		/**
-		 * 已审核
-		 */
-		yes, /**
-		 * /** 审核失败
-		 */
-		no, /**
-		 * /** 未审核
-		 */
-		init,
-	};
 }

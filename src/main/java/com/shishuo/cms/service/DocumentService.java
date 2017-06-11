@@ -2,7 +2,10 @@ package com.shishuo.cms.service;
 
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.DocumentDao;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.Document;
+import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.util.IDUtils;
 import com.shishuo.cms.util.MediaUtils;
 import com.shishuo.cms.util.Office2PDFUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +28,10 @@ public class DocumentService
     @Autowired
     private DocumentDao documentDao;
 
-    public Document add(MultipartFile file) throws IOException
+    public void add(MultipartFile file, Admin admin) throws IOException
     {
         Document document = new Document();
+        document.setId(IDUtils.getId());
         document.setCreated(new Date());
         String fileName = file.getOriginalFilename();
         if (!file.isEmpty()) {
@@ -36,14 +41,10 @@ public class DocumentService
 
         document.setType(fileName.substring(fileName.lastIndexOf(".")+1));
         document.setPreview(null);
+        document.setAdminId(admin.getAdminId());
+        document.setAdminName(admin.getName());
 
-        long id = documentDao.add(document);
-        return documentDao.getById(id);
-    }
-
-    public List<Document> getDocList()
-    {
-        return documentDao.getDocList();
+        documentDao.add(document);
     }
 
     public Document getById(long id)
@@ -61,11 +62,7 @@ public class DocumentService
                 String pdfFile = "";
                 if (!document.getType().equalsIgnoreCase("pdf")) {
                     pdfFile = filepath + new Date().getTime() + ".pdf";
-                    int i = new Office2PDFUtil().office2PDF(SystemConstant.SHISHUO_CMS_ROOT + "/" +document.getPath(),SystemConstant.SHISHUO_CMS_ROOT + "/" +pdfFile);
-                    if(i!=0) {
-                        System.out.println(i);
-                        return null;
-                    }
+                    new Office2PDFUtil().office2PDF(SystemConstant.SHISHUO_CMS_ROOT + "/" +document.getPath(),SystemConstant.SHISHUO_CMS_ROOT + "/" +pdfFile);
                 }else{
                     pdfFile = document.getPath();
                 }
@@ -77,7 +74,7 @@ public class DocumentService
                 return document.getPreview();
             }
         }else{
-            return null;
+            throw new FileNotFoundException();
         }
     }
 
@@ -109,5 +106,19 @@ public class DocumentService
         }
     }
 
+    public PageVo<Document> findByCondition(long adminId,String keywords, int pageNum, int rows)
+    {
+        PageVo<Document> pageVo = new PageVo<Document>(pageNum);
+        pageVo.setRows(rows);
+        pageVo.setCount(documentDao.allCountByCondition(adminId,keywords));
+        List<Document> articlelist = documentDao.findByCondition(adminId,keywords,pageVo.getOffset(),rows);
+        pageVo.setList(articlelist);
+        return pageVo;
+    }
+
+    public int allCountByCondition(long adminId,String keywords)
+    {
+        return documentDao.allCountByCondition(adminId,keywords);
+    }
 
 }

@@ -3,6 +3,7 @@ package com.shishuo.cms.action.manage;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.service.MenuService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -29,6 +30,9 @@ public class ManageMenuAction extends ManageBaseAction
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private ArticleService articleService;
+
 
     @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
     public String list(@RequestParam(value = "id", defaultValue = "0") long id, ModelMap modelMap)
@@ -54,8 +58,9 @@ public class ManageMenuAction extends ManageBaseAction
     public JsonVo<String> add(
             @RequestParam(value = "pid", defaultValue = "0") long pid,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "url") String url,
-            @RequestParam(value = "status") FolderConstant.status status) {
+            @RequestParam(value = "url",defaultValue = "") String url,
+            @RequestParam(value = "status") FolderConstant.status status,
+            @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();
         try {
             if (StringUtils.isBlank(name)) {
@@ -70,7 +75,7 @@ public class ManageMenuAction extends ManageBaseAction
             menu.setStatus(status);
             menu.setUrl(url);
 
-            menuService.add(menu);
+            menuService.add(menu,createUrl);
 
             json.setResult(true);
         } catch (Exception e) {
@@ -119,8 +124,9 @@ public class ManageMenuAction extends ManageBaseAction
     public JsonVo<String> update(
             @RequestParam(value = "id") long id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "url") String url,
-            @RequestParam(value = "status") FolderConstant.status status) {
+            @RequestParam(value = "url",defaultValue = "") String url,
+            @RequestParam(value = "status") FolderConstant.status status,
+            @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();
         try {
             if (name.equals("")) {
@@ -134,7 +140,7 @@ public class ManageMenuAction extends ManageBaseAction
             menu.setStatus(status);
             menu.setId(id);
 
-            menuService.update(menu);
+            menuService.update(menu,createUrl);
 
             json.setResult(true);
         } catch (Exception e) {
@@ -148,10 +154,9 @@ public class ManageMenuAction extends ManageBaseAction
     @RequestMapping(value = "/delete.json", method = RequestMethod.POST)
     public JsonVo<String> delete(long id,long pid) {
         JsonVo<String> json = new JsonVo<String>();
-
         if (pid == 0) {
             int count = menuService.getCountOfChilden(id);
-            if (count != 0) {
+            if (count > 0) {
                 json.setResult(false);
                 json.setMsg("此菜单下还有子菜单,不能被删除。");
             } else {
@@ -159,8 +164,14 @@ public class ManageMenuAction extends ManageBaseAction
                 menuService.delete(id);
             }
         } else {
-            json.setResult(true);
-            menuService.delete(id);
+            int count = articleService.getArticleCountByMenuId(id,"");
+            if (count > 0) {
+                json.setResult(false);
+                json.setMsg("此菜单下有文章,不能被删除。");
+            } else {
+                json.setResult(true);
+                menuService.delete(id);
+            }
         }
         return json;
     }

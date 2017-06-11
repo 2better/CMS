@@ -8,12 +8,12 @@ package com.shishuo.cms.action.manage;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.shishuo.cms.entity.Admin;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.entity.vo.AdminVo;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.AdminService;
@@ -69,8 +69,8 @@ public class ManageBaseAction {
 	 * @param request
 	 * @return
 	 */
-	protected AdminVo getAdmin(HttpServletRequest request) {
-		AdminVo admin = (AdminVo) request.getSession().getAttribute(
+	protected Admin getAdmin(HttpServletRequest request) {
+		Admin admin = (Admin) request.getSession().getAttribute(
 				SystemConstant.SESSION_ADMIN);
 		return admin;
 	}

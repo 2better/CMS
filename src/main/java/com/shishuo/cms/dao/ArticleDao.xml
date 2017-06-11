@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- Changsha Shishuo Network Technology Co., Ltd. All rights reserved. -->
-<!-- 长沙市师说网络科技有限公司 版权所有 -->
-<!-- http://www.shishuo.com -->
-
 <mapper namespace="com.shishuo.cms.dao.ArticleDao">
+
+	<resultMap id="baseMap" type="com.shishuo.cms.entity.Article">
+		<id column="articleId" property="articleId" />
+		<result column="menuId" property="menuId"/>
+		<result column="menuName" property="menuName"/>
+		<result column="adminId" property="adminId"/>
+		<result column="adminName" property="adminName"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"/>
+	</resultMap>
+
+	<resultMap id="withMenu" type="com.shishuo.cms.entity.Article" extends="baseMap">
+		<association property="menu" javaType="com.shishuo.cms.entity.Menu" >
+			<id column="id" property="id" />
+			<result column="name" property="name"/>
+			<result column="url" property="url"/>
+			<result column="pid" property="pid"/>
+		</association>
+	</resultMap>
+
 
 	<!-- ############################## -->
 	<!-- ###### 增加 ###### -->
 	<!-- ############################## -->
 	<insert id="addArticle" parameterType="com.shishuo.cms.entity.Article">
 		insert into
-		article(folderId,path,adminId,title,summary,content,picture,status,`check`,createTime,updateTime)
-		values(#{folderId},#{path},#{adminId},#{title},#{summary},#{content},#{picture},#{status},#{check},#{createTime},#{updateTime})
-		<selectKey resultType="long" keyProperty="articleId">
-			SELECT
-			LAST_INSERT_ID()
-		</selectKey>
+		article(articleId,menuId,menuName,adminId,adminName,title,content,status,createTime)
+		values(#{articleId},#{menuId},#{menuName},#{adminId},#{adminName},#{title},#{content},#{status},#{createTime})
 	</insert>
 
 	<!-- ############################## -->
@@ -29,10 +43,6 @@
 		where articleId=#{articleId}
 	</delete>
 
-	<delete id="deleteArticleListByStatus">
-		delete from article
-		where status=#{status}
-	</delete>
 
 	<!-- ############################## -->
 	<!-- ###### 修改 ###### -->
@@ -40,79 +50,73 @@
 
 	<update id="updateArticle" parameterType="com.shishuo.cms.entity.Article">
 		UPDATE article SET
-		folderId=#{folderId},
-		path=#{path},
+		menuId=#{menuId},
+		menuName = #{menuName},
 		title=#{title},
-		summary=#{summary},
-		picture=#{picture},
 		content=#{content},
 		status=#{status},
-		`check`=#{check},
-		createTime=#{createTime},
-		updateTime=#{updateTime}
+		createTime = #{createTime}
 		WHERE
 		articleId=#{articleId}
 	</update>
 
-	<update id="updateViewCount" parameterType="long">
-		update article set
-		viewCount = #{viewCount} where articleId = #{articleId}
-	</update>
-
-	<update id="updateCommentCount" parameterType="long">
-		update article set
-		commentCount = #{commentCount} where articleId = #{articleId}
-	</update>
-	
-	<update id="updateCheck">
-		update article set `check`=#{check} where articleId=#{articleId}
-	</update>
 
 	<!-- ############################## -->
 	<!-- ###### 查询 ###### -->
 	<!-- ############################## -->
 
-	<select id="getArticleById" parameterType="long"
-		resultType="com.shishuo.cms.entity.vo.ArticleVo">
-		select * from article where articleId=#{articleId}
+	<select id="getArticleById" parameterType="long" resultMap="withMenu">
+		select a.*,m.id,m.name,m.url,m.pid from article a ,menu m where a.menuId = m.id and a.articleId=#{articleId}
 	</select>
 
-	<select id="getArticleListOfDisplayByPath" resultType="com.shishuo.cms.entity.vo.ArticleVo">
-		select *
-		from article
-		where
-		path like #{path}"%" and status = 'display' and `check` = 'yes'
-		order by
-		createTime desc limit #{offset},#{rows}
-	</select>
-
-	<select id="getArticleCountOfDisplayByPath" resultType="Integer">
+	<select id="getArticleCountByMenuId" resultType="Integer">
 		select
 		count(*)
-		from article
-		where
-		path like #{path}"%" and status = 'display' and `check` = 'yes'
+		from article where menuId = #{menuId}
+		<if test="status!=''">
+			and status = #{status}
+		</if>
 	</select>
 
-	<select id="getArticleCountByFolderId" resultType="Integer">
-		select
-		count(*)
-		from article where folderId = #{folderId}
-	</select>
-	
-	<select id="getArticleCountByAdminIdAndPath" resultType="Integer">
-		select
-		count(*)
-		from article where path like #{path}"%" <if test="check !=null">and `check` = #{check}</if>
+	<select id="getArticleByMenuId" resultType="com.shishuo.cms.entity.Article">
+		select articleId,title,createTime from article where menuId = #{menuId} and status = 'display'  limit #{offset},#{rows}
 	</select>
 
-	<select id="getArticleListByAdminIdAndPath" resultType="com.shishuo.cms.entity.vo.ArticleVo">
-		select * from
-		article
-		where path like #{path}"%" <if test="check !=null">and `check` = #{check}</if>
-		order by createTime
-		desc limit
-		#{offset},#{rows}
+	<select id="findByCondition" resultMap="baseMap">
+		SELECT * from article
+		 <where>
+			 <if test="menuId!=-1">
+				 menuId = #{menuId}
+			 </if>
+			 <if test="adminId!=-1">
+				 and adminId = #{adminId}
+			 </if>
+			 <if test="status!='all'">
+				and status = #{status}
+			 </if>
+			 <if test="keywords!=''">
+				 and title like "%${keywords}%"
+			 </if>
+		 </where>
+		 limit #{offset},#{rows}
+	</select>
+
+	<select id="allCountByCondition" resultType="int">
+		SELECT count(*) from article
+		<where>
+			<if test="menuId!=-1">
+				menuId = #{menuId}
+			</if>
+			<if test="adminId!=-1">
+				and adminId = #{adminId}
+			</if>
+			<if test="status!='all'">
+				and status = #{status}
+			</if>
+			<if test="keywords!=''">
+				and title like "%${keywords}%"
+			</if>
+		</where>
 	</select>
 
 </mapper>  
