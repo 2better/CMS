@@ -106,7 +106,7 @@ public class ManageArticleAction extends ManageBaseAction {
 			@RequestParam(value = "status", defaultValue = "all") ArticleConstant.Status status,
 			@RequestParam(value = "keywords", defaultValue = "") String keywords)
 	{
-		PageVo<Article> pageVo = pageVo = articleService.findByCondition(menuId,adminId,status.toString(),keywords,pageNum,1);
+		PageVo<Article> pageVo = articleService.findByCondition(menuId,adminId,status.toString(),keywords,pageNum,1);
 		return pageVo;
 	}
 
@@ -156,11 +156,6 @@ public class ManageArticleAction extends ManageBaseAction {
 		}
 	}
 
-	/**
-	 * @author 彻底删除文件
-	 * @throws ArticleNotFoundException
-	 * 
-	 */
 	@ResponseBody
 	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
 	public JsonVo<String> deleteFile(
@@ -179,13 +174,6 @@ public class ManageArticleAction extends ManageBaseAction {
 		return json;
 	}
 
-
-	// @RequestMapping(value = "/preview.htm", method = RequestMethod.GET)
-	// public String preview(@RequestParam(value = "articleId") long articleId,
-	// @RequestParam(value = "p", defaultValue = "0") int p,
-	// ModelMap modelMap, HttpServletRequest request) {
-	// return articleAction.folder(articleId, p, modelMap);
-	// }
 
 	@RequestMapping(value = "/preview.htm", method = RequestMethod.GET)
 	public String preview(@RequestParam(value = "articleId") long articleId,

@@ -53,7 +53,7 @@ public class ArticleService {
 			String createTime){
 		Article article = new Article();
 		Menu menu = menuService.getByid(menuId);
-		article.setArticleId(IDUtils.genId());
+		article.setArticleId(IDUtils.getId());
 		article.setAdminId(adminId);
 		article.setMenuId(menuId);
 		article.setMenuName(menu.getName());
@@ -143,28 +143,9 @@ public class ArticleService {
 		}
 	}
 
-
-	@Cacheable(value = "article")
-	public PageVo<Article> getArticlePageByMenuId(long menuId,
-			int pageNum, int rows) {
-		PageVo<Article> pageVo = new PageVo<Article>(pageNum);
-		pageVo.setRows(rows);
-		pageVo.setCount(articleDao.getArticleCountByMenuId(menuId));
-		List<Article> articlelist = articleDao.getArticleListByMenuId(menuId,pageVo.getOffset(),
-				pageVo.getRows());
-
-		pageVo.setList(articlelist);
-		return pageVo;
-	}
-
-
-
-	public List<Article> getArticleListByAdminId(long adminId,
-			long offset, long rows)  {
-		List<Article> articleList = articleDao
-				.getArticleListByAdminId(adminId,
-						offset, rows);
-		return articleList;
+	public int getArticleCountByMenuId(long menuId)
+	{
+		return articleDao.getArticleCountByMenuId(menuId);
 	}
 
 	public PageVo<Article> findByCondition(long menuId,long adminId,String status,String keywords,int pageNum, int rows)
@@ -182,15 +163,5 @@ public class ArticleService {
 		return articleDao.allCountByCondition(menuId,adminId,status,keywords);
 	}
 
-	public int getArticleCountByAdminId(long adminId)
-	{
-		return articleDao.getArticleCountByAdminId(adminId);
-	}
-
-
-	public int getArticleCountByMenuId(long menuId)
-	{
-		return articleDao.getArticleCountByMenuId(menuId);
-	}
 
 }

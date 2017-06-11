@@ -58,15 +58,14 @@
         <ul id="nav">
         <#if menuList?? && menuList?size gt 0>
             <#list menuList?sort_by("sort") as p>
-            <li class="on"><a href="${p.url}" target="0">${p.name}</a>
+            <li class="on">
+                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>" target="0">${p.name}</a>
                 <ul>
-
                 <#list p.children?sort_by("sort") as c>
                     <li class=""><a href="${c.url}" target="0">${c.name}</a>
                         <ul></ul>
                     </li>
                 </#list>
-
                 </ul>
             </li>
             </#list>

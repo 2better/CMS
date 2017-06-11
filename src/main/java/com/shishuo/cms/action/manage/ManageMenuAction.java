@@ -124,7 +124,7 @@ public class ManageMenuAction extends ManageBaseAction
     public JsonVo<String> update(
             @RequestParam(value = "id") long id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "url",required = false) String url,
+            @RequestParam(value = "url",defaultValue = "") String url,
             @RequestParam(value = "status") FolderConstant.status status,
             @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();

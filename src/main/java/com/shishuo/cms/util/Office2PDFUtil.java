@@ -35,11 +35,10 @@ public class Office2PDFUtil {
 	 * @return 操作成功与否的提示信息. 如果返回 -1, 表示找不到源文件, 或url.properties配置错误; 如果返回 0,
 	 *         则表示操作成功; 返回1, 则表示转换失败
 	 */
-	public int office2PDF(String sourceFile, String destFile) {
-		try {
+	public void office2PDF(String sourceFile, String destFile) throws Exception {
 			File inputFile = new File(sourceFile);
 			if (!inputFile.exists()) {
-				return -1;// 找不到源文件, 则返回-1
+				throw new FileNotFoundException();
 			}
 
 			// 如果目标路径不存在, 则新建该路径
@@ -55,8 +54,8 @@ public class Office2PDFUtil {
 			 * 但是需要注意的是：要用"\\"代替"\",用"\:"代替":" . 如果大家嫌麻烦,
 			 * 可以直接给OpenOffice_HOME变量赋值为自己OpenOffice的安装目录
 			 */
-			if (OpenOffice_HOME == null)
-				return -1;
+			if (OpenOffice_HOME == null) //java.net.ConnectException
+				throw new FileNotFoundException();
 			// 如果从文件中读取的URL地址最后一个字符不是 '\'，则添加'\'
 			if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '\\') {
 				OpenOffice_HOME += "\\";
@@ -78,17 +77,5 @@ public class Office2PDFUtil {
 			connection.disconnect();
 			// 关闭OpenOffice服务的进程
 			pro.destroy();
-
-			return 0;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return -1;
-		} catch (ConnectException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return 1;
 	}
 }

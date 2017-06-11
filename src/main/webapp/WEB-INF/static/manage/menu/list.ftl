@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">url</label>
                                     <div class="col-xs-9">
-                                        <input style="font-size:15px;width: 200px;" class="form-control" name="url"
+                                        <input style="font-size:15px;width: 200px;" class="form-control" name="url" disabled
                                                placeholder="url" id="url">
                                     </div>
                                 </div>

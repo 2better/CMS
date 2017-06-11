@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class IDUtils
 {
-    public static long genId() {
+    public static long getId() {
         //取当前时间的长整形值包含毫秒
         long millis = System.currentTimeMillis();
         //long millis = System.nanoTime();

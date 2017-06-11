@@ -35,9 +35,8 @@ public class ManageAction extends ManageBaseAction {
 		modelMap.put("articleCount", 0);
 		modelMap.put("downloadCount", 0);
 		modelMap.put("userCount", 0);
-		List<Article> articleList = articleService
-				.getArticleListByAdminId(admin.getAdminId(),0, 10);
-		modelMap.put("articleList", articleList);
+
+
 		return "manage/index";
 	}
 

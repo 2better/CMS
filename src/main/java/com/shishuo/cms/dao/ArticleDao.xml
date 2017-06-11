@@ -43,10 +43,6 @@
 		where articleId=#{articleId}
 	</delete>
 
-	<delete id="deleteArticleListByStatus">
-		delete from article
-		where status=#{status}
-	</delete>
 
 	<!-- ############################## -->
 	<!-- ###### 修改 ###### -->
@@ -73,35 +69,10 @@
 		select a.*,m.id,m.name,m.url,m.pid from article a ,menu m where a.menuId = m.id and a.articleId=#{articleId}
 	</select>
 
-
 	<select id="getArticleCountByMenuId" resultType="Integer">
 		select
 		count(*)
 		from article where menuId = #{menuId}
-	</select>
-
-
-	<select id="getArticleListByAdminId" resultType="com.shishuo.cms.entity.Article">
-		select * from
-		article
-		where adminId=#{adminId}
-		order by createTime
-		desc limit
-		#{offset},#{rows}
-	</select>
-
-	<select id="getArticleCountByAdminId" resultType="int">
-		select count(*) from
-		article
-		where adminId=#{adminId}
-	</select>
-
-	<select id="getArticleListByMenuId" resultType="com.shishuo.cms.entity.Article">
-		select * from
-		article
-		where menuId=#{menuId}
-		limit
-		#{offset},#{rows}
 	</select>
 
 	<select id="findByCondition" resultMap="baseMap">

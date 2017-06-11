@@ -23,7 +23,7 @@ public class MenuService
     @CacheEvict(value = "menu", allEntries = true)
     public void add(Menu menu,int createUrl)
     {
-        long id = IDUtils.genId();
+        long id = IDUtils.getId();
         menu.setId(id);
         menu.setSort(1);
         if(createUrl!=0)
