@@ -117,6 +117,10 @@
             pagination(1, adminId, keywords);
         });
 
+        $("#keywords").change(function () {
+            keywords = $("#keywords").val();
+        });
+
         $("#btn").click(function () {
             keywords = $("#keywords").val();
             pagination(1, adminId, keywords);

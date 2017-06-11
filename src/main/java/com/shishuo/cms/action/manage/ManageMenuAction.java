@@ -164,7 +164,7 @@ public class ManageMenuAction extends ManageBaseAction
                 menuService.delete(id);
             }
         } else {
-            int count = articleService.getArticleCountByMenuId(id);
+            int count = articleService.getArticleCountByMenuId(id,"");
             if (count > 0) {
                 json.setResult(false);
                 json.setMsg("此菜单下有文章,不能被删除。");

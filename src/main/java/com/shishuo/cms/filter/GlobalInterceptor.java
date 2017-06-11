@@ -47,17 +47,11 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		String basePath = HttpUtils.getBasePath(request);
 		modelAndView.addObject("BASE_PATH", basePath);
 		modelAndView.addObject("UPLOAD_BASE_PATH", basePath + "/upload");
-		modelAndView
-				.addObject(
-						"TEMPLATE_BASE_PATH",
-						basePath
-								+ "/static/template/"
-								+ configService
-										.getStringByKey(ConfigConstant.SHISHUO_TEMPLATE));
-		modelAndView.addObject("shishuo_seo_title",
-				configService.getStringByKey("shishuo_seo_title"));
-		modelAndView.addObject("shishuo_seo_description",
-				configService.getStringByKey("shishuo_seo_description"));
+		modelAndView.addObject("TEMPLATE_BASE_PATH", basePath + "/static/template/blog");
+		modelAndView.addObject("index_title",
+				configService.getStringByKey("index_title"));
+		modelAndView.addObject("seo_description",
+				configService.getStringByKey("seo_description"));
 		MDC.put("ip", HttpUtils.getIp(request));
 	}
 

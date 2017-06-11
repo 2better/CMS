@@ -53,7 +53,9 @@ public interface ArticleDao {
 	 */
 	 Article getArticleById(@Param("articleId") long articleId);
 
-	int getArticleCountByMenuId(@Param("menuId") long menuId);
+	int getArticleCountByMenuId(@Param("menuId") long menuId,@Param("status") String status);
+
+	List<Article> getArticleByMenuId(@Param("menuId") long menuId,@Param("offset") int offset, @Param("rows") int rows);
 
 	/**
 	 * 多条件组合查询，并分页

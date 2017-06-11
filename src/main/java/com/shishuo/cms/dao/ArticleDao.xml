@@ -73,6 +73,13 @@
 		select
 		count(*)
 		from article where menuId = #{menuId}
+		<if test="status!=''">
+			and status = #{status}
+		</if>
+	</select>
+
+	<select id="getArticleByMenuId" resultType="com.shishuo.cms.entity.Article">
+		select articleId,title,createTime from article where menuId = #{menuId} and status = 'display'  limit #{offset},#{rows}
 	</select>
 
 	<select id="findByCondition" resultMap="baseMap">

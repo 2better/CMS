@@ -9,20 +9,15 @@
 			<header class="panel-heading"> 基本设置</header>
 			<div class="panel-body">
 				<form id="basicForm" action="${BASE_PATH}/manage/config/basic.json" role="form" class="form-horizontal" autocomplete="off" method="post" >
+					<#list configs as c>
 					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站名称</label>
+						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">${c.description}</label>
 						<div class="col-lg-10">
-							<input type="text" placeholder="网站名称" id="inputEmail1" name="sitename"
-								class="form-control" value="${SYS_SITENAME}">
+							<input type="text" id="inputEmail1" name="${c.key}"
+								class="form-control" value="${c.value}">
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-lg-2 col-sm-2 control-label" for="inputEmail1">网站描述</label>
-						<div class="col-lg-10">
-							<input type="text" placeholder="网站描述" id="inputEmail1" name="sitedesc"
-								class="form-control" value="${SYS_SITEDESC}">
-						</div>
-					</div>
+					</#list>
 					<div class="form-group">
 						<div class="col-lg-offset-2 col-lg-10">
 							<button class="btn btn-danger" type="submit">保存</button>

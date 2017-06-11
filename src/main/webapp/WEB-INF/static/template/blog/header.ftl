@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="${shishuo_seo_description}">
+<meta name="description" content="${seo_description}">
 <meta name="author" content="CMS">
 <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/favicon.ico">
 
-<title>${shishuo_seo_title}</title>
+<title>${index_title}</title>
 
 <link rel="stylesheet" type="text/css" href="${TEMPLATE_BASE_PATH}/css/main.css" />
 </head>

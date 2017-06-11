@@ -143,9 +143,19 @@ public class ArticleService {
 		}
 	}
 
-	public int getArticleCountByMenuId(long menuId)
+	@Cacheable(value = "article", key = "#menuId+'_'+#status")
+	public int getArticleCountByMenuId(long menuId,String status)
 	{
-		return articleDao.getArticleCountByMenuId(menuId);
+		return articleDao.getArticleCountByMenuId(menuId,status);
+	}
+
+	public List<Article> getArticleByMenuId(long menuId,int pageNum, int rows)
+	{
+		return articleDao.getArticleByMenuId(menuId,(pageNum - 1) * rows,rows);
+	}
+
+	public int getPageCount(int count,int rows) {
+		return (count + rows  - 1) / rows;
 	}
 
 	public PageVo<Article> findByCondition(long menuId,long adminId,String status,String keywords,int pageNum, int rows)

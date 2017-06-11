@@ -27,7 +27,7 @@ public class MenuService
         menu.setId(id);
         menu.setSort(1);
         if(createUrl!=0)
-            menu.setUrl("/manage/article/list.htm?menuId="+id);
+            menu.setUrl("/article/list.htm?menuId="+id);
         menuDao.add(menu);
     }
 

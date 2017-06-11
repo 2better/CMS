@@ -98,7 +98,7 @@
 						<a <#if menu="admin_list">class="active"</#if> href="${BASE_PATH}/manage/admin/manage.htm"> <i class="icon-user"></i> <span>管理员管理</span></a>
 					</li>
 					<li class="">
-						<a <#if menu="update_password">class="active"</#if> href="${BASE_PATH}/manage/admin/update.htm"> <i class="icon-cogs"></i> <span>修改密码</span></a>
+						<a <#if menu="system">class="active"</#if> href="${BASE_PATH}/manage/config/basic.htm"> <i class="icon-cogs"></i> <span>系统设置</span></a>
 					</li>
 
 					<#else>
@@ -108,9 +108,6 @@
                     <li class="">
                         <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
                      </li>
-					<li class="">
-						<a <#if menu="update_password">class="active"</#if> href="${BASE_PATH}/manage/admin/update.htm"> <i class="icon-home"></i> <span>修改密码</span></a>
-					</li>
 					</#if>
 
 				</ul>

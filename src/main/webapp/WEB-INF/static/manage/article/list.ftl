@@ -167,6 +167,10 @@
             pagination(1, menuId,status,adminId,keywords);
         });
 
+        $("#keywords").change(function () {
+            keywords = $("#keywords").val();
+        });
+
         $("#status").change(function () {
             status = $("#status").val();
             pagination(1, menuId,status,adminId,keywords);

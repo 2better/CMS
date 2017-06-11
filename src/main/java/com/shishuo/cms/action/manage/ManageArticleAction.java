@@ -106,7 +106,8 @@ public class ManageArticleAction extends ManageBaseAction {
 			@RequestParam(value = "status", defaultValue = "all") ArticleConstant.Status status,
 			@RequestParam(value = "keywords", defaultValue = "") String keywords)
 	{
-		PageVo<Article> pageVo = articleService.findByCondition(menuId,adminId,status.toString(),keywords,pageNum,1);
+		int num = configService.getIntKey("pagination_num");
+		PageVo<Article> pageVo = articleService.findByCondition(menuId,adminId,status.toString(),keywords,pageNum,num);
 		return pageVo;
 	}
 

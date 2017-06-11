@@ -6,6 +6,7 @@ import com.shishuo.cms.entity.Document;
 import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
+import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,8 @@ import java.util.List;
 public class ManageDocumentAction {
     @Autowired
     private DocumentService documentService;
+    @Autowired
+    private ConfigService configService;
 
     @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
     public String listPage(HttpServletRequest request, ModelMap modelMap) {
@@ -46,7 +49,8 @@ public class ManageDocumentAction {
             @RequestParam(value = "p", defaultValue = "1") int pageNum,
             @RequestParam(value = "adminId", defaultValue = "-1") long adminId,
             @RequestParam(value = "keywords", defaultValue = "") String keywords) {
-        PageVo<Document> pageVo = documentService.findByCondition(adminId, keywords, pageNum, 1);
+        int num = configService.getIntKey("pagination_num");
+        PageVo<Document> pageVo = documentService.findByCondition(adminId, keywords, pageNum, num);
         return pageVo;
     }
 

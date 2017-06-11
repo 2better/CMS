@@ -40,7 +40,7 @@
 				and adminId = #{adminId}
 			</if>
 			<if test="keywords!=''">
-				and title like "%${keywords}%"
+				and name like "%${keywords}%"
 			</if>
 		</where>
 		limit #{offset},#{rows}
@@ -53,7 +53,7 @@
 				and adminId = #{adminId}
 			</if>
 			<if test="keywords!=''">
-				and title like "%${keywords}%"
+				and name like "%${keywords}%"
 			</if>
 		</where>
 	</select>
