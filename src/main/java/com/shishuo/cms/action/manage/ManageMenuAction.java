@@ -3,6 +3,7 @@ package com.shishuo.cms.action.manage;
 import com.shishuo.cms.constant.FolderConstant;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.service.MenuService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -28,6 +29,9 @@ public class ManageMenuAction extends ManageBaseAction
 {
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private ArticleService articleService;
 
 
     @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
@@ -150,10 +154,9 @@ public class ManageMenuAction extends ManageBaseAction
     @RequestMapping(value = "/delete.json", method = RequestMethod.POST)
     public JsonVo<String> delete(long id,long pid) {
         JsonVo<String> json = new JsonVo<String>();
-
         if (pid == 0) {
             int count = menuService.getCountOfChilden(id);
-            if (count != 0) {
+            if (count > 0) {
                 json.setResult(false);
                 json.setMsg("此菜单下还有子菜单,不能被删除。");
             } else {
@@ -161,8 +164,14 @@ public class ManageMenuAction extends ManageBaseAction
                 menuService.delete(id);
             }
         } else {
-            json.setResult(true);
-            menuService.delete(id);
+            int count = articleService.getArticleCountByMenuId(id);
+            if (count > 0) {
+                json.setResult(false);
+                json.setMsg("此菜单下有文章,不能被删除。");
+            } else {
+                json.setResult(true);
+                menuService.delete(id);
+            }
         }
         return json;
     }

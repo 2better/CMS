@@ -57,10 +57,10 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
 
                         <select class="form-control" id="parentMenu"
-                                style="font-size:15px;width: 200px; display: inline-block">
+                                style="font-size:15px;width: 150px; display: inline-block">
                             <option value="-1">>>一级栏目<<</option>
                         <#list menus?sort_by("sort") as f>
                             <#if f.name != "首页">
@@ -69,7 +69,7 @@
                         </#list>
                         </select>
                         <select class="form-control" id="childMenu" name="menuId"
-                                style="font-size:15px;width: 200px; display: inline-block">
+                                style="font-size:15px;width: 150px; display: inline-block">
                             <option value="-1">>>二级栏目<<</option>
                         </select>
                         <select class="form-control" id="status"
@@ -85,8 +85,11 @@
                             <option value="${SESSION_ADMIN.adminId}">我的文章</option>
                         </select>
 
+                        <input id="keywords" class="form-control" type="text"  placeholder="请输入关键词"
+                        style="width:170px;display: inline-block"/>
+                        <button class="btn btn-info" id="btn">搜索</button>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <a class="btn btn-primary" style="float:right;"
                            href="${BASE_PATH}/manage/article/add.htm">增加文章</a>
                     </div>
@@ -128,6 +131,7 @@
     var menuId = $("#childMenu").val();
     var status = $("#status").val();
     var adminId = $("#myArt").val();
+    var keywords = $("#keywords").val();
 
     $(function () {
 
@@ -155,25 +159,30 @@
                 }
             }
             menuId = $("#childMenu").val();
-            pagination(1, menuId,status,adminId);
+            pagination(1, menuId,status,adminId,keywords);
         });
 
         $("#childMenu").change(function () {
             menuId = $("#childMenu").val();
-            pagination(1, menuId,status,adminId);
+            pagination(1, menuId,status,adminId,keywords);
         });
 
         $("#status").change(function () {
             status = $("#status").val();
-            pagination(1, menuId,status,adminId);
+            pagination(1, menuId,status,adminId,keywords);
         });
 
         $("#myArt").change(function () {
             adminId = $("#myArt").val();
-            pagination(1, menuId,status,adminId);
+            pagination(1, menuId,status,adminId,keywords);
         });
 
-        pagination(1, menuId,status,adminId);
+        $("#btn").click(function () {
+            keywords = $("#keywords").val();
+            pagination(1, menuId,status,adminId,keywords);
+        });
+
+        pagination(1, menuId,status,adminId,keywords);
 
         $(document).on("click",".js_article_delete",function () {
             var articleId = $(this).attr('articleId');
@@ -203,13 +212,13 @@
         });
     });
 
-    function pagination(curr, menuId,status,adminId) {
+    function pagination(curr, menuId,status,adminId,keywords) {
         var index;
         $.ajax(
                 {
                     url: "${BASE_PATH}/manage/article/list.json",
                     type: "post",
-                    data: "p="+curr+"&menuId="+menuId+"&status="+status+"&adminId="+adminId ,
+                    data: "p="+curr+"&menuId="+menuId+"&status="+status+"&adminId="+adminId +"&keywords="+keywords,
 
                     success: function (data) {
 
@@ -247,7 +256,7 @@
                             last: data.pageCount,
                             jump: function (obj, first) { //触发分页后的回调
                                 if (!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
-                                    pagination(obj.curr, menuId,status,adminId);
+                                    pagination(obj.curr, menuId,status,adminId,keywords);
                                 }
                             }
                         });

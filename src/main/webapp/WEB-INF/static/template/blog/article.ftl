@@ -2,7 +2,7 @@
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
-            <span class="g-sd-header-title">新闻动态</span>
+            <span class="g-sd-header-title">${menus.name}</span>
             <span class="circle"></span>
         </div>
         <ul class="g-sd-content">
@@ -20,7 +20,7 @@
     </div>
     <div class="g-mn">
         <div class="g-mn-header">
-            <span class="g-sd-header-crumb">${article.menuName} > ${article.title}</span>
+            <span class="g-sd-header-crumb"><a href="${article.menu.url!}" style="color:#fff;">${article.menuName}</a> > ${article.title}</span>
         </div>
         <div class="g-mn-content-out">
         <div class="g-mn-content">

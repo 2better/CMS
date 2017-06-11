@@ -88,8 +88,8 @@ public class ManageArticleAction extends ManageBaseAction {
 	{
 		List<Menu> menus = menuService.getAllDisplay();
 		Admin admin = this.getAdmin(request);
-		int allCount = articleService.allCountByCondition(-1,-1,"all");
-		int admidArtCount = articleService.allCountByCondition(-1,admin.getAdminId(),"all");
+		int allCount = articleService.allCountByCondition(-1,-1,"all","");
+		int admidArtCount = articleService.allCountByCondition(-1,admin.getAdminId(),"all","");
 		modelMap.put("menus", menus);
 		modelMap.put("allCount", allCount);
 		modelMap.put("admidArtCount", admidArtCount);
@@ -103,9 +103,10 @@ public class ManageArticleAction extends ManageBaseAction {
 			@RequestParam(value = "p", defaultValue = "1") int pageNum,
 			@RequestParam(value = "menuId", defaultValue = "-1") long menuId,
 			@RequestParam(value = "adminId", defaultValue = "-1") long adminId,
-			@RequestParam(value = "status", defaultValue = "all") ArticleConstant.Status status)
+			@RequestParam(value = "status", defaultValue = "all") ArticleConstant.Status status,
+			@RequestParam(value = "keywords", defaultValue = "") String keywords)
 	{
-		PageVo<Article> pageVo = pageVo = articleService.findByCondition(menuId,adminId,status.toString(),pageNum,1);
+		PageVo<Article> pageVo = pageVo = articleService.findByCondition(menuId,adminId,status.toString(),keywords,pageNum,1);
 		return pageVo;
 	}
 

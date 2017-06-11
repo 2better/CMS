@@ -167,19 +167,19 @@ public class ArticleService {
 		return articleList;
 	}
 
-	public PageVo<Article> findByCondition(long menuId,long adminId,String status,int pageNum, int rows)
+	public PageVo<Article> findByCondition(long menuId,long adminId,String status,String keywords,int pageNum, int rows)
 	{
 		PageVo<Article> pageVo = new PageVo<Article>(pageNum);
 		pageVo.setRows(rows);
-		pageVo.setCount(articleDao.allCountByCondition(menuId,adminId,status));
-		List<Article> articlelist = articleDao.findByCondition(menuId,adminId,status,pageVo.getOffset(),rows);
+		pageVo.setCount(articleDao.allCountByCondition(menuId,adminId,status,keywords));
+		List<Article> articlelist = articleDao.findByCondition(menuId,adminId,status,keywords,pageVo.getOffset(),rows);
 		pageVo.setList(articlelist);
 		return pageVo;
 	}
 
-	public int allCountByCondition(long menuId,long adminId,String status)
+	public int allCountByCondition(long menuId,long adminId,String status,String keywords)
 	{
-		return articleDao.allCountByCondition(menuId,adminId,status);
+		return articleDao.allCountByCondition(menuId,adminId,status,keywords);
 	}
 
 	public int getArticleCountByAdminId(long adminId)

@@ -31,6 +31,8 @@ public class Article {
 	private ArticleConstant.Status status;
 	private Date createTime;
 
+	private Menu menu = new Menu();
+
 	public long getArticleId() {
 		return articleId;
 	}
@@ -108,5 +110,13 @@ public class Article {
 
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 }

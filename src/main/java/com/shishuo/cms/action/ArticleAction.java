@@ -37,13 +37,13 @@ public class ArticleAction extends BaseAction {
 		try {
 			Article article = fileService.getArticleById(articleId);
 			List<Menu> menuList = menuService.getAllDisplay();
-			Menu menu = menuService.getByid(article.getMenuId());
-			List<Menu> menus = menuService.getWithChildById(menu.getPid());
+			List<Menu> menus = menuService.getWithChildById(article.getMenu().getPid());
 			modelMap.put("menuList",menuList);
 			modelMap.put("menus",menus.get(0));
 			modelMap.addAttribute("article", article);
 			return themeService.getArticleTemplate();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return themeService.get404();
 		}
 	}

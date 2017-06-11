@@ -29,7 +29,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-3  control-label">由系统生成URl</label>
                                 <div class="col-sm-2">
-                                    <input type="checkbox"  class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
+                                    <input type="checkbox" checked class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
                                 </div>
                             </div>
                         	<div class="form-group">

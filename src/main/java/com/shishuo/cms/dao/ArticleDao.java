@@ -101,8 +101,8 @@ public interface ArticleDao {
 			@Param("menuId") long menuId,
 			@Param("offset") long offset, @Param("rows") long rows);
 
-	public List<Article> findByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("offset") int offset, @Param("rows") int rows);
+	public List<Article> findByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("keywords") String keywords,@Param("offset") int offset, @Param("rows") int rows);
 
-	int allCountByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status);
+	int allCountByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("keywords") String keywords);
 
 }

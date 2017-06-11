@@ -37,14 +37,14 @@
                                     <div class="col-xs-9">
                                         <input type="text" style="font-size:15px;width: 200px;" class="form-control"
                                                name="name"
-                                               placeholder="菜单名称" id="folderName" maxlength="4">${menuName}
+                                               placeholder="菜单名称" id="folderName" maxlength="5">${menuName}
                                         </input>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-4 control-label">由系统生成URl</label>
                                     <div class="col-xs-3">
-                                        <input type="checkbox"  class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
+                                        <input type="checkbox" checked class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -132,7 +132,7 @@
                                                 修改
                                             </a>
                                             |
-                                            <a class="js_folder_delete" folderId="${folder.id}" pid="${Menu.pid}"
+                                            <a class="js_folder_delete" folderId="${folder.id}" pid="${folder.pid}"
                                                href="javascript:void(0);" title="删除">
                                                 删除
                                             </a>
