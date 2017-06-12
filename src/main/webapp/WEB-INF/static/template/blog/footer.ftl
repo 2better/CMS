@@ -17,7 +17,7 @@
     </div>
 </div>
 <script language="javascript">
-    window.onload = menuFix;
+    //window.onload = menuFix;
 </script>
 <!--底部-->
 <!--底部-->

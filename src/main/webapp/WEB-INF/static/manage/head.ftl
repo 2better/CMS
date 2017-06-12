@@ -47,7 +47,7 @@
 		<header class="white-bg">
 			<div class="container" style="background-color: #ffffff; padding: 10px;">
 				<!--logo start-->
-				<a href="${BASE_PATH}/index.htm" class="logo" title="访问前台页面">
+				<a href="${BASE_PATH}/index.htm" class="logo" title="访问前台页面" target="_blank">
 					<img src="${TEMPLATE_BASE_PATH}/images/logo.png" style="height: 38px;width:140px;" />
 				</a>
 				<!--logo end-->

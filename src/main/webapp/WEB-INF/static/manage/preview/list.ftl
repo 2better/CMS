@@ -60,6 +60,13 @@
                             <option value="${SESSION_ADMIN.adminId}">我的文章</option>
                         </select>
 
+                        <select class="form-control" id="column"
+                                style="font-size:15px;width: 120px; display: inline-block">
+                            <option value="-1">所有类目</option>
+                            <option value="1">智库专报</option>
+                            <option value="2">学术论文</option>
+                        </select>
+
                         <input id="keywords" class="form-control" type="text" placeholder="请输入关键词"
                                style="width:200px;display: inline-block" autocomplete="off"/>
                         <button class="btn btn-info" id="btn">搜索</button>
@@ -77,6 +84,7 @@
                             <thead>
                             <tr>
                                 <th>文档名称</th>
+                                <th>所属类目</th>
                                 <th>上传者</th>
                                 <th>文档类型</th>
                                 <th>上传时间</th>
@@ -107,14 +115,20 @@
 
     var adminId = $("#myArt").val();
     var keywords = $("#keywords").val();
+    var column = $("#column").val();
 
     $(function () {
 
-        pagination(1, adminId, keywords);
+        pagination(1, adminId, keywords,column);
 
         $("#myArt").change(function () {
             adminId = $("#myArt").val();
-            pagination(1, adminId, keywords);
+            pagination(1, adminId, keywords,column);
+        });
+
+        $("#column").change(function () {
+            column = $("#column").val();
+            pagination(1, adminId, keywords,column);
         });
 
         $("#keywords").change(function () {
@@ -123,7 +137,7 @@
 
         $("#btn").click(function () {
             keywords = $("#keywords").val();
-            pagination(1, adminId, keywords);
+            pagination(1, adminId, keywords,column);
         });
 
         $(document).on("click", ".js_article_delete", function () {
@@ -166,12 +180,12 @@
 
     });
 
-    function pagination(curr, adminId, keywords) {
+    function pagination(curr, adminId, keywords,column) {
         $.ajax(
                 {
                     url: "${BASE_PATH}/manage/preview/list.json",
                     type: "post",
-                    data: "p=" + curr + "&adminId=" + adminId + "&keywords=" + keywords,
+                    data: "p=" + curr + "&adminId=" + adminId + "&keywords=" + keywords+"&column="+column,
 
                     success: function (data) {
 
@@ -186,6 +200,7 @@
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
                             trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/preview/download.htm?id=" + n.id + "\">" + n.name + "</a></td>";
+                            trs += "<td>" + n.columnView + "</td>";
                             trs += "<td>" + n.adminName + "</td>";
                             trs += "<td>" + n.type + "</td>";
                             trs += "<td>" + n.createdView + "</td>";
@@ -206,7 +221,7 @@
                             last: data.pageCount,
                             jump: function (obj, first) { //触发分页后的回调
                                 if (!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
-                                    pagination(obj.curr, adminId, keywords);
+                                    pagination(obj.curr, adminId, keywords,column);
                                 }
                             }
                         });

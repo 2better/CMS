@@ -38,7 +38,7 @@
 <div class="header">
     <div class="header-content">
         <div class="logo">
-            <a href="${BASE_PATH}/index.htm"></a>
+            <a href="${BASE_PATH}/index.htm" target="_blank"></a>
         </div>
         <h3>
             创新理论与创新管理研究中心

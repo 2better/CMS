@@ -3,6 +3,8 @@ package com.shishuo.cms.entity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zyl
@@ -18,7 +20,14 @@ public class Document
     private String type;
     private String path;
     private String preview;
+    private int column;//所属栏目
     private Date created;
+
+    private static Map<Integer,String> columnMap = new HashMap<Integer,String>();
+    static{
+        columnMap.put(1,"智库专报");
+        columnMap.put(2,"学术论文");
+    }
 
     public long getId() {
         return id;
@@ -88,5 +97,18 @@ public class Document
         if(this.created == null ) return "";
         DateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
         return df.format(this.created);
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public String getColumnView()
+    {
+        return columnMap.get(this.column);
     }
 }

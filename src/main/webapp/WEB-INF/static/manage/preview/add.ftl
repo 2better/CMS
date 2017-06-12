@@ -15,6 +15,18 @@
 						上传文档
 					</header>
 					<div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">选择类目</label>
+                            <div class="col-sm-10">
+                                <select class="form-control input-lg m-bot15"
+                                        style="font-size:15px;width: 200px;" name="column">
+                                    <option value="1">智库专报</option>
+                                    <option value="2">学术论文</option>
+                                </select>
+                            </div>
+                        </div>
+
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">选择文档</label>
                           <div class="col-sm-10">
@@ -22,6 +34,7 @@
                               	id="file" >
                           </div>
                       	</div>
+
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
                                 <button class="btn btn-shadow btn-primary" type="submit">上传</button>
@@ -57,7 +70,7 @@ $(function(){
                             label : "返回列表",
                             className : "btn-primary",
                             callback : function() {
-                                window.location.href="${BASE_PATH}/manage/preview/list.htm";
+                                window.location.href="${BASE_PATH}/manage/preview/listPage.htm";
                             }
                         },
                     }
