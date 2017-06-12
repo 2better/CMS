@@ -41,13 +41,30 @@ $(function(){
 	$('#add_article_form').ajaxForm({
 		dataType : 'json',
 		success : function(data) {
-			if (data.result) {
-				bootbox.alert("保存成功，将刷新页面", function() {
-					window.location.reload();
-				});
-			}else{
-				showErrors($('#add_article_form'),data.errors);
-			}
+            if (data.result) {
+                bootbox.dialog({
+                    message : "保存成功",
+                    title : "提示",
+                    buttons : {
+                        add : {
+                            label : "继续添加",
+                            className : "btn-success",
+                            callback : function() {
+                                window.location.reload();
+                            }
+                        },
+                        list : {
+                            label : "返回列表",
+                            className : "btn-primary",
+                            callback : function() {
+                                window.location.href="${BASE_PATH}/manage/preview/list.htm";
+                            }
+                        },
+                    }
+                });
+            }else{
+                showErrors($('#addFolder_form'),data.errors);
+            }
 		}
 	});
 });

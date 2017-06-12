@@ -11,10 +11,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.shishuo.cms.constant.ArticleConstant;
-import com.shishuo.cms.constant.ArticleConstant.check;
 import com.shishuo.cms.entity.Article;
-import com.shishuo.cms.entity.vo.ArticleVo;
+
 
 /**
  * 文件服务
@@ -25,31 +23,19 @@ import com.shishuo.cms.entity.vo.ArticleVo;
 @Repository
 public interface ArticleDao {
 
-	// ///////////////////////////////
-	// ///// 增加 ////////
-	// ///////////////////////////////
-
 	/**
 	 * 增加文件
 	 * 
 	 * @return Integer
 	 */
-	public int addArticle(Article article);
-
-	// ///////////////////////////////
-	// ///// 刪除 ////////
-	// ///////////////////////////////
+	 void addArticle(Article article);
 
 	/**
 	 * 删除文件
 	 * 
 	 * @return boolean
 	 */
-	public boolean deleteArticleById(@Param("articleId") long articleId);
-
-	// ///////////////////////////////
-	// ///// 修改 ////////
-	// ///////////////////////////////
+	 boolean deleteArticleById(@Param("articleId") long articleId);
 
 	/**
 	 * 修改文件
@@ -57,35 +43,7 @@ public interface ArticleDao {
 	 * @param article
 	 * @return Integer
 	 */
-	public int updateArticle(Article article);
-
-	/**
-	 * 更新浏览人数
-	 * 
-	 * @param articleId
-	 * @param viewCount
-	 * @return int
-	 */
-	public int updateViewCount(@Param("articleId") long articleId,
-			@Param("viewCount") int viewCount);
-
-	/**
-	 * 更新评论数
-	 * 
-	 * @param articleId
-	 * @param commentCount
-	 * @return int
-	 */
-
-	public int updateCommentCount(@Param("articleId") long articleId,
-			@Param("commentCount") int commentCount);
-
-	public int updateCheck(@Param("articleId") long articleId,
-			@Param("check") check check);
-
-	// ///////////////////////////////
-	// ///// 查詢 ////////
-	// ///////////////////////////////
+	 int updateArticle(Article article);
 
 	/**
 	 * 得到文件
@@ -93,53 +51,32 @@ public interface ArticleDao {
 	 * @param articleId
 	 * @return File
 	 */
-	public ArticleVo getArticleById(@Param("articleId") long articleId);
+	 Article getArticleById(@Param("articleId") long articleId);
+
+	int getArticleCountByMenuId(@Param("menuId") long menuId,@Param("status") String status);
+
+	List<Article> getArticleByMenuId(@Param("menuId") long menuId,@Param("offset") int offset, @Param("rows") int rows);
 
 	/**
-	 * 得到目录的文件的列表
-	 * 
-	 * @param foderId
-	 * @return List<FileVo>
-	 */
-	public List<ArticleVo> getArticleListOfDisplayByPath(
-			@Param("path") String path, @Param("offset") long offset,
-			@Param("rows") long rows);
-
-	/**
-	 * 得到目录的所有文件的数量
-	 * 
-	 * @param foderId
-	 * @return Integer
-	 */
-	public int getArticleCountOfDisplayByPath(@Param("path") String path);
-
-	/**
-	 * 得到某种显示的文件的列表
-	 * 
-	 * @param foderId
-	 * @return List<FileVo>
-	 */
-	public List<ArticleVo> getArticleListByAdminIdAndPath(
-			@Param("adminId") long adminId, @Param("path") String path,
-			@Param("check") ArticleConstant.check check,
-			@Param("offset") long offset, @Param("rows") long rows);
-
-	/**
-	 * @param firstFolderId
-	 * @param secondFolderId
-	 * @param thirdFolderId
-	 * @param fourthFolderId
-	 * @return
-	 */
-	public int getArticleCountByAdminIdAndPath(@Param("adminId") long adminId,
-			@Param("path") String path,
-			@Param("check") ArticleConstant.check check);
-
-	/**
+	 * 多条件组合查询，并分页
+	 * @param menuId
 	 * @param adminId
-	 * @param path
+	 * @param status
+	 * @param keywords
+	 * @param offset
+	 * @param rows
 	 * @return
 	 */
-	public int getArticleCountByFolderId(@Param("folderId") long folderId);
+	public List<Article> findByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("keywords") String keywords,@Param("offset") int offset, @Param("rows") int rows);
+
+	/**
+	 * 多条件组合下查找到的结果数
+	 * @param menuId
+	 * @param adminId
+	 * @param status
+	 * @param keywords
+	 * @return
+	 */
+	int allCountByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("keywords") String keywords);
 
 }

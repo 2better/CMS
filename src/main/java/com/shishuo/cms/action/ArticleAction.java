@@ -6,19 +6,20 @@
 
 package com.shishuo.cms.action;
 
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Menu;
+import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import com.shishuo.cms.entity.vo.ArticleVo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Herbert
@@ -30,22 +31,56 @@ public class ArticleAction extends BaseAction {
 
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private ConfigService configService;
 
 	@RequestMapping(value = "/{articleId}.htm", method = RequestMethod.GET)
 	public String article(@PathVariable long articleId,
-			@RequestParam(value = "p", defaultValue = "1") long p,
 			ModelMap modelMap) {
 		try {
-			ArticleVo article = fileService.getArticleById(articleId);
+			Article article = fileService.getArticleById(articleId);
 			List<Menu> menuList = menuService.getAllDisplay();
+			List<Menu> menus = menuService.getWithChildById(article.getMenu().getPid());
 			modelMap.put("menuList",menuList);
-			modelMap.addAttribute("p", p);
+			modelMap.put("menus",menus.get(0));
 			modelMap.addAttribute("article", article);
-			return themeService.getArticleTemplate(article.getFolderId(),
-					articleId);
+			return themeService.getArticleTemplate();
 		} catch (Exception e) {
-			modelMap.addAttribute("g_folderId", 0);
+			e.printStackTrace();
 			return themeService.get404();
 		}
+	}
+
+	@RequestMapping(value = "/list.htm", method = RequestMethod.GET)
+	public String list(@RequestParam(value = "menuId") long menuId,ModelMap modelMap) {
+		try {
+			List<Menu> menuList = menuService.getAllDisplay();
+			Menu menu = menuService.getByid(menuId);
+			List<Menu> menus = menuService.getWithChildById(menu.getPid());
+			int count = fileService.getArticleCountByMenuId(menuId,"display");
+			int rows = configService.getIntKey("pagination_num");
+			int pageCount = fileService.getPageCount(count,rows);
+
+			modelMap.put("menuList",menuList);
+			modelMap.put("Menu",menu);
+			modelMap.put("menus",menus.get(0));
+			modelMap.put("count",count);
+			modelMap.put("pageCount",pageCount);
+			return "template/blog/article_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return themeService.get404();
+		}
+	}
+
+	@RequestMapping(value = "/listJson.json", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> listJson(@RequestParam(value = "menuId") long menuId,
+								 @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		int rows = configService.getIntKey("pagination_num");
+		map.put("list",fileService.getArticleByMenuId(menuId,pageNum,rows));
+		map.put("pageNum",pageNum);
+		return map;
 	}
 }

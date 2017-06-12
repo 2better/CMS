@@ -9,7 +9,7 @@
 	<section class="wrapper">
 		<!-- page start-->
 		<form id="update_article_form" class="form-horizontal" action="${BASE_PATH}/manage/article/update.json"  autocomplete="off"  method="post"
-			enctype="multipart/form-data">
+			>
 			<fieldset>
 		<div class="row">
 			<input type="hidden" name="articleId" value="${article.articleId}">
@@ -19,14 +19,6 @@
 						修改文章
 					</header>
 					<div class="panel-body">
-	                      <div class="form-group">
-	                          <label class="col-sm-2 col-sm-2 control-label">封面</label>
-	                          <div class="col-sm-10">
-	                          	<img src="${BASE_PATH}/${article.picture}" alt="img04" style="height:120px;">
-	                          	<input type="file" name="file"
-	                              	id="file" >
-	                          </div>
-	                      </div>
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">标题</label>
                           <div class="col-sm-10">
@@ -36,27 +28,36 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">目录</label>
-                          <div class="col-sm-10">
-                              <select class="form-control" name="folderId" style="font-size:15px;width: 300px;">
-                              		<#--<#list folderAll as folder>
-			                   			<#if folder.owner == "yes">
-			                        	<option value="${folder.folderId}" <#if folder.folderId==article.folderId>selected</#if>>
-			                        	${folder.pathName}
-			                        	</option>
-			                        	</#if>
-			                        </#list>-->
-	                            </select>			
-                          </div>
-                        </div> 
-						<div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">摘要</label>
-                          <div class="col-sm-10">
-                              <input type="text" style="font-size:15px;" class="form-control" name="summary"
-                              	placeholder="摘要" id="name" value="${article.summary}">
-                              </input>
-                          </div>
-                        </div>                                               
+                            <label class="col-sm-2 col-sm-2 control-label">所属菜单</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="parentMenu" style="font-size:15px;width: 300px; display: inline-block">
+								<#list menus?sort_by("sort") as f>
+									<#if f.name != "首页">
+                                        <option value="${f.id}" <#if Menu.pid ==f.id>selected</#if>>${f.name}</option>
+									</#if>
+								</#list>
+                                </select>
+                                <select class="form-control" id="childMenu" name="menuId" style="font-size:15px;width: 300px; display: inline-block"">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">发布时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" data-link-format="yyyy-mm-dd" data-date-format="yyyy-MM-dd" style="font-size:15px;" class="js_create_time" name="createTime"
+                                       placeholder="发布时间" id="createTime" value="${article.createTime?string("yyyy-MM-dd")}" readonly>
+                                </input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">文章状态</label>
+                            <div class="col-sm-10" style="margin-bottom:10px;">
+                                <input name="status" value="display" type="radio" <#if article.status=="display" || article.status=="init">checked</#if>> 显示
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input name="status" value="hidden" type="radio" <#if article.status=="hidden">checked</#if>> 隐藏
+                            </div>
+                        </div>
 						<div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">内容</label>
                               <div class="col-sm-10">
@@ -70,25 +71,10 @@
 								  </script>
                               </div>
                         </div>
-                        <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">发布时间</label>
-                          <div class="col-sm-10">
-                              <input type="text" data-link-format="yyyy-mm-dd" data-date-format="yyyy-MM-dd" style="font-size:15px;" class="js_create_time" name="createTime"
-                              	placeholder="发布时间" id="createTime" value="${article.createTime?string("yyyy-MM-dd")}" readonly>
-                              </input>
-                          </div>
-                        </div>    
-                        <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">文章状态</label>
-                          <div class="col-sm-10" style="margin-bottom:10px;">
-                          	<input name="status" value="display" type="radio" <#if article.status=="display" || article.status=="init">checked</#if>> 显示
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input name="status" value="hidden" type="radio" <#if article.status=="hidden">checked</#if>> 隐藏
-                          </div>
-                        </div>                       
+
                         <div class="form-group">
                       	  <div class="col-lg-offset-2 col-lg-10">
-                          <button class="btn btn-shadow btn-primary" type="submit">发布</button>
+                          <button class="btn btn-shadow btn-primary" type="submit">更新</button>
                           </div>
                       </div>
 					</div>
@@ -164,6 +150,49 @@ $.extend({
 	}
 });
 $(function(){
+
+    var menus = {
+	<#list menus as f>
+		<#if f.name != "首页">
+            "${f.id}":[
+				<#list f.children as c>
+                    {"id":"${c.id}","name":"${c.name}"},
+				</#list>
+            ],
+		</#if>
+	</#list>
+    };
+
+    var parentMenu=$("#parentMenu").val();
+    var childMenu=$("#childMenu")[0];
+    var m=menus[parentMenu];
+    childMenu.options.length=0;
+    if (typeof m == "undefined") {
+        childMenu.options.add(new Option(">>二级栏目<<", -1));
+    }else {
+        for (var i = 0; i < m.length; i++) {
+            if(m[i].id=="${article.menuId}")
+                childMenu.options.add(new Option(m[i].name, m[i].id,false,true));
+            else
+            childMenu.options.add(new Option(m[i].name, m[i].id));
+        }
+    }
+
+    $("#parentMenu").change(function()
+    {
+        var parentMenu=$(this).val();
+        var childMenu=$("#childMenu")[0];
+        var m=menus[parentMenu];
+        childMenu.options.length=0;
+        if (typeof m == "undefined") {
+            childMenu.options.add(new Option(">>二级栏目<<", -1));
+        }else {
+            for (var i = 0; i < m.length; i++) {
+                childMenu.options.add(new Option(m[i].name, m[i].id));
+            }
+        }
+    });
+
 	$('#update_article_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
@@ -177,18 +206,7 @@ $(function(){
 				}
 			}
 		});
-	$('#file_upload').uploadify({
-		'buttonText'  		: 	'请选择文件',
-        'swf'         		: 	'${BASE_PATH}/static/manage/assets/uploadify/uploadify.swf',
-        'uploader'    		: 	'${BASE_PATH}/manage/attachment/upload.json;jsessionid=${JSESSIONID}',
-        'formData'  		: 	{'kindId':kindId,'kind':kind},
-        'fileObjName'		: 	'file',
-        'fileTypeExts' 		: 	'*.*',
-        'method'			:	'post',
-        'onUploadSuccess' 	: 	function(file, data, response) {
-        	$.getAttachment();
-        }
-	});
+
 	$.getAttachment();
 	$('.js_create_time').datetimepicker({
         language:  'zh-CN',

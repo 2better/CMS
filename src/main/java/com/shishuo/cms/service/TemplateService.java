@@ -71,30 +71,6 @@ public class TemplateService {
 		throw new TemplateNotFoundException("模板文件：index 不存在！！");
 	}
 
-	/**
-	 * 得到文件夹模板
-	 * 
-	 * @param folderId
-	 * @return
-	 * @throws TemplateNotFoundException
-	 *
-	 */
-	public String getFolderTemplate(long folderId)
-			throws TemplateNotFoundException{
-		List<String> themeOrderList = new ArrayList<String>();
-		themeOrderList.add(FOLDER_TEMPLATE_PREFIX);
-		String themeString = FOLDER_TEMPLATE_PREFIX;
-		// 模板顺序反转
-		Collections.reverse(themeOrderList);
-		for (String theme : themeOrderList) {
-			if (this.isExist(theme)) {
-				return this.getTemplatePath(theme);
-			}
-		}
-		throw new TemplateNotFoundException("模板文件："
-				+ this.getTemplatePath(FOLDER_TEMPLATE_PREFIX) + ".ftl"
-				+ " 不存在！！");
-	}
 
 	/**
 	 * 得到文件模板
@@ -104,19 +80,13 @@ public class TemplateService {
 	 * @return
 	 * @throws TemplateNotFoundException
 	 */
-	public String getArticleTemplate(long folderId, long articleId)
+	public String getArticleTemplate()
 			throws TemplateNotFoundException{
-		List<String> themeOrderList = new ArrayList<String>();
-		themeOrderList.add(FILE_TEMPLATE_PREFIX);
-		String themeString = FILE_TEMPLATE_PREFIX;
-		themeOrderList.add(themeString + "-" + articleId);
-		// 模板顺序反转
-		Collections.reverse(themeOrderList);
-		for (String theme : themeOrderList) {
-			if (this.isExist(theme)) {
-				return this.getTemplatePath(theme);
+
+			if (this.isExist(FILE_TEMPLATE_PREFIX)) {
+				return this.getTemplatePath(FILE_TEMPLATE_PREFIX);
 			}
-		}
+
 		throw new TemplateNotFoundException("模板文件："
 				+ this.getTemplatePath(FILE_TEMPLATE_PREFIX) + " 不存在！！");
 	}
@@ -128,9 +98,7 @@ public class TemplateService {
 	 * @return
 	 */
 	private String getTemplatePath(String template) {
-		return "/template/"
-				+ configService.getStringByKey(ConfigConstant.SHISHUO_TEMPLATE)
-				+ "/" + template;
+		return "/template/blog/" + template;
 	}
 
 	/**
@@ -141,9 +109,7 @@ public class TemplateService {
 	 */
 	@Cacheable("default")
 	public Boolean isExist(String theme) {
-		String themePath = "/WEB-INF/static/template/"
-				+ configService.getStringByKey(ConfigConstant.SHISHUO_TEMPLATE)
-				+ "/" + theme + ".ftl";
+		String themePath = "/WEB-INF/static/template/blog/" + theme + ".ftl";
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + themePath);
 		if (file.exists()) {
 			logger.info("尝试使用模板：" + themePath+"【存在】");

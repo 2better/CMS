@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.AdminDao;
 import com.shishuo.cms.entity.Admin;
-import com.shishuo.cms.entity.vo.AdminVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.AuthException;
 import com.shishuo.cms.util.AuthUtils;
@@ -111,7 +110,7 @@ public class AdminService {
 	public void adminLogin(String name, String password,
 			HttpServletRequest request) throws AuthException,
 			IOException {
-		AdminVo admin = adminDao.getAdminByName(name);
+		Admin admin = adminDao.getAdminByName(name);
 		if (admin == null) {
 			throw new AuthException("邮箱或密码错误");
 		}
@@ -119,12 +118,6 @@ public class AdminService {
 		if (loginPassword.equals(admin.getPassword())) {
 			HttpSession session = request.getSession();
 			admin.setPassword("");
-			if (name.equals(PropertyUtils
-					.getValue("shishuocms.admin"))) {
-				admin.setAdmin(true);
-			} else {
-				admin.setAdmin(false);
-			}
 			session.setAttribute(SystemConstant.SESSION_ADMIN,
 					admin);
 		} else {

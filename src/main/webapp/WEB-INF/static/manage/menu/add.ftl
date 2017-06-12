@@ -116,7 +116,7 @@
 								label : "查看文件夹列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${BASE_PATH}/manage/folder/list.htm";
+									window.location.href="${BASE_PATH}/manage/folder/listPage.htm";
 								}
 							},
 						}

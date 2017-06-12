@@ -1,9 +1,12 @@
 package com.shishuo.cms.action.manage;
 
 import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.Document;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
+import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.ConnectException;
 import java.util.List;
 
 /**
@@ -25,16 +29,29 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/manage/preview")
-public class ManagePreviewAction {
+public class ManageDocumentAction {
     @Autowired
     private DocumentService documentService;
+    @Autowired
+    private ConfigService configService;
 
-    @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
-    public String list(HttpServletRequest request, ModelMap modelMap) {
-        List<Document> list = documentService.getDocList();
-        modelMap.put("list", list);
+    @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
+    public String listPage(HttpServletRequest request, ModelMap modelMap) {
+        int count = documentService.allCountByCondition(-1, "");
+        modelMap.put("count", count);
 
         return "manage/preview/list";
+    }
+
+    @RequestMapping(value = "/list.json", method = RequestMethod.POST)
+    @ResponseBody
+    public PageVo<Document> list(
+            @RequestParam(value = "p", defaultValue = "1") int pageNum,
+            @RequestParam(value = "adminId", defaultValue = "-1") long adminId,
+            @RequestParam(value = "keywords", defaultValue = "") String keywords) {
+        int num = configService.getIntKey("pagination_num");
+        PageVo<Document> pageVo = documentService.findByCondition(adminId, keywords, pageNum, num);
+        return pageVo;
     }
 
     @RequestMapping(value = "/add.htm", method = RequestMethod.GET)
@@ -44,13 +61,12 @@ public class ManagePreviewAction {
 
     @ResponseBody
     @RequestMapping(value = "/add.json", method = RequestMethod.POST)
-    public JsonVo<Document> add(
-            @RequestParam(value = "file", required = false) MultipartFile file)
+    public JsonVo<Document> add(HttpServletRequest request,
+                                @RequestParam(value = "file", required = false) MultipartFile file)
             throws UploadException {
         JsonVo<Document> json = new JsonVo<Document>();
         try {
-            Document document = documentService.add(file);
-            json.setT(document);
+            documentService.add(file, (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN));
             json.setResult(true);
             return json;
         } catch (IOException e) {
@@ -68,7 +84,7 @@ public class ManagePreviewAction {
      * @Description:
      */
     @RequestMapping(value = "/download.htm", method = RequestMethod.GET)
-    public String downloadFile(@RequestParam("id") Long id,HttpServletResponse response) {
+    public String downloadFile(@RequestParam("id") Long id, HttpServletResponse response) {
         if (id != null) {
             Document document = documentService.getById(id);
             if (document != null) {
@@ -115,14 +131,39 @@ public class ManagePreviewAction {
     }
 
 
-    @RequestMapping(value = "/preview.htm", method = RequestMethod.GET)
-    public String preview(@RequestParam(value = "id") Long id, ModelMap modelmap) throws Exception {
-        if(id!=null) {
-            String pdfFilePath = documentService.getPreview(id);
-            modelmap.put("pdfFilePath",pdfFilePath);
-            return "manage/preview/preview";
+    @RequestMapping(value = "/previewPage.htm", method = RequestMethod.GET)
+    public String previewPage(@RequestParam(value = "pdfFilePath") String pdfFilePath, ModelMap modelmap) {
+        modelmap.put("pdfFilePath", pdfFilePath);
+        return "manage/preview/preview";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/preview.json", method = RequestMethod.POST)
+    public JsonVo<String> preview(@RequestParam(value = "id") Long id) {
+        JsonVo<String> json = new JsonVo<String>();
+        if (id != null) {
+            try {
+                String pdfFilePath = documentService.getPreview(id);
+                json.setResult(true);
+                json.setT(pdfFilePath);
+            } catch (FileNotFoundException e) {
+                json.setResult(false);
+                json.setMsg("找不到该文档");
+            } catch (ConnectException e) {
+                e.printStackTrace();
+                json.setResult(false);
+                json.setMsg("系统繁忙，请重试");
+            } catch (Exception e) {
+                e.printStackTrace();
+                json.setResult(false);
+                json.setMsg("系统繁忙，请重试");
+            }
+        }else {
+            json.setResult(false);
+            json.setMsg("找不到该文档");
         }
-        return null;
+        return json;
+
     }
 
     @ResponseBody

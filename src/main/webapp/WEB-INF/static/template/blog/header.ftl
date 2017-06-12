@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="${shishuo_seo_description}">
+<meta name="description" content="${seo_description}">
 <meta name="author" content="CMS">
 <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/favicon.ico">
 
-<title>${shishuo_seo_title}</title>
+<title>${index_title}</title>
 
 <link rel="stylesheet" type="text/css" href="${TEMPLATE_BASE_PATH}/css/main.css" />
 </head>
@@ -38,7 +38,7 @@
 <div class="header">
     <div class="header-content">
         <div class="logo">
-            <a href="/001lt269/index.html"></a>
+            <a href="${BASE_PATH}/index.htm"></a>
         </div>
         <h3>
             创新理论与创新管理研究中心
@@ -47,7 +47,7 @@
         </h3>
         <!--搜索-->
         <div class="search">
-            <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
+            <span class="widget"><i>${.now?string('yyyy年MM月dd日')}</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
             <input id="keywords" name="keywords" class="input-text" type="text" x-webkit-speech="" placeholder="请输入关键字搜索" onkeydown="if(event.keyCode==13){SiteSearch('/001lt269/search.html', '#keywords');return false};"
             />
             <input class="input-btn" type="submit" value="" onclick="SiteSearch('/001lt269/search.html', '#keywords');" />
@@ -58,15 +58,14 @@
         <ul id="nav">
         <#if menuList?? && menuList?size gt 0>
             <#list menuList?sort_by("sort") as p>
-            <li class="on"><a href="${p.url}" target="0">${p.name}</a>
+            <li class="on">
+                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>" target="0">${p.name}</a>
                 <ul>
-
                 <#list p.children?sort_by("sort") as c>
                     <li class=""><a href="${c.url}" target="0">${c.name}</a>
                         <ul></ul>
                     </li>
                 </#list>
-
                 </ul>
             </li>
             </#list>

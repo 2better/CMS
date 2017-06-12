@@ -54,9 +54,6 @@
                         p:name="config"/>
                 <bean
                         class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="folder"/>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
                         p:name="article"/>
                 <bean
                         class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
