@@ -178,4 +178,6 @@
         <property name="basePackage" value="com.shishuo.cms.dao"/>
     </bean>
 
+    <bean class="com.shishuo.cms.util.PageStaticUtils" id="pageStaticUtils"/>
+
 </beans>

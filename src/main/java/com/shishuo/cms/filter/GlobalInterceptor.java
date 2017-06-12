@@ -26,9 +26,6 @@ import com.shishuo.cms.util.HttpUtils;
 @Component
 public class GlobalInterceptor implements HandlerInterceptor {
 
-	@Autowired
-	private ConfigService configService;
-
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -48,10 +45,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 		modelAndView.addObject("BASE_PATH", basePath);
 		modelAndView.addObject("UPLOAD_BASE_PATH", basePath + "/upload");
 		modelAndView.addObject("TEMPLATE_BASE_PATH", basePath + "/static/template/blog");
-		modelAndView.addObject("index_title",
-				configService.getStringByKey("index_title"));
-		modelAndView.addObject("seo_description",
-				configService.getStringByKey("seo_description"));
+
 		MDC.put("ip", HttpUtils.getIp(request));
 	}
 

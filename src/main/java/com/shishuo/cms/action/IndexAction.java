@@ -8,6 +8,7 @@ package com.shishuo.cms.action;
 
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.MenuService;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shishuo.cms.exception.TemplateNotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,37 +30,27 @@ import java.util.List;
 public class IndexAction extends BaseAction {
 
 	@Autowired
-	private MenuService menuService;
+	private PageStaticUtils pageStaticUtils;
 	/**
 	 * 首页
-	 *
-	 * @param modelMap
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String defalut(
-			@RequestParam(value = "p", defaultValue = "1") long p,
-			ModelMap modelMap) {
-		return home(p, modelMap);
+	public String defalut(HttpServletRequest request) {
+		return home(request);
 	}
 
 	/**
 	 * 首页
 	 *
-	 * @param modelMap
 	 * @return
 	 */
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
-	public String home(@RequestParam(value = "p", defaultValue = "1") long p,
-			ModelMap modelMap) {
+	public String home(HttpServletRequest request) {
 		try {
-			List<Menu> menuList = menuService.getAllDisplay();
-			modelMap.put("menuList",menuList);
-			modelMap.addAttribute("p", p);
-			modelMap.addAttribute("g_folderId", 0);
+			pageStaticUtils.headerStaticPage(request);
 			return themeService.getDefaultTemplate();
 		} catch (TemplateNotFoundException e) {
-			modelMap.addAttribute("g_folderId", 0);
 			logger.fatal(e.getMessage());
 			return themeService.get404();
 		}

@@ -11,12 +11,14 @@ import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.MenuService;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,17 +35,19 @@ public class ArticleAction extends BaseAction {
 	private MenuService menuService;
 	@Autowired
 	private ConfigService configService;
+	@Autowired
+	private PageStaticUtils pageStaticUtils;
 
 	@RequestMapping(value = "/{articleId}.htm", method = RequestMethod.GET)
 	public String article(@PathVariable long articleId,
-			ModelMap modelMap) {
+						  ModelMap modelMap, HttpServletRequest request) {
 		try {
 			Article article = fileService.getArticleById(articleId);
-			List<Menu> menuList = menuService.getAllDisplay();
 			List<Menu> menus = menuService.getWithChildById(article.getMenu().getPid());
-			modelMap.put("menuList",menuList);
 			modelMap.put("menus",menus.get(0));
 			modelMap.addAttribute("article", article);
+
+			pageStaticUtils.headerStaticPage(request);
 			return themeService.getArticleTemplate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,20 +56,22 @@ public class ArticleAction extends BaseAction {
 	}
 
 	@RequestMapping(value = "/list.htm", method = RequestMethod.GET)
-	public String list(@RequestParam(value = "menuId") long menuId,ModelMap modelMap) {
+	public String list(@RequestParam(value = "menuId") long menuId,ModelMap modelMap,HttpServletRequest request) {
 		try {
-			List<Menu> menuList = menuService.getAllDisplay();
+
 			Menu menu = menuService.getByid(menuId);
 			List<Menu> menus = menuService.getWithChildById(menu.getPid());
 			int count = fileService.getArticleCountByMenuId(menuId,"display");
 			int rows = configService.getIntKey("pagination_num");
 			int pageCount = fileService.getPageCount(count,rows);
 
-			modelMap.put("menuList",menuList);
+
 			modelMap.put("Menu",menu);
 			modelMap.put("menus",menus.get(0));
 			modelMap.put("count",count);
 			modelMap.put("pageCount",pageCount);
+
+			pageStaticUtils.headerStaticPage(request);
 			return "template/blog/article_list";
 		} catch (Exception e) {
 			e.printStackTrace();

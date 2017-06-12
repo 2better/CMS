@@ -1,4 +1,4 @@
-<#include "header.ftl">
+<#include "staticPage/header.html">
 <!--主体-->
 <div class="container">
     <div class="content">

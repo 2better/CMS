@@ -3,6 +3,7 @@ package com.shishuo.cms.service;
 import com.shishuo.cms.dao.MenuDao;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.util.IDUtils;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,12 +30,14 @@ public class MenuService
         if(createUrl!=0)
             menu.setUrl("/article/list.htm?menuId="+id);
         menuDao.add(menu);
+        PageStaticUtils.updateTemplate("header");
     }
 
     @CacheEvict(value = "menu", allEntries = true)
     public void delete(long id)
     {
         menuDao.delete(id);
+        PageStaticUtils.updateTemplate("header");
     }
 
     public List<Menu> getAll()
@@ -56,6 +59,7 @@ public class MenuService
     public void modifySortById(long id,int sort)
     {
         menuDao.modifySortById(id,sort);
+        PageStaticUtils.updateTemplate("header");
     }
 
     public Menu getByid(long id){
@@ -68,6 +72,7 @@ public class MenuService
         if(createUrl!=0)
             menu.setUrl("/manage/article/list.htm?menuId="+menu.getId());
         menuDao.update(menu);
+        PageStaticUtils.updateTemplate("header");
     }
 
     public int getCountOfChilden(long pid)

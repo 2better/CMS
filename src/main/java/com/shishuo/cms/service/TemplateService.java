@@ -29,7 +29,6 @@ import com.shishuo.cms.exception.TemplateNotFoundException;
 @Service
 public class TemplateService {
 
-	private static String FOLDER_TEMPLATE_PREFIX = "folder";
 	private static String FILE_TEMPLATE_PREFIX = "article";
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
@@ -59,14 +58,8 @@ public class TemplateService {
 	 * @throws TemplateNotFoundException
 	 */
 	public String getDefaultTemplate() throws TemplateNotFoundException {
-		List<String> themeOrderList = new ArrayList<String>();
-		themeOrderList.add("index");
-		themeOrderList.add(FOLDER_TEMPLATE_PREFIX);
-		themeOrderList.add(FILE_TEMPLATE_PREFIX);
-		for (String theme : themeOrderList) {
-			if (this.isExist(theme)) {
-				return this.getTemplatePath(theme);
-			}
+		if (this.isExist("index")) {
+			return this.getTemplatePath("index");
 		}
 		throw new TemplateNotFoundException("模板文件：index 不存在！！");
 	}
@@ -74,9 +67,7 @@ public class TemplateService {
 
 	/**
 	 * 得到文件模板
-	 * 
-	 * @param folderPathList
-	 * @param articleId
+	 *
 	 * @return
 	 * @throws TemplateNotFoundException
 	 */
