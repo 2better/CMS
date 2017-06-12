@@ -8,14 +8,12 @@ package com.shishuo.cms.action;
 
 import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Menu;
-import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -82,5 +80,22 @@ public class ArticleAction extends BaseAction {
 		map.put("list",fileService.getArticleByMenuId(menuId,pageNum,rows));
 		map.put("pageNum",pageNum);
 		return map;
+	}
+
+	@RequestMapping(value = "listNews", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Article> listNewsJson() {
+		return listArtice("149715108805446");
+	}
+
+
+	@RequestMapping(value = "listCooperation", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Article> listCooperationJson() {
+		return listArtice("149715115964151");
+	}
+
+	private List<Article> listArtice(String menuId) {
+		return fileService.getArticeByMenuIdByTime(new Long(menuId),6);
 	}
 }

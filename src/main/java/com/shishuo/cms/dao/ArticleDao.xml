@@ -119,4 +119,10 @@
 		</where>
 	</select>
 
-</mapper>  
+	<!--添加了时间排序-->
+	<select id="getArticeByMenuIdByTime" resultType="com.shishuo.cms.entity.Article">
+		select articleId,title,createTime from article where menuId
+		IN (SELECT DISTINCT id FROM menu WHERE id = ${menuId} OR pId = #{menuId})
+		and status = 'display' ORDER BY createTime DESC limit 0 ,#{num}
+	</select>
+</mapper>

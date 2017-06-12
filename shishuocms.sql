@@ -12,7 +12,9 @@ File Encoding         : 65001
 
 Date: 2017-06-12 03:15:00
 */
-
+DROP DATABASE IF EXISTS shishuocms;
+CREATE DATABASE shishuocms;
+USE shishuocms;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -48,7 +50,7 @@ CREATE TABLE `article` (
   `title` varchar(200) DEFAULT '' COMMENT '文件名称',
   `content` mediumtext COMMENT '文件内容',
   `status` varchar(20) DEFAULT 'init' COMMENT '状态：0 隐藏 1 显示',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `createTime` TIMESTAMP DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`articleId`),
   KEY `idx_folder` (`status`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='文件';
