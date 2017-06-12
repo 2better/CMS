@@ -127,12 +127,12 @@
                         </div>
                     </div>
                     <div class="area-con">
-                        <ul>
-                            <li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>
-                            <li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>
-                            <li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>
-                            <li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>
-                            <li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>
+                        <ul id="newsUl">
+                            <#--<li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>-->
+                            <#--<li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -151,13 +151,13 @@
                         </div>
                     </div>
                     <div class="area-con">
-                        <ul>
-                            <li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>
-                            <li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>
-                            <li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>
-                            <li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>
-                            <li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>
-                            <li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>
+                        <ul id="cooperationUl">
+                            <#--<li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>-->
+                            <#--<li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>-->
+                            <#--<li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>-->
+                            <#--<li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>-->
+                            <#--<li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>-->
+                            <#--<li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -248,6 +248,9 @@
                 <!--E 区域5-->
             </div>
         </div>
+        <#--异步加载article-->
+        <script src="${TEMPLATE_BASE_PATH}/js/article.js"></script>
+
         <!--E 下部分-->
         <div class="con-top" style="height:auto;margin:0;">
             <div class="con-top-l" style="float:right;height:auto;">

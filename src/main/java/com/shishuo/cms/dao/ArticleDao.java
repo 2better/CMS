@@ -79,4 +79,8 @@ public interface ArticleDao {
 	 */
 	int allCountByCondition(@Param("menuId") long menuId,@Param("adminId") long adminId,@Param("status") String status,@Param("keywords") String keywords);
 
+
+	//按时间排序查找目录下的文章
+	List<Article> getArticeByMenuIdByTime(@Param("menuId") long menuId, @Param("num") int num);
+
 }
