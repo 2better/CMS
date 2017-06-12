@@ -28,11 +28,12 @@ public class DocumentService
     @Autowired
     private DocumentDao documentDao;
 
-    public void add(MultipartFile file, Admin admin) throws IOException
+    public void add(MultipartFile file, Admin admin,int column) throws IOException
     {
         Document document = new Document();
         document.setId(IDUtils.getId());
         document.setCreated(new Date());
+        document.setColumn(column);
         String fileName = file.getOriginalFilename();
         if (!file.isEmpty()) {
             document.setName(fileName);
@@ -106,19 +107,19 @@ public class DocumentService
         }
     }
 
-    public PageVo<Document> findByCondition(long adminId,String keywords, int pageNum, int rows)
+    public PageVo<Document> findByCondition(long adminId,String keywords,int column, int pageNum, int rows)
     {
         PageVo<Document> pageVo = new PageVo<Document>(pageNum);
         pageVo.setRows(rows);
-        pageVo.setCount(documentDao.allCountByCondition(adminId,keywords));
-        List<Document> articlelist = documentDao.findByCondition(adminId,keywords,pageVo.getOffset(),rows);
+        pageVo.setCount(documentDao.allCountByCondition(adminId,keywords,column));
+        List<Document> articlelist = documentDao.findByCondition(adminId,keywords,column,pageVo.getOffset(),rows);
         pageVo.setList(articlelist);
         return pageVo;
     }
 
-    public int allCountByCondition(long adminId,String keywords)
+    public int allCountByCondition(long adminId,String keywords,int column)
     {
-        return documentDao.allCountByCondition(adminId,keywords);
+        return documentDao.allCountByCondition(adminId,keywords,column);
     }
 
 }

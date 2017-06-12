@@ -29,7 +29,7 @@ public interface DocumentDao
      * @param rows
      * @return
      */
-     List<Document> findByCondition(@Param("adminId") long adminId,  @Param("keywords") String keywords, @Param("offset") int offset, @Param("rows") int rows);
+     List<Document> findByCondition(@Param("adminId") long adminId,  @Param("keywords") String keywords,@Param("column") int column, @Param("offset") int offset, @Param("rows") int rows);
 
     /**
      * 多条件组合下查找到的结果数
@@ -37,5 +37,6 @@ public interface DocumentDao
      * @param keywords
      * @return
      */
-    int allCountByCondition(@Param("adminId") long adminId,@Param("keywords") String keywords);
+    int allCountByCondition(@Param("adminId") long adminId,@Param("keywords") String keywords,@Param("column") int column);
+
 }

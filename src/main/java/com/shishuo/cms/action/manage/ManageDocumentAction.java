@@ -37,7 +37,7 @@ public class ManageDocumentAction {
 
     @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
     public String listPage(HttpServletRequest request, ModelMap modelMap) {
-        int count = documentService.allCountByCondition(-1, "");
+        int count = documentService.allCountByCondition(-1, "",-1);
         modelMap.put("count", count);
 
         return "manage/preview/list";
@@ -48,10 +48,11 @@ public class ManageDocumentAction {
     public PageVo<Document> list(
             @RequestParam(value = "p", defaultValue = "1") int pageNum,
             @RequestParam(value = "adminId", defaultValue = "-1") long adminId,
-            @RequestParam(value = "keywords", defaultValue = "") String keywords) {
+            @RequestParam(value = "keywords", defaultValue = "") String keywords,
+            @RequestParam(value = "column", defaultValue = "-1") int column) {
         int num = configService.getIntKey("pagination_num");
-        PageVo<Document> pageVo = documentService.findByCondition(adminId, keywords, pageNum, num);
-        return pageVo;
+        return documentService.findByCondition(adminId, keywords,column, pageNum, num);
+
     }
 
     @RequestMapping(value = "/add.htm", method = RequestMethod.GET)
@@ -61,12 +62,12 @@ public class ManageDocumentAction {
 
     @ResponseBody
     @RequestMapping(value = "/add.json", method = RequestMethod.POST)
-    public JsonVo<Document> add(HttpServletRequest request,
+    public JsonVo<Document> add(HttpServletRequest request,@RequestParam(value="column",defaultValue = "1")int column,
                                 @RequestParam(value = "file", required = false) MultipartFile file)
             throws UploadException {
         JsonVo<Document> json = new JsonVo<Document>();
         try {
-            documentService.add(file, (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN));
+            documentService.add(file, (Admin) request.getSession().getAttribute(SystemConstant.SESSION_ADMIN),column);
             json.setResult(true);
             return json;
         } catch (IOException e) {
