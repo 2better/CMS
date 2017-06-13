@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-06-12 03:15:00
+Date: 2017-06-14 02:26:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,19 +21,18 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `adminId` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
-  `name` varchar(50) DEFAULT NULL COMMENT '管理员名称',
-  `password` varchar(32) DEFAULT NULL COMMENT '密码 MD5加密',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
-  `status` tinyint(4) NOT NULL,
+  `name` varchar(50) NOT NULL COMMENT '管理员名称',
+  `password` char(32) NOT NULL COMMENT '密码 MD5加密',
+  `salt` char(32) NOT NULL,
+  `createTime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'shishuocms', '6158f875bf826e15923779855b6eef2e', '2012-08-08 00:00:00', '0');
-INSERT INTO `admin` VALUES ('2', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '2017-06-09 21:19:15', '1');
+INSERT INTO `admin` VALUES ('3', 'admin', 'bc9ebb893e70f3ab2173a80a492e0109', '7633241aa83e08c68e0b0053f9d01c58', '2017-06-13 15:59:58');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -102,7 +101,7 @@ CREATE TABLE `config` (
 -- Records of config
 -- ----------------------------
 INSERT INTO `config` VALUES ('index_title', 'ITIMRC', '首页title');
-INSERT INTO `config` VALUES ('pagination_num', '4', '分页每页显示条数');
+INSERT INTO `config` VALUES ('pagination_num', '2', '分页每页显示条数');
 INSERT INTO `config` VALUES ('seo_description', 'ITIMRC', '网站描述');
 INSERT INTO `config` VALUES ('static', 'false', '是否启用全站静态化');
 
@@ -119,16 +118,18 @@ CREATE TABLE `document` (
   `type` varchar(10) NOT NULL,
   `preview` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL,
+  `_column` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of document
 -- ----------------------------
-INSERT INTO `document` VALUES ('149718056688936', '1', 'shishuocms', '01广东工业大学创新理论与创新管理研究中心章程.docx', 'upload/2017/06/11/7cc1fdeef2974446a40f44b9f8df5fc6.docx', 'docx', 'upload/preview/1497180621394.pdf', '2017-06-11 19:29:26');
-INSERT INTO `document` VALUES ('149718057318167', '1', 'shishuocms', '02广东工业大学创新理论与创新管理研究中心：中心定位和使命.docx', 'upload/2017/06/11/4055e9fb36cb44c69d85f7fd7e0a2c5d.docx', 'docx', 'upload/preview/1497185646190.pdf', '2017-06-11 19:29:33');
-INSERT INTO `document` VALUES ('149718057906763', '1', 'shishuocms', '03创新理论与创新管理研究中心人员管理办法.doc', 'upload/2017/06/11/de4e8050fadc497680525c84301d9f8f.doc', 'doc', 'upload/preview/1497185657604.pdf', '2017-06-11 19:29:39');
-INSERT INTO `document` VALUES ('149718466556700', '1', 'shishuocms', '04创新理论与创新管理研究中心科研管理条例.doc', 'upload/2017/06/11/c8345008101542d5a915607bb53d1dc5.doc', 'doc', 'upload/preview/1497185671684.pdf', '2017-06-11 20:37:45');
+INSERT INTO `document` VALUES ('149718056688936', '1', 'shishuocms', '01广东工业大学创新理论与创新管理研究中心章程.docx', 'upload/2017/06/11/7cc1fdeef2974446a40f44b9f8df5fc6.docx', 'docx', 'upload/preview/1497180621394.pdf', '2017-06-11 19:29:26', '1');
+INSERT INTO `document` VALUES ('149718057318167', '1', 'shishuocms', '02广东工业大学创新理论与创新管理研究中心：中心定位和使命.docx', 'upload/2017/06/11/4055e9fb36cb44c69d85f7fd7e0a2c5d.docx', 'docx', 'upload/preview/1497185646190.pdf', '2017-06-11 19:29:33', '1');
+INSERT INTO `document` VALUES ('149718057906763', '1', 'shishuocms', '03创新理论与创新管理研究中心人员管理办法.doc', 'upload/2017/06/11/de4e8050fadc497680525c84301d9f8f.doc', 'doc', 'upload/preview/1497185657604.pdf', '2017-06-11 19:29:39', '2');
+INSERT INTO `document` VALUES ('149718466556700', '1', 'shishuocms', '04创新理论与创新管理研究中心科研管理条例.doc', 'upload/2017/06/11/c8345008101542d5a915607bb53d1dc5.doc', 'doc', 'upload/preview/1497185671684.pdf', '2017-06-11 20:37:45', '2');
+INSERT INTO `document` VALUES ('149724169672426', '1', 'shishuocms', '【Python学习手册（第3版）】Mark Lutz.pdf', 'upload/2017/06/12/84bcaaf36cca4c5fa3242b862d7969bd.pdf', 'pdf', 'upload/2017/06/12/84bcaaf36cca4c5fa3242b862d7969bd.pdf', '2017-06-12 12:28:16', '1');
 
 -- ----------------------------
 -- Table structure for `headline`
@@ -196,7 +197,7 @@ INSERT INTO `menu` VALUES ('149715114562973', '人才培养', '/article/list.htm
 INSERT INTO `menu` VALUES ('149715115964151', '合作交流', '/article/list.htm?menuId=149715115964151', '0', '7', 'display');
 INSERT INTO `menu` VALUES ('149715117020733', '研究资源', '/article/list.htm?menuId=149715117020733', '0', '8', 'display');
 INSERT INTO `menu` VALUES ('149715118080311', '人才招聘', '/article/list.htm?menuId=149715118080311', '0', '9', 'display');
-INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/article/list.htm?menuId=149715120950670', '0', '10', 'display');
+INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/article/download.htm', '0', '10', 'display');
 INSERT INTO `menu` VALUES ('149715122468202', '首页', '/index.htm', '0', '1', 'display');
 INSERT INTO `menu` VALUES ('149715128012317', '主任致辞', '/article/list.htm?menuId=149715128012317', '149715099586609', '1', 'display');
 INSERT INTO `menu` VALUES ('149715129668145', '中心简介', '/article/list.htm?menuId=149715129668145', '149715099586609', '1', 'display');
@@ -221,14 +222,15 @@ INSERT INTO `menu` VALUES ('149715157911011', '政府合作', '/article/list.htm
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `openId` bigint(20) DEFAULT NULL COMMENT '公共用户ID，只有是师说，QQ，微博等其它网站登录时才有。',
-  `type` varchar(20) DEFAULT NULL COMMENT '帐号类型：0 本站 1 师说 2 QQ 3 微博',
-  `name` varchar(45) DEFAULT NULL COMMENT '用户名',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `userId` bigint(20) NOT NULL COMMENT '用户ID',
+  `password` char(32) NOT NULL,
+  `salt` char(32) NOT NULL,
+  `name` varchar(45) NOT NULL COMMENT '用户名',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='用户';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('149737071298860', '74e77f19b10bd9a72ab2bd5b5270363a', '0f79680132f4a387948d2a1210475091', 'user', '2017-06-14 00:18:32');

@@ -27,7 +27,7 @@ public class MenuService
         long id = IDUtils.getId();
         menu.setId(id);
         menu.setSort(1);
-        if(createUrl!=0)
+        if(createUrl==1)
             menu.setUrl("/article/list.htm?menuId="+id);
         menuDao.add(menu);
         PageStaticUtils.updateTemplate("header");
@@ -69,7 +69,7 @@ public class MenuService
     @CacheEvict(value = "menu", allEntries = true)
     public void update(Menu menu,int createUrl)
     {
-        if(createUrl!=0)
+        if(createUrl==1)
             menu.setUrl("/manage/article/list.htm?menuId="+menu.getId());
         menuDao.update(menu);
         PageStaticUtils.updateTemplate("header");

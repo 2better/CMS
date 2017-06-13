@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.shishuo.cms.action;
 
@@ -13,6 +8,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.shishuo.cms.entity.User;
+import com.shishuo.cms.entity.User;
+import com.shishuo.cms.exception.ValidateException;
+import com.shishuo.cms.service.UserService;
+import com.shishuo.cms.util.SSUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.vo.JsonVo;
-import com.shishuo.cms.service.AdminService;
+import com.shishuo.cms.service.UserService;
 import com.shishuo.cms.util.HttpUtils;
 
 /**
@@ -37,22 +37,19 @@ import com.shishuo.cms.util.HttpUtils;
  */
 
 @Controller
-@RequestMapping("/admin")
-public class AdminAction extends BaseAction {
+@RequestMapping("/user")
+public class UserAction extends BaseAction {
 
-    /**
-     * Kaptcha 验证码
-     */
     @Autowired
-    private DefaultKaptcha captchaProducer;
+    private UserService userService;
 
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
     public String login() {
-        return "/manage/login";
+        return "/manage/user/login";
     }
 
     @RequestMapping(value = "/login.json", method = RequestMethod.POST)
-    public String adminLogin(@RequestParam(value = "name") String name,
+    public String userLogin(@RequestParam(value = "name") String name,
                              @RequestParam(value = "password") String password, ModelMap
                                      modelMap, HttpServletRequest request) {
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
@@ -74,32 +71,47 @@ public class AdminAction extends BaseAction {
         return login();
     }
 
-    /**
-     * 生成验证码
-     *
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    @RequestMapping(value = "captcha.htm", method = RequestMethod.GET)
-    public void captcha(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control",
-                "no-store, no-cache, must-revalidate");
-        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-        response.setHeader("Pragma", "no-cache");
-        response.setContentType("image/jpeg");
-        String capText = captchaProducer.createText();
-        request.getSession().setAttribute(
-                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, capText);
-        BufferedImage bi = captchaProducer.createImage(capText);
-        ServletOutputStream out = response.getOutputStream();
-        ImageIO.write(bi, "jpg", out);
-        try {
-            out.flush();
-        } finally {
-            out.close();
-        }
+    @RequestMapping(value = "/update.htm", method = RequestMethod.GET)
+    public String update(ModelMap modelMap, HttpServletRequest request) {
+        User sessionUser = (User) request.getSession().getAttribute("sessionUser");
+        User user = userService.getUserById(sessionUser.getUserId());
+        modelMap.put("user", user);
+        return "manage/user/update";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/update.json", method = RequestMethod.POST)
+    public JsonVo<String> updateUser(
+            @RequestParam(value = "password") String password,
+            HttpServletRequest request) {
+        JsonVo<String> json = new JsonVo<String>();
+        try {
+            if (StringUtils.isBlank(password)) {
+                json.getErrors().put("password", "密码不能为空");
+            }
+            if (password.length() < 6) {
+                json.getErrors().put("password", "密码不能小于6位数");
+            }
+            if (password.length() > 16) {
+                json.getErrors().put("password", "密码不能大于18位数");
+            }
+            
+            if (json.getErrors().size() > 0) {
+                json.setResult(false);
+                throw new ValidateException("有错误发生");
+            } else {
+                json.setResult(true);
+            }
+            SSUtils.toText(password);
+            User sessionUser = (User) request.getSession().getAttribute("sessionUser");
+            userService.updateUserByUserId(sessionUser.getUserId(),
+                    SSUtils.toText(password));
+            json.setResult(true);
+        } catch (Exception e) {
+            json.setResult(false);
+            json.setMsg(e.getMessage());
+        }
+        return json;
+    }
+
 }

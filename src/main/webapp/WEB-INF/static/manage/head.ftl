@@ -12,6 +12,7 @@
 
 <title>ITIMRC后台管理</title>
 <!-- Bootstrap core CSS -->
+<link rel="icon" href="${TEMPLATE_BASE_PATH}/images/favicon.ico"  type="image/x-icon">
 <link href="${BASE_PATH}/static/manage/css/bootstrap.min.css?v=${config_v}" rel="stylesheet">
 <link href="${BASE_PATH}/static/manage/css/bootstrap-reset.css?v=${config_v}"
 	rel="stylesheet">
@@ -81,7 +82,7 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu goes here-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<#if SESSION_ADMIN.status= 0>
+
 					<li class="">
 						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
 					</li>
@@ -97,19 +98,12 @@
 					<li class="">
 						<a <#if menu="admin_list">class="active"</#if> href="${BASE_PATH}/manage/admin/manage.htm"> <i class="icon-user"></i> <span>管理员管理</span></a>
 					</li>
+                    <li class="">
+                        <a <#if menu="user_list">class="active"</#if> href="${BASE_PATH}/manage/user/manage.htm"> <i class="icon-user"></i> <span>用户管理</span></a>
+                    </li>
 					<li class="">
 						<a <#if menu="system">class="active"</#if> href="${BASE_PATH}/manage/config/basic.htm"> <i class="icon-cogs"></i> <span>系统设置</span></a>
 					</li>
-
-					<#else>
-					<li class="">
-						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
-					</li>
-                    <li class="">
-                        <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
-                     </li>
-					</#if>
-
 				</ul>
 			</div>
 		</aside>

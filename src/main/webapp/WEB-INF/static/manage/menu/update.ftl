@@ -22,21 +22,26 @@
 	                          <label class="col-sm-2 col-sm-2 control-label">菜单名称</label>
 	                          <div class="col-sm-10">
 	                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="name"
-	                              	placeholder="菜单名称" id="name" value="${Menu.name}">
+	                              	placeholder="菜单名称" id="name" value="${Menu.name}" required>
 	                              </input>
 	                          </div>
 	                        </div>
                             <div class="form-group">
-                                <label class="col-sm-2 col-sm-3  control-label">由系统生成URl</label>
-                                <div class="col-sm-2">
-                                    <input type="checkbox" checked class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
+                                <label class="col-sm-2 col-sm-2 control-label">菜单类型</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control input-lg m-bot15" id="createUrl"
+                                            style="font-size:15px;width: 200px; height:46px;" name="createUrl">
+                                        <option value="3" selected>不修改</option>
+										<option value="1">站内链接(系统生成)</option>
+                                        <option value="2">站内链接(自定义)</option>
+                                        <option value="0">外部链接</option>
+                                    </select>
                                 </div>
                             </div>
                         	<div class="form-group">
-	                          <label class="col-sm-2 col-sm-2 control-label">URL</label>
+	                          <label class="col-sm-2 col-sm-2 control-label">链接地址</label>
 	                          <div class="col-sm-10">
-	                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="url" disabled
-	                              	placeholder="URL" id="ename" value="${Menu.url}">
+	                              <input type="text" style="font-size:15px;width:500px;" class="form-control" name="url" disabled id="ename" value="${Menu.url}" required>
 	                              </input>
 	                          </div>
 	                        </div>
@@ -69,11 +74,23 @@
 <script type="text/javascript">
 	$(function() {
 
+	    var urlvalue = $("#ename").val();
         $("#createUrl").change(function () {
-            if($("#createUrl").is(':checked'))
-                $("#ename").attr("disabled","disabled");
-            else
+            var a = $(this).val();
+            if(a==1) {
+                $("#ename").attr("disabled", "disabled");
+                $("#ename").val('系统生成');
+            }else if(a==2) {
                 $("#ename").removeAttr("disabled");
+                $("#ename").val('');
+            }else if(a==0)
+            {
+                $("#ename").removeAttr("disabled");
+                $("#ename").val('http://');
+            }else {
+                $("#ename").attr("disabled", "disabled");
+                $("#ename").val(urlvalue);
+			}
         });
 
 		$('#update_folder_form').ajaxForm({

@@ -59,7 +59,7 @@ public interface AdminDao {
 	 * @param password
 	 */
 	public void updateAdminByadminId(@Param("adminId") long adminId,
-			@Param("password") String password);
+			@Param("password") String password,@Param("salt") String salt);
 
 	// ///////////////////////////////
 	// ///// 查詢 ////////

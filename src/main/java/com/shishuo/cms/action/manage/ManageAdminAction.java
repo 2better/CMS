@@ -61,13 +61,8 @@ public class ManageAdminAction extends ManageBaseAction {
 	@RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
 	public JsonVo<String> addNewUser(
 			@RequestParam(value = "adminName") String adminName,
-			@RequestParam(value = "password") String password,
-			@RequestParam(value = "status")int status) {
+			@RequestParam(value = "password") String password) {
 		JsonVo<String> json = new JsonVo<String>();
-		Admin admin = adminService.getAdminByName(adminName);
-		if (admin != null) {
-		json.getErrors().put("adminName", "管理员名称不能重复");
-		}
 		try {
 			if (adminName.equals("")) {
 				json.getErrors().put("adminName", "管理员名称不能为空");
@@ -79,10 +74,15 @@ public class ManageAdminAction extends ManageBaseAction {
 			} else if (password.length() > 16) {
 				json.getErrors().put("password", "密码不能大于16位");
 			}
+			Admin admin = adminService.getAdminByName(adminName);
+			if (admin != null) {
+				json.getErrors().put("adminName", "管理员名称不能重复");
+			}
+
 			// 检测校验结果
 			validate(json);
 			adminService.addAdmin(SSUtils.toText(adminName.trim()),
-					password,status);
+					password);
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);
@@ -109,7 +109,6 @@ public class ManageAdminAction extends ManageBaseAction {
 	 */
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String update(
-			@RequestParam(value = "adminId", defaultValue = "0") long adminId,
 			ModelMap modelMap, HttpServletRequest request) {
 		Admin sessionAdmin = this.getAdmin(request);
 		Admin admin = adminService.getAdminById(sessionAdmin.getAdminId());
@@ -158,8 +157,7 @@ public class ManageAdminAction extends ManageBaseAction {
 
 	@ResponseBody
 	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
-	public JsonVo<String> delete(@RequestParam(value = "adminId") long adminId,
-			HttpServletRequest request) {
+	public JsonVo<String> delete(@RequestParam(value = "adminId") long adminId) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
 			adminService.deleteAdmin(adminId);

@@ -62,8 +62,7 @@ public class IndexAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
-	public String pageNotFound(ModelMap modelMap) {
-		modelMap.addAttribute("g_folderId", 0);
+	public String pageNotFound() {
 		return themeService.get404();
 	}
 
@@ -73,8 +72,17 @@ public class IndexAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/500.htm", method = RequestMethod.GET)
-	public String error(ModelMap modelMap) {
-		modelMap.addAttribute("g_folderId", 0);
+	public String error() {
 		return themeService.get500();
+	}
+
+	/**
+	 * refuse
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "/refuse.htm", method = RequestMethod.GET)
+	public String refuse() {
+		return themeService.getRefuse();
 	}
 }

@@ -23,79 +23,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-5">
                 <section class="panel">
                     <header class="panel-heading">
-                        添加菜单
-                    </header>
-                    <div class="panel-body">
-                        <form id="addFolder_form" method="post" class="form-horizontal" autocomplete="off"
-                              action="${BASE_PATH}/manage/menu/add.json">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-xs-3 control-label">菜单名称</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" style="font-size:15px;width: 200px;" class="form-control"
-                                               name="name"
-                                               placeholder="菜单名称" id="folderName" maxlength="5">${menuName}
-                                        </input>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-4 control-label">由系统生成URl</label>
-                                    <div class="col-xs-3">
-                                        <input type="checkbox" checked class="form-control" id="createUrl" name="createUrl" value="1" style="font-size:10px;height:20px">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3 control-label">url</label>
-                                    <div class="col-xs-9">
-                                        <input style="font-size:15px;width: 200px;" class="form-control" name="url" disabled
-                                               placeholder="url" id="url">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3 control-label">父级菜单</label>
-                                    <div class="col-xs-9">
-                                        <select class="form-control input-lg m-bot15"
-                                                style="font-size:15px;width: 200px;" name="pid">
-                                            <option value="0">根菜单</option>
-                                        <#list menuParentsList?sort_by("sort") as f>
-                                            <option value="${f.id}"<#if Menu.id ==f.id>selected</#if>>${f.name}</option>
-                                        </#list>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-xs-3 control-label">菜单状态</label>
-                                    <div class="col-xs-9">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="display" checked/> 显示
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="hidden"/> 隐藏
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-3 col-xs-9">
-                                        <button class="btn btn-danger" type="submit">保存</button>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-7">
-                <section class="panel">
-                    <header class="panel-heading">
+                        <div class="col-lg-8">
+                        <label class="control-label">上级菜单</label>
                         <select id="mm" class="input-lg" style="font-size:12px;width: 150px;height:40px">
                             <option value="0">根菜单</option>
                         <#list menuParentsList?sort_by("sort") as f>
                             <option value="${f.id}" <#if Menu.id ==f.id>selected</#if>>${f.name}</option>
                         </#list>
                         </select>
+                        </div>
+                        <div class="col-lg-4">
+                            <a class="btn btn-primary" style="float:right;"
+                               href="${BASE_PATH}/manage/menu/add.htm?id=${Menu.id}">增加菜单</a>
+                        </div>
                     </header>
                     <div class="panel-body">
                         <div class="adv-table">
@@ -105,10 +47,10 @@
                                     <thead>
                                     <tr>
                                         <th>顺序</th>
-                                        <th width="100" >名称</th>
-                                        <th >URL</th>
-                                        <th width="50" >状态</th>
-                                        <th width="100" >操作</th>
+                                        <th  >名称</th>
+                                        <th >链接地址</th>
+                                        <th  >状态</th>
+                                        <th  >操作</th>
                                     </tr>
                                     </thead>
                                     <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -152,21 +94,13 @@
                         </div>
                     </div>
                 </section>
-            </div>
+
             <!-- page end-->
     </section>
 </section>
 <!--main content end-->
 <script type="text/javascript">
-    var pageFolderId = ${Menu.id};
     $(function () {
-
-        $("#createUrl").change(function () {
-            if($("#createUrl").is(':checked'))
-                $("#url").attr("disabled","disabled");
-            else
-                $("#url").removeAttr("disabled");
-        });
 
         $('.js_update_sort').click(function () {
             var folderSort = new Array();
@@ -183,7 +117,7 @@
                         if (data.result) {
                             bootbox.alert("更新成功",
                                     function () {
-                                        window.location.href = "${BASE_PATH}/manage/menu/list.htm?id=" + pageFolderId;
+                                        window.location.href = "${BASE_PATH}/manage/menu/list.htm?id=${Menu.id}";
                                     });
                         } else {
                             bootbox.alert(data.msg,
@@ -212,7 +146,7 @@
                                         if (data.result) {
                                             bootbox.alert("删除成功",
                                                     function () {
-                                                        window.location.href = "${BASE_PATH}/manage/menu/list.htm?id=" + pageFolderId;
+                                                        window.location.href = "${BASE_PATH}/manage/menu/list.htm?id=${Menu.id}";
                                                     });
                                         } else {
                                             bootbox.alert(data.msg,
@@ -243,19 +177,6 @@
             }, function () {
                 window.location.reload();
             }, "json");
-        });
-
-        $('#addFolder_form').ajaxForm({
-            dataType: 'json',
-            success: function (data) {
-                if (data.result) {
-                    bootbox.alert("保存成功", function () {
-                        window.location.reload();
-                    });
-                } else {
-                    showErrors($('#addFolder_form'), data.errors);
-                }
-            }
         });
     });
 </script>

@@ -8,7 +8,7 @@
 <meta name="keyword"
 	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>ITIMRC后台登录</title>
+<title>ITIMRC用户登录</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/favicon.ico"  type="image/x-icon">
@@ -60,7 +60,7 @@ input.error:focus {
 	<div class="container">
 
 		<form class="form-signin" id="adminForm"
-			action="${BASE_PATH}/admin/login.json" autocomplete="off"
+			action="${BASE_PATH}/user/login.json" autocomplete="off"
 			method="post">
             <input type="hidden" name="name" value="" id="hn"/>
 			<h2 class="form-signin-heading">
@@ -70,11 +70,11 @@ input.error:focus {
 			<div class="login-wrap">
 				<div class="form-group">
                                       <label for="exampleInputEmail1">用户名</label>
-                                      <input type="text"  id="name" required class="form-control" placeholder="用户名" value="admin" style="*width: 250px;" autofocus>
+                                      <input type="text"  id="name" required class="form-control" placeholder="用户名" value="user" style="*width: 250px;" autofocus>
                                   </div>
  				<div class="form-group">
                                       <label for="exampleInputEmail1">密码</label>
-                                      <input type="password" required id="password" name="password" required class="form-control" placeholder="密码" value="123456" style="*width: 250px;">
+                                      <input type="password" id="password" required name="password" required class="form-control" placeholder="密码" value="123456" style="*width: 250px;">
                                   </div>	                                 	
 				<div class="form-group">
 					<input type="text" name="captcha" class="form-control"  required
@@ -112,7 +112,7 @@ input.error:focus {
             alert("请输入验证码");
             return false;
         }
-        $('#hn').val(name+"#-@gl");
+        $('#hn').val(name+"#-@yh");
 
         return true;
     });

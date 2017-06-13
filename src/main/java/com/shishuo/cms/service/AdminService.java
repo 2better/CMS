@@ -6,23 +6,17 @@
 
 package com.shishuo.cms.service;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.dao.AdminDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.vo.PageVo;
-import com.shishuo.cms.exception.AuthException;
-import com.shishuo.cms.util.AuthUtils;
-import com.shishuo.cms.util.PropertyUtils;
 
 /**
  * 管理员
@@ -40,22 +34,18 @@ public class AdminService {
 	// ///// 增加 ////////
 	// ///////////////////////////////
 
-	/**
-	 * 添加管理员
-	 * 
-	 * @param email
-	 * @param name
-	 * @param password
-	 * @return Admin
-	 */
-	public Admin addAdmin(String name, String password,int status)
-			throws AuthException {
+	public Admin addAdmin(String name, String password)
+	{
 		Date now = new Date();
 		Admin admin = new Admin();
 		admin.setName(name);
-		admin.setPassword(AuthUtils.getPassword(password));
+
+		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
+		SimpleHash hash = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1);
+		admin.setSalt(salt);
+		admin.setPassword(hash.toHex());
+
 		admin.setCreateTime(now);
-		admin.setStatus(status);
 		adminDao.addAdmin(admin);
 		return admin;
 	}
@@ -86,44 +76,18 @@ public class AdminService {
 	 * @param password
 	 * @param status
 	 * @return Admin
-	 * @throws AuthException
 	 */
 
 	public void updateAdminByAmdinId(long adminId, String password)
-			throws AuthException {
-		String pwd = AuthUtils.getPassword(password);
-		adminDao.updateAdminByadminId(adminId, pwd);
+			{
+		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
+		SimpleHash hash = new SimpleHash("MD5", password, ByteSource.Util.bytes(salt), 1);
+		adminDao.updateAdminByadminId(adminId, hash.toHex(),salt);
 	}
 
 	// ///////////////////////////////
 	// ///// 查詢 ////////
 	// ///////////////////////////////
-
-	/**
-	 * 管理员登陆
-	 * 
-	 * @param email
-	 * @param password
-	 * @param request
-	 * @throws IOException
-	 */
-	public void adminLogin(String name, String password,
-			HttpServletRequest request) throws AuthException,
-			IOException {
-		Admin admin = adminDao.getAdminByName(name);
-		if (admin == null) {
-			throw new AuthException("邮箱或密码错误");
-		}
-		String loginPassword = AuthUtils.getPassword(password);
-		if (loginPassword.equals(admin.getPassword())) {
-			HttpSession session = request.getSession();
-			admin.setPassword("");
-			session.setAttribute(SystemConstant.SESSION_ADMIN,
-					admin);
-		} else {
-			throw new AuthException("邮箱或密码错误");
-		}
-	}
 
 	/**
 	 * 通过Id获得指定管理员资料
@@ -145,7 +109,7 @@ public class AdminService {
 
 	/**
 	 * 获得所有管理员的数量
-	 * 
+	 *
 	 * @return Integer
 	 */
 	public int getAllListCount() {
@@ -168,19 +132,8 @@ public class AdminService {
 		return pageVo;
 	}
 
-	/**
-	 * 通过email获得管理员资料
-	 * 
-	 * @param email
-	 * @return Admin
-	 */
 	public Admin getAdminByName(String name) {
 		return adminDao.getAdminByName(name);
 	}
 
-	public long getSuperAdminId() {
-		Admin admin = getAdminByName(PropertyUtils
-				.getValue("shishuocms.admin"));
-		return admin.getAdminId();
-	}
 }

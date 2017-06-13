@@ -51,6 +51,10 @@ public class TemplateService {
 		return this.getTemplatePath("500");
 	}
 
+	public String getRefuse() {
+		return this.getTemplatePath("refuse");
+	}
+
 	/**
 	 * 得到首页（默认页）模板
 	 * 
