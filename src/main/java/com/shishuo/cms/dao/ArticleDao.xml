@@ -9,7 +9,7 @@
 		<result column="menuName" property="menuName"/>
 		<result column="adminId" property="adminId"/>
 		<result column="adminName" property="adminName"/>
-		<result column="name" property="name"/>
+		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="status" property="status"/>
 		<result column="createTime" property="createTime"/>
@@ -30,8 +30,8 @@
 	<!-- ############################## -->
 	<insert id="addArticle" parameterType="com.shishuo.cms.entity.Article">
 		insert into
-		article(articleId,menuId,menuName,adminId,adminName,name,content,status,createTime)
-		values(#{articleId},#{menuId},#{menuName},#{adminId},#{adminName},#{name},#{content},#{status},#{createTime})
+		article(articleId,menuId,menuName,adminId,adminName,title,content,status,createTime)
+		values(#{articleId},#{menuId},#{menuName},#{adminId},#{adminName},#{title},#{content},#{status},#{createTime})
 	</insert>
 
 	<!-- ############################## -->
@@ -121,7 +121,7 @@
 
 	<!--添加了时间排序-->
 	<select id="getArticeByMenuIdByTime" resultType="com.shishuo.cms.entity.Article">
-		select articleId,name,createTime from article where menuId
+		select articleId,title,createTime from article where menuId
 		IN (SELECT DISTINCT id FROM menu WHERE id = ${menuId} OR pId = #{menuId})
 		and status = 'display' ORDER BY createTime DESC limit 0 ,#{num}
 	</select>

@@ -38,15 +38,15 @@
             <div class="con-top-l">
                 <!--S 区域1-->
                 <div class="area1">
-                    <div class="name-con">
-                        <div class="name-con-l">
-                            <div class="name">
+                    <div class="title-con">
+                        <div class="title-con-l">
+                            <div class="title">
                                 <p class="tl-zh">主任致辞</p>
                                 <p class="tl-en">Master wodrs</p>
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="name-con-r"><img src="${TEMPLATE_BASE_PATH}/images/20153271053847.Jpeg" /></div>
+                        <div class="title-con-r"><img src="${TEMPLATE_BASE_PATH}/images/20153271053847.Jpeg" /></div>
                     </div>
                     <div class="area-con">
                         <p>XXX 大学文学院副教授、汉语国际教育专业硕士生导师 办公室：人文楼722 办公电话：88899966 邮箱：88888888@163.com 教育背景 1989-1993，1993-1995，就读北京语言大学，获得对外汉语专业和对外汉语教学（尤其对英语母语者）专业文学学士双学位（六年制）1998-2001，…</p>
@@ -61,14 +61,14 @@
                 <div class="area2">
                     <div class="area2-top"><img src="${TEMPLATE_BASE_PATH}/images/201505090952264356.jpg" /></div>
                     <div class="area2-bot">
-                        <div class="name-con-l">
-                            <div class="name">
+                        <div class="title-con-l">
+                            <div class="title">
                                 <p class="tl-zh">重要活动</p>
                                 <p class="tl-en">Vital Activity</p>
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="name-con-r">
+                        <div class="title-con-r">
                             <p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
                                 2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p>
                             <div id="area2-url" style="display:none">/001lt269/page/34.html</div>
@@ -256,15 +256,15 @@
             <div class="con-top-l" style="float:right;height:auto;">
                 <!--S 区域1-->
                 <div class="area1">
-                    <div class="name-con">
-                        <div class="name-con-l">
-                            <div class="name">
+                    <div class="title-con">
+                        <div class="title-con-l">
+                            <div class="title">
                                 <p class="tl-zh">公众号二维码</p>
                                 <p class="tl-en">QR Code</p>
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="name-con-r"><img src="${TEMPLATE_BASE_PATH}/images/qrcode_for_gh_900e1c96300a_258.jpg" /></div>
+                        <div class="title-con-r"><img src="${TEMPLATE_BASE_PATH}/images/qrcode_for_gh_900e1c96300a_258.jpg" /></div>
                     </div>
                 </div>
                 <!--E 区域1-->
@@ -273,14 +273,14 @@
                 <!--S 区域2-->
                 <div class="area2">
                     <div class="area2-bot">
-                        <div class="name-con-l">
-                            <div class="name">
+                        <div class="title-con-l">
+                            <div class="title">
                                 <p class="tl-zh">研究资源库</p>
                                 <p class="tl-en">Resource DataBase</p>
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="name-con-r" style="background-color:none;">
+                        <div class="title-con-r" style="background-color:none;">
                             <!--<p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
                                 2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p>
                             <div id="area2-url" style="display:none">/001lt269/page/34.html</div>

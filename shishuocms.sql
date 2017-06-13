@@ -242,7 +242,6 @@ CREATE TABLE Event
   id INT AUTO_INCREMENT,
   important TINYINT DEFAULT 0,
   content mediumtext NOT NULL ,
-  picUrl VARCHAR(100),
   name VARCHAR(100) NOT NULL ,
   createTime TIMESTAMP NOT NULL ,
   PRIMARY KEY (id)

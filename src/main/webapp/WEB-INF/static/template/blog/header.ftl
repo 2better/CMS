@@ -9,7 +9,7 @@
 <meta name="author" content="CMS">
 <link rel="icon" href="${TEMPLATE_BASE_PATH}/images/favicon.ico">
 
-<name>${index_title}</name>
+<title>${index_title}</title>
 
 <link rel="stylesheet" type="text/css" href="${TEMPLATE_BASE_PATH}/css/main.css" />
 </head>

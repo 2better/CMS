@@ -10,7 +10,7 @@
     <meta name="keyword"
           content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <tilte>ITIMRC后台管理</tilte>
+    <title>ITIMRC后台管理</title>
     <!-- Bootstrap core CSS -->
     <link href="${BASE_PATH}/static/manage/css/bootstrap.min.css?v=${config_v}" rel="stylesheet">
     <link href="${BASE_PATH}/static/manage/css/bootstrap-reset.css?v=${config_v}"

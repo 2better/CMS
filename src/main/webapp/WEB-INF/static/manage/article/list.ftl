@@ -236,7 +236,7 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.name + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.title + "</a></td>";
                             trs += "<td>";
                             if (n.status == "display")
                                 trs += "显示";

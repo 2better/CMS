@@ -2,7 +2,7 @@
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
-            <span class="g-sd-header-name">${menus.name}</span>
+            <span class="g-sd-header-title">${menus.name}</span>
             <span class="circle"></span>
         </div>
         <ul class="g-sd-content">

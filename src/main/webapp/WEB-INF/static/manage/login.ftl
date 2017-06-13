@@ -8,7 +8,7 @@
 <meta name="keyword"
 	content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<name>ITIMRC后台登录</name>
+<title>ITIMRC后台登录</title>
 
 <!-- Bootstrap core CSS -->
 <link href="${BASE_PATH}/static/manage/css/bootstrap.min.css"
