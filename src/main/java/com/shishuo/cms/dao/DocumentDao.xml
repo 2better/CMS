@@ -64,7 +64,7 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<!--根据类别进行查询 按时间排序-->
 	<select id="getBy_Column" resultMap="baseMap">
 		SELECT * FROM document
