@@ -57,7 +57,7 @@ $(function(){
             if (data.result) {
                 bootbox.dialog({
                     message : "保存成功",
-                    title : "提示",
+                    name : "提示",
                     buttons : {
                         add : {
                             label : "继续添加",

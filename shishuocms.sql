@@ -47,7 +47,7 @@ CREATE TABLE `article` (
   `menuName` varchar(20) DEFAULT NULL,
   `adminId` bigint(20) DEFAULT '0' COMMENT '管理员ID',
   `adminName` varchar(20) DEFAULT NULL,
-  `title` varchar(200) DEFAULT '' COMMENT '文件名称',
+  `name` varchar(200) DEFAULT '' COMMENT '文件名称',
   `content` mediumtext COMMENT '文件内容',
   `status` varchar(20) DEFAULT 'init' COMMENT '状态：0 隐藏 1 显示',
   `createTime` TIMESTAMP COMMENT '创建时间',

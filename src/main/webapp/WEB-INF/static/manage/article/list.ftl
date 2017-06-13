@@ -192,8 +192,8 @@
             var articleId = $(this).attr('articleId');
             var status = "trash";
             bootbox.dialog({
-                message: $(this).attr('title'),
-                title: "提示",
+                message: $(this).attr('name'),
+                name: "提示",
                 buttons: {
                     "delete": {
                         label: "确定",
@@ -236,7 +236,7 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.title + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.name + "</a></td>";
                             trs += "<td>";
                             if (n.status == "display")
                                 trs += "显示";
@@ -244,7 +244,7 @@
                                 trs += "<span style=\"color:red;\">隐藏</span>";
                             trs += "</td><td>" + n.adminName + "</td><td><a href=\"${BASE_PATH}/manage/article/list.htm?menuId=" + n.menuId + "\">" + n.menuName + "</a></td><td>" + n.createTimeView + "</td>";
 
-                            trs += "<td><a title=\"编辑\" href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\" >编辑</a> | <a title=\"是否删除文章\" href=\"javascript:void(0);\"  class=\"js_article_delete\" articleId=\"" + n.articleId + "\">删除</a> | <a href=\"${BASE_PATH}/manage/article/preview.htm?articleId=" + n.articleId + "\" target=\"_blank\">预览</a></td></tr>";
+                            trs += "<td><a name=\"编辑\" href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\" >编辑</a> | <a name=\"是否删除文章\" href=\"javascript:void(0);\"  class=\"js_article_delete\" articleId=\"" + n.articleId + "\">删除</a> | <a href=\"${BASE_PATH}/manage/article/preview.htm?articleId=" + n.articleId + "\" target=\"_blank\">预览</a></td></tr>";
 
                         });
                         $("#con").append(trs + "</tbody>");

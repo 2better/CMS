@@ -343,14 +343,14 @@
 				<li >
 					<a href="index.html">
 					<i class="fa fa-home"></i> 
-					<span class="title">查看首页</span>					
+					<span class="name">查看首页</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li class=" ">
 					<a href="javascript:;">
 					<i class="fa fa-cogs"></i> 
-					<span class="title">目录管理</span>					
+					<span class="name">目录管理</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
@@ -411,7 +411,7 @@
 				<li class="">
 					<a href="javascript:;">
 					<i class="fa fa-bookmark-o"></i> 
-					<span class="title">文件管理</span>					
+					<span class="name">文件管理</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">
@@ -484,7 +484,7 @@
 				<li class="">
 					<a href="javascript:;">
 					<i class="fa fa-table"></i> 
-					<span class="title">系统管理</span>					
+					<span class="name">系统管理</span>
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub-menu">

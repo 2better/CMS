@@ -22,8 +22,8 @@
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">标题</label>
                           <div class="col-sm-10">
-                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="title"
-                              	placeholder="文章标题" id="name" value="${article.title}">
+                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="name"
+                              	placeholder="文章标题" id="name" value="${article.name}">
                               </input>
                           </div>
                         </div>
@@ -111,7 +111,7 @@ $.extend({
 			html += '<tr>';
 			html += '<td>'+attachment.name+'</td>';
 			html += '<td>'+attachment.size+'</td><td>';
-			html += '<a href="javascript:void(0);" title="删除" name="'+attachment.name+'" class="btn btn-danger btn-xs js_delete" attachmentId="'+attachment.attachmentId+'">删除</a> ';
+			html += '<a href="javascript:void(0);" name="删除" name="'+attachment.name+'" class="btn btn-danger btn-xs js_delete" attachmentId="'+attachment.attachmentId+'">删除</a> ';
 			html += '</td></tr>';
 		}
 		html += '</tbody></table>';

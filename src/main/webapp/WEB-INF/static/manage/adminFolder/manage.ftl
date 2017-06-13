@@ -77,7 +77,7 @@
                                       <td>${folder.pathName}</td>
                                       <td>
                                 		<!-- Icons -->
-                              			 <a href="javascript:void(0);" title="删除${folder.name}" class="js_folder_delete" folderId="${folder.folderId}">
+                              			 <a href="javascript:void(0);" name="删除${folder.name}" class="js_folder_delete" folderId="${folder.folderId}">
                                                                                                    		   删除
                                 		</a>
                             			</td>
@@ -114,8 +114,8 @@ $(function() {
 	$('.js_folder_delete').click(function() {
         var folderId = $(this).attr('folderId');
         bootbox.dialog({
-            message: "是否" + $(this).attr('title') + "文件夹",
-            title: "提示",
+            message: "是否" + $(this).attr('name') + "文件夹",
+            name: "提示",
             buttons: {
                 "delete": {
                     label: "删除",

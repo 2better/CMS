@@ -22,15 +22,15 @@ Load files in the <head> section of your HTML document. Make sure you also add t
         <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
     </head>
 
-Create your links with a `title` if you want a title to be shown, and add a class:
+Create your links with a `name` if you want a name to be shown, and add a class:
 
-    <a href="large_image.jpg" class="fancybox" title="Sample title"><img src="small_image.jpg" /></a>
+    <a href="large_image.jpg" class="fancybox" name="Sample name"><img src="small_image.jpg" /></a>
 
 If you have a set of related items that you would like to group,
 additionally include a group name in the `rel` (or `data-fancybox-group`) attribute:
 
-    <a href="large_1.jpg" class="fancybox" rel="gallery" title="Sample title 1"><img src="small_1.jpg" /></a>
-    <a href="large_2.jpg" class="fancybox" rel="gallery" title="Sample title 1"><img src="small_2.jpg" /></a>
+    <a href="large_1.jpg" class="fancybox" rel="gallery" name="Sample name 1"><img src="small_1.jpg" /></a>
+    <a href="large_2.jpg" class="fancybox" rel="gallery" name="Sample name 1"><img src="small_2.jpg" /></a>
 
 Initialise the script like this:
 
@@ -84,13 +84,13 @@ Advanced
 
 ### Helpers
 
-Helpers provide a simple mechanism to extend the capabilities of fancyBox. There are two built-in helpers - 'overlay' and 'title'.
+Helpers provide a simple mechanism to extend the capabilities of fancyBox. There are two built-in helpers - 'overlay' and 'name'.
 You can disable them, set custom options or enable other helpers. Examples:
 
-    //Disable title helper
+    //Disable name helper
     $(".fancybox").fancybox({
         helpers:  {
-            title:  null
+            name:  null
         }
     });
 
@@ -101,10 +101,10 @@ You can disable them, set custom options or enable other helpers. Examples:
         }
     });
 
-    //Change title position and overlay color
+    //Change name position and overlay color
     $(".fancybox").fancybox({
         helpers:  {
-            title : {
+            name : {
                 type : 'inside'
             },
             overlay : {
@@ -128,15 +128,15 @@ You can disable them, set custom options or enable other helpers. Examples:
 
 ### API
 
-Also available are event driven callback methods.  The `this` keyword refers to the current or upcoming object (depends on callback method). Here is how you can change title:
+Also available are event driven callback methods.  The `this` keyword refers to the current or upcoming object (depends on callback method). Here is how you can change name:
 
     $(".fancybox").fancybox({
         beforeLoad : function() {
-            this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+            this.name = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.name ? ' - ' + this.name : '');
 
             /*
-                "this.element" refers to current element, so you can, for example, use the "alt" attribute of the image to store the title:
-                this.title = $(this.element).find('img').attr('alt');
+                "this.element" refers to current element, so you can, for example, use the "alt" attribute of the image to store the name:
+                this.name = $(this.element).find('img').attr('alt');
             */
         }
     });
@@ -145,29 +145,29 @@ It`s possible to open fancyBox programmatically in various ways:
 
     //HTML content:
     $.fancybox( '<div><h1>Lorem Lipsum</h1><p>Lorem lipsum</p></div>', {
-        title : 'Custom Title'
+        name : 'Custom Title'
     });
 
     //DOM element:
     $.fancybox( $("#inline"), {
-        title : 'Custom Title'
+        name : 'Custom Title'
     });
 
     //Custom object:
     $.fancybox({
         href: 'example.jpg',
-        title : 'Custom Title'
+        name : 'Custom Title'
     });
 
     //Array of objects:
     $.fancybox([
         {
             href: 'example1.jpg',
-            title : 'Custom Title 1'
+            name : 'Custom Title 1'
         },
         {
             href: 'example2.jpg',
-            title : 'Custom Title 2'
+            name : 'Custom Title 2'
         }
     ], {
         padding: 0

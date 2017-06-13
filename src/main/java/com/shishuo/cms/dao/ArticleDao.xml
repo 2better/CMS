@@ -9,7 +9,7 @@
 		<result column="menuName" property="menuName"/>
 		<result column="adminId" property="adminId"/>
 		<result column="adminName" property="adminName"/>
-		<result column="title" property="title"/>
+		<result column="name" property="name"/>
 		<result column="content" property="content"/>
 		<result column="status" property="status"/>
 		<result column="createTime" property="createTime"/>
@@ -30,8 +30,8 @@
 	<!-- ############################## -->
 	<insert id="addArticle" parameterType="com.shishuo.cms.entity.Article">
 		insert into
-		article(articleId,menuId,menuName,adminId,adminName,title,content,status,createTime)
-		values(#{articleId},#{menuId},#{menuName},#{adminId},#{adminName},#{title},#{content},#{status},#{createTime})
+		article(articleId,menuId,menuName,adminId,adminName,name,content,status,createTime)
+		values(#{articleId},#{menuId},#{menuName},#{adminId},#{adminName},#{name},#{content},#{status},#{createTime})
 	</insert>
 
 	<!-- ############################## -->
@@ -52,7 +52,7 @@
 		UPDATE article SET
 		menuId=#{menuId},
 		menuName = #{menuName},
-		title=#{title},
+		name=#{name},
 		content=#{content},
 		status=#{status},
 		createTime = #{createTime}
@@ -79,7 +79,7 @@
 	</select>
 
 	<select id="getArticleByMenuId" resultType="com.shishuo.cms.entity.Article">
-		select articleId,title,createTime from article where menuId = #{menuId} and status = 'display'  limit #{offset},#{rows}
+		select articleId,name,createTime from article where menuId = #{menuId} and status = 'display'  limit #{offset},#{rows}
 	</select>
 
 	<select id="findByCondition" resultMap="baseMap">
@@ -95,7 +95,7 @@
 				and status = #{status}
 			 </if>
 			 <if test="keywords!=''">
-				 and title like "%${keywords}%"
+				 and name like "%${keywords}%"
 			 </if>
 		 </where>
 		 limit #{offset},#{rows}
@@ -114,14 +114,14 @@
 				and status = #{status}
 			</if>
 			<if test="keywords!=''">
-				and title like "%${keywords}%"
+				and name like "%${keywords}%"
 			</if>
 		</where>
 	</select>
 
 	<!--添加了时间排序-->
 	<select id="getArticeByMenuIdByTime" resultType="com.shishuo.cms.entity.Article">
-		select articleId,title,createTime from article where menuId
+		select articleId,name,createTime from article where menuId
 		IN (SELECT DISTINCT id FROM menu WHERE id = ${menuId} OR pId = #{menuId})
 		and status = 'display' ORDER BY createTime DESC limit 0 ,#{num}
 	</select>

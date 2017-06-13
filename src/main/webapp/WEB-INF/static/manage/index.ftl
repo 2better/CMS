@@ -33,7 +33,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol terques">
-                              <a href="${BASE_PATH}/manage/user/page.htm"><i class="icon-user" title="前往用户列表"></i></a>
+                              <a href="${BASE_PATH}/manage/user/page.htm"><i class="icon-user" name="前往用户列表"></i></a>
                           </div>
                           <div class="value">
                               <h1>${userCount}</h1>
@@ -44,7 +44,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol red">
-                              <a href="${BASE_PATH}/manage/article/page.htm" title="前往文章列表"><i class="icon-tags"></i></a>
+                              <a href="${BASE_PATH}/manage/article/page.htm" name="前往文章列表"><i class="icon-tags"></i></a>
                           </div>
                           <div class="value">
                               <h1>${articleCount}</h1>
@@ -55,7 +55,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol yellow">
-                              <a href="${BASE_PATH}/manage/folder/page.htm" title="前往目录列表"><i class="icon-folder-open"></i></a>
+                              <a href="${BASE_PATH}/manage/folder/page.htm" name="前往目录列表"><i class="icon-folder-open"></i></a>
                           </div>
                           <div class="value">
                               <h1>0</h1>
@@ -66,7 +66,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                           <div class="symbol blue">
-                              <a href="${BASE_PATH}/manage/attachment/page.htm" title="上传附件"><i class="icon-download-alt"></i></a>
+                              <a href="${BASE_PATH}/manage/attachment/page.htm" name="上传附件"><i class="icon-download-alt"></i></a>
                           </div>
                           <div class="value">
                               <h1>0</h1>
@@ -88,7 +88,7 @@
                           	<li class="list-group-item">
                           		<div style="width:50% float:left">
                           			${firstFolder.pathName}
-                          			<a href="${BASE_PATH}/manage/folder/update.htm?folderId=${firstFolder.folderId}" title="修改" style="float:right;">
+                          			<a href="${BASE_PATH}/manage/folder/update.htm?folderId=${firstFolder.folderId}" name="修改" style="float:right;">
                 						[修改]
                 					</a>
 									<a href="${BASE_PATH}/manage/article/list.htm?folderId=${firstFolder.folderId}"  folderId="${firstFolder.folderId}" style="float:right;">
@@ -111,8 +111,8 @@
                           <ul class="list-group">
                           	<#--<#list articleList as article>
                           		<li class="list-group-item" style="background-color:#FCF8E3;height:33px;">
-                          			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}">${article.title}</a>
-                          			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}" title="修改" style="float:right;">
+                          			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}">${article.name}</a>
+                          			<a href="${BASE_PATH}/manage/article/update.htm?articleId=${article.articleId}" name="修改" style="float:right;">
                   						[修改]
                   					</a>
                           		</li>

@@ -2,7 +2,7 @@
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
-            <span class="g-sd-header-title">${menus.name}</span>
+            <span class="g-sd-header-name">${menus.name}</span>
             <span class="circle"></span>
         </div>
         <ul class="g-sd-content">
@@ -129,7 +129,7 @@
                 var con = "";
                 $.each(data.list, function (i, n) {
                     con+="<li><span class=\"pic\"></span>";
-                    con+="<a href=\"${BASE_PATH}/article/"+n.articleId+".htm\" target=\"_blank\">"+n.title+"</a>";
+                    con+="<a href=\"${BASE_PATH}/article/"+n.articleId+".htm\" target=\"_blank\">"+n.name+"</a>";
                     con+="<span class=\"time\">["+n.createTimeView+"]</span></li>";
                 });
                 $("#content").append(con);

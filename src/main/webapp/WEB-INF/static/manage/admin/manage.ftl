@@ -95,10 +95,10 @@
                                      </td>
                                       <td>
                                 <!-- Icons -->
-                               <a href="javascript:void(0);" adminId="${e.adminId}" title="删除" class="js_delete_admin">
+                               <a href="javascript:void(0);" adminId="${e.adminId}" name="删除" class="js_delete_admin">
                                                                                                       删除
                                 </a><#--|
-                                <a href="${BASE_PATH}/manage/adminFolder/manage.htm?adminId=${e.adminId}" title="权限">
+                                <a href="${BASE_PATH}/manage/adminFolder/manage.htm?adminId=${e.adminId}" name="权限">
                                 	权限
                                 </a>-->
                             </td>
@@ -135,8 +135,8 @@
 		$('.js_delete_admin').click(function() {
 		var adminId= $(this).attr('adminId');
         bootbox.dialog({
-            message: "是否" + $(this).attr('title') + "管理员",
-            title: "提示",
+            message: "是否" + $(this).attr('name') + "管理员",
+            name: "提示",
             buttons: {
                 "delete": {
                     label: "删除",

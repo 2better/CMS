@@ -128,12 +128,12 @@
                                             </#if>
                                         </td>
                                         <td>
-                                            <a href="${BASE_PATH}/manage/menu/update.htm?id=${folder.id}" title="修改">
+                                            <a href="${BASE_PATH}/manage/menu/update.htm?id=${folder.id}" name="修改">
                                                 修改
                                             </a>
                                             |
                                             <a class="js_folder_delete" folderId="${folder.id}" pid="${folder.pid}"
-                                               href="javascript:void(0);" title="删除">
+                                               href="javascript:void(0);" name="删除">
                                                 删除
                                             </a>
                                         </td>
@@ -197,8 +197,8 @@
             var folderId = $(this).attr('folderId');
             var pid = $(this).attr('pid');
             bootbox.dialog({
-                message: "是否" + $(this).attr('title') + "文件夹",
-                title: "提示",
+                message: "是否" + $(this).attr('name') + "文件夹",
+                name: "提示",
                 buttons: {
                     "delete": {
                         label: "删除",

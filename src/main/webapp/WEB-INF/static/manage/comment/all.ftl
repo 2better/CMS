@@ -62,7 +62,7 @@
                                     		</#if>
                                     	</td>
                                     	<td>
-                                    		<a href="${BASE_PATH}/manage/comment/detail.htm?commentId=${commentVo.commentId}" title="查看详情">
+                                    		<a href="${BASE_PATH}/manage/comment/detail.htm?commentId=${commentVo.commentId}" name="查看详情">
                                     			查看
                   							</a>
                                     	</td>

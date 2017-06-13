@@ -2315,7 +2315,7 @@
    ];
    function addLinkAttributes(link, params) {
     var url = params && params.url;
-    link.href = link.title = url ? removeNullCharacters(url) : '';
+    link.href = link.name = url ? removeNullCharacters(url) : '';
     if (url) {
      var target = params.target;
      if (typeof target === 'undefined') {
@@ -3905,7 +3905,7 @@
        container: container,
        trigger: trigger,
        color: data.color,
-       title: data.title,
+       name: data.name,
        contents: data.contents,
        hideWrapper: true
       });
@@ -3968,7 +3968,7 @@
    }();
    var TextAnnotationElement = function TextAnnotationElementClosure() {
     function TextAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.hasPopup || parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(TextAnnotationElement, AnnotationElement, {
@@ -4100,7 +4100,7 @@
    }();
    var PopupAnnotationElement = function PopupAnnotationElementClosure() {
     function PopupAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(PopupAnnotationElement, AnnotationElement, {
@@ -4115,7 +4115,7 @@
        container: this.container,
        trigger: parentElement,
        color: this.data.color,
-       title: this.data.title,
+       name: this.data.name,
        contents: this.data.contents
       });
       var parentLeft = parseFloat(parentElement.style.left);
@@ -4134,7 +4134,7 @@
      this.container = parameters.container;
      this.trigger = parameters.trigger;
      this.color = parameters.color;
-     this.title = parameters.title;
+     this.name = parameters.name;
      this.contents = parameters.contents;
      this.hideWrapper = parameters.hideWrapper || false;
      this.pinned = false;
@@ -4155,13 +4155,13 @@
        popup.style.backgroundColor = Util.makeCssRgb(r | 0, g | 0, b | 0);
       }
       var contents = this._formatContents(this.contents);
-      var title = document.createElement('h1');
-      title.textContent = this.title;
+      var name = document.createElement('h1');
+      name.textContent = this.name;
       this.trigger.addEventListener('click', this._toggle.bind(this));
       this.trigger.addEventListener('mouseover', this._show.bind(this, false));
       this.trigger.addEventListener('mouseout', this._hide.bind(this, false));
       popup.addEventListener('click', this._hide.bind(this, true));
-      popup.appendChild(title);
+      popup.appendChild(name);
       popup.appendChild(contents);
       wrapper.appendChild(popup);
       return wrapper;
@@ -4208,7 +4208,7 @@
    }();
    var HighlightAnnotationElement = function HighlightAnnotationElementClosure() {
     function HighlightAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.hasPopup || parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(HighlightAnnotationElement, AnnotationElement, {
@@ -4224,7 +4224,7 @@
    }();
    var UnderlineAnnotationElement = function UnderlineAnnotationElementClosure() {
     function UnderlineAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.hasPopup || parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(UnderlineAnnotationElement, AnnotationElement, {
@@ -4240,7 +4240,7 @@
    }();
    var SquigglyAnnotationElement = function SquigglyAnnotationElementClosure() {
     function SquigglyAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.hasPopup || parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(SquigglyAnnotationElement, AnnotationElement, {
@@ -4256,7 +4256,7 @@
    }();
    var StrikeOutAnnotationElement = function StrikeOutAnnotationElementClosure() {
     function StrikeOutAnnotationElement(parameters) {
-     var isRenderable = !!(parameters.data.hasPopup || parameters.data.title || parameters.data.contents);
+     var isRenderable = !!(parameters.data.hasPopup || parameters.data.name || parameters.data.contents);
      AnnotationElement.call(this, parameters, isRenderable);
     }
     Util.inherit(StrikeOutAnnotationElement, AnnotationElement, {
@@ -4283,7 +4283,7 @@
       trigger.style.height = this.container.style.height;
       trigger.style.width = this.container.style.width;
       trigger.addEventListener('dblclick', this._download.bind(this));
-      if (!this.data.hasPopup && (this.data.title || this.data.contents)) {
+      if (!this.data.hasPopup && (this.data.name || this.data.contents)) {
        this._createPopup(this.container, trigger, this.data);
       }
       this.container.appendChild(trigger);

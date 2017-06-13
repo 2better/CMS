@@ -39,7 +39,7 @@
                                     	<td>${e.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                     	<td>
                   							<!-- Icons -->
-                							<a href="${BASE_PATH}/manage/admin/delete.htm?adminId=${e.adminId}" title="删除">
+                							<a href="${BASE_PATH}/manage/admin/delete.htm?adminId=${e.adminId}" name="删除">
                   								<button class="btn btn-danger btn-xs">
                   									<i class="icon-trash "></i>
                   								</button>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>fancyBox - Fancy jQuery Lightbox Alternative | Demonstration</title>
+	<name>fancyBox - Fancy jQuery Lightbox Alternative | Demonstration</name>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	<!-- Add jQuery library -->
@@ -37,10 +37,10 @@
 			 *  Different effects
 			 */
 
-			// Change title type, overlay closing speed
+			// Change name type, overlay closing speed
 			$(".fancybox-effects-a").fancybox({
 				helpers: {
-					title : {
+					name : {
 						type : 'outside'
 					},
 					overlay : {
@@ -49,19 +49,19 @@
 				}
 			});
 
-			// Disable opening and closing animations, change title type
+			// Disable opening and closing animations, change name type
 			$(".fancybox-effects-b").fancybox({
 				openEffect  : 'none',
 				closeEffect	: 'none',
 
 				helpers : {
-					title : {
+					name : {
 						type : 'over'
 					}
 				}
 			});
 
-			// Set custom style, close if clicked, change title type and overlay color
+			// Set custom style, close if clicked, change name type and overlay color
 			$(".fancybox-effects-c").fancybox({
 				wrapCSS    : 'fancybox-custom',
 				closeClick : true,
@@ -69,7 +69,7 @@
 				openEffect : 'none',
 
 				helpers : {
-					title : {
+					name : {
 						type : 'inside'
 					},
 					overlay : {
@@ -98,7 +98,7 @@
 			});
 
 			/*
-			 *  Button helper. Disable animations, hide close button, change title type and content
+			 *  Button helper. Disable animations, hide close button, change name type and content
 			 */
 
 			$('.fancybox-buttons').fancybox({
@@ -111,14 +111,14 @@
 				closeBtn  : false,
 
 				helpers : {
-					title : {
+					name : {
 						type : 'inside'
 					},
 					buttons	: {}
 				},
 
 				afterLoad : function() {
-					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+					this.name = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.name ? ' - ' + this.name : '');
 				}
 			});
 
@@ -181,10 +181,10 @@
 				$.fancybox.open([
 					{
 						href : '1_b.jpg',
-						title : 'My title'
+						name : 'My name'
 					}, {
 						href : '2_b.jpg',
-						title : '2nd title'
+						name : '2nd name'
 					}, {
 						href : '3_b.jpg'
 					}
@@ -214,24 +214,24 @@
 
 	<h3>Simple image gallery</h3>
 	<p>
-		<a class="fancybox" href="1_b.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="1_s.jpg" alt="" /></a>
+		<a class="fancybox" href="1_b.jpg" data-fancybox-group="gallery" name="Lorem ipsum dolor sit amet"><img src="1_s.jpg" alt="" /></a>
 
-		<a class="fancybox" href="2_b.jpg" data-fancybox-group="gallery" title="Etiam quis mi eu elit temp"><img src="2_s.jpg" alt="" /></a>
+		<a class="fancybox" href="2_b.jpg" data-fancybox-group="gallery" name="Etiam quis mi eu elit temp"><img src="2_s.jpg" alt="" /></a>
 
-		<a class="fancybox" href="3_b.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="3_s.jpg" alt="" /></a>
+		<a class="fancybox" href="3_b.jpg" data-fancybox-group="gallery" name="Cras neque mi, semper leon"><img src="3_s.jpg" alt="" /></a>
 
-		<a class="fancybox" href="4_b.jpg" data-fancybox-group="gallery" title="Sed vel sapien vel sem uno"><img src="4_s.jpg" alt="" /></a>
+		<a class="fancybox" href="4_b.jpg" data-fancybox-group="gallery" name="Sed vel sapien vel sem uno"><img src="4_s.jpg" alt="" /></a>
 	</p>
 
 	<h3>Different effects</h3>
 	<p>
-		<a class="fancybox-effects-a" href="5_b.jpg" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
+		<a class="fancybox-effects-a" href="5_b.jpg" name="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
 
-		<a class="fancybox-effects-b" href="5_b.jpg" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
+		<a class="fancybox-effects-b" href="5_b.jpg" name="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
 
-		<a class="fancybox-effects-c" href="5_b.jpg" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
+		<a class="fancybox-effects-c" href="5_b.jpg" name="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
 
-		<a class="fancybox-effects-d" href="5_b.jpg" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
+		<a class="fancybox-effects-d" href="5_b.jpg" name="Lorem ipsum dolor sit amet, consectetur adipiscing elit"><img src="5_s.jpg" alt="" /></a>
 	</p>
 
 	<h3>Various types</h3>
@@ -239,7 +239,7 @@
 		fancyBox will try to guess content type from href attribute but you can specify it directly by adding classname (fancybox.image, fancybox.iframe, etc).
 	</p>
 	<ul>
-		<li><a class="fancybox" href="#inline1" title="Lorem ipsum dolor sit amet">Inline</a></li>
+		<li><a class="fancybox" href="#inline1" name="Lorem ipsum dolor sit amet">Inline</a></li>
 		<li><a class="fancybox fancybox.ajax" href="ajax.txt">Ajax</a></li>
 		<li><a class="fancybox fancybox.iframe" href="iframe.html">Iframe</a></li>
 		<li><a class="fancybox" href="http://www.adobe.com/jp/events/cs3_web_edition_tour/swfs/perform.swf">Swf</a></li>

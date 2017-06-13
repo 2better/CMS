@@ -144,8 +144,8 @@
             var articleId = $(this).attr('articleId');
             var status = "trash";
             bootbox.dialog({
-                message: $(this).attr('title'),
-                title: "提示",
+                message: $(this).attr('name'),
+                name: "提示",
                 buttons: {
                     "delete": {
                         label: "确定",
@@ -205,7 +205,7 @@
                             trs += "<td>" + n.type + "</td>";
                             trs += "<td>" + n.createdView + "</td>";
 
-                            trs += "<td><a title=\"下载\" target=\"_self\" href=\"${BASE_PATH}/manage/preview/download.htm?id=" + n.id + "\" >下载</a> | <a title=\"是否删除文档\" href=\"javascript:void(0);\"  class=\"js_article_delete\" articleId=\"" + n.id + "\">删除</a> | <a href=\"javascript:void(0);\" class=\"js_article_preview\" articleId=\"" + n.id + "\">预览</a></td></tr>";
+                            trs += "<td><a name=\"下载\" target=\"_self\" href=\"${BASE_PATH}/manage/preview/download.htm?id=" + n.id + "\" >下载</a> | <a name=\"是否删除文档\" href=\"javascript:void(0);\"  class=\"js_article_delete\" articleId=\"" + n.id + "\">删除</a> | <a href=\"javascript:void(0);\" class=\"js_article_preview\" articleId=\"" + n.id + "\">预览</a></td></tr>";
 
                         });
                         $("#con").append(trs + "</tbody>");
