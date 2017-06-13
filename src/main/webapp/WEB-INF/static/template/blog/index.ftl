@@ -211,12 +211,12 @@
                         </div>
                     </div>
                     <div class="area-con">
-                        <ul>
-                            <li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>
-                            <li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>
-                            <li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>
-                            <li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>
-                            <li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>
+                        <ul id="paperUl">
+                            <#--<li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>-->
+                            <#--<li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>-->
+                            <#--<li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>-->
                         </ul>
                     </div>
                 </div>

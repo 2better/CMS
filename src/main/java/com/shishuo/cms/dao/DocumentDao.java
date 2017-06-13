@@ -17,7 +17,7 @@ public interface DocumentDao
 
     Document getById(long id);
 
-    void modifyPreviewById(long id,String preview);
+    void modifyPreviewById(long id, String preview);
 
     void delete(long id);
 
@@ -29,7 +29,7 @@ public interface DocumentDao
      * @param rows
      * @return
      */
-     List<Document> findByCondition(@Param("adminId") long adminId,  @Param("keywords") String keywords,@Param("column") int column, @Param("offset") int offset, @Param("rows") int rows);
+     List<Document> findByCondition(@Param("adminId") long adminId, @Param("keywords") String keywords, @Param("column") int column, @Param("offset") int offset, @Param("rows") int rows);
 
     /**
      * 多条件组合下查找到的结果数
@@ -37,6 +37,7 @@ public interface DocumentDao
      * @param keywords
      * @return
      */
-    int allCountByCondition(@Param("adminId") long adminId,@Param("keywords") String keywords,@Param("column") int column);
+    int allCountByCondition(@Param("adminId") long adminId, @Param("keywords") String keywords, @Param("column") int column);
 
+    List<Document> getBy_Column(@Param("column") int column, @Param("offest") int offest, @Param("rows") int rows);
 }

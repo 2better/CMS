@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.ConnectException;
-import java.util.List;
+import java.net.URLEncoder;
 
 /**
  * @author zyl
@@ -93,12 +93,13 @@ public class ManageDocumentAction {
                 File file = new File(realPath);
                 if (file.exists()) {
                     response.setContentType("application/force-download");// 设置强制下载不打开
-                    response.addHeader("Content-Disposition",
-                            "attachment;fileName=" + document.getName());// 设置文件名
+                    String fileName = document.getName();
                     byte[] buffer = new byte[1024];
                     FileInputStream fis = null;
                     BufferedInputStream bis = null;
                     try {
+                        response.addHeader("Content-Disposition",
+                                "attachment;fileName=" + URLEncoder.encode(fileName,"utf-8"));// 设置文件名
                         fis = new FileInputStream(file);
                         bis = new BufferedInputStream(fis);
                         OutputStream os = response.getOutputStream();
