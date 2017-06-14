@@ -14,14 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baidu.ueditor.ActionEnter;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.util.HttpUtils;
 import com.shishuo.cms.util.MediaUtils;
-import com.shishuo.cms.util.PropertyUtils;
 
 @Controller
 @RequestMapping("/manage")
@@ -29,22 +27,15 @@ public class ManageUEditorAction extends ManageBaseAction {
 
 	@ResponseBody
 	@RequestMapping(value = "/ueditor.htm")
-	public String config(@RequestParam(value = "action") String action,
-			HttpServletResponse response, HttpServletRequest request) {
-//		response.setContentType("text/html;charset=UTF-8");
-		// String root = HttpUtils.getBasePath(request);
-		String root = PropertyUtils.getRoot()
-				+ java.io.File.separatorChar;
-		// root = root.replace("\\", "/");
-		// if (!root.endsWith("/")) {
-		// root += "/";
-		// }
-		logger.info("ueditor root:"+root);
+	public String config(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("application/json");
+		response.setHeader("Content-Type" , "text/html");
+		String root = request.getSession().getServletContext().getRealPath( "/" );
 		return new ActionEnter(request, root).exec();
 	}
 
 	/**
-	 * @see imageManager.jsp
+	 *
 	 * @return
 	 */
 	@ResponseBody

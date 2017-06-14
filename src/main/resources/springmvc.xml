@@ -54,13 +54,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 						<!-- 验证码高度 -->
 						<prop key="kaptcha.image.height">60</prop>
 						<!-- 生成验证码内容范围 -->
-						<prop key="kaptcha.textproducer.char.string">abcde2345678gfynmnpwx</prop>
+						<prop key="kaptcha.textproducer.char.string">abcde234568uqrfynmnpwx</prop>
 						<!-- 验证码个数 -->
-						<prop key="kaptcha.textproducer.char.length">5</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
 						<!-- 是否有边框 -->
 						<prop key="kaptcha.border">no</prop>
 						<!-- 验证码字体颜色 -->
-						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
 						<!-- 验证码字体大小 -->
 						<prop key="kaptcha.textproducer.font.size">35</prop>
 						<!-- 验证码所属字体样式 -->
@@ -72,7 +72,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 						<!-- 干扰线颜色 -->
 						<prop key="kaptcha.noise.color">red</prop>
 						<!-- 验证码文本字符间距 -->
-						<prop key="kaptcha.textproducer.char.space">4</prop>
+						<prop key="kaptcha.textproducer.char.space">6</prop>
 					</props>
 				</constructor-arg>
 			</bean>
