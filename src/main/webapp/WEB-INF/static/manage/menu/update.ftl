@@ -1,7 +1,5 @@
 <#assign menu="menu"> <#assign submenu="update_menu"> <#include
 "/manage/head.ftl">
-<style type="text/css">
-</style>
 <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
@@ -88,7 +86,7 @@
                 $("#ename").removeAttr("disabled");
                 $("#ename").val('http://');
             }else {
-                $("#ename").attr("disabled", "disabled");
+                $("#ename").attr("Readonly", "Readonly");
                 $("#ename").val(urlvalue);
 			}
         });

@@ -53,4 +53,12 @@ public class UserFormAuthenticationFilter extends FormAuthenticationFilter
         return false;
     }
 
+    @Override
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+        String username = getUsername(request);
+        String password = getPassword(request);
+        String host = request.getRemoteHost();
+        return new UserToken(username, password, false, host);
+    }
+
 }

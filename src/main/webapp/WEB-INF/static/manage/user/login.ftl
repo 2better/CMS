@@ -62,7 +62,6 @@ input.error:focus {
 		<form class="form-signin" id="adminForm"
 			action="${BASE_PATH}/user/login.json" autocomplete="off"
 			method="post">
-            <input type="hidden" name="name" value="" id="hn"/>
 			<h2 class="form-signin-heading">
 				<img src="${TEMPLATE_BASE_PATH}/images/logo-bg.png"
 					style="height: 38px;" />
@@ -70,7 +69,7 @@ input.error:focus {
 			<div class="login-wrap">
 				<div class="form-group">
                                       <label for="exampleInputEmail1">用户名</label>
-                                      <input type="text"  id="name" required class="form-control" placeholder="用户名" value="user" style="*width: 250px;" autofocus>
+                                      <input type="text" name="name" id="name" required class="form-control" placeholder="用户名" value="user" style="*width: 250px;" autofocus>
                                   </div>
  				<div class="form-group">
                                       <label for="exampleInputEmail1">密码</label>
@@ -112,7 +111,6 @@ input.error:focus {
             alert("请输入验证码");
             return false;
         }
-        $('#hn').val(name+"#-@yh");
 
         return true;
     });

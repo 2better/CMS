@@ -101,16 +101,19 @@
                 <entry key="userAuthc" value-ref="userFormAuthenticationFilter" />
                 <entry key="user" value-ref="userFilter" />
                 <entry key="admin" value-ref="adminFilter" />
+                <entry key="roles">
+                    <bean class="com.shishuo.cms.shiro.CustomRolesAuthorizationFilter"/>
+                </entry>
             </map>
         </property>
         <property name="filterChainDefinitions">
             <value>
                 /admin/login.json = authc
-                /admin/logout.htm = logout,roles[admin]
+                /admin/logout.htm = logout,roles["admin"]
                 /user/login.json = userAuthc
-                /user/logout.htm = userLogout,roles[user]
-                /manage/** = admin,roles[admin]
-                /article/download.htm = user,roles[user]
+                /user/logout.htm = userLogout,roles["user"]
+                /manage/** = roles[admin]
+                /article/download.htm = roles["user,admin"]
 
                 /** = anon
 
@@ -121,11 +124,19 @@
 
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="customizedRealm" />
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm"/>
+                <ref bean="userRealm" />
+            </list>
+        </property>
     </bean>
 
     <!-- 自定义 realm -->
-    <bean id="customizedRealm" class="com.shishuo.cms.shiro.CustomizedRealm">
+    <bean id="userRealm" class="com.shishuo.cms.shiro.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+    <bean id="adminRealm" class="com.shishuo.cms.shiro.AdminRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher" />
     </bean>
 

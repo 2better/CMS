@@ -30,12 +30,17 @@ public class MenuService
         if(createUrl==1)
             menu.setUrl("/article/list.htm?menuId="+id);
         menuDao.add(menu);
+        menuDao.modifyIsLeaf(menu.getPid(),0);
         PageStaticUtils.updateTemplate("header");
     }
 
     @CacheEvict(value = "menu", allEntries = true)
     public void delete(long id)
     {
+        Menu menu = menuDao.getById(id);
+        int count = menuDao.getCountOfChilden(menu.getPid());
+        if(count==0)
+            menuDao.modifyIsLeaf(menu.getPid(),1);
         menuDao.delete(id);
         PageStaticUtils.updateTemplate("header");
     }
@@ -45,9 +50,9 @@ public class MenuService
         return menuDao.getAll();
     }
 
-    public List<Menu> getAllParents()
+    public List<Menu> getChildren()
     {
-        return menuDao.getAllParents();
+        return menuDao.getChildren(0);
     }
 
     public List<Menu> getWithChildById(long id)
@@ -70,7 +75,7 @@ public class MenuService
     public void update(Menu menu,int createUrl)
     {
         if(createUrl==1)
-            menu.setUrl("/manage/article/list.htm?menuId="+menu.getId());
+            menu.setUrl("/article/list.htm?menuId="+menu.getId());
         menuDao.update(menu);
         PageStaticUtils.updateTemplate("header");
     }
@@ -83,6 +88,15 @@ public class MenuService
     @Cacheable(value = "menu")
     public List<Menu> getAllDisplay()
     {
-        return menuDao.getAllDisplay();
+        List<Menu> list =  menuDao.getAllDisplay();
+        for(Menu first:list)
+        {
+            for(Menu second:first.getChildren())
+            {
+                if(second.getIsLeaf()==0)
+                    second.setChildren(menuDao.getChildren(second.getId()));
+            }
+        }
+        return list;
     }
 }

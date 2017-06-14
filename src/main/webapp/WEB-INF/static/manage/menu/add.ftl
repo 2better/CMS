@@ -17,6 +17,48 @@
     line-height: 1.33;
     padding: 9px 15px；
 }
+
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+    float: none;
+}
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
 </style>
 		<!--main content start-->
 		<section id="main-content">
@@ -37,8 +79,8 @@
                                           <div class="col-xs-9">
                                               <input type="text" style="font-size:15px;width: 200px;" class="form-control"
                                                      name="name"
-                                                     placeholder="菜单名称" id="folderName" maxlength="5" required="required">${menuName}
-                                              </input>
+                                                     placeholder="菜单名称" id="folderName" maxlength="5" required="required"/>
+
                                           </div>
                                       </div>
                                       <div class="form-group">
@@ -61,7 +103,7 @@
                                       </div>
                                       <div class="form-group">
                                           <label class="col-xs-3 control-label">上级菜单</label>
-                                          <div class="col-xs-9">
+                                          <#--<div class="col-xs-9">
                                               <select class="form-control input-lg m-bot15"
                                                       style="font-size:15px;width: 200px;" name="pid">
                                                   <option value="0">根菜单</option>
@@ -69,6 +111,38 @@
                                                   <option value="${f.id}"<#if mid ==f.id>selected</#if>>${f.name}</option>
 											  </#list>
                                               </select>
+                                          </div>-->
+                                          <input id="hpid" type="hidden" value="${Menu.id}" name="pid"/>
+                                          <div class="col-lg-9">
+                                              <div class="dropdown" style="display: inline-block;">
+                                                  <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+                                                     href="javascript:;" menuId="${Menu.id}">
+                                                  ${Menu.name} <span class="caret"></span>
+                                                  </a>
+                                                  <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                                      <li class="divider"></li>
+                                                      <li><a href="javascript:;" menuId="0" class="dLabel hd">根菜单</a></li>
+                                                      <li class="divider hd"></li>
+                                                  <#list menuParentsList?sort_by("sort") as f>
+                                                      <#if (f.children?size > 0)>
+                                                          <li class="dropdown-submenu">
+                                                              <a tabindex="-1" href="javascript:;" class="dLabel" menuId="${f.id}" >${f.name}</a>
+                                                              <ul class="dropdown-menu">
+                                                                  <li class="divider"></li>
+                                                                  <#list f.children?sort_by("sort") as c>
+                                                                      <li><a href="javascript:;"  menuId="${c.id}" class="dLabel">${c.name}</a></li>
+                                                                      <li class="divider"></li>
+                                                                  </#list>
+                                                              </ul>
+                                                          </li>
+                                                          <li class="divider"></li>
+                                                      <#else>
+                                                          <li><a href="javascript:;" menuId="${f.id}" class="dLabel">${f.name}</a></li>
+                                                          <li class="divider"></li>
+                                                      </#if>
+                                                  </#list>
+                                                  </ul>
+                                              </div>
                                           </div>
                                       </div>
                                       <div class="form-group">
@@ -117,6 +191,16 @@
 
         });
 
+       /* if($("#dLabel").attr("menuId")==0)
+        {
+            $(".hd").hide();
+        }*/
+
+        $("a.dLabel").click(function () {
+            $("#dLabel").text($(this).text());
+            $("#hpid").val($(this).attr("menuId"));
+        });
+
 		$('#addFolder_form').ajaxForm({
 			dataType : 'json',
 			success : function(data) {
@@ -136,7 +220,8 @@
 								label : "查看菜单列表",
 								className : "btn-primary",
 								callback : function() {
-									window.location.href="${BASE_PATH}/manage/menu/list.htm?id=${mid}";
+								    var id = $("#hpid").val();
+									window.location.href="${BASE_PATH}/manage/menu/list.htm?id="+id;
 								}
 							}
 						}
