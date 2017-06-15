@@ -164,8 +164,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.lan</groupId>
-			<artifactId>lan-jodconverter</artifactId>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
 

@@ -107,12 +107,12 @@
                                 class="icon-cogs"></i> <span>活动管理</span></a>
                     </li>
                     <li class="">
-                        <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/composition/listPage.htm"> <i
+                        <a <#if menu="composition">class="active"</#if> href="${BASE_PATH}/manage/composition/listPage.htm"> <i
                                 class="icon-cogs"></i> <span>著作管理</span></a>
                     </li>
 
                     <li class="">
-                        <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/scholar/listPage.htm"> <i
+                        <a <#if menu="scholar">class="active"</#if> href="${BASE_PATH}/manage/scholar/listPage.htm"> <i
                                 class="icon-cogs"></i> <span>学者资料</span></a>
                     </li>
                     <li class="">
@@ -127,16 +127,6 @@
                         <a <#if menu="system">class="active"</#if> href="${BASE_PATH}/manage/config/basic.htm"> <i
                                 class="icon-cogs"></i> <span>系统设置</span></a>
                     </li>
-                <#else>
-                    <li class="">
-                        <a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i
-                                class="icon-book"></i> <span>文章管理</span></a>
-                    </li>
-                    <li class="">
-                        <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i
-                                class="icon-file"></i> <span>文档管理</span></a>
-                    </li>
-                </#if>
 
                 </ul>
             </div>
