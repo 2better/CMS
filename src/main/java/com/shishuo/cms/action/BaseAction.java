@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.shishuo.cms.service.ArticleService;
-import com.shishuo.cms.service.HeadlineService;
 import com.shishuo.cms.service.TemplateService;
 
 /**
@@ -24,9 +23,6 @@ public class BaseAction {
 
 	@Autowired
 	protected TemplateService themeService;
-
-	@Autowired
-	protected HeadlineService headlineService;
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 }

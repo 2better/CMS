@@ -26,4 +26,9 @@
 		WHERE type = #{type}
 		limit #{offest},#{rows}
 	</select>
+
+	<select id="getAllByType" resultType="com.shishuo.cms.entity.Picture">
+		SELECT * FROM picture
+		WHERE type = #{0}
+	</select>
 </mapper>

@@ -23,4 +23,6 @@ public interface PictureDao {
     List<Picture> getPictureList(@Param("type") Integer type, @Param("offest")Integer offest, @Param("rows")Integer rows);
 
     int getCount(Integer type);
+
+    List<Picture> getAllByType(Integer type);
 }

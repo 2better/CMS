@@ -49,8 +49,7 @@
                 </div>
 
                 <div class="tab-pane" id="picture">
-                    <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-                        TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+                    <#include "/manage/pic/list.ftl">
                 </div>
 
                 <div class="tab-pane" id="friendlyLink">

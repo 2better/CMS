@@ -61,4 +61,9 @@ public class Picture implements Serializable{
         DateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
         return df.format(this.createTime);
     }
+
+    public String getPicType() {
+        if (this.type == 1)return "是";
+        return "否";
+    }
 }

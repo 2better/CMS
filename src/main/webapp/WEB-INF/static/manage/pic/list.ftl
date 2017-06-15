@@ -39,6 +39,10 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>上传轮播图</h3>
+                <h4>是否为大图:
+                    <input type="radio" name="type" value="1">是
+                    <input type="radio" name="type" value="0" checked>否
+                </h4>
                 <input type="file" multiple id="ssi-upload"/>
             </div>
         </div>
@@ -57,6 +61,7 @@
                             <thead>
                             <tr>
                                 <th>图片</th>
+                                <th>是否为大图</th>
                                 <th>编辑时间</th>
                                 <th>操作</th>
                             </tr>
@@ -72,12 +77,12 @@
         <!-- page end-->
         </section>
     </section>
-</section>
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
         url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 1,
         maxNumberOfFiles:6,
+        data:{type:$("input:radio[name='type']:checked").val()},
         responseValidation: {
             validationKey: {
                 success: 'success',
@@ -147,6 +152,7 @@
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
                             trs += "<tr class=\"gradeA odd\"><td><a href='/"+ n.picUrl +"'>" + n.picUrl + "</a></td>";
+                            trs += "<td>"+ n.picType +"</td>";
                             trs += "<td>"+ n.createTimeView +"</td>";
                             trs += "<td><a name=\"是否删除活动\" href=\"javascript:void(0);\"  class=\"js_picture_delete\" id=\"" + n.id + "\">删除</a></td></tr>";
                         });

@@ -1,4 +1,4 @@
-<#include "header.ftl">
+<#include "staticPage/header.html">
 <div class="g-bd f-cb">
 <#--<div class="g-sd">-->
 <#--<div class="g-sd-header">-->
