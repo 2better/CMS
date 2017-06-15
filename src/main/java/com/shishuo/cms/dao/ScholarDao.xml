@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shishuo.cms.dao.ScholarDao">
+	<insert id="add" parameterType="com.shishuo.cms.entity.Scholar">
+		insert into
+		Scholar(content, name, createTime, picUrl)
+		values(#{content},#{name},#{createTime},#{picUrl})
+	</insert>
+
+	<select id="getById" resultType="com.shishuo.cms.entity.Scholar">
+		SELECT * from Scholar WHERE id = #{id}
+	</select>
+
+	<update id="update" parameterType="com.shishuo.cms.entity.Scholar">
+		UPDATE Scholar
+		SET picUrl = #{picUrl},
+		content = #{content},
+		name = #{name},
+		createTime = #{createTime}
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE from Scholar where id = #{id}
+	</delete>
+
+	<!--按时间排序-->
+	<select id="getByPage" resultType="com.shishuo.cms.entity.Scholar">
+		SELECT * FROM Scholar
+		ORDER BY createTime DESC
+		limit #{offest}, #{rows}
+	</select>
+
+	<select id="getCount" resultType="Integer">
+		SELECT COUNT(*) FROM Scholar
+	</select>
+</mapper>
