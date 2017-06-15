@@ -20,4 +20,5 @@
 	<select id="findAll" resultType="com.shishuo.cms.entity.Config">
 		SELECT * FROM config;
 	</select>
-</mapper>  
+
+</mapper>

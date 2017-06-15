@@ -113,6 +113,10 @@
                                 class="icon-cogs"></i> <span>学者资料</span></a>
                     </li>
                     <li class="">
+                        <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/picture/listPage.htm"> <i
+                                class="icon-cogs"></i> <span>轮播图管理</span></a>
+                    </li>
+                    <li class="">
                         <a <#if menu="admin_list">class="active"</#if> href="${BASE_PATH}/manage/admin/manage.htm"> <i
                                 class="icon-user"></i> <span>管理员管理</span></a>
                     </li>
