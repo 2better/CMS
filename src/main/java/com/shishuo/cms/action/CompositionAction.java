@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -25,14 +26,11 @@ public class CompositionAction extends BaseAction {
     @Autowired
     private CompositionService compositionService;
     @Autowired
-    private MenuService menuService;
-    @Autowired
     private ConfigService configService;
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
-    public String event(@PathVariable("id") Integer id, ModelMap m) {
-        List<Menu> menuList = menuService.getAllDisplay();
-        m.put("menuList", menuList);
+    public String event(@PathVariable("id") Integer id, ModelMap m, HttpServletRequest request) {
+        pageStaticUtils.headerStaticPage(request);
         m.put("composition", compositionService.getById(id));
         return "/template/blog/composition";
     }
@@ -47,9 +45,8 @@ public class CompositionAction extends BaseAction {
     }
 
     @RequestMapping(value = "/list.htm",method = RequestMethod.GET)
-    public String listPage(ModelMap m) {
-        List<Menu> menuList = menuService.getAllDisplay();
-        m.put("menuList",menuList);
+    public String listPage(HttpServletRequest request) {
+        pageStaticUtils.headerStaticPage(request);
         return "/template/blog/composition_list";
     }
 

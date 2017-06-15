@@ -5,6 +5,7 @@
  */
 package com.shishuo.cms.action;
 
+import com.shishuo.cms.util.PageStaticUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,7 +27,7 @@ public class BaseAction {
 	protected TemplateService themeService;
 
 	@Autowired
-	protected HeadlineService headlineService;
+	protected PageStaticUtils pageStaticUtils;
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 }

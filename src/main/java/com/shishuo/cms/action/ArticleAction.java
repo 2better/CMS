@@ -29,8 +29,6 @@ public class ArticleAction extends BaseAction {
 	private MenuService menuService;
 	@Autowired
 	private ConfigService configService;
-	@Autowired
-	private PageStaticUtils pageStaticUtils;
 
 	@RequestMapping(value = "/{articleId}.htm", method = RequestMethod.GET)
 	public String article(@PathVariable long articleId,

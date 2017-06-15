@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,14 +28,11 @@ public class EventAction extends BaseAction {
     @Autowired
     private EventService eventService;
     @Autowired
-    private MenuService menuService;
-    @Autowired
     private ConfigService configService;
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
-    public String event(@PathVariable("id") Integer id, ModelMap m) {
-        List<Menu> menuList = menuService.getAllDisplay();
-        m.put("menuList", menuList);
+    public String event(@PathVariable("id") Integer id, ModelMap m, HttpServletRequest request) {
+        pageStaticUtils.headerStaticPage(request);
         m.put("event", eventService.getById(id));
         return "/template/blog/event";
     }
@@ -62,9 +60,8 @@ public class EventAction extends BaseAction {
     }
 
     @RequestMapping(value = "/list.htm",method = RequestMethod.GET)
-    public String listPage(ModelMap m) {
-        List<Menu> menuList = menuService.getAllDisplay();
-        m.put("menuList",menuList);
+    public String listPage(HttpServletRequest request) {
+        pageStaticUtils.headerStaticPage(request);
         return "/template/blog/event_list";
     }
 
