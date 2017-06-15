@@ -20,12 +20,19 @@
 									<div class="col-sm-10">
 										${admin.name}
 									</div>
-								</div>								
+								</div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-sm-2 control-label">旧密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" name="password"
+                                               value=""  id="password" required maxlength="16" minlength="6">
+                                    </div>
+                                </div>
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">密码</label>
+									<label class="col-sm-2 col-sm-2 control-label">新密码</label>
 									<div class="col-sm-10">
-										<input type="password" class="form-control" name="password"
-											value="" placeholder="密码" id="password">
+										<input type="password" class="form-control" name="newpwd"
+											value=""  id="newpwd" required maxlength="16" minlength="6">
 									</div>
 								</div>
 								<div class="form-group">

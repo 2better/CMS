@@ -1,6 +1,6 @@
 <#assign menu="default">
 <#assign submenu="">
-<#include "head.ftl">
+<#include "/manage/head.ftl">
 <style>
 .dd-handle {
     -moz-box-sizing: border-box;
@@ -126,4 +126,4 @@
 			</section>
 		</section>
 		<!--main content end-->
-<#include "foot.ftl">
+<#include "/manage/foot.ftl">

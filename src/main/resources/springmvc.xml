@@ -14,9 +14,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="freemarkerSettings">
 			<props>
-				<prop key="template_update_delay">10</prop>
+				<prop key="template_update_delay">7200</prop>
 				<prop key="defaultEncoding">UTF-8</prop>
 				<prop key="url_escaping_charset">UTF-8</prop>
+				<prop key="output_encoding">UTF-8</prop>
 				<prop key="locale">zh_CN</prop>
 				<prop key="boolean_format">true,false</prop>
 				<prop key="time_format">HH:mm:ss</prop>
@@ -24,6 +25,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
 				<prop key="whitespace_stripping">true</prop>
+				<prop key="classic_compatible">true</prop>
 			</props>
 		</property>
 	</bean>
@@ -54,7 +56,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 						<!-- 验证码高度 -->
 						<prop key="kaptcha.image.height">60</prop>
 						<!-- 生成验证码内容范围 -->
-						<prop key="kaptcha.textproducer.char.string">abcde234568uqrfynmnpwx</prop>
+						<prop key="kaptcha.textproducer.char.string">abcde3456uqrfymnpwx</prop>
 						<!-- 验证码个数 -->
 						<prop key="kaptcha.textproducer.char.length">4</prop>
 						<!-- 是否有边框 -->

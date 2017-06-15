@@ -39,7 +39,7 @@
                         	<div class="form-group">
 	                          <label class="col-sm-2 col-sm-2 control-label">链接地址</label>
 	                          <div class="col-sm-10">
-	                              <input type="text" style="font-size:15px;width:500px;" class="form-control" name="url" disabled id="ename" value="${Menu.url}" required>
+	                              <input type="text" style="font-size:15px;width:500px;" class="form-control" name="url" readonly id="ename" value="${Menu.url}" required>
 	                              </input>
 	                          </div>
 	                        </div>
@@ -76,17 +76,17 @@
         $("#createUrl").change(function () {
             var a = $(this).val();
             if(a==1) {
-                $("#ename").attr("disabled", "disabled");
+                $("#ename").attr("readonly", "readonly");
                 $("#ename").val('系统生成');
             }else if(a==2) {
-                $("#ename").removeAttr("disabled");
+                $("#ename").removeAttr("readonly");
                 $("#ename").val('');
             }else if(a==0)
             {
-                $("#ename").removeAttr("disabled");
+                $("#ename").removeAttr("readonly");
                 $("#ename").val('http://');
             }else {
-                $("#ename").attr("Readonly", "Readonly");
+                $("#ename").attr("readonly", "readonly");
                 $("#ename").val(urlvalue);
 			}
         });

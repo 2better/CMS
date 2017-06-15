@@ -137,7 +137,7 @@
                 var con = "";
                 $.each(data.list, function (i, n) {
                     con+="<li><span class=\"pic\"></span>";
-                    con+="<a href=\"${BASE_PATH}/article/"+n.articleId+".htm\" target=\"_blank\">"+n.name+"</a>";
+                    con+="<a href=\"${BASE_PATH}/article/"+n.articleId+".htm\" target=\"_blank\">"+n.title+"</a>";
                     con+="<span class=\"time\">["+n.createTimeView+"]</span></li>";
                 });
                 $("#content").append(con);
