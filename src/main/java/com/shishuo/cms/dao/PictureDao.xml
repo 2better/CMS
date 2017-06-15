@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shishuo.cms.dao.PictureDao">
+	<insert id="add" parameterType="com.shishuo.cms.entity.Picture">
+		insert into
+		Picture(name, createTime, picUrl, type)
+		values(#{name},#{createTime},#{picUrl}, #{type})
+	</insert>
+
+	<select id="getById" resultType="com.shishuo.cms.entity.Picture">
+		SELECT * from Picture WHERE id = #{id}
+	</select>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE from Picture where id = #{id}
+	</delete>
+
+	<select id="getCount" resultType="Integer">
+		SELECT COUNT(*) FROM Picture
+		WHERE type = #{type}
+	</select>
+
+	<select id="getPictureList" resultType="com.shishuo.cms.entity.Picture">
+		SELECT * FROM picture
+		WHERE type = #{type}
+		limit #{offest},#{rows}
+	</select>
+</mapper>
