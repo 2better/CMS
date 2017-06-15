@@ -69,8 +69,10 @@
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
                         <div class="title-con-r">
-                            <p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
-                                2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p>
+                            <p id="importantEvent">
+                                <#--《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。-->
+                                <#--2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…-->
+                            </p>
                             <div id="area2-url" style="display:none">/001lt269/page/34.html</div>
                             <div id="area2-img" style="display:none">/001lt269/upload/201505/09/201505090952264356.jpg</div>
                         </div>
@@ -91,19 +93,13 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news2/89.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/event/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
                         <div id="area3-list-content">
                             <div id="area3-list">
-                                <ul>
-                                    <li><a href="/001lt269/news2/show-219.html" target="#target">高校实验示范中心信息化教学管理体系研究及构建</a></li>
-                                    <li><a href="/001lt269/news2/show-220.html" target="#target">基于电子政务的高校基层党组织管理创新策略探讨</a></li>
-                                    <li><a href="/001lt269/news2/show-192.html" target="#target">贫困村信息化工作实施方案</a></li>
-                                    <li><a href="/001lt269/news2/show-267.html" target="#target">标本室温度高自动报警 物联网编织智慧校园</a></li>
-                                    <li><a href="/001lt269/news2/show-268.html" target="#target">中国电信提速智慧校园建设 网络升级破解教学资源失衡</a></li>
-                                    <li><a href="/001lt269/news2/show-233.html" target="#target">浪潮携手辽宁科技学院打造安全、高效数字化校园</a></li>
+                                <ul id="eventUl">
                                 </ul>
                             </div>
                         </div>
@@ -123,16 +119,11 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news/53.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715140882566"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
                         <ul id="newsUl">
-                            <#--<li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>-->
-                            <#--<li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>-->
-                            <#--<li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>-->
-                            <#--<li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>-->
-                            <#--<li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -147,17 +138,11 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news/39.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715156331056"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
                         <ul id="cooperationUl">
-                            <#--<li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>-->
-                            <#--<li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>-->
-                            <#--<li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>-->
-                            <#--<li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>-->
-                            <#--<li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>-->
-                            <#--<li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -175,19 +160,13 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news2/89.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/composition/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
                         <div id="area3-list-content">
                             <div id="area3-list">
-                                <ul>
-                                    <li><a href="/001lt269/news2/show-219.html" target="#target">高校实验示范中心信息化教学管理体系研究及构建</a></li>
-                                    <li><a href="/001lt269/news2/show-220.html" target="#target">基于电子政务的高校基层党组织管理创新策略探讨</a></li>
-                                    <li><a href="/001lt269/news2/show-192.html" target="#target">贫困村信息化工作实施方案</a></li>
-                                    <li><a href="/001lt269/news2/show-267.html" target="#target">标本室温度高自动报警 物联网编织智慧校园</a></li>
-                                    <li><a href="/001lt269/news2/show-268.html" target="#target">中国电信提速智慧校园建设 网络升级破解教学资源失衡</a></li>
-                                    <li><a href="/001lt269/news2/show-233.html" target="#target">浪潮携手辽宁科技学院打造安全、高效数字化校园</a></li>
+                                <ul id="compositionUl">
                                 </ul>
                             </div>
                         </div>
@@ -207,7 +186,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news/53.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715140882566"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -231,17 +210,11 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/001lt269/news/39.html"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/scholar/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
                         </div>
                     </div>
                     <div class="area-con">
-                        <ul>
-                            <li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>
-                            <li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>
-                            <li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>
-                            <li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>
-                            <li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>
-                            <li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>
+                        <ul id="scholarUl">
                         </ul>
                     </div>
                 </div>

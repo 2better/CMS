@@ -253,7 +253,7 @@ CREATE TABLE Composition
   id INT AUTO_INCREMENT,
   content mediumtext NOT NULL ,
   picUrl VARCHAR(100),
-  name VARCHAR(100) NOT NULL ,
+  title VARCHAR(100) NOT NULL ,
   createTime TIMESTAMP NOT NULL ,
   PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
