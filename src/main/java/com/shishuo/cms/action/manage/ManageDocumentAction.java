@@ -8,6 +8,7 @@ import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.DocumentService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,6 +35,8 @@ public class ManageDocumentAction {
     private DocumentService documentService;
     @Autowired
     private ConfigService configService;
+
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
     public String listPage(HttpServletRequest request, ModelMap modelMap) {
@@ -71,7 +74,7 @@ public class ManageDocumentAction {
             json.setResult(true);
             return json;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
             json.setResult(false);
             return json;
         }
@@ -109,20 +112,20 @@ public class ManageDocumentAction {
                             i = bis.read(buffer);
                         }
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.error(e);
                     } finally {
                         if (bis != null) {
                             try {
                                 bis.close();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                logger.error(e);
                             }
                         }
                         if (fis != null) {
                             try {
                                 fis.close();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                logger.error(e);
                             }
                         }
                     }
@@ -149,14 +152,15 @@ public class ManageDocumentAction {
                 json.setResult(true);
                 json.setT(pdfFilePath);
             } catch (FileNotFoundException e) {
+                logger.error(e);
                 json.setResult(false);
-                json.setMsg("找不到该文档");
+                json.setMsg("该文档不存在");
             } catch (ConnectException e) {
-                e.printStackTrace();
+                logger.error(e);
                 json.setResult(false);
                 json.setMsg("系统繁忙，请重试");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e);
                 json.setResult(false);
                 json.setMsg("系统繁忙，请重试");
             }

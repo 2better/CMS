@@ -63,6 +63,9 @@ public class PageStaticUtils {
 
         Writer out = null;
         try {
+            if (!htmlFile.getParentFile().exists()) {
+                htmlFile.getParentFile().mkdirs();
+            }
             htmlFile.createNewFile();
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlFile), "UTF-8"));
             //获得模板
@@ -71,15 +74,15 @@ public class PageStaticUtils {
             template.process(data, out);
             out.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         } catch (TemplateException e) {
-            e.printStackTrace();
+            logger.error(e);
         } finally {
             try {
                 if (out != null)
                     out.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e);
             }
         }
     }
