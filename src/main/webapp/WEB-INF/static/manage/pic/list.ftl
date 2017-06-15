@@ -1,41 +1,6 @@
-<style type="text/css">
-    .pagination {
-        border-radius: 4px;
-        display: inline-block;
-        margin: 0;
-        padding-left: 0;
-    }
 
-    .howto, .nonessential, #edit-slug-box, .form-input-tip, .subsubsub {
-        color: #666666;
-    }
-
-    .subsubsub {
-        float: left;
-        font-size: 12px;
-        list-style: none outside none;
-        margin: 8px 0 5px;
-        padding: 0;
-    }
-
-    .form-group {
-        width: 100%;
-    }
-
-    .count {
-        position: absolute;
-        right: 0px;
-    }
-
-    .arrticle_status {
-        float: left;
-    }
-</style>
 <link rel="stylesheet" href="${BASE_PATH}/static/manage/pic/ssi-uploader.css"/>
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
-        <!-- page start-->
+<section class="wrapper">
         <div class="row">
             <div class="col-md-12">
                 <h3>上传轮播图</h3>
@@ -74,9 +39,7 @@
                 </div>
             </div>
         </section>
-        <!-- page end-->
-        </section>
-    </section>
+</section>
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
