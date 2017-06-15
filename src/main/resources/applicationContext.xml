@@ -109,11 +109,11 @@
         <property name="filterChainDefinitions">
             <value>
                 /admin/login.json = authc
-                /admin/logout.htm = logout,roles["admin"]
+                /admin/logout.htm = logout,roles[admin]
                 /user/login.json = userAuthc
-                /user/logout.htm = userLogout,roles["user"]
+                /user/logout.htm = userLogout,roles[user]
                 /manage/** = roles[admin]
-                /article/download.htm = roles["user,admin"]
+                /article/download.htm = user
 
                 /** = anon
 

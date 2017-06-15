@@ -1,6 +1,5 @@
 <#assign menu="composition">
 <#assign submenu="composition_list">
-<#include "/manage/head.ftl">
 <style type="text/css">
     .pagination {
         border-radius: 4px;
@@ -161,4 +160,3 @@
     }
 
 </script>
-<#include "/manage/foot.ftl">

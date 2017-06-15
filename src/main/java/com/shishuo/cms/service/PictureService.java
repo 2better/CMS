@@ -49,5 +49,9 @@ public class PictureService {
         pv.setList(pictureDao.getPictureList(type,pv.getOffset(),rows));
         return pv;
     }
+
+    public List<Picture> getAllByType(Integer type) {
+        return pictureDao.getAllByType(type);
+    }
 }
 
