@@ -91,10 +91,6 @@
 
                     </li>
                     <li class="">
-                        <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i
-                                class="icon-file"></i> <span>文档管理</span></a>
-                    </li>
-                    <li class="">
                         <a <#if menu="menu">class="active"</#if> href="${BASE_PATH}/manage/menu/list.htm"> <i
                                 class="icon-folder-open"></i> <span>菜单管理</span></a>
                     </li>
