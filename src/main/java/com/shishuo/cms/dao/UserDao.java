@@ -27,8 +27,8 @@ public interface UserDao {
 	 void updateUserByuserId(@Param("userId") long userId,
                                      @Param("password") String password, @Param("salt") String salt);
 
-	 List<User> getAllList(@Param("offset") long offset,
-                                  @Param("rows") long rows);
+	 List<User> getAllList(@Param("offset") int offset,
+                                  @Param("rows") int rows);
 
 	 int getAllListCount();
 

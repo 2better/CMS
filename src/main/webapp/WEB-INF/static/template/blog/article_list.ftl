@@ -25,6 +25,9 @@
         </div>
         <div class="g-mn-content-out2">
             <div class="g-mn-content2">
+                <div class="g-sd-content" id="nolist">
+                    暂时没有相关作品
+                </div>
                 <ul id="content">
 
 
@@ -57,60 +60,65 @@
 
         $(function() {
 
+
+        if(totalPage>0) {
+
+            $("#nolist").hide();
             ajaxFun(1);
 
-        if(totalPage==1)
-        {
-            $("#first").css("display","none");
-            $("#prev").css("display","none");
-            $("#next").css("display","none");
-            $("#end").css("display","none");
-            $("#to").css("display","none");
-            $(".box2").css("display","none");
-        }
-        else if(currentPage==1)
-        {
-            $("#first").css("display","none");
-            $("#prev").css("display","none");
-        }
-        else if(currentPage==totalPage)
-        {
-            $("#next").css("display","none");
-            $("#end").css("display","none");
-        }
-
-        $(document).on('click', '.box', function () {
-
-            btnId = $(this).attr('id');
-
-            toPage = parseInt($('.box2').val());
-            switch (btnId) {
-                case "first":
-                    newPage = 1;
-                    break;
-                case "prev":
-                    newPage = currentPage - 1;
-                    break;
-                case "next":
-                    newPage = currentPage + 1;
-                    break;
-                case "end":
-                    newPage = totalPage;
-                    break;
-                case "to":
-                    if (toPage > totalPage) {
-                        newPage = totalPage
-                    } else if (toPage < 1) {
-                        newPage = 1
-                    } else {
-                        newPage = toPage
-                    }
-                    break;
-                default:
-                    newPage = 1
+            if (totalPage == 1) {
+                $("#first").css("display", "none");
+                $("#prev").css("display", "none");
+                $("#next").css("display", "none");
+                $("#end").css("display", "none");
+                $("#to").css("display", "none");
+                $(".box2").css("display", "none");
             }
-            ajaxFun(newPage);
-        });
+            else if (currentPage == 1) {
+                $("#first").css("display", "none");
+                $("#prev").css("display", "none");
+            }
+            else if (currentPage == totalPage) {
+                $("#next").css("display", "none");
+                $("#end").css("display", "none");
+            }
+
+            $(document).on('click', '.box', function () {
+
+                btnId = $(this).attr('id');
+
+                toPage = parseInt($('.box2').val());
+                switch (btnId) {
+                    case "first":
+                        newPage = 1;
+                        break;
+                    case "prev":
+                        newPage = currentPage - 1;
+                        break;
+                    case "next":
+                        newPage = currentPage + 1;
+                        break;
+                    case "end":
+                        newPage = totalPage;
+                        break;
+                    case "to":
+                        if (toPage > totalPage) {
+                            newPage = totalPage
+                        } else if (toPage < 1) {
+                            newPage = 1
+                        } else {
+                            newPage = toPage
+                        }
+                        break;
+                    default:
+                        newPage = 1
+                }
+                ajaxFun(newPage);
+            });
+        }else {
+            $("#content").hide();
+            $(".page").hide();
+        }
     });
 
     function ajaxFun(num)

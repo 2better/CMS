@@ -124,10 +124,10 @@
                                     <tbody role="alert" aria-live="polite" aria-relevant="all">
                                     <#list Menu.children?sort_by("sort") as folder>
                                     <tr class="gradeA_firstFolder">
-                                        <td class="folderSort"><input type="text"
+                                        <td class="folderSort"><input type="number"
                                                                       folderId="${folder.id}" value="${folder.sort}"
                                                                       name="sort"
-                                                                      class="js_folder_sort" style="width: 40px;"></td>
+                                                                      class="js_folder_sort" style="width: 40px;" required ></td>
                                         <td>${folder.name}</td>
                                         <td><a href="${folder.url}">${folder.url}</a></td>
                                         <td>

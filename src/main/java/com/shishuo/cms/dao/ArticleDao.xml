@@ -66,7 +66,7 @@
 	<!-- ############################## -->
 
 	<select id="getArticleById" parameterType="long" resultMap="withMenu">
-		select a.*,m.id,m.name,m.url,m.pid from article a ,menu m where a.menuId = m.id and a.articleId=#{articleId}
+		select a.*,m.id,m.name,m.url,m.pid from article a ,menu m where a.menuId = m.id  and a.articleId=#{articleId}
 	</select>
 
 	<select id="getArticleCountByMenuId" resultType="Integer">
@@ -79,7 +79,7 @@
 	</select>
 
 	<select id="getArticleByMenuId" resultType="com.shishuo.cms.entity.Article">
-		select articleId,title,createTime from article where menuId = #{menuId} and status = 'display'  limit #{offset},#{rows}
+		select articleId,title,createTime from article where menuId = #{menuId} and status = 'display' ORDER BY createTime desc  limit #{offset},#{rows}
 	</select>
 
 	<select id="findByCondition" resultMap="baseMap">
@@ -119,4 +119,4 @@
 		</where>
 	</select>
 
-</mapper>  
+</mapper>

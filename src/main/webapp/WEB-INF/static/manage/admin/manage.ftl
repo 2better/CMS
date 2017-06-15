@@ -28,14 +28,14 @@
                                     <label class="col-sm-3 col-sm-3 control-label">名称</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="adminName"
-                                               placeholder="管理员名称" id="adminName">
+                                               placeholder="管理员名称" id="adminName" required\>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 col-sm-3 control-label">密码</label>
                                     <div class="col-sm-9">
                                         <input type="password" class="form-control" name="password"
-                                               placeholder="管理员密码">
+                                               placeholder="管理员密码" required>
                                     </div>
                                 </div>
                                 <div class="form-group">

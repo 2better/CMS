@@ -16,7 +16,4 @@ public class FolderConstant {
 		hidden, display
 	};
 
-	public static enum check {
-		yes, no
-	};
 }
