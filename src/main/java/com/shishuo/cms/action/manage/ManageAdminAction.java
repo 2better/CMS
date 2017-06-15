@@ -108,26 +108,30 @@ public class ManageAdminAction extends ManageBaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
-	public JsonVo<String> updateAdmin(
-			@RequestParam(value = "password") String password,
+	public JsonVo<String> updateAdmin(@RequestParam(value = "password") String password,
+			@RequestParam(value = "newpwd") String newpwd,
 			HttpServletRequest request) {
 		JsonVo<String> json = new JsonVo<String>();
 		try {
-			if (StringUtils.isBlank(password)) {
-				json.getErrors().put("password", "密码不能为空");
+			if (StringUtils.isBlank(newpwd)) {
+				json.getErrors().put("newpwd", "密码不能为空");
 			}
 			if (password.length() < 6) {
-				json.getErrors().put("password", "密码不能小于6位数");
+				json.getErrors().put("newpwd", "密码不能小于6位数");
 			}
-			if (password.length() > 18) {
-				json.getErrors().put("password", "密码不能大于18位数");
+			if (password.length() > 16) {
+				json.getErrors().put("newpwd", "密码不能大于16位数");
 			}
-			// 检测校验结果
-			validate(json);
-			SSUtils.toText(password);
 			Admin admin = this.getAdmin(request);
+			if(!adminService.checkPwd(admin.getAdminId(),SSUtils.toText(password)))
+			{
+				json.getErrors().put("password", "密码错误");
+			}
+				// 检测校验结果
+			validate(json);
+
 			adminService.updateAdminByAmdinId(admin.getAdminId(),
-					SSUtils.toText(password));
+					SSUtils.toText(newpwd));
 			json.setResult(true);
 		} catch (Exception e) {
 			json.setResult(false);

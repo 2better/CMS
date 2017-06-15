@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.shishuo.cms.action;
 
@@ -62,7 +57,8 @@ public class IndexAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
-	public String pageNotFound() {
+	public String pageNotFound(HttpServletRequest request) {
+		pageStaticUtils.headerStaticPage(request);
 		return themeService.get404();
 	}
 
@@ -72,7 +68,8 @@ public class IndexAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/500.htm", method = RequestMethod.GET)
-	public String error() {
+	public String error(HttpServletRequest request) {
+		pageStaticUtils.headerStaticPage(request);
 		return themeService.get500();
 	}
 
@@ -82,7 +79,8 @@ public class IndexAction extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/refuse.htm", method = RequestMethod.GET)
-	public String refuse() {
+	public String refuse(HttpServletRequest request) {
+		pageStaticUtils.headerStaticPage(request);
 		return themeService.getRefuse();
 	}
 }

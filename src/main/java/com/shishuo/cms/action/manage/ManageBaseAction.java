@@ -19,7 +19,6 @@ import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.AdminService;
 import com.shishuo.cms.service.ArticleService;
 import com.shishuo.cms.service.ConfigService;
-import com.shishuo.cms.service.HeadlineService;
 import com.shishuo.cms.service.MediaService;
 
 /**
@@ -43,8 +42,6 @@ public class ManageBaseAction {
 	@Autowired
 	protected AdminService adminService;
 
-	@Autowired
-	protected HeadlineService headlineService;
 
 
 	/**

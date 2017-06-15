@@ -68,16 +68,6 @@ public class AdminService {
 	// ///// 修改 ////////
 	// ///////////////////////////////
 
-	/**
-	 * 修改管理员资料
-	 * 
-	 * @param adminId
-	 * @param name
-	 * @param password
-	 * @param status
-	 * @return Admin
-	 */
-
 	public void updateAdminByAmdinId(long adminId, String password)
 			{
 		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
@@ -112,6 +102,13 @@ public class AdminService {
 
 	public Admin getAdminByName(String name) {
 		return adminDao.getAdminByName(name);
+	}
+
+	public boolean checkPwd(long id,String pwd)
+	{
+		Admin admin = adminDao.getAdminById(id);
+		SimpleHash hash = new SimpleHash("MD5", pwd, ByteSource.Util.bytes(admin.getSalt()), 1);
+		return admin.getPassword().equals(hash.toHex());
 	}
 
 }

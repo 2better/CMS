@@ -86,17 +86,9 @@
 					<li class="">
 						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
 					</li>
-                     <li class="">
-                       <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
-
-                    </li>
                     <li class="">
                         <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i
                                 class="icon-file"></i> <span>文档管理</span></a>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="${BASE_PATH}/manage/headline/list.htm" <#if menu="headline">class="active"</#if>> <i
-                                class="icon-desktop"></i> <span>首页头条</span></a>
                     </li>
                     <li class="">
                         <a <#if menu="menu">class="active"</#if> href="${BASE_PATH}/manage/menu/list.htm"> <i
@@ -104,7 +96,7 @@
                     </li>
                     <li class="">
                         <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/event/listPage.htm"> <i
-                                class="icon-cogs"></i> <span>活动管理</span></a>
+                                class="icon-desktop"></i> <span>活动管理</span></a>
                     </li>
                     <li class="">
                         <a <#if menu="composition">class="active"</#if> href="${BASE_PATH}/manage/composition/listPage.htm"> <i
@@ -116,8 +108,7 @@
                                 class="icon-cogs"></i> <span>学者资料</span></a>
                     </li>
                     <li class="">
-                        <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/picture/listPage.htm"> <i
-                                class="icon-cogs"></i> <span>轮播图管理</span></a>
+                        <a <#if menu="user_list">class="active"</#if> href="${BASE_PATH}/manage/user/manage.htm"> <i class="icon-user"></i> <span>用户管理</span></a>
                     </li>
                     <li class="">
                         <a <#if menu="admin_list">class="active"</#if> href="${BASE_PATH}/manage/admin/manage.htm"> <i
@@ -125,7 +116,7 @@
                     </li>
                     <li class="">
                         <a <#if menu="system">class="active"</#if> href="${BASE_PATH}/manage/config/basic.htm"> <i
-                                class="icon-cogs"></i> <span>系统设置</span></a>
+                                class="icon-cogs"></i> <span>网站设置</span></a>
                     </li>
 
                 </ul>

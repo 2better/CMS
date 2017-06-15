@@ -97,7 +97,7 @@
                                       <div class="form-group">
                                           <label class="col-xs-3 control-label">链接地址</label>
                                           <div class="col-xs-9">
-                                              <input style="font-size:15px;width: 500px;" class="form-control" required name="url" disabled value="系统生成"
+                                              <input style="font-size:15px;width: 500px;" class="form-control" required name="url" readonly value="系统生成"
                                                      id="url">
                                           </div>
                                       </div>
@@ -177,15 +177,15 @@
         $("#createUrl").change(function () {
             var a = $(this).val();
             if(a==1) {
-                $("#url").attr("disabled", "disabled");
+                $("#url").attr("readonly", "readonly");
                 $("#url").val('系统生成');
             }else if(a==2) {
-                $("#url").removeAttr("disabled");
+                $("#url").removeAttr("readonly");
                 $("#url").attr("");
                 $("#url").val('');
             }else
             {
-                $("#url").removeAttr("disabled");
+                $("#url").removeAttr("readonly");
                 $("#url").val('http://');
             }
 
