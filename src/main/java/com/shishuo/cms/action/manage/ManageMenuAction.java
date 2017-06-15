@@ -37,7 +37,7 @@ public class ManageMenuAction extends ManageBaseAction
     @RequestMapping(value = "/list.htm", method = RequestMethod.GET)
     public String list(@RequestParam(value = "id", defaultValue = "0") long id, ModelMap modelMap)
     {
-        List<Menu> menuParentsList = menuService.getAllParents();
+        List<Menu> menuParentsList = menuService.getAll();
         List<Menu> menuList = menuService.getWithChildById(id);
         Menu menu = null;
         if(menuList.size()>0) {
@@ -48,10 +48,18 @@ public class ManageMenuAction extends ManageBaseAction
         }
         modelMap.put("menuParentsList", menuParentsList);
         modelMap.put("Menu",menu);
-        modelMap.put("menuName", "");
         return "manage/menu/list";
     }
 
+    @RequestMapping(value = "/add.htm", method = RequestMethod.GET)
+    public String addPage(@RequestParam(value = "id", defaultValue = "0") long id, ModelMap modelMap)
+    {
+        List<Menu> menuParentsList = menuService.getAll();
+        Menu menu = menuService.getByid(id);
+        modelMap.put("menuParentsList", menuParentsList);
+        modelMap.put("Menu",menu);
+        return  "manage/menu/add";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/add.json", method = RequestMethod.POST)
@@ -60,7 +68,7 @@ public class ManageMenuAction extends ManageBaseAction
             @RequestParam(value = "name") String name,
             @RequestParam(value = "url",defaultValue = "") String url,
             @RequestParam(value = "status") FolderConstant.status status,
-            @RequestParam(value = "createUrl",defaultValue = "0")int createUrl) {
+            @RequestParam(value = "createUrl",defaultValue = "1")int createUrl) {
         JsonVo<String> json = new JsonVo<String>();
         try {
             if (StringUtils.isBlank(name)) {

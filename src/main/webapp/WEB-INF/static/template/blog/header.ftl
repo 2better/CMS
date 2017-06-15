@@ -63,7 +63,13 @@
                 <ul>
                 <#list p.children?sort_by("sort") as c>
                     <li class=""><a href="${c.url}" target="0">${c.name}</a>
-                        <ul></ul>
+                         <ul>
+                             <#if (c.children?size > 0)>
+                                 <#list c.children?sort_by("sort") as s>
+                                    <li class=""><a href="${s.url}" target="0">${s.name}</a>
+                                 </#list>
+                             </#if>
+                         </ul>
                     </li>
                 </#list>
                 </ul>

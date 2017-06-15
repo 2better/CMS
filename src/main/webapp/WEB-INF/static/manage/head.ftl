@@ -42,51 +42,53 @@
     <script src="${BASE_PATH}/static/manage/js/jquery.js?v=${config_v}"></script>
 </head>
 <body class="boxed-page">
-<div class="container">
-    <section id="container" class="">
-        <!--header start-->
-        <header class="white-bg">
-            <div class="container" style="background-color: #ffffff; padding: 10px;">
-                <!--logo start-->
-                <a href="${BASE_PATH}/index.htm" class="logo" name="访问前台页面" target="_blank">
-                    <img src="${TEMPLATE_BASE_PATH}/images/logo.png" style="height: 38px;width:140px;"/>
-                </a>
-                <!--logo end-->
-                <div class="nav notify-row" id="top_menu">
-                    <!--  notification goes here -->
-                </div>
-                <div class="top-nav ">
+	<div class="container">
+	<section id="container" class="">
+		<!--header start-->
+		<header class="white-bg">
+			<div class="container" style="background-color: #ffffff; padding: 10px;">
+				<!--logo start-->
+				<a href="${BASE_PATH}/index.htm" class="logo" title="访问前台页面" target="_blank">
+					<img src="${TEMPLATE_BASE_PATH}/images/logo.png" style="height: 38px;width:140px;" />
+				</a>
+				<!--logo end-->
+				<div class="nav notify-row" id="top_menu">
+					<!--  notification goes here -->
+				</div>
+				<div class="top-nav ">
+	
+					<ul class="nav pull-right top-menu">
+	                  <!-- user login dropdown start-->
+	                  <li class="dropdown">
+	                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                          <span class="username">${SESSION_ADMIN.name}</span>
+	                          <b class="caret"></b>
+	                      </a>
+	                      <ul class="dropdown-menu extended logout">
+	                          <div class="log-arrow-up"></div>
+	                          <li><a href="${BASE_PATH}/manage/admin/update.htm"><i class="icon-cog"></i> 修改密码</a></li>
+	                          <li><a href="${BASE_PATH}/admin/logout.htm"><i class="icon-key"></i> 安全退出</a></li>
+	                      </ul>
+	                  </li>
+	                  <!-- user login dropdown end -->
+	              </ul>
+	          
+				</div>
+			</div>
+		</header>
+		<!--header end-->
+		<!--sidebar start-->
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu goes here-->
+				<ul class="sidebar-menu" id="nav-accordion">
 
-                    <ul class="nav pull-right top-menu">
-                        <!-- user login dropdown start-->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="username">${SESSION_ADMIN.name}</span>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu extended logout">
-                                <div class="log-arrow-up"></div>
-                                <li><a href="${BASE_PATH}/manage/admin/update.htm"><i class="icon-cog"></i> 修改密码</a>
-                                </li>
-                                <li><a href="${BASE_PATH}/admin/logout.htm"><i class="icon-key"></i> 安全退出</a></li>
-                            </ul>
-                        </li>
-                        <!-- user login dropdown end -->
-                    </ul>
+					<li class="">
+						<a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i class="icon-book"></i> <span>文章管理</span></a>
+					</li>
+                     <li class="">
+                       <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i class="icon-file"></i> <span>文档管理</span></a>
 
-                </div>
-            </div>
-        </header>
-        <!--header end-->
-        <!--sidebar start-->
-        <aside>
-            <div id="sidebar" class="nav-collapse ">
-                <!-- sidebar menu goes here-->
-                <ul class="sidebar-menu" id="nav-accordion">
-                <#if SESSION_ADMIN.status= 0>
-                    <li class="">
-                        <a <#if menu="article">class="active"</#if> href="${BASE_PATH}/manage/article/listPage.htm"> <i
-                                class="icon-book"></i> <span>文章管理</span></a>
                     </li>
                     <li class="">
                         <a <#if menu="preview">class="active"</#if> href="${BASE_PATH}/manage/preview/listPage.htm"> <i
@@ -108,6 +110,7 @@
                         <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/composition/listPage.htm"> <i
                                 class="icon-cogs"></i> <span>著作管理</span></a>
                     </li>
+
                     <li class="">
                         <a <#if menu="event">class="active"</#if> href="${BASE_PATH}/manage/scholar/listPage.htm"> <i
                                 class="icon-cogs"></i> <span>学者资料</span></a>

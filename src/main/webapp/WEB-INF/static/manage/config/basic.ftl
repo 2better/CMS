@@ -113,6 +113,7 @@
                                                         <th>顺序</th>
                                                         <th>名称</th>
                                                         <th>地址</th>
+                                                        <th>状态</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -125,27 +126,23 @@
                                                                                       class="js_folder_sort" style="width: 40px;" required ></td>
                                                         <td>${l.name}</td>
                                                         <td>${l.url}</td>
+                                                        <td>${l.status}</td>
                                                         <td>
-                                                            <a  data-toggle="modal" data-target="#addChannelInfoModal"
+                                                            <a  id="btn_add" data-toggle="modal" data-target="#myModal" href="${BASE_PATH}/manage/config/update.htm?id=${l.id}"
                                                                title="修改">
                                                                 修改
                                                             </a>
-                                                            <div class="modal hide fade" id="addChannelInfoModal"  tabindex="-1" role="dialog">
-                                                                <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
-                                                                    <h3>修改友情链接</h3>
-                                                                </div>
-                                                                <div class="modal-body">
 
-                                                                    <div class="form-group">
-                                                                        <label for="txt_departmentname">部门名称</label>
-                                                                        <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="部门名称">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="txt_parentdepartment">上级部门</label>
-                                                                        <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="上级部门">
+                                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                             |
                                                             <a href="javascript:void(0);" adminId="${l.id}" title="删除"
                                                                class="js_delete_admin">

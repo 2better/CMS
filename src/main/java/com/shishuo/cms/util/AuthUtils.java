@@ -9,7 +9,6 @@ package com.shishuo.cms.util;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.exception.AuthException;
 
 /**
  * 授权相关的工具类
@@ -27,7 +26,6 @@ public class AuthUtils {
 	 * @param email
 	 *            邮箱
 	 * @return
-	 * @throws AuthException
 	 */
 	public static String getPassword(String password) {
 		return DigestUtils.md5Hex(password).toLowerCase();

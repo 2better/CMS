@@ -9,10 +9,10 @@ import java.util.Map;
 import com.baidu.ueditor.Encoder;
 
 /**
- * 多状态集合状态 其包含了多个状态的集合, 其本身自己也是一个状态
- * 
+ * 多状态集合状态
+ * 其包含了多个状态的集合, 其本身自己也是一个状态
  * @author hancong03@baidu.com
- * 
+ *
  */
 public class MultiState implements State {
 
@@ -21,28 +21,28 @@ public class MultiState implements State {
 	private Map<String, Long> intMap = new HashMap<String, Long>();
 	private Map<String, String> infoMap = new HashMap<String, String>();
 	private List<String> stateList = new ArrayList<String>();
-
-	public MultiState(boolean state) {
+	
+	public MultiState ( boolean state ) {
 		this.state = state;
 	}
-
-	public MultiState(boolean state, String info) {
+	
+	public MultiState ( boolean state, String info ) {
 		this.state = state;
 		this.info = info;
 	}
-
-	public MultiState(boolean state, int infoKey) {
+	
+	public MultiState ( boolean state, int infoKey ) {
 		this.state = state;
-		this.info = AppInfo.getStateInfo(infoKey);
+		this.info = AppInfo.getStateInfo( infoKey );
 	}
-
+	
 	@Override
 	public boolean isSuccess() {
 		return this.state;
 	}
-
-	public void addState(State state) {
-		stateList.add(state.toJSONString());
+	
+	public void addState ( State state ) {
+		stateList.add( state.toJSONString() );
 	}
 
 	/**
@@ -55,60 +55,58 @@ public class MultiState implements State {
 
 	@Override
 	public String toJSONString() {
-
-		String stateVal = this.isSuccess() ? AppInfo
-				.getStateInfo(AppInfo.SUCCESS) : this.info;
-
+		
+		String stateVal = this.isSuccess() ? AppInfo.getStateInfo( AppInfo.SUCCESS ) : this.info;
+		
 		StringBuilder builder = new StringBuilder();
-
-		builder.append("{\"state\": \"" + stateVal + "\"");
-
+		
+		builder.append( "{\"state\": \"" + stateVal + "\"" );
+		
 		// 数字转换
 		Iterator<String> iterator = this.intMap.keySet().iterator();
-
-		while (iterator.hasNext()) {
-
+		
+		while ( iterator.hasNext() ) {
+			
 			stateVal = iterator.next();
-
-			builder.append(",\"" + stateVal + "\": "
-					+ this.intMap.get(stateVal));
-
+			
+			builder.append( ",\""+ stateVal +"\": " + this.intMap.get( stateVal ) );
+			
 		}
-
+		
 		iterator = this.infoMap.keySet().iterator();
-
-		while (iterator.hasNext()) {
-
+		
+		while ( iterator.hasNext() ) {
+			
 			stateVal = iterator.next();
-
-			builder.append(",\"" + stateVal + "\": \""
-					+ this.infoMap.get(stateVal) + "\"");
-
+			
+			builder.append( ",\""+ stateVal +"\": \"" + this.infoMap.get( stateVal ) + "\"" );
+			
 		}
-
-		builder.append(", list: [");
-
+		
+		builder.append( ", list: [" );
+		
+		
 		iterator = this.stateList.iterator();
-
-		while (iterator.hasNext()) {
-
-			builder.append(iterator.next() + ",");
-
+		
+		while ( iterator.hasNext() ) {
+			
+			builder.append( iterator.next() + "," );
+			
 		}
-
-		if (this.stateList.size() > 0) {
-			builder.deleteCharAt(builder.length() - 1);
+		
+		if ( this.stateList.size() > 0 ) {
+			builder.deleteCharAt( builder.length() - 1 );
 		}
+		
+		builder.append( " ]}" );
 
-		builder.append(" ]}");
-
-		return Encoder.toUnicode(builder.toString());
+		return Encoder.toUnicode( builder.toString() );
 
 	}
 
 	@Override
 	public void putInfo(String name, long val) {
-		this.intMap.put(name, val);
+		this.intMap.put( name, val );
 	}
 
 }
