@@ -3,7 +3,7 @@
     <div class="foot">
         <div class="copy">
                 <span>
-                版权所有：<font class="foot-info">demo</font><br />
+                版权所有：<font class="foot-info"><#if sessionUser??>${sessionUser.name}</#if></font><br />
                 建议在IE8以上浏览器1024*768以上分辨率下浏览本站
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--<script type="text/javascript" src="Scripts/submit_ajax.js"></script>-->
             </span>

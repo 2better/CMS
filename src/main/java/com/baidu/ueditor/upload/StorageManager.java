@@ -39,8 +39,8 @@ public class StorageManager {
 		}
 
 		state = new BaseState(true, file.getAbsolutePath());
-		state.putInfo("size", data.length);
-		state.putInfo("title", file.getName());
+		state.putInfo( "size", data.length );
+		state.putInfo( "title", file.getName() );
 		return state;
 	}
 
@@ -50,9 +50,8 @@ public class StorageManager {
 
 		File tmpFile = getTmpFile();
 
-		byte[] dataBuf = new byte[2048];
-		BufferedInputStream bis = new BufferedInputStream(is,
-				StorageManager.BUFFER_SIZE);
+		byte[] dataBuf = new byte[ 2048 ];
+		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
 
 		try {
 			BufferedOutputStream bos = new BufferedOutputStream(
@@ -77,7 +76,7 @@ public class StorageManager {
 			}
 
 			return state;
-
+			
 		} catch (IOException e) {
 		}
 		return new BaseState(false, AppInfo.IO_ERROR);
@@ -88,9 +87,8 @@ public class StorageManager {
 
 		File tmpFile = getTmpFile();
 
-		byte[] dataBuf = new byte[2048];
-		BufferedInputStream bis = new BufferedInputStream(is,
-				StorageManager.BUFFER_SIZE);
+		byte[] dataBuf = new byte[ 2048 ];
+		BufferedInputStream bis = new BufferedInputStream(is, StorageManager.BUFFER_SIZE);
 
 		try {
 			BufferedOutputStream bos = new BufferedOutputStream(
@@ -135,9 +133,9 @@ public class StorageManager {
 		}
 
 		state = new BaseState(true);
-		state.putInfo("size", targetFile.length());
-		state.putInfo("title", targetFile.getName());
-
+		state.putInfo( "size", targetFile.length() );
+		state.putInfo( "title", targetFile.getName() );
+		
 		return state;
 	}
 

@@ -32,12 +32,12 @@ public class Admin {
 	 */
 	private String password;
 
+	private String salt;
+
 	/**
 	 * 时间
 	 */
 	private Date createTime;
-
-	private int status;
 
 	public long getAdminId() {
 		return adminId;
@@ -71,11 +71,12 @@ public class Admin {
 		this.createTime = createTime;
 	}
 
-	public int getStatus() {
-		return status;
+	public String getSalt() {
+		return salt;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
+
 }

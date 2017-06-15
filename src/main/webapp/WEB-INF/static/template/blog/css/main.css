@@ -157,16 +157,17 @@ body {
   width: 100%;
   height: 140px;
   position: relative;
-  background: url(../images/header-bg.png) repeat-x;
+  /*background: url(../images/header-bg.png) repeat-x;*/
+  background-color: #f7f7f7;
 }
 
 .header-content {
   /*background: url(../images/header-content-bg.png) no-repeat;*/
-  background: url("../images/logo-bg.png") no-repeat;
   width: 1200px;
   height: 100px;
   position: relative;
   margin: 0 auto;
+  padding: 0.8em 0;
   overflow: hidden;
   z-index: 99;
   top: 0px;
@@ -175,13 +176,17 @@ body {
 
 .logo {
   float: left;
-  /*addition*/
-  width: 30%;
-  height: 100%;
+  width: 100px;
+  margin-right: 1em;
 }
 
 .logo>a {
   display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.logo>a>img{
   width: 100%;
   height: 100%;
 }
@@ -308,7 +313,8 @@ body {
   width: 100%;
   position: relative;
   z-index: 99;
-  background: url(../images/menu-bg.png) repeat-x;
+  /*background: url(../images/menu-bg.png) repeat-x;*/
+  background-color: #8592BB;
 }
 
 #nav {
@@ -350,12 +356,14 @@ body {
 
 #nav li:hover a {
   color: #fff;
-  background: #F87C17;
+  /*background: #F87C17;*/
+  background: #56628B;
 }
 
 #nav .menu-hover a {
   color: #fff;
-  background: #F87C17;
+  /*background: #F87C17;*/
+  background: #56628B;
 }
 
 #nav li ul {
@@ -371,9 +379,11 @@ body {
 #nav li ul li {
   float: left;
   display: inline;
-  border-top: 1px solid #FF9024;
+  /*border-top: 1px solid #FF9024;*/
+  border-top: 1px solid #45527d;
   height: 40px;
-  background: #FE8109 !important;
+  /*background: #FE8109 !important;*/
+  background: #56628B !important;
   padding: 0px;
 }
 
@@ -392,11 +402,12 @@ body {
 
 #nav li ul a:hover {
   color: #fff !important;
-  background: #FFA224 !important;
+  /*background: #FFA224 !important;*/
+  background: #65789f !important;
   height: 40px;
 }
 
-#nav li:hover ul {
+#nav li:hover > ul {
   display: block;
 }
 
@@ -407,6 +418,20 @@ body {
 
 
 /*默认二级下拉导航菜单*/
+
+/*三级下拉菜单*/
+
+#nav li ul li ul{
+  display: none;
+  top: -1px;
+  left: 183px;
+}
+
+#nav li ul li:hover ul{
+  display: block;
+}
+
+/*三级下拉菜单*/
 
 
 /*主要内容*/
@@ -478,6 +503,11 @@ body {
   /*addition*/
   margin-bottom: 30px;
   overflow: hidden
+}
+
+.con-bot > div{
+  /*outline: 1px solid #ccc;*/
+  box-shadow: 0 0 3px 0 #333;
 }
 
 .con-bot .con-bot-l {
@@ -727,6 +757,9 @@ body {
 
 .area4 .area-con ul li {
   border-bottom: 1px dashed #333;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .area4 .area-con ul li a {
@@ -797,15 +830,16 @@ body {
 
 #foot {
   width: 100%;
-  /*height: 100px;*/
+  height: 100px;
   margin: 0 auto;
   overflow: hidden;
   /*background: #DEDDD8;*/
-  background: #CB0404;
+  background: #56628B;
 }
 
 .foot {
-  width: 1200px;
+  /*width: 1200px;*/
+  width: 880px;
   height: 100px;
   line-height: 25px;
   margin: 0 auto;
@@ -821,7 +855,8 @@ body {
 }
 
 .copy {
-  width: 580px;
+  /*width: 580px;*/
+  width: 300px;
   height: 100px;
   float: left;
   background: url(../images/foot-icon.png) no-repeat 0px 30px;
@@ -831,15 +866,23 @@ body {
 }
 
 .copy a {
-  color: #333;
+  /*color: #333;*/
   color: #fff;
 }
 
 .foot .link2 {
-  background: #FFFFFF;
-  width: 190px;
-  height: 35px;
-  margin: 35px 0 0 10px;
+  /*background: #FFFFFF;*/
+  color: #fff;
+  /*width: 190px;*/
+  /*height: 35px;*/
+  margin: 22px 0 0 10px;
+  padding-left: 2em;
+  border-left: 1px solid #fff;
+}
+
+.foot .link2 a{
+  color: #fff;
+  margin: 0 8px;
 }
 
 .foot .link2 select {
@@ -2054,11 +2097,6 @@ body {
   background-color: #D19D40;
 }
 
-.con-bot>div {
-  /*border: 1px solid #ccc;*/
-}
-
-
 /*for detail.html*/
 
 
@@ -2104,7 +2142,7 @@ body {
 .g-sd-header,
 .g-mn-header {
   width: 100%;
-  height: 40px;
+  height: 45px;
   background-color: #CB0404;
   position: relative;
   font-size: 15px;
@@ -2113,18 +2151,18 @@ body {
 .g-sd-header-title,
 .g-sd-header-crumb {
   position: absolute;
-  top: 12px;
+  top: 14px;
   left: 14px;
   color: white;
 }
 
 .g-sd-content {
   font-size: 14px;
-  padding: 32px 16px 0;
+  padding: 14px 14px 0;
 }
 
 .g-sd-content li {
-  padding-bottom: 27px;
+  padding-bottom: 14px;
 }
 
 .g-sd-content a {
@@ -2151,14 +2189,14 @@ body {
 
 .circle {
   position: absolute;
-  top: 13px;
+  top: 18px;
   right: 14px;
   width: 12px;
   height: 12px;
   background: white;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
-  border-radius: 6px;
+  border-radius: 6px
 }
 
 .g-mn-content {

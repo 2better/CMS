@@ -11,6 +11,7 @@
 			<result column="curl" property="url"/>
 			<result column="csort" property="sort"/>
 			<result column="cstatus" property="status"/>
+			<result column="cisLeaf" property="isLeaf"/>
 		</collection>
 	</resultMap>
 
@@ -21,6 +22,7 @@
 		<result column="pid" property="pid"/>
 		<result column="status" property="status"/>
 		<result column="sort" property="sort"/>
+		<result column="isLeaf" property="isLeaf"/>
 	</resultMap>
 
 	<!-- ############################## -->
@@ -29,8 +31,8 @@
 
 	<insert id="add" parameterType="com.shishuo.cms.entity.Menu" useGeneratedKeys="true" keyProperty="id">
 		insert into
-		menu(id,name,url,pid,sort,status)
-		value(#{id},#{name},#{url},#{pid},#{sort},#{status})
+		menu(id,name,url,pid,sort,status,isLeaf)
+		value(#{id},#{name},#{url},#{pid},#{sort},#{status},#{isLeaf})
 	</insert>
 
 	<!-- ############################## -->
@@ -55,19 +57,23 @@
 	<!-- ############################## -->
 
 	<select id="getAll" resultMap="withchildren">
-		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid where p.pid = 0
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid where p.pid = 0
 	</select>
 
 	<select id="getAllDisplay" resultMap="withchildren">
-		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
 	</select>
 
-	<select id="getAllParents" resultMap="baseMap">
-		select * from menu where pid = 0
+	<select id="getAllDisplayExceptLeaf" resultMap="withchildren">
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
+	</select>
+
+	<select id="getChildren" resultMap="baseMap">
+		select * from menu where pid = #{pid}
 	</select>
 
 	<select id="getWithChildById" resultMap="withchildren">
-		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus from menu p left join menu c on p.id = c.pid where p.id = #{id}
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid where p.id = #{id}
 	</select>
 
 	<select id="getById" resultType="com.shishuo.cms.entity.Menu">
@@ -76,6 +82,10 @@
 
 	<update id="modifySortById">
 		update menu set sort=#{1} where id = #{0}
+	</update>
+	
+	<update id="modifyIsLeaf">
+		update menu set isLeaf=#{isLeaf} where id = #{id}
 	</update>
 
 	<select id="getCountOfChilden" resultType="int">

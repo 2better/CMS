@@ -18,6 +18,7 @@ public class Menu
     private long pid;
     private int sort;
     private FolderConstant.status status;
+    private int isLeaf;
 
     private List<Menu> children = new ArrayList<Menu>();
 
@@ -75,5 +76,13 @@ public class Menu
 
     public void setStatus(FolderConstant.status status) {
         this.status = status;
+    }
+
+    public int getIsLeaf() {
+        return isLeaf;
+    }
+
+    public void setIsLeaf(int isLeaf) {
+        this.isLeaf = isLeaf;
     }
 }

@@ -3,15 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd
 	         http://www.springframework.org/schema/tx   
 	         http://www.springframework.org/schema/tx/spring-tx.xsd
-	         http://www.springframework.org/schema/mvc     
-	         http://www.springframework.org/schema/mvc/spring-mvc.xsd   
-	         http://www.springframework.org/schema/context     
+	         http://www.springframework.org/schema/context
 	         http://www.springframework.org/schema/context/spring-context.xsd
 	         http://www.springframework.org/schema/cache
 	         http://www.springframework.org/schema/cache/spring-cache.xsd
@@ -19,28 +17,15 @@
 	         http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 自动扫描的包名 -->
-    <context:component-scan base-package="com.shishuo.cms"/>
-
-    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.shishuo.cms">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <tx:annotation-driven/>
 
     <task:annotation-driven/>
 
     <cache:annotation-driven key-generator="keyGeneratorService"/>
-
-    <mvc:resources mapping="/static/**" location="/WEB-INF/static/"
-                   cache-period="31556926"/>
-    <mvc:resources mapping="/upload/**" location="/upload/"
-                   cache-period="31556926"/>
-    <mvc:default-servlet-handler/>
-
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.shishuo.cms.filter.GlobalInterceptor" />
-        </mvc:interceptor>
-    </mvc:interceptors>
 
     <!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
@@ -74,86 +59,6 @@
         </property>
     </bean>
 
-    <!-- FreeMarker的配置 -->
-    <bean id="freeMarkerConfigurer"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPaths" value="/WEB-INF/static/"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="freemarkerSettings">
-            <props>
-                <prop key="template_update_delay">10</prop>
-                <prop key="defaultEncoding">UTF-8</prop>
-                <prop key="url_escaping_charset">UTF-8</prop>
-                <prop key="locale">zh_CN</prop>
-                <prop key="boolean_format">true,false</prop>
-                <prop key="time_format">HH:mm:ss</prop>
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-                <prop key="date_format">yyyy-MM-dd</prop>
-                <prop key="number_format">#.##</prop>
-                <prop key="whitespace_stripping">true</prop>
-            </props>
-        </property>
-    </bean>
-
-    <!-- 配置 FreeMarker视图解析器 -->
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-        <property name="cache" value="false"/>
-        <property name="prefix" value=""/>
-        <property name="suffix" value=".ftl"/><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
-        <property name="contentType" value="text/html;charset=utf-8"/>
-        <property name="exposeRequestAttributes" value="true"/>
-        <property name="exposeSessionAttributes" value="true"/>
-        <property name="exposeSpringMacroHelpers" value="true"/>
-    </bean>
-
-    <!-- 图片上传的配置 -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 最大值4M -->
-        <property name="maxUploadSize" value="209715200"/>
-        <property name="resolveLazily" value="true"/>
-    </bean>
-
-    <!-- 登陆时验证码的配置 -->
-    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
-        <property name="config">
-            <bean class="com.google.code.kaptcha.util.Config">
-                <!--通过构造函数注入属性值 -->
-                <constructor-arg type="java.util.Properties">
-                    <props>
-                        <!-- 验证码宽度 -->
-                        <prop key="kaptcha.image.width">150</prop>
-                        <!-- 验证码高度 -->
-                        <prop key="kaptcha.image.height">60</prop>
-                        <!-- 生成验证码内容范围 -->
-                        <prop key="kaptcha.textproducer.char.string">abcde2345678gfynmnpwx</prop>
-                        <!-- 验证码个数 -->
-                        <prop key="kaptcha.textproducer.char.length">5</prop>
-                        <!-- 是否有边框 -->
-                        <prop key="kaptcha.border">no</prop>
-                        <!-- 验证码字体颜色 -->
-                        <prop key="kaptcha.textproducer.font.color">red</prop>
-                        <!-- 验证码字体大小 -->
-                        <prop key="kaptcha.textproducer.font.size">35</prop>
-                        <!-- 验证码所属字体样式 -->
-                        <prop key="kaptcha.textproducer.font.names">Arial, Courier</prop>
-                        <prop key="kaptcha.background.clear.from">white</prop>
-                        <prop key="kaptcha.background.clear.to">white</prop>
-                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
-                        <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
-                        <!-- 干扰线颜色 -->
-                        <prop key="kaptcha.noise.color">red</prop>
-                        <!-- 验证码文本字符间距 -->
-                        <prop key="kaptcha.textproducer.char.space">4</prop>
-                    </props>
-                </constructor-arg>
-            </bean>
-        </property>
-    </bean>
-
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${jdbc.driverClass}"/>
         <property name="url" value="${jdbc.url}"/>
@@ -176,6 +81,112 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
         <property name="basePackage" value="com.shishuo.cms.dao"/>
+    </bean>
+
+    <!-- shiro配置-->
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <!-- 如果没有认证将要跳转的登陆地址，http可访问的url，如果不在表单认证过虑器FormAuthenticationFilter中指定此地址就为身份认证地址 -->
+        <property name="loginUrl" value="/admin/login.htm" />
+        <!--<property name="successUrl" value="/manage/index.htm" />-->
+        <!-- 没有权限跳转的地址 -->
+        <property name="unauthorizedUrl" value="/refuse.htm" />
+        <!-- shiro拦截器配置 -->
+        <property name="filters">
+            <map>
+                <entry key="authc" value-ref="adminFormAuthenticationFilter" />
+                <entry key="logout" value-ref="logoutFilter" />
+                <entry key="userLogout" value-ref="userLogout" />
+                <entry key="userAuthc" value-ref="userFormAuthenticationFilter" />
+                <entry key="user" value-ref="userFilter" />
+                <entry key="admin" value-ref="adminFilter" />
+                <entry key="roles">
+                    <bean class="com.shishuo.cms.shiro.CustomRolesAuthorizationFilter"/>
+                </entry>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /admin/login.json = authc
+                /admin/logout.htm = logout,roles["admin"]
+                /user/login.json = userAuthc
+                /user/logout.htm = userLogout,roles["user"]
+                /manage/** = roles[admin]
+                /article/download.htm = roles["user,admin"]
+
+                /** = anon
+
+            </value>
+        </property>
+    </bean>
+
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm"/>
+                <ref bean="userRealm" />
+            </list>
+        </property>
+    </bean>
+
+    <!-- 自定义 realm -->
+    <bean id="userRealm" class="com.shishuo.cms.shiro.UserRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+    <bean id="adminRealm" class="com.shishuo.cms.shiro.AdminRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+
+    <bean id="userFilter" class="org.apache.shiro.web.filter.authc.UserFilter">
+        <property name="loginUrl" value="/user/login.htm"/>
+    </bean>
+
+    <bean id="adminFilter" class="org.apache.shiro.web.filter.authc.UserFilter">
+        <property name="loginUrl" value="/admin/login.htm"/>
+    </bean>
+
+    <!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
+    <bean id="adminFormAuthenticationFilter"
+          class="com.shishuo.cms.shiro.AdminFormAuthenticationFilter">
+        <!-- 表单中账号的input名称 -->
+        <property name="usernameParam" value="name" />
+        <!-- 表单中密码的input名称 -->
+        <property name="passwordParam" value="password" />
+        <!-- loginurl：用户登陆地址，此地址是可以http访问的url地址 -->
+        <property name="loginUrl" value="/admin/login.json" />
+        <property name="successUrl" value="/manage/index.htm" />
+    </bean>
+
+    <bean id="userFormAuthenticationFilter"
+          class="com.shishuo.cms.shiro.UserFormAuthenticationFilter">
+        <!-- 表单中账号的input名称 -->
+        <property name="usernameParam" value="name" />
+        <!-- 表单中密码的input名称 -->
+        <property name="passwordParam" value="password" />
+        <!-- loginurl：用户登陆地址，此地址是可以http访问的url地址 -->
+        <property name="loginUrl" value="/user/login.json" />
+        <property name="successUrl" value="/index.htm" />
+    </bean>
+
+    <bean id="credentialsMatcher"
+          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="MD5" />
+        <property name="hashIterations" value="1" />
+    </bean>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/admin/login.htm" />
+    </bean>
+
+    <bean id="userLogout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="/user/login.htm" />
     </bean>
 
 </beans>

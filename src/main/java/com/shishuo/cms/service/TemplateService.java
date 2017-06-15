@@ -7,16 +7,13 @@
 package com.shishuo.cms.service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.shishuo.cms.constant.ConfigConstant;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.exception.TemplateNotFoundException;
 
@@ -29,7 +26,6 @@ import com.shishuo.cms.exception.TemplateNotFoundException;
 @Service
 public class TemplateService {
 
-	private static String FOLDER_TEMPLATE_PREFIX = "folder";
 	private static String FILE_TEMPLATE_PREFIX = "article";
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
@@ -52,6 +48,10 @@ public class TemplateService {
 		return this.getTemplatePath("500");
 	}
 
+	public String getRefuse() {
+		return this.getTemplatePath("refuse");
+	}
+
 	/**
 	 * 得到首页（默认页）模板
 	 * 
@@ -59,14 +59,8 @@ public class TemplateService {
 	 * @throws TemplateNotFoundException
 	 */
 	public String getDefaultTemplate() throws TemplateNotFoundException {
-		List<String> themeOrderList = new ArrayList<String>();
-		themeOrderList.add("index");
-		themeOrderList.add(FOLDER_TEMPLATE_PREFIX);
-		themeOrderList.add(FILE_TEMPLATE_PREFIX);
-		for (String theme : themeOrderList) {
-			if (this.isExist(theme)) {
-				return this.getTemplatePath(theme);
-			}
+		if (this.isExist("index")) {
+			return this.getTemplatePath("index");
 		}
 		throw new TemplateNotFoundException("模板文件：index 不存在！！");
 	}
@@ -74,9 +68,7 @@ public class TemplateService {
 
 	/**
 	 * 得到文件模板
-	 * 
-	 * @param folderPathList
-	 * @param articleId
+	 *
 	 * @return
 	 * @throws TemplateNotFoundException
 	 */

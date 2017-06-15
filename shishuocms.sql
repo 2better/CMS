@@ -10,11 +10,9 @@ Target Server Type    : MYSQL
 Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-06-12 03:15:00
+Date: 2017-06-15 11:41:32
 */
-DROP DATABASE IF EXISTS shishuocms;
-CREATE DATABASE shishuocms;
-USE shishuocms;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -23,19 +21,18 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `adminId` bigint(10) NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
-  `name` varchar(50) DEFAULT NULL COMMENT '管理员名称',
-  `password` varchar(32) DEFAULT NULL COMMENT '密码 MD5加密',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
-  `status` tinyint(4) NOT NULL,
+  `name` varchar(50) NOT NULL COMMENT '管理员名称',
+  `password` char(32) NOT NULL COMMENT '密码 MD5加密',
+  `salt` char(32) NOT NULL,
+  `createTime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'shishuocms', '6158f875bf826e15923779855b6eef2e', '2012-08-08 00:00:00', '0');
-INSERT INTO `admin` VALUES ('2', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '2017-06-09 21:19:15', '1');
+INSERT INTO `admin` VALUES ('3', 'admin', 'bc9ebb893e70f3ab2173a80a492e0109', '7633241aa83e08c68e0b0053f9d01c58', '2017-06-13 15:59:58');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -47,10 +44,10 @@ CREATE TABLE `article` (
   `menuName` varchar(20) DEFAULT NULL,
   `adminId` bigint(20) DEFAULT '0' COMMENT '管理员ID',
   `adminName` varchar(20) DEFAULT NULL,
-  `name` varchar(200) DEFAULT '' COMMENT '文件名称',
+  `title` varchar(200) DEFAULT '' COMMENT '文件名称',
   `content` mediumtext COMMENT '文件内容',
   `status` varchar(20) DEFAULT 'init' COMMENT '状态：0 隐藏 1 显示',
-  `createTime` TIMESTAMP COMMENT '创建时间',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`articleId`),
   KEY `idx_folder` (`status`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='文件';
@@ -62,28 +59,31 @@ INSERT INTO `article` VALUES ('149709034912085', '149715128012317', '主任致�
 INSERT INTO `article` VALUES ('149710232637363', '149715128012317', '主任致辞', '1', 'shishuocms', '广 东工业大学创新理论与创新管理研究中心人员管理办法', '<p style=\"line-height:140%\"><span style=\";line-height:140%;font-family:楷体_GB2312\">广东省决策咨询研究基地</span></p><p style=\"line-height:140%\"><strong><span style=\"font-family:仿宋_GB2312\">&nbsp;</span></strong></p><p style=\"text-align:center;line-height:140%\"><strong><span style=\"font-size:21px;line-height:140%;font-family:幼圆\">广 东 工 业 大 学</span></strong></p><p style=\"text-align:center;line-height:150%\"><strong><span style=\"font-size:20px;line-height: 150%;font-family:幼圆\">创新理论与创新管理研究中心人员</span></strong><strong><span style=\"font-size:20px;line-height:150%;font-family:幼圆\">管理办法</span></strong></p><p style=\"line-height:150%\"><span style=\"font-family: 仿宋_GB2312\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">广东工业大学创新理论与创新管理研究中心（以下简称</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">“研究中心”）</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">是广东省社会科学界联合会批准的</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">第三批广东省决策咨询研究基地</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">。参照《广东省普通高校人文社会科学重点研究基地管理办法》建设标准，充分发挥现有优势，深化改革，加大建设力度，特此制订本章程。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第一条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心人员由</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">专职研究人员——驻基地专职研究人员——校内外兼职研究人员等三个层次组成。专职人员属于研究中心的“核心层”，是专门从事研究和管理的工作人员；驻基地专职研究人员是研究中心骨干研究力量；校内外兼职研究人员从事一定科研工作和学术活动的兼职人员，分布在广东省内外一些高校和研究机构。校内专职研究人员保持</span><span style=\"font-size:16px;line-height:150%\">5</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">人以上，校外专兼职人员保持</span><span style=\"font-size:16px;line-height:150%\">3</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">人以上。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第二条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心人员管理实行过程管理与结果管理相结合，以激励与约束相结合的管理机制。大力提倡奉献精神，努力工作，不断创新，为研究中心（基地）的发展多做贡献。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第三条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心所有专职和兼职人员</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">服从广东工业大学有关规章制度，接受学校领导和</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">督促。研究中心</span><span style=\"font-size:16px;line-height: 150%;font-family:仿宋_GB2312\">正、副主任接受学校年终考核，并每年向中心全体研究人员述职一次，其内容包括中心工作运行状况、本人在工作中所起的作用与执行规章制度情况、本人工作中的不足以及相应的改进措施等，并听取中心研究人员的评价、批评和建议。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第四条&nbsp; 驻基地专职研究人员与校、内外兼职研究人员接受研究中心的有关管理制度，主要实行合同管理方式。</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">不能完成合同所规定的任务者或完成课题后无新课题者不再驻基地。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第五条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心校内驻所专职研究人员系指厅级及厅级以上科研项目的第一或第二主持人（负责人）、按“带（给）课题和经费进基地、完成课题后出基地”要求、接受聘任后进驻研究中心（基地）从事课题研究的人员，其岗位要求：</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（一）校内专职人员驻基地研究时间每年不得少于</span><span style=\"font-size:16px;line-height:150%\">6</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">个月。</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">确需承担少量教学任务的校内驻所研究人员，每周兼课时数不得超过</span><span style=\"font-size:16px;line-height:150%\">2</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">个自然课时。其课酬遵循广东工业大学有关管理制度。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（二）校内驻所专职研究人员除完成所承担的研究项目外，每人每年须完成学校规定的专职科研人员工作量，其中包括在国内外权威期刊上独立发表学术论文</span><span style=\"font-size:16px;line-height:140%\">1</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">篇或在核心期刊上独立发表学术论文</span><span style=\"font-size:16px;line-height:140%\">2</span><span style=\"font-size:16px;line-height: 140%;font-family:仿宋_GB2312\">篇。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（三）除了完成规定的科研任务之外，每人均有义务分担研究中心一定事务性和学术性工作，如接待来访者，主持学术报告，组织学术论坛，筹办学术研讨会、讲习班、暑期班等。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（四）驻基地专职研究人员年末须完成一份科研工作总结报告，并</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">接受研究中心考核。</span><span style=\"font-size:16px;line-height: 140%;font-family:仿宋_GB2312\">重点考核科研项目进展、研究成果、工作任务的完成情况等内容。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第六条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">校内兼职研究人员系指凡获得厅（局）级以上科研项目的校内人员，均可申请进入研究中心做兼职研究人员</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">，其岗位要求：</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（一）兼职研究人员驻所的时间不超过</span><span style=\"font-size:16px;line-height:150%\">5</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">个月，在合同规定的时间里必须认真履行自己的职责。工作量参照专职研究人员的标准，按在研究中心工作的实际时间折算。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（二）兼职人员进驻期间，学校承诺其原工资、津贴、福利待遇不变，研究中心为兼职研究人员提供必要的科研条件。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（三）</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">兼职人员年终主要接受学校考核；其业绩及科研成果的考核具体遵照</span> <span style=\"font-size:16px;line-height: 150%;font-family:仿宋_GB2312\">“广东工业大学绩效考核及奖惩条例”。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%\">&nbsp;</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">广东工业大学</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">创新理论与创新管理研究中心</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family:宋体\">2017</span><span style=\"font-size:16px;line-height:125%;font-family:宋体\">年4月15日</span></p><p><br/></p>', 'display', '2017-06-10 00:00:00');
 INSERT INTO `article` VALUES ('149720554567196', '149715128012317', '主任致辞', '1', 'shishuocms', '新理论与创新管理研究中心人员管理办法', '<p style=\"line-height:140%\"><span style=\";line-height:140%;font-family:楷体_GB2312\">广东省决策咨询研究基地</span></p><p style=\"line-height:140%\"><strong><span style=\"font-family:仿宋_GB2312\">&nbsp;</span></strong></p><p style=\"text-align:center;line-height:140%\"><strong><span style=\"font-size:21px;line-height:140%;font-family:幼圆\">广 东 工 业 大 学</span></strong></p><p style=\"text-align:center;line-height:150%\"><strong><span style=\"font-size:20px;line-height: 150%;font-family:幼圆\">创新理论与创新管理研究中心人员</span></strong><strong><span style=\"font-size:20px;line-height:150%;font-family:幼圆\">管理办法</span></strong></p><p style=\"line-height:150%\"><span style=\"font-family: 仿宋_GB2312\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">广东工业大学创新理论与创新管理研究中心（以下简称</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">“研究中心”）</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">是广东省社会科学界联合会批准的</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">第三批广东省决策咨询研究基地</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">。参照《广东省普通高校人文社会科学重点研究基地管理办法》建设标准，充分发挥现有优势，深化改革，加大建设力度，特此制订本章程。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第一条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心人员由</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">专职研究人员——驻基地专职研究人员——校内外兼职研究人员等三个层次组成。专职人员属于研究中心的“核心层”，是专门从事研究和管理的工作人员；驻基地专职研究人员是研究中心骨干研究力量；校内外兼职研究人员从事一定科研工作和学术活动的兼职人员，分布在广东省内外一些高校和研究机构。校内专职研究人员保持</span><span style=\"font-size:16px;line-height:150%\">5</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">人以上，校外专兼职人员保持</span><span style=\"font-size:16px;line-height:150%\">3</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">人以上。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第二条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心人员管理实行过程管理与结果管理相结合，以激励与约束相结合的管理机制。大力提倡奉献精神，努力工作，不断创新，为研究中心（基地）的发展多做贡献。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第三条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心所有专职和兼职人员</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">服从广东工业大学有关规章制度，接受学校领导和</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">督促。研究中心</span><span style=\"font-size:16px;line-height: 150%;font-family:仿宋_GB2312\">正、副主任接受学校年终考核，并每年向中心全体研究人员述职一次，其内容包括中心工作运行状况、本人在工作中所起的作用与执行规章制度情况、本人工作中的不足以及相应的改进措施等，并听取中心研究人员的评价、批评和建议。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第四条&nbsp; 驻基地专职研究人员与校、内外兼职研究人员接受研究中心的有关管理制度，主要实行合同管理方式。</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">不能完成合同所规定的任务者或完成课题后无新课题者不再驻基地。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第五条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心校内驻所专职研究人员系指厅级及厅级以上科研项目的第一或第二主持人（负责人）、按“带（给）课题和经费进基地、完成课题后出基地”要求、接受聘任后进驻研究中心（基地）从事课题研究的人员，其岗位要求：</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（一）校内专职人员驻基地研究时间每年不得少于</span><span style=\"font-size:16px;line-height:150%\">6</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">个月。</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">确需承担少量教学任务的校内驻所研究人员，每周兼课时数不得超过</span><span style=\"font-size:16px;line-height:150%\">2</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">个自然课时。其课酬遵循广东工业大学有关管理制度。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（二）校内驻所专职研究人员除完成所承担的研究项目外，每人每年须完成学校规定的专职科研人员工作量，其中包括在国内外权威期刊上独立发表学术论文</span><span style=\"font-size:16px;line-height:140%\">1</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">篇或在核心期刊上独立发表学术论文</span><span style=\"font-size:16px;line-height:140%\">2</span><span style=\"font-size:16px;line-height: 140%;font-family:仿宋_GB2312\">篇。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（三）除了完成规定的科研任务之外，每人均有义务分担研究中心一定事务性和学术性工作，如接待来访者，主持学术报告，组织学术论坛，筹办学术研讨会、讲习班、暑期班等。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（四）驻基地专职研究人员年末须完成一份科研工作总结报告，并</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">接受研究中心考核。</span><span style=\"font-size:16px;line-height: 140%;font-family:仿宋_GB2312\">重点考核科研项目进展、研究成果、工作任务的完成情况等内容。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">第六条</span><span style=\"font-size:16px;line-height:150%\">&nbsp; </span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">研究中心</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">校内兼职研究人员系指凡获得厅（局）级以上科研项目的校内人员，均可申请进入研究中心做兼职研究人员</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">，其岗位要求：</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（一）兼职研究人员驻所的时间不超过</span><span style=\"font-size:16px;line-height:150%\">5</span><span style=\"font-size:16px;line-height:150%;font-family:仿宋_GB2312\">个月，在合同规定的时间里必须认真履行自己的职责。工作量参照专职研究人员的标准，按在研究中心工作的实际时间折算。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（二）兼职人员进驻期间，学校承诺其原工资、津贴、福利待遇不变，研究中心为兼职研究人员提供必要的科研条件。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">（三）</span><span style=\"font-size:16px;line-height:150%;font-family: 仿宋_GB2312\">兼职人员年终主要接受学校考核；其业绩及科研成果的考核具体遵照</span> <span style=\"font-size:16px;line-height: 150%;font-family:仿宋_GB2312\">“广东工业大学绩效考核及奖惩条例”。</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:150%\"><span style=\"font-size:16px;line-height:150%\">&nbsp;</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">广东工业大学</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">创新理论与创新管理研究中心</span></p><p style=\"text-indent:350px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family:宋体\">2017</span><span style=\"font-size:16px;line-height:125%;font-family:宋体\">年4月15日</span></p><p><br/></p>', 'display', '2017-06-12 00:00:00');
 INSERT INTO `article` VALUES ('149720559527905', '149715128012317', '主任致辞', '1', 'shishuocms', '新理论与创新管理研究中心科研管理条例', '<p style=\"line-height:140%\"><span style=\";line-height:140%;font-family:楷体_GB2312\">广东省决策咨询研究基地</span></p><p style=\"line-height:140%\"><strong><span style=\"font-family:仿宋_GB2312\">&nbsp;</span></strong></p><p style=\"text-align:center;line-height:140%\"><strong><span style=\"font-size:21px;line-height:140%;font-family:幼圆\">广 东 工 业 大 学</span></strong></p><p style=\"text-align:center;line-height:140%\"><strong><span style=\"font-size:20px;line-height: 140%;font-family:幼圆\">创新理论与创新管理研究中心</span></strong><strong><span style=\"font-size:20px;line-height:140%;font-family:幼圆\">科研管理条例</span></strong></p><p style=\"line-height:140%\"><span style=\"font-size: 16px;line-height:140%\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">广东工业大学创新理论与创新管理研究中心（以下简称</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">“研究中心”）</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">是广东省社会科学界联合会批准的</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">第三批广东省决策咨询研究基地</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">。开展科研是研究中心的重要工作，必须加强管理，促进科研的发展，特制定本条例。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第一条&nbsp; 研究中心是一个以创新理论与创新管理及其相关领域为研究重点的科研机构，以“科研”为工作中心，开展一系列管理活动，主要发挥整合资源及调配人员、生成课题及创新知识、成果应用开发及政策咨询等作用，具体体现为一系列科研活动。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第二条&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">研究中心承担的重大纵向和横向课题，采取对外开放的模式运作，实行项目</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">招标制、</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">人员招聘制和流动制，广纳贤士，吸收国内外的一流学者来主持或参与研究。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第三条</span><span style=\"font-size:16px;line-height:140%\">&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">按“带（给）课题和经费进基地、完成课题后出基地”要求，接受聘任后进驻研究中心（基地）从事课题研究的专职研究员必须把主要精力投入研究中心的科学研究、教学或中心指定的工作。专职研究员对外兼职一定要征得研究中心主任同意。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第四条&nbsp; 研究中心对科研活动的管理采取“招标制”、课题“第一责任人制”、科研管理“项目制”、经费管理“合同制”</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">、应用项目“经纪人制”</span><span style=\"font-size:16px;line-height: 140%;font-family:仿宋_GB2312\">等制度。严格项目审核、目标管理和成果评估，维护学术规范，充分发挥个人和学术团队的积极性，形成有效的激励机制。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第五条&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">研究中心的重大课题实行课题“第一责任人负责制”。重大课题指国家社会科学基金项目、国家自然科学基金项目以及教育部社会科学重点项目。课题获得批准</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">立项后，</span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">由课题负责人对承担研究项目负全责，全权负责项目实施方案的制定、经费使用、项目参与人的确定以及研究成果的质量。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第六条</span><span style=\"font-size:16px;line-height:140%\">&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">研究中心自选、自定的科研课题实行项目招标制，实行学术委员会评审制，公开向国内外、校内外择优选择科研人员，以增强学术竞争性，提高科研水平。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第七条</span><span style=\"font-size:16px;line-height:140%\">&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">积极创造条件转化研究成果，争取来自社会各界的横向课题。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（一）开发应用项目实行项目“经纪人制”，对带项目进入研究中心的负责人、向研究中心介绍项目的“经纪人”给予课题经费总额</span><span style=\"font-size:16px;line-height:140%\">20%</span><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">的奖励。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（二）鼓励和支持研究中心研究人员承担研究成果开发应用性项目，积极为各级政府和企事业单位开展咨询研究。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">（三）积极争取实际工作部门的委托研究课题，支持实际部门工作人员参加课题组，配合开展合作研究。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第八条</span><span style=\"font-size:16px;line-height:140%\">&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">研究中心对一年以上的中长期研究项目实施中期评估制。课题负责人应定期向研究中心主任汇报课题的研究进展情况。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%;font-family: 仿宋_GB2312\">第九条</span><span style=\"font-size:16px;line-height:140%\">&nbsp; </span><span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">研究项目承担者应按项目合同书要求处置研究成果，所有研究成果在公开发表或提交有关部门采用时，必须署名“广东省决策咨询研究基地</span> <span style=\"font-size:16px;line-height:140%;font-family:仿宋_GB2312\">广东工业大学创新理论与创新管理研究中心”。</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%\">&nbsp;</span></p><p style=\"text-indent:32px;line-height:140%\"><span style=\"font-size:16px;line-height:140%\">&nbsp;</span></p><p style=\"text-indent:340px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">广东工业大学</span></p><p style=\"text-indent:340px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family: 宋体\">创新理论与创新管理研究中心</span></p><p style=\"text-indent:340px;line-height:125%\"><span style=\"font-size:16px;line-height:125%;font-family:宋体\">2017</span><span style=\"font-size:16px;line-height:125%;font-family:宋体\">年4月15日</span></p><p><br/></p>', 'display', '2017-06-12 00:00:00');
+INSERT INTO `article` VALUES ('149744407854897', '149715128012317', '主任致辞', '3', 'admin', '测试带图片上传', '<h1><span style=\"font-family:宋体\">作业中应阐述和体现的核心内容：</span></h1><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">1.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合活动图，描述一个完整的核心业务用例。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">所谓完整业务用例是指由参与者发起并获得有价值的可观察结果的活动场景。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">在描述过程中验证活动图绘制和元素的使用正确与否。</span></p><p class=\"MsoListParagraph\" style=\"margin-left: 28px\"><span style=\"font-size:19px;font-family:黑体\">2.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合领域模型，验证所需业务数据是否完备，业务对象之间的关联关系是否正确。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">在前面参与者获得得有价值的可观察结果中包括了哪些业务数据？这些数据可以从哪些领域对象属性中获取，或计算所得。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">考察领域对象间可能存在的依赖、聚合、继承等关系是否在领域模型中得以正确表达。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">3.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">用SSD（时序图）展示系统用例中参与者发起的系统操作，应用GRASP原则或模式，设计相关对象和分配对象职责。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">创建实例的职责——创建者模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">选择控制器——控制器模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">c)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">除以上两种以外的职责，大多考虑信息专家模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">d)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">评价原则——高内聚、低耦合。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">4.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合软件架构和框架，建立系统设计模型，并用时序图和类图实现可视化描述。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">5.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\"><img width=\"554\" height=\"284\" src=\"/upload/image/2017/06/14/1497444166301068218.jpg\" title=\"1497444166301068218.jpg\" alt=\"14信管1班.jpg\"/></span></p><p><br/></p>', 'display', '2017-06-14 00:00:00');
+INSERT INTO `article` VALUES ('149744473071654', '149715128012317', '主任致辞', '3', 'admin', '', '<h1><span style=\"font-family:宋体\">作业中应阐述和体现的核心内容：</span></h1><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">1.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合活动图，描述一个完整的核心业务用例。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">所谓完整业务用例是指由参与者发起并获得有价值的可观察结果的活动场景。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">在描述过程中验证活动图绘制和元素的使用正确与否。</span></p><p class=\"MsoListParagraph\" style=\"margin-left: 28px\"><span style=\"font-size:19px;font-family:黑体\">2.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合领域模型，验证所需业务数据是否完备，业务对象之间的关联关系是否正确。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">在前面参与者获得得有价值的可观察结果中包括了哪些业务数据？这些数据可以从哪些领域对象属性中获取，或计算所得。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">考察领域对象间可能存在的依赖、聚合、继承等关系是否在领域模型中得以正确表达。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">3.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">用SSD（时序图）展示系统用例中参与者发起的系统操作，应用GRASP原则或模式，设计相关对象和分配对象职责。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">a)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">创建实例的职责——创建者模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">b)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">选择控制器——控制器模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">c)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">除以上两种以外的职责，大多考虑信息专家模式；</span></p><p class=\"MsoListParagraph\" style=\"margin-left:56px\"><span style=\"font-size:19px;font-family:黑体\">d)<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">评价原则——高内聚、低耦合。</span></p><p class=\"MsoListParagraph\" style=\"margin-left:28px\"><span style=\"font-size:19px;font-family:黑体\">4.<span style=\"font-stretch: normal;font-size: 9px;font-family: &#39;Times New Roman&#39;\">&nbsp; </span></span><span style=\"font-size:19px;font-family:黑体\">结合软件架构和框架，建立系统设计模型，并用时序图和类图实现可视化描述。</span></p><p>&nbsp;&nbsp;&nbsp;&nbsp;</p><p style=\"line-height: 16px;\"><img src=\"http://localhost:8080/static/manage/assets/ueditor/dialogs/attachment/fileTypeImages/icon_doc.gif\"/><a style=\"font-size:12px; color:#0066cc;\" href=\"/upload/file/2017/06/14/1497444726083030690.docx\" title=\"OOA&amp;D作业展示说明.docx\">OOA&amp;D作业展示说明.docx</a></p><p><br/></p>', 'display', '2017-06-14 00:00:00');
+INSERT INTO `article` VALUES ('149749576725342', '149746288288476', '出版书籍', '3', 'admin', '测试三级菜单', '<p>测试三级菜单</p>', 'display', '2017-06-15 00:00:00');
 
--- -- ----------------------------
--- -- Table structure for `comment`
--- -- ----------------------------
--- DROP TABLE IF EXISTS `comment`;
--- CREATE TABLE `comment` (
---   `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
---   `userId` bigint(20) DEFAULT NULL COMMENT '用户ID',
---   `fatherId` bigint(20) DEFAULT NULL COMMENT '父评论ID',
---   `kindId` bigint(20) DEFAULT NULL,
---   `kind` varchar(45) DEFAULT NULL COMMENT '文件ID',
---   `name` varchar(45) DEFAULT NULL COMMENT '评论者',
---   `email` varchar(45) DEFAULT NULL COMMENT '评论者邮件地址',
---   `url` varchar(200) DEFAULT NULL COMMENT '评论者网址',
---   `phone` bigint(20) DEFAULT NULL,
---   `content` text COMMENT '内容',
---   `ip` varchar(45) DEFAULT NULL COMMENT 'Ip',
---   `status` varchar(20) DEFAULT NULL COMMENT '状态',
---   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
---   PRIMARY KEY (`commentId`),
---   KEY `idx_status` (`status`) USING BTREE
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='评论';
+-- ----------------------------
+-- Table structure for `comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `userId` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `fatherId` bigint(20) DEFAULT NULL COMMENT '父评论ID',
+  `kindId` bigint(20) DEFAULT NULL,
+  `kind` varchar(45) DEFAULT NULL COMMENT '文件ID',
+  `name` varchar(45) DEFAULT NULL COMMENT '评论者',
+  `email` varchar(45) DEFAULT NULL COMMENT '评论者邮件地址',
+  `url` varchar(200) DEFAULT NULL COMMENT '评论者网址',
+  `phone` bigint(20) DEFAULT NULL,
+  `content` text COMMENT '内容',
+  `ip` varchar(45) DEFAULT NULL COMMENT 'Ip',
+  `status` varchar(20) DEFAULT NULL COMMENT '状态',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`commentId`),
+  KEY `idx_status` (`status`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='评论';
 
 -- ----------------------------
 -- Records of comment
@@ -103,10 +103,12 @@ CREATE TABLE `config` (
 -- ----------------------------
 -- Records of config
 -- ----------------------------
+INSERT INTO `config` VALUES ('copyright', '©ITIMRC 版权所有', '网站版权');
+INSERT INTO `config` VALUES ('friendship_link', 'http://www.baidu.com', '友情链接(用半角逗号隔开)');
+INSERT INTO `config` VALUES ('ICP', 'aa', '备案号');
 INSERT INTO `config` VALUES ('index_title', 'ITIMRC', '首页title');
-INSERT INTO `config` VALUES ('pagination_num', '4', '分页每页显示条数');
+INSERT INTO `config` VALUES ('pagination_num', '2', '分页每页显示条数');
 INSERT INTO `config` VALUES ('seo_description', 'ITIMRC', '网站描述');
-INSERT INTO `config` VALUES ('static', 'false', '是否启用全站静态化');
 
 -- ----------------------------
 -- Table structure for `document`
@@ -121,17 +123,17 @@ CREATE TABLE `document` (
   `type` varchar(10) NOT NULL,
   `preview` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL,
-  _column tinyint DEFAULT 2,
+  `_column` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of document
 -- ----------------------------
-INSERT INTO `document` VALUES ('149718056688936', '1', 'shishuocms', '01广东工业大学创新理论与创新管理研究中心章程.docx', 'upload/2017/06/11/7cc1fdeef2974446a40f44b9f8df5fc6.docx', 'docx', 'upload/preview/1497180621394.pdf', '2017-06-11 19:29:26',1);
-INSERT INTO `document` VALUES ('149718057318167', '1', 'shishuocms', '02广东工业大学创新理论与创新管理研究中心：中心定位和使命.docx', 'upload/2017/06/11/4055e9fb36cb44c69d85f7fd7e0a2c5d.docx', 'docx', 'upload/preview/1497185646190.pdf', '2017-06-11 19:29:33',1);
-INSERT INTO `document` VALUES ('149718057906763', '1', 'shishuocms', '03创新理论与创新管理研究中心人员管理办法.doc', 'upload/2017/06/11/de4e8050fadc497680525c84301d9f8f.doc', 'doc', 'upload/preview/1497185657604.pdf', '2017-06-11 19:29:39',2);
-INSERT INTO `document` VALUES ('149718466556700', '1', 'shishuocms', '04创新理论与创新管理研究中心科研管理条例.doc', 'upload/2017/06/11/c8345008101542d5a915607bb53d1dc5.doc', 'doc', 'upload/preview/1497185671684.pdf', '2017-06-11 20:37:45',2);
+INSERT INTO `document` VALUES ('149718056688936', '1', 'shishuocms', '01广东工业大学创新理论与创新管理研究中心章程.docx', 'upload/2017/06/11/7cc1fdeef2974446a40f44b9f8df5fc6.docx', 'docx', 'upload/preview/1497180621394.pdf', '2017-06-11 19:29:26', '1');
+INSERT INTO `document` VALUES ('149718057318167', '1', 'shishuocms', '02广东工业大学创新理论与创新管理研究中心：中心定位和使命.docx', 'upload/2017/06/11/4055e9fb36cb44c69d85f7fd7e0a2c5d.docx', 'docx', 'upload/preview/1497185646190.pdf', '2017-06-11 19:29:33', '1');
+INSERT INTO `document` VALUES ('149718057906763', '1', 'shishuocms', '03创新理论与创新管理研究中心人员管理办法.doc', 'upload/2017/06/11/de4e8050fadc497680525c84301d9f8f.doc', 'doc', 'upload/preview/1497185657604.pdf', '2017-06-11 19:29:39', '2');
+INSERT INTO `document` VALUES ('149718466556700', '1', 'shishuocms', '04创新理论与创新管理研究中心科研管理条例.doc', 'upload/2017/06/11/c8345008101542d5a915607bb53d1dc5.doc', 'doc', 'upload/preview/1497185671684.pdf', '2017-06-11 20:37:45', '2');
 
 -- ----------------------------
 -- Table structure for `headline`
@@ -184,98 +186,60 @@ CREATE TABLE `menu` (
   `pid` bigint(20) NOT NULL,
   `sort` tinyint(4) NOT NULL,
   `status` varchar(20) NOT NULL,
+  `isLeaf` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否是叶子节点，0不是1是',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('0', '根菜单', ' ', '-1', '1', 'display');
-INSERT INTO `menu` VALUES ('149715099586609', '关于我们', '/article/list.htm?menuId=149715099586609', '0', '2', 'display');
-INSERT INTO `menu` VALUES ('149715108805446', '新闻动态', '/article/list.htm?menuId=149715108805446', '0', '3', 'display');
-INSERT INTO `menu` VALUES ('149715110302379', '研究人员', '/article/list.htm?menuId=149715110302379', '0', '4', 'display');
-INSERT INTO `menu` VALUES ('149715112017201', '学术研究', '/article/list.htm?menuId=149715112017201', '0', '5', 'display');
-INSERT INTO `menu` VALUES ('149715114562973', '人才培养', '/article/list.htm?menuId=149715114562973', '0', '6', 'display');
-INSERT INTO `menu` VALUES ('149715115964151', '合作交流', '/article/list.htm?menuId=149715115964151', '0', '7', 'display');
-INSERT INTO `menu` VALUES ('149715117020733', '研究资源', '/article/list.htm?menuId=149715117020733', '0', '8', 'display');
-INSERT INTO `menu` VALUES ('149715118080311', '人才招聘', '/article/list.htm?menuId=149715118080311', '0', '9', 'display');
-INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/article/list.htm?menuId=149715120950670', '0', '10', 'display');
-INSERT INTO `menu` VALUES ('149715122468202', '首页', '/index.htm', '0', '1', 'display');
-INSERT INTO `menu` VALUES ('149715128012317', '主任致辞', '/article/list.htm?menuId=149715128012317', '149715099586609', '1', 'display');
-INSERT INTO `menu` VALUES ('149715129668145', '中心简介', '/article/list.htm?menuId=149715129668145', '149715099586609', '1', 'display');
-INSERT INTO `menu` VALUES ('149715135268713', '学术委员会', '/article/list.htm?menuId=149715135268713', '149715099586609', '1', 'display');
-INSERT INTO `menu` VALUES ('149715137137918', '组织机构', '/article/list.htm?menuId=149715137137918', '149715099586609', '1', 'display');
-INSERT INTO `menu` VALUES ('149715140882566', '中心动态', '/article/list.htm?menuId=149715140882566', '149715108805446', '1', 'display');
-INSERT INTO `menu` VALUES ('149715141715540', '学术前沿', '/article/list.htm?menuId=149715141715540', '149715108805446', '1', 'display');
-INSERT INTO `menu` VALUES ('149715143466311', '研究顾问', '/article/list.htm?menuId=149715143466311', '149715110302379', '1', 'display');
-INSERT INTO `menu` VALUES ('149715145693790', '专职研究员', '/article/list.htm?menuId=149715145693790', '149715110302379', '1', 'display');
-INSERT INTO `menu` VALUES ('149715147705703', '兼职研究员', '/article/list.htm?menuId=149715147705703', '149715110302379', '1', 'display');
-INSERT INTO `menu` VALUES ('149715148797574', '其他人员', '/article/list.htm?menuId=149715148797574', '149715110302379', '1', 'display');
-INSERT INTO `menu` VALUES ('149715150497545', '研究方向', '/article/list.htm?menuId=149715150497545', '149715112017201', '1', 'display');
-INSERT INTO `menu` VALUES ('149715151450632', '研究成果', '/article/list.htm?menuId=149715151450632', '149715112017201', '1', 'display');
-INSERT INTO `menu` VALUES ('149715153341548', '本科生教育', '/article/list.htm?menuId=149715153341548', '149715114562973', '1', 'display');
-INSERT INTO `menu` VALUES ('149715154586939', '研究生教育', '/article/list.htm?menuId=149715154586939', '149715114562973', '1', 'display');
-INSERT INTO `menu` VALUES ('149715156331056', '高校合作', '/article/list.htm?menuId=149715156331056', '149715115964151', '1', 'display');
-INSERT INTO `menu` VALUES ('149715156997426', '企业合作', '/article/list.htm?menuId=149715156997426', '149715115964151', '1', 'display');
-INSERT INTO `menu` VALUES ('149715157911011', '政府合作', '/article/list.htm?menuId=149715157911011', '149715115964151', '1', 'display');
+INSERT INTO `menu` VALUES ('0', '根菜单', ' ', '-1', '1', 'display', '0');
+INSERT INTO `menu` VALUES ('149715099586609', '关于我们', '/article/list.htm?menuId=149715099586609', '0', '2', 'display', '0');
+INSERT INTO `menu` VALUES ('149715108805446', '新闻动态', '/article/list.htm?menuId=149715108805446', '0', '3', 'display', '0');
+INSERT INTO `menu` VALUES ('149715110302379', '研究人员', '/article/list.htm?menuId=149715110302379', '0', '4', 'display', '0');
+INSERT INTO `menu` VALUES ('149715112017201', '学术研究', '/article/list.htm?menuId=149715112017201', '0', '5', 'display', '0');
+INSERT INTO `menu` VALUES ('149715114562973', '人才培养', '/article/list.htm?menuId=149715114562973', '0', '6', 'display', '0');
+INSERT INTO `menu` VALUES ('149715115964151', '合作交流', '/article/list.htm?menuId=149715115964151', '0', '7', 'display', '0');
+INSERT INTO `menu` VALUES ('149715117020733', '研究资源', '/article/list.htm?menuId=149715117020733', '0', '8', 'display', '1');
+INSERT INTO `menu` VALUES ('149715118080311', '人才招聘', '/article/list.htm?menuId=149715118080311', '0', '9', 'display', '1');
+INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/article/download.htm', '0', '10', 'display', '1');
+INSERT INTO `menu` VALUES ('149715122468202', '首页', '/index.htm', '0', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715128012317', '主任致辞', '/article/list.htm?menuId=149715128012317', '149715099586609', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715129668145', '中心简介', '/article/list.htm?menuId=149715129668145', '149715099586609', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715135268713', '学术委员会', '/article/list.htm?menuId=149715135268713', '149715099586609', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715137137918', '组织机构', '/article/list.htm?menuId=149715137137918', '149715099586609', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715140882566', '中心动态', '/article/list.htm?menuId=149715140882566', '149715108805446', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715141715540', '学术前沿', '/article/list.htm?menuId=149715141715540', '149715108805446', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715143466311', '研究顾问', '/article/list.htm?menuId=149715143466311', '149715110302379', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715145693790', '专职研究员', '/article/list.htm?menuId=149715145693790', '149715110302379', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715147705703', '兼职研究员', '/article/list.htm?menuId=149715147705703', '149715110302379', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715148797574', '其他人员', '/article/list.htm?menuId=149715148797574', '149715110302379', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715150497545', '研究方向', '/article/list.htm?menuId=149715150497545', '149715112017201', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715151450632', '研究成果', '/article/list.htm?menuId=149715151450632', '149715112017201', '1', 'display', '0');
+INSERT INTO `menu` VALUES ('149715153341548', '本科生教育', '/article/list.htm?menuId=149715153341548', '149715114562973', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715154586939', '研究生教育', '/article/list.htm?menuId=149715154586939', '149715114562973', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715156331056', '高校合作', '/article/list.htm?menuId=149715156331056', '149715115964151', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715156997426', '企业合作', '/article/list.htm?menuId=149715156997426', '149715115964151', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715157911011', '政府合作', '/article/list.htm?menuId=149715157911011', '149715115964151', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149746273666579', '学术论文', '/article/list.htm?menuId=149746273666579', '149715151450632', '1', 'display', '0');
+INSERT INTO `menu` VALUES ('149746288288476', '出版书籍', '/article/list.htm?menuId=149746288288476', '149715151450632', '1', 'display', '0');
 
 -- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `userId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `openId` bigint(20) DEFAULT NULL COMMENT '公共用户ID，只有是师说，QQ，微博等其它网站登录时才有。',
-  `type` varchar(20) DEFAULT NULL COMMENT '帐号类型：0 本站 1 师说 2 QQ 3 微博',
-  `name` varchar(45) DEFAULT NULL COMMENT '用户名',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `userId` bigint(20) NOT NULL COMMENT '用户ID',
+  `password` char(32) NOT NULL,
+  `salt` char(32) NOT NULL,
+  `name` varchar(45) NOT NULL COMMENT '用户名',
+  `createTime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='用户';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-
-DROP TABLE IF EXISTS Event;
-CREATE TABLE Event
-(
-  id INT AUTO_INCREMENT,
-  important TINYINT DEFAULT 0,
-  content mediumtext NOT NULL ,
-  name VARCHAR(100) NOT NULL ,
-  createTime TIMESTAMP NOT NULL ,
-  PRIMARY KEY (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS Composition;
-CREATE TABLE Composition
-(
-  id INT AUTO_INCREMENT,
-  content mediumtext NOT NULL ,
-  picUrl VARCHAR(100),
-  title VARCHAR(100) NOT NULL ,
-  createTime TIMESTAMP NOT NULL ,
-  PRIMARY KEY (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS Scholar;
-CREATE TABLE Scholar
-(
-  id INT AUTO_INCREMENT,
-  content mediumtext NOT NULL ,
-  picUrl VARCHAR(100),
-  name VARCHAR(100) NOT NULL ,
-  createTime TIMESTAMP NOT NULL ,
-  PRIMARY KEY (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS Picture;
-CREATE TABLE Picture
-(
-  id INT AUTO_INCREMENT,
-  picUrl VARCHAR(100),
-  name VARCHAR(100) NOT NULL ,
-  createTime TIMESTAMP NOT NULL ,
-  type tinyint DEFAULT 0,
-  PRIMARY KEY (id)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `user` VALUES ('149737071298860', '74e77f19b10bd9a72ab2bd5b5270363a', '0f79680132f4a387948d2a1210475091', 'user', '2017-06-14 00:18:32');
+INSERT INTO `user` VALUES ('149749213497248', '207db224d7d70bd55db33a01d1f2bcbd', '2210e4d2eb0324b4ca0a17b59cbfc82a', 'a', '2017-06-15 10:02:14');
+INSERT INTO `user` VALUES ('149749214321594', 'a73cf946b2d4aafc32444e1d1f4415bd', 'ac1b9cdf614b3200b9337125f9172857', 'b', '2017-06-15 10:02:23');
