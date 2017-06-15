@@ -96,15 +96,8 @@ public class AdminService {
 		return adminDao.getAdminById(adminId);
 	}
 
-	/**
-	 * 获得所有管理员的分页数据
-	 * 
-	 * @param offset
-	 * @param rows
-	 * @return List<Admin>
-	 */
-	public List<Admin> getAllList(long offset, long rows) {
-		return adminDao.getAllList(offset, rows);
+	public List<Admin> getAllList() {
+		return adminDao.getAllList();
 	}
 
 	/**
@@ -116,21 +109,6 @@ public class AdminService {
 		return adminDao.getAllListCount();
 	}
 
-	/**
-	 * 获得所有管理员的分页
-	 * 
-	 * @param Integer
-	 * @return PageVo<Admin>
-	 */
-	public PageVo<Admin> getAllListPage(int pageNum) {
-		PageVo<Admin> pageVo = new PageVo<Admin>(pageNum);
-		pageVo.setRows(20);
-		List<Admin> list = this.getAllList(pageVo.getOffset(),
-				pageVo.getRows());
-		pageVo.setList(list);
-		pageVo.setCount(this.getAllListCount());
-		return pageVo;
-	}
 
 	public Admin getAdminByName(String name) {
 		return adminDao.getAdminByName(name);

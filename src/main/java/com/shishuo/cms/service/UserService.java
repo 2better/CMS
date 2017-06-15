@@ -57,21 +57,13 @@ public class UserService {
 		return userDao.getUserById(userId);
 	}
 
-	public List<User> getAllList(long offset, long rows) {
-		return userDao.getAllList(offset, rows);
-	}
 
-	public int getAllListCount() {
-		return userDao.getAllListCount();
-	}
-
-	public PageVo<User> getAllListPage(int pageNum) {
+	public PageVo<User> getAllListPage(int pageNum,int rows) {
 		PageVo<User> pageVo = new PageVo<User>(pageNum);
-		pageVo.setRows(20);
-		List<User> list = this.getAllList(pageVo.getOffset(),
-				pageVo.getRows());
+		pageVo.setRows(rows);
+		List<User> list = userDao.getAllList(pageVo.getOffset(),rows);
 		pageVo.setList(list);
-		pageVo.setCount(this.getAllListCount());
+		pageVo.setCount(userDao.getAllListCount());
 		return pageVo;
 	}
 

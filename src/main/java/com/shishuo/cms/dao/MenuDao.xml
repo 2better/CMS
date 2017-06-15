@@ -64,6 +64,10 @@
 		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
 	</select>
 
+	<select id="getAllDisplayExceptLeaf" resultMap="withchildren">
+		select p.*,c.id cid,c.name cname,c.url curl,c.pid cpid,c.sort csort,c.status cstatus,c.isLeaf cisLeaf from menu p left join menu c on p.id = c.pid and c.status='display' where p.pid = 0 and p.status='display'
+	</select>
+
 	<select id="getChildren" resultMap="baseMap">
 		select * from menu where pid = #{pid}
 	</select>

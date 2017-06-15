@@ -119,7 +119,7 @@ public class ManageArticleAction extends ManageBaseAction {
 	@RequestMapping(value = "/update.htm", method = RequestMethod.GET)
 	public String update(
 			@RequestParam(value = "articleId", defaultValue = "1") long articleId,
-			ModelMap modelMap, HttpServletRequest request) throws Exception {
+			ModelMap modelMap) throws Exception {
 
 		Article article = articleService.getArticleById(articleId);
 		List<Menu> menus = menuService.getAllDisplay();

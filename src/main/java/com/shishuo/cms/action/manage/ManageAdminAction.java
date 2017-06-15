@@ -46,10 +46,8 @@ public class ManageAdminAction extends ManageBaseAction {
 	 * 进入管理员管理页面
 	 */
 	@RequestMapping(value = "/manage.htm", method = RequestMethod.GET)
-	public String manage(
-			@RequestParam(value = "p", defaultValue = "1") int pageNum,
-			ModelMap modelMap) {
-		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
+	public String manage(ModelMap modelMap) {
+		modelMap.put("list", adminService.getAllList());
 		return "manage/admin/manage";
 	}
 
@@ -89,18 +87,6 @@ public class ManageAdminAction extends ManageBaseAction {
 			json.setMsg(e.getMessage());
 		}
 		return json;
-	}
-
-	/**
-	 * 进入管理员列表页面
-	 * 
-	 */
-	@RequestMapping(value = "/page.htm", method = RequestMethod.GET)
-	public String allList(
-			@RequestParam(value = "p", defaultValue = "1") int pageNum,
-			ModelMap modelMap) {
-		modelMap.put("pageVo", adminService.getAllListPage(pageNum));
-		return "manage/admin/all";
 	}
 
 	/**

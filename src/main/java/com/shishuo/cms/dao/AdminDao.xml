@@ -39,8 +39,7 @@
 	<!-- ############################## -->
 
 	<select id="getAllList" resultType="com.shishuo.cms.entity.Admin">
-		select * from admin limit
-		#{offset},#{rows}
+		select * from admin
 	</select>
 
 	<select id="getAllListCount" resultType="int">

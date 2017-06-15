@@ -2,36 +2,52 @@
 <#assign submenu="article_list">
 <#include "/manage/head.ftl">
 <style type="text/css">
-    .pagination {
-        border-radius: 4px;
-        display: inline-block;
-        margin: 0;
-        padding-left: 0;
+    .dropdown-submenu {
+        position: relative;
     }
 
-    .howto, .nonessential, #edit-slug-box, .form-input-tip, .subsubsub {
-        color: #666666;
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
     }
 
-    .subsubsub {
-        float: left;
-        font-size: 12px;
-        list-style: none outside none;
-        margin: 8px 0 5px;
-        padding: 0;
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
     }
 
-    .form-group {
-        width: 100%;
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
     }
 
-    .count {
-        position: absolute;
-        right: 0px;
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
     }
 
-    .arrticle_status {
-        float: left;
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
     }
 </style>
 <!--main content start-->
@@ -59,7 +75,7 @@
                 <div class="row">
                     <div class="col-lg-10">
 
-                        <select class="form-control" id="parentMenu"
+                        <#--<select class="form-control" id="parentMenu"
                                 style="font-size:15px;width: 150px; display: inline-block">
                             <option value="-1">>>一级栏目<<</option>
                         <#list menus?sort_by("sort") as f>
@@ -71,7 +87,62 @@
                         <select class="form-control" id="childMenu" name="menuId"
                                 style="font-size:15px;width: 150px; display: inline-block">
                             <option value="-1">>>二级栏目<<</option>
-                        </select>
+                        </select>-->
+
+                                <div class="dropdown" style="display: inline-block;">
+                                    <a id="dLabel"  role="button" data-toggle="dropdown" class="btn btn-primary"
+                                       data-target="#"
+                                       href="javascript:;">全部菜单<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                        <li class="divider"></li>
+                                    <li >
+                                        <a tabindex="-1" href="javascript:;" class="dLabel"
+                                           menuId="-1">全部菜单</a>
+                                    </li>
+                                        <li class="divider"></li>
+                                    <#list menus?sort_by("sort") as f>
+                                        <#if (f.children?size > 0)>
+                                            <li class="dropdown-submenu">
+                                                <a tabindex="-1" href="javascript:;" class="dLabel"
+                                                   menuId="${f.id}">${f.name}</a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="divider"></li>
+                                                    <#list f.children?sort_by("sort") as c>
+                                                        <#if (c.children?size > 0)>
+                                                            <li class="dropdown-submenu">
+                                                                <a href="javascript:;" menuId="${c.id}"
+                                                                   class="dLabel">${c.name}</a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li class="divider"></li>
+                                                                    <#list c.children?sort_by("sort") as s>
+                                                                        <li><a href="javascript:;" class="dLabel"
+                                                                               menuId="${s.id}">${s.name}</a></li>
+                                                                        <li class="divider"></li>
+                                                                    </#list>
+                                                                </ul>
+                                                            </li>
+                                                        <#else>
+                                                            <li>
+                                                                <a href="javascript:;" menuId="${c.id}"
+                                                                   class="dLabel">${c.name}</a>
+                                                            </li>
+                                                        </#if>
+                                                        <li class="divider"></li>
+                                                    </#list>
+                                                </ul>
+                                            </li>
+                                            <li class="divider"></li>
+                                        <#else>
+                                            <li><a href="javascript:;" menuId="${f.id}" class="dLabel">${f.name}</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                        </#if>
+                                    </#list>
+                                    </ul>
+                                </div>
+
+
                         <select class="form-control" id="status"
                                 style="font-size:15px;width: 120px; display: inline-block">
                             <option value="all">全部状态</option>
@@ -128,42 +199,16 @@
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/laypage.js"></script>
 <script>
 
-    var menuId = $("#childMenu").val();
+    var menuId = -1;
     var status = $("#status").val();
     var adminId = $("#myArt").val();
     var keywords = $("#keywords").val();
 
     $(function () {
 
-        var menus = {
-        <#list menus as f>
-            <#if f.name != "首页">
-                "${f.id}": [
-                    <#list f.children as c>
-                        {"id": "${c.id}", "name": "${c.name}"},
-                    </#list>],
-            </#if>
-        </#list>};
-
-        $("#parentMenu").change(function () {
-            var parentMenu = $(this).val();
-            var childMenu = $("#childMenu")[0];
-            var m = menus[parentMenu];
-
-            childMenu.options.length = 0;
-            if (typeof m == "undefined") {
-                childMenu.options.add(new Option(">>二级栏目<<", -1));
-            }else {
-                for (var i = 0; i < m.length; i++) {
-                    childMenu.options.add(new Option(m[i].name, m[i].id));
-                }
-            }
-            menuId = $("#childMenu").val();
-            pagination(1, menuId,status,adminId,keywords);
-        });
-
-        $("#childMenu").change(function () {
-            menuId = $("#childMenu").val();
+        $("a.dLabel").click(function () {
+            $("#dLabel").text($(this).text());
+            menuId = $(this).attr("menuId");
             pagination(1, menuId,status,adminId,keywords);
         });
 

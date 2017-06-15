@@ -8,6 +8,7 @@ package com.shishuo.cms.action.manage;
 
 import com.shishuo.cms.entity.User;
 import com.shishuo.cms.entity.vo.JsonVo;
+import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.UserService;
 import com.shishuo.cms.util.SSUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,11 +29,16 @@ public class ManageUserAction extends ManageBaseAction{
 	private UserService userService;
 
 	@RequestMapping(value = "/manage.htm", method = RequestMethod.GET)
-	public String manage(
-			@RequestParam(value = "p", defaultValue = "1") int pageNum,
-			ModelMap modelMap) {
-		modelMap.put("pageVo", userService.getAllListPage(pageNum));
+	public String manage() {
 		return "manage/user/manage";
+	}
+
+	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
+	@ResponseBody
+	public PageVo<User> list(@RequestParam(value = "p", defaultValue = "1") int pageNum)
+	{
+		int rows = configService.getIntKey("pagination_num");
+		return userService.getAllListPage(pageNum,rows);
 	}
 
 

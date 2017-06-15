@@ -73,8 +73,7 @@ public interface AdminDao {
 	 * @return List<Admin>
 	 * 
 	 */
-	public List<Admin> getAllList(@Param("offset") long offset,
-			@Param("rows") long rows);
+	public List<Admin> getAllList();
 
 	/**
 	 * 获取所有管理员的数量

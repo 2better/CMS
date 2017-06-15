@@ -1,6 +1,55 @@
 <#assign menu="article">
 <#assign submenu="update_article">
 <#include "/manage/head.ftl">
+<style type="text/css">
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+</style>
 <!--main content start-->
 <style type="text/css">
 
@@ -13,6 +62,7 @@
 			<fieldset>
 		<div class="row">
 			<input type="hidden" name="articleId" value="${article.articleId}">
+			<input type="hidden" name="menuId" id="menuId" value="${Menu.id}"/>
 			<div class="col-lg-12">
 				<section class="panel">
 					<header class="panel-heading"> 
@@ -27,7 +77,7 @@
                               </input>
                           </div>
                         </div>
-                        <div class="form-group">
+                        <#--<div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">所属菜单</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="parentMenu" style="font-size:15px;width: 300px; display: inline-block">
@@ -40,6 +90,56 @@
                                 <select class="form-control" id="childMenu" name="menuId" style="font-size:15px;width: 300px; display: inline-block"">
 
                                 </select>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">所属菜单</label>
+                            <div class="dropdown col-sm-10" style="display: inline-block;">
+                                <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary"
+                                   data-target="#"
+                                   href="javascript:;">${Menu.name}<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <li class="divider"></li>
+								<#list menus?sort_by("sort") as f>
+									<#if (f.children?size > 0)>
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="javascript:;" class="dLabel"
+                                               menuId="${f.id}">${f.name}</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="divider"></li>
+												<#list f.children?sort_by("sort") as c>
+													<#if (c.children?size > 0)>
+                                                        <li class="dropdown-submenu">
+                                                            <a href="javascript:;" menuId="${c.id}"
+                                                               class="dLabel">${c.name}</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li class="divider"></li>
+																<#list c.children?sort_by("sort") as s>
+                                                                    <li><a href="javascript:;" class="dLabel"
+                                                                           menuId="${s.id}">${s.name}</a></li>
+                                                                    <li class="divider"></li>
+																</#list>
+                                                            </ul>
+                                                        </li>
+													<#else>
+                                                        <li>
+                                                            <a href="javascript:;" menuId="${c.id}"
+                                                               class="dLabel">${c.name}</a>
+                                                        </li>
+													</#if>
+                                                    <li class="divider"></li>
+												</#list>
+                                            </ul>
+                                        </li>
+                                        <li class="divider"></li>
+									<#else>
+                                        <li><a href="javascript:;" menuId="${f.id}" class="dLabel">${f.name}</a>
+                                        </li>
+                                        <li class="divider"></li>
+									</#if>
+								</#list>
+                                </ul>
                             </div>
                         </div>
                         <div class="form-group">
@@ -151,46 +251,9 @@ $.extend({
 });
 $(function(){
 
-    var menus = {
-	<#list menus as f>
-		<#if f.name != "首页">
-            "${f.id}":[
-				<#list f.children as c>
-                    {"id":"${c.id}","name":"${c.name}"},
-				</#list>
-            ],
-		</#if>
-	</#list>
-    };
-
-    var parentMenu=$("#parentMenu").val();
-    var childMenu=$("#childMenu")[0];
-    var m=menus[parentMenu];
-    childMenu.options.length=0;
-    if (typeof m == "undefined") {
-        childMenu.options.add(new Option(">>二级栏目<<", -1));
-    }else {
-        for (var i = 0; i < m.length; i++) {
-            if(m[i].id=="${article.menuId}")
-                childMenu.options.add(new Option(m[i].name, m[i].id,false,true));
-            else
-            childMenu.options.add(new Option(m[i].name, m[i].id));
-        }
-    }
-
-    $("#parentMenu").change(function()
-    {
-        var parentMenu=$(this).val();
-        var childMenu=$("#childMenu")[0];
-        var m=menus[parentMenu];
-        childMenu.options.length=0;
-        if (typeof m == "undefined") {
-            childMenu.options.add(new Option(">>二级栏目<<", -1));
-        }else {
-            for (var i = 0; i < m.length; i++) {
-                childMenu.options.add(new Option(m[i].name, m[i].id));
-            }
-        }
+    $("a.dLabel").click(function () {
+        $("#dLabel").text($(this).text());
+        $("#menuId").val($(this).attr("menuId"));
     });
 
 	$('#update_article_form').ajaxForm({
