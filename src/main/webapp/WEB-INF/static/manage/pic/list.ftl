@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="${BASE_PATH}/static/manage/pic/ssi-uploader.css"/>
 <section class="wrapper">
         <div class="row">
@@ -45,7 +44,6 @@
     $('#ssi-upload').ssi_uploader({
         url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 1,
         maxNumberOfFiles:6,
-        data:{type:$("input:radio[name='type']:checked").val()},
         responseValidation: {
             validationKey: {
                 success: 'success',

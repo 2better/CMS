@@ -14,7 +14,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="freemarkerSettings">
 			<props>
-				<prop key="template_update_delay">7200</prop>
+				<prop key="template_update_delay">10</prop>
 				<prop key="defaultEncoding">UTF-8</prop>
 				<prop key="url_escaping_charset">UTF-8</prop>
 				<prop key="output_encoding">UTF-8</prop>
@@ -25,7 +25,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 				<prop key="date_format">yyyy-MM-dd</prop>
 				<prop key="number_format">#.##</prop>
 				<prop key="whitespace_stripping">true</prop>
-				<prop key="classic_compatible">true</prop>
+				<prop key="classic_compatible">false</prop>
 			</props>
 		</property>
 	</bean>
