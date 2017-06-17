@@ -122,9 +122,24 @@
 
 	<!--添加了时间排序-->
 	<select id="getArticeByMenuIdByTime" resultType="com.shishuo.cms.entity.Article">
-		select articleId,title,createTime from article where menuId
-		IN (SELECT DISTINCT id FROM menu WHERE id = ${menuId} OR pId = #{menuId})
-		and status = 'display' ORDER BY createTime DESC limit 0 ,#{num}
+		SELECT ar.articleId,ar.title,ar.createTime from article ar
+		INNER JOIN menu m
+		ON (m.id = ar.menuId OR m.pId = ar.menuId)
+		AND ar.menuId = #{menuId}
+		AND ar.status = 'display'
+		ORDER BY ar.createTime DESC limit 0 ,#{num};
+	</select>
+
+	<!--根据关键词询-->
+	<select id="getArticlesBykey" resultType="com.shishuo.cms.entity.Article">
+		SELECT articleId, title,createTime FROM article
+		WHERE title LIKE concat('%','${key}','%')
+		ORDER BY createTime DESC limit #{offest} ,#{rows};
+	</select>
+
+	<select id="getCountByKey" resultType="Integer">
+		SELECT count(*) FROM article
+		WHERE title LIKE concat('%','${key}','%');
 	</select>
 </mapper>
 
