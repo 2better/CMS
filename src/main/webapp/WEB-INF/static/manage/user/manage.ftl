@@ -1,14 +1,6 @@
 <#assign menu="user_list">
 <#assign submenu="user_list">
 <#include "/manage/head.ftl">
-<style type="text/css">
-    .pagination {
-        border-radius: 4px;
-        display: inline-block;
-        margin: 0;
-        padding-left: 0;
-    }
-</style>
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">

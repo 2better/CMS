@@ -60,7 +60,9 @@
 			success : function(data) {
 				if (data.result) {
                     $("#bt").click();
-					bootbox.alert("修改成功");
+					bootbox.alert("修改成功",function(){
+                        window.location.reload();
+					});
 				}else{
 					showErrors($('#update_folder_form'),data.errors);
 				}

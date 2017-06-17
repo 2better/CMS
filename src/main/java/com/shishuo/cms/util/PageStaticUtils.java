@@ -3,6 +3,7 @@ package com.shishuo.cms.util;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.ConfigService;
+import com.shishuo.cms.service.FriendlylinkService;
 import com.shishuo.cms.service.MenuService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -30,26 +31,38 @@ public class PageStaticUtils {
     private MenuService menuService;
     @Autowired
     private ConfigService configService;
+    @Autowired
+    private FriendlylinkService friendlylinkService;
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    public void headerStaticPage(HttpServletRequest request) {
-        String htmlPath = "/WEB-INF/static/template/blog/staticPage/header.html";
-        File htmlFile = new File(request.getSession().getServletContext().getRealPath("/") + htmlPath);
-        if (htmlFile.exists()) {
-            logger.info("使用静态化页面");
-            return;
+    public void headerAndFooterStaticPage(HttpServletRequest request) {
+        String headerHtmlPath = "/WEB-INF/static/template/blog/staticPage/header.html";
+        String footerHtmlPath = "/WEB-INF/static/template/blog/staticPage/footer.html";
+        String root = request.getSession().getServletContext().getRealPath("/");
+        File headerHtmlFile = new File(root + headerHtmlPath);
+        File footerHtmlFile = new File(root + footerHtmlPath);
+        if (!headerHtmlFile.exists()) {
+            List<Menu> menuList = menuService.getAllDisplay();
+            String BASE_PATH = HttpUtils.getBasePath(request);
+            Map<String, Object> data = new HashMap<String, Object>();
+            data.put("menuList", menuList);
+            data.put("index_title", configService.getStringByKey("index_title"));
+            data.put("seo_description", configService.getStringByKey("seo_description"));
+            data.put("TEMPLATE_BASE_PATH",BASE_PATH  + "/static/template/blog");
+            data.put("BASE_PATH", BASE_PATH);
+            createHtml(headerHtmlFile, "header", data);
         }
-        List<Menu> menuList = menuService.getAllDisplay();
-        String BASE_PATH = HttpUtils.getBasePath(request);
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("menuList", menuList);
-        data.put("index_title", configService.getStringByKey("index_title"));
-        data.put("seo_description", configService.getStringByKey("seo_description"));
-        data.put("TEMPLATE_BASE_PATH",BASE_PATH  + "/static/template/blog");
-        data.put("BASE_PATH", BASE_PATH);
-        createHtml(htmlFile, "header", data);
+        if (!footerHtmlFile.exists())
+        {
+            Map<String, Object> data = new HashMap<String, Object>();
+            data.put("linkList", friendlylinkService.getAllDisplay());
+            data.put("copyright", configService.getStringByKey("copyright"));
+            data.put("phonenum", configService.getStringByKey("phonenum"));
+            createHtml(footerHtmlFile, "footer", data);
+        }
 
+        logger.info("页面静态化");
     }
 
     public static void updateTemplate(String theme)

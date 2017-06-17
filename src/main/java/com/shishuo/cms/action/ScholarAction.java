@@ -29,7 +29,7 @@ public class ScholarAction extends BaseAction {
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
     public String event(@PathVariable("id") Integer id, ModelMap m, HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         m.put("scholar", scholarService.getById(id));
         return "/template/blog/scholar";
     }
@@ -45,7 +45,7 @@ public class ScholarAction extends BaseAction {
 
     @RequestMapping(value = "/list.htm",method = RequestMethod.GET)
     public String listPage(HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         return "/template/blog/scholar_list";
     }
 }

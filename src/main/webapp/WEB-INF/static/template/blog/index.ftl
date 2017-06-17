@@ -4,33 +4,9 @@
     <div class="content">
         <!-- banner -->
         <div class="banner">
-            <div class="banner-img"><img src="${TEMPLATE_BASE_PATH}/images/banner.png" /></div>
-            <div class="flv">
-                <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="980" height="250">
-                    <param name="movie" value="/001lt269/templates/001lt269/images/21.swf" />
-                    <param name="quality" value="high" />
-                    <param name="wmode" value="transparent" />
-                    <param name="swfversion" value="6.0.65.0" />
-                    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-                    <param name="expressinstall" value="Scripts/expressInstall.swf" />
-                    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
-                    <!--[if !IE]>-->
-                    <object type="application/x-shockwave-flash" data="/001lt269/templates/001lt269/images/21.swf" width="980" height="250">
-                        <!--<![endif]-->
-                        <param name="quality" value="high" />
-                        <param name="wmode" value="transparent" />
-                        <param name="swfversion" value="6.0.65.0" />
-                        <param name="expressinstall" value="Scripts/expressInstall.swf" />
-                        <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
-                        <div>
-                            <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
-                            <p><a href="#go/getflashplayer"><img src="${TEMPLATE_BASE_PATH}/images/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
-                        </div>
-                        <!--[if !IE]>-->
-                    </object>
-                    <!--<![endif]-->
-                </object>
-            </div>
+            <ul></ul>
+            <ol></ol>
+            <i class="left"></i><i class="right"></i>
         </div>
         <!-- banner -->
         <!--S 上部分-->
@@ -237,7 +213,7 @@
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="title-con-r"><img src="${TEMPLATE_BASE_PATH}/images/qrcode_for_gh_900e1c96300a_258.jpg" /></div>
+                        <div class="title-con-r"><img src="${TEMPLATE_BASE_PATH}/images/qr_code.jpg" /></div>
                     </div>
                 </div>
                 <!--E 区域1-->
@@ -293,4 +269,4 @@
     </div>
 </div>
 <!--主体-->
-<#include "footer.ftl">
+<#include "staticPage/footer.html">

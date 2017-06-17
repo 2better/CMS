@@ -77,7 +77,7 @@ input.error:focus {
                                   </div>	                                 	
 				<div class="form-group">
 					<input type="text" name="captcha" class="form-control"  required
-						placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
+						placeholder="验证码" style="width: 100px; float: left;" id="captcha" value="abcd"> <img
 
 						style="cursor: pointer; cursor: hand; margin-top: -13px;"
 						onclick="this.src='${BASE_PATH}/admin/captcha.htm?'+Math.random();"

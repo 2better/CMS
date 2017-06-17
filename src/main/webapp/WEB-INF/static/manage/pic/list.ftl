@@ -1,6 +1,9 @@
-
+<#assign menu="picture">
+<#assign submenu="picture_list">
+<#include "/manage/head.ftl">
 <link rel="stylesheet" href="${BASE_PATH}/static/manage/pic/ssi-uploader.css"/>
-<section class="wrapper">
+<section id="main-content">
+    <section class="wrapper">
         <div class="row">
             <div class="col-md-12">
                 <h3>上传轮播图</h3>
@@ -39,23 +42,24 @@
                 </div>
             </div>
         </section>
+    </section>
 </section>
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
         url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 1,
-        maxNumberOfFiles:6,
-        data:{type:$("input:radio[name='type']:checked").val()},
+        maxNumberOfFiles: 6,
+        data: {type: $("input:radio[name='type']:checked").val()},
         responseValidation: {
             validationKey: {
                 success: 'success',
                 error: 'error'
             },
             resultKey: 'validationKey'
-        },onUpload:function(){
+        }, onUpload: function () {
             pagination(1);
         },
-        beforeEachUpload:function (file) {
+        beforeEachUpload: function (file) {
             console.log(file);
             console.log(file.width);
         }
@@ -68,7 +72,7 @@
 <script>
     pagination(1);
 
-    $(document).on("click",".js_picture_delete",function () {
+    $(document).on("click", ".js_picture_delete", function () {
         var id = $(this).attr('id');
         var status = "trash";
         bootbox.dialog({
@@ -100,7 +104,7 @@
                 {
                     url: "${BASE_PATH}/manage/picture/list.json",
                     type: "GET",
-                    data: "p="+curr,
+                    data: "p=" + curr,
 
                     success: function (data) {
                         console.log(data);
@@ -114,9 +118,9 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href='/"+ n.picUrl +"'>" + n.picUrl + "</a></td>";
-                            trs += "<td>"+ n.picType +"</td>";
-                            trs += "<td>"+ n.createTimeView +"</td>";
+                            trs += "<tr class=\"gradeA odd\"><td><a href='/" + n.picUrl + "'>" + n.picUrl + "</a></td>";
+                            trs += "<td>" + n.picType + "</td>";
+                            trs += "<td>" + n.createTimeView + "</td>";
                             trs += "<td><a name=\"是否删除活动\" href=\"javascript:void(0);\"  class=\"js_picture_delete\" id=\"" + n.id + "\">删除</a></td></tr>";
                         });
                         $("#con").append(trs + "</tbody>");
@@ -142,3 +146,4 @@
     }
 </script>
 
+<#include "/manage/foot.ftl">

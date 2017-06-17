@@ -31,7 +31,6 @@ public class ManageAction extends ManageBaseAction {
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap modelMap)
 			{
-		Admin admin = this.getAdmin(request);
 		modelMap.put("articleCount", 0);
 		modelMap.put("downloadCount", 0);
 		modelMap.put("userCount", 0);

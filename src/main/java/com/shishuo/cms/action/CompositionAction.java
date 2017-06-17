@@ -30,7 +30,7 @@ public class CompositionAction extends BaseAction {
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
     public String event(@PathVariable("id") Integer id, ModelMap m, HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         m.put("composition", compositionService.getById(id));
         return "/template/blog/composition";
     }
@@ -46,7 +46,7 @@ public class CompositionAction extends BaseAction {
 
     @RequestMapping(value = "/list.htm",method = RequestMethod.GET)
     public String listPage(HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         return "/template/blog/composition_list";
     }
 

@@ -39,14 +39,10 @@ import com.shishuo.cms.util.SSUtils;
 @RequestMapping("/manage/config")
 public class ManageConfigAction extends ManageBaseAction {
 
-    @Autowired
-    private FriendlylinkService friendlylinkService;
-
     @RequestMapping(value = "/basic.htm", method = RequestMethod.GET)
     public String basic(ModelMap modelMap) {
         List<Config> configs = configService.findAll();
         modelMap.put("configs", configs);
-        modelMap.put("list",friendlylinkService.getAllList());
         return "manage/config/basic";
     }
 
@@ -75,85 +71,6 @@ public class ManageConfigAction extends ManageBaseAction {
         }
         return json;
 
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/addNew.json", method = RequestMethod.POST)
-    public JsonVo<String> addNewFriendlylink(Friendlylink friendlylink) {
-        JsonVo<String> json = new JsonVo<String>();
-        try {
-            if (friendlylink.getName().equals("")) {
-                json.getErrors().put("name", "名称不能为空");
-            }
-            if (StringUtils.isBlank(friendlylink.getUrl())) {
-                json.getErrors().put("password", "链接地址不能为空");
-            }
-            // 检测校验结果
-            validate(json);
-            friendlylinkService.addFriendlylink(friendlylink);
-            json.setResult(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            json.setResult(false);
-            json.setMsg(e.getMessage());
-        }
-        return json;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/delete.json", method = RequestMethod.POST)
-    public JsonVo<String> delete(@RequestParam(value = "id") Integer id) {
-        JsonVo<String> json = new JsonVo<String>();
-        try {
-            friendlylinkService.deleteFriendlylink(id);
-            json.setResult(true);
-        } catch (Exception e) {
-            json.setResult(false);
-            json.setMsg(e.getMessage());
-        }
-        return json;
-    }
-
-    @RequestMapping(value = "/update.htm", method = RequestMethod.GET)
-    public String update(
-            @RequestParam(value = "id") Integer id,
-            ModelMap modelMap) throws Exception {
-        modelMap.put("friendlylink", friendlylinkService.getFriendlylinkById(id));
-        return "manage/config/updatefriendLink";
-    }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/update.json", method = RequestMethod.POST)
-    public JsonVo<Friendlylink> update(Friendlylink friendlylink){
-        JsonVo<Friendlylink> json = new JsonVo<Friendlylink>();
-        try {
-            friendlylinkService.updateFriendlylinkByFriendlylinkId(friendlylink);
-            json.setResult(true);
-            return json;
-        } catch (Exception e) {
-            e.printStackTrace();
-            json.setResult(false);
-            return json;
-        }
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/sort.json", method = RequestMethod.POST)
-    public JsonVo<String> sort(
-            @RequestParam(value = "sortJson") String sortJson) {
-        JsonVo<String> json = new JsonVo<String>();
-        JSONArray array = JSONArray.fromObject(sortJson);
-        for (int i = 0; i < array.size(); i++) {
-            JSONObject friendlylink = array.getJSONObject(i);
-            String id = friendlylink.get("id").toString();
-            String sort = friendlylink.get("sort").toString();
-            friendlylinkService.modifySortById(Integer.parseInt(id),
-                    Integer.parseInt(sort));
-        }
-        json.setResult(true);
-        return json;
     }
 
 }

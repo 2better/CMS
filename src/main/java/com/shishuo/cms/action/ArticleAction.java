@@ -39,7 +39,7 @@ public class ArticleAction extends BaseAction {
 			modelMap.put("menus",menus.get(0));
 			modelMap.addAttribute("article", article);
 
-			pageStaticUtils.headerStaticPage(request);
+			pageStaticUtils.headerAndFooterStaticPage(request);
 			return themeService.getArticleTemplate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class ArticleAction extends BaseAction {
 			modelMap.put("count",count);
 			modelMap.put("pageCount",pageCount);
 
-			pageStaticUtils.headerStaticPage(request);
+			pageStaticUtils.headerAndFooterStaticPage(request);
 			return "template/blog/article_list";
 		} catch (Exception e) {
 			e.printStackTrace();

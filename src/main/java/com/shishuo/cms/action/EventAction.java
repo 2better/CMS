@@ -32,7 +32,7 @@ public class EventAction extends BaseAction {
 
     @RequestMapping(value = "/{id}.htm", method = RequestMethod.GET)
     public String event(@PathVariable("id") Integer id, ModelMap m, HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         m.put("event", eventService.getById(id));
         return "/template/blog/event";
     }
@@ -61,7 +61,7 @@ public class EventAction extends BaseAction {
 
     @RequestMapping(value = "/list.htm",method = RequestMethod.GET)
     public String listPage(HttpServletRequest request) {
-        pageStaticUtils.headerStaticPage(request);
+        pageStaticUtils.headerAndFooterStaticPage(request);
         return "/template/blog/event_list";
     }
 

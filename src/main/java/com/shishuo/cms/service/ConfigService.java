@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,6 +35,8 @@ public class ConfigService {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             configDao.updateConfig(entry.getKey(),entry.getValue());
         }
+        PageStaticUtils.updateTemplate("header");
+        PageStaticUtils.updateTemplate("footer");
     }
 
     @Cacheable(value = "config")

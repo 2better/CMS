@@ -64,6 +64,7 @@ public class UserAction extends BaseAction {
         } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
             modelMap.put("error", "密码重试次数过多");
         } else {
+            System.out.println(exceptionClassName);
             modelMap.put("error", "系统繁忙,请稍后再试");
         }
         modelMap.put("name",name);

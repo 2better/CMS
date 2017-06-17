@@ -252,8 +252,6 @@ ul.sidebar-menu li ul.sub li a:hover, ul.sidebar-menu li ul.sub li.active a {
 ul.sidebar-menu li{
     /*line-height: 20px !important;*/
     margin-bottom: 5px;
-    margin-left:10px;
-    margin-right:10px;
 }
 
 ul.sidebar-menu li.sub-menu{
@@ -304,6 +302,82 @@ ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
 
 ul.sidebar-menu li a.active i {
     color: #FF6C60;
+}
+
+
+.sidebar-menu .link {
+
+    margin-bottom: 5px;
+    margin-left:10px;
+    margin-right:10px;
+
+    cursor: pointer;
+    display: block;
+
+    color: #FFF;
+
+
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.sidebar-menu li:last-child .link {
+    border-bottom: 0;
+}
+
+.sidebar-menu li i {
+
+
+    color: #595959;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.sidebar-menu li i.fa-chevron-down {
+
+}
+
+.sidebar-menu li.open .link {
+    color: #fff;
+}
+
+.sidebar-menu li.open i {
+    color: #fff;
+}
+.sidebar-menu li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+.submenu {
+    display: none;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.submenu li {
+    border-bottom: 1px solid #4b4a5e;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #d9d9d9;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+    background: #b63b4d;
+    color: #FFF;
 }
 
 

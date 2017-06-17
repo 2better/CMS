@@ -8,6 +8,7 @@ package com.shishuo.cms.service;
 
 import com.shishuo.cms.dao.FriendlylinkDao;
 import com.shishuo.cms.entity.Friendlylink;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,12 @@ public class FriendlylinkService {
 	public void addFriendlylink(Friendlylink friendlylink) {
 		friendlylink.setSort(1);
 		friendlylinkDao.addFriendlylink(friendlylink);
+		PageStaticUtils.updateTemplate("footer");
 	}
 
 	
 	public int deleteFriendlylink(int id) {
+		PageStaticUtils.updateTemplate("footer");
 		return friendlylinkDao.deleteFriendlylink(id);
 	}
 	
@@ -35,6 +38,7 @@ public class FriendlylinkService {
 	public void updateFriendlylinkByFriendlylinkId(Friendlylink friendlylink)
 	{
 		friendlylinkDao.updateFriendlylinkById(friendlylink);
+		PageStaticUtils.updateTemplate("footer");
 	}
 	
 	public Friendlylink getFriendlylinkById(int id) {
@@ -54,6 +58,7 @@ public class FriendlylinkService {
 	public void modifySortById(int id,int sort)
 	{
 		friendlylinkDao.modifySortById(id,sort);
+		PageStaticUtils.updateTemplate("footer");
 	}
 
 }

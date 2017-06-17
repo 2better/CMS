@@ -42,4 +42,4 @@
         </div>
     </div>
 </div>
-<#include "footer.ftl">
+<#include "staticPage/footer.html">

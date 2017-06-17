@@ -1,5 +1,5 @@
 <#assign menu="menu">
-<#assign submenu="menu_list">
+<#assign submenu="cog">
 <#include "/manage/head.ftl">
 <style type="text/css">
     .dropdown-submenu {

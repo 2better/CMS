@@ -43,7 +43,7 @@ public class IndexAction extends BaseAction {
 	@RequestMapping(value = "/index.htm", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		try {
-			pageStaticUtils.headerStaticPage(request);
+			pageStaticUtils.headerAndFooterStaticPage(request);
 			return themeService.getDefaultTemplate();
 		} catch (TemplateNotFoundException e) {
 			logger.fatal(e.getMessage());
@@ -58,7 +58,7 @@ public class IndexAction extends BaseAction {
 	 */
 	@RequestMapping(value = "/404.htm", method = RequestMethod.GET)
 	public String pageNotFound(HttpServletRequest request) {
-		pageStaticUtils.headerStaticPage(request);
+		pageStaticUtils.headerAndFooterStaticPage(request);
 		return themeService.get404();
 	}
 
@@ -69,7 +69,7 @@ public class IndexAction extends BaseAction {
 	 */
 	@RequestMapping(value = "/500.htm", method = RequestMethod.GET)
 	public String error(HttpServletRequest request) {
-		pageStaticUtils.headerStaticPage(request);
+		pageStaticUtils.headerAndFooterStaticPage(request);
 		return themeService.get500();
 	}
 
@@ -80,7 +80,7 @@ public class IndexAction extends BaseAction {
 	 */
 	@RequestMapping(value = "/refuse.htm", method = RequestMethod.GET)
 	public String refuse(HttpServletRequest request) {
-		pageStaticUtils.headerStaticPage(request);
+		pageStaticUtils.headerAndFooterStaticPage(request);
 		return themeService.getRefuse();
 	}
 }
