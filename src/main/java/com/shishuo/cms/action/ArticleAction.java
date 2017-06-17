@@ -3,6 +3,7 @@ package com.shishuo.cms.action;
 
 import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Menu;
+import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.MenuService;
 import com.shishuo.cms.util.PageStaticUtils;
@@ -97,5 +98,13 @@ public class ArticleAction extends BaseAction {
 
 	private List<Article> listArtice(String menuId) {
 		return fileService.getArticeByMenuIdByTime(new Long(menuId),6);
+	}
+
+
+	@RequestMapping(value = "/search.json",method = RequestMethod.GET)
+	@ResponseBody
+	public PageVo<Article> getAticlesByKey(@RequestParam(value = "key",defaultValue = "") String key,
+										   @RequestParam(value = "p",defaultValue = "1") Integer p) {
+		return fileService.getArticlesBykey(configService.getIntKey("pagination_num"),p,key);
 	}
 }

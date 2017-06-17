@@ -1,4 +1,3 @@
-
 <#assign menu="picture">
 <#assign submenu="picture_list">
 <#include "/manage/head.ftl">
@@ -43,6 +42,7 @@
                 </div>
             </div>
         </section>
+
     </section>
 </section>
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>

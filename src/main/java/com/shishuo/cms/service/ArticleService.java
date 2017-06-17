@@ -168,4 +168,11 @@ public class ArticleService {
     public List<Article> getArticeByMenuIdByTime(long menuId, int num) {
         return articleDao.getArticeByMenuIdByTime(menuId, num);
     }
+
+    public PageVo<Article> getArticlesBykey(Integer rows, Integer p, String key) {
+        PageVo<Article> pv = new PageVo<>(p);
+        pv.setCount(articleDao.getCountByKey(key));
+        pv.setList(articleDao.getArticlesBykey(key, pv.getOffset(),rows));
+        return pv;
+    }
 }

@@ -83,4 +83,7 @@ public interface ArticleDao {
 	//按时间排序查找目录下的文章
 	List<Article> getArticeByMenuIdByTime(@Param("menuId") long menuId, @Param("num") int num);
 
+	List<Article> getArticlesBykey(@Param("key") String key,@Param("offest") Integer offest, @Param("rows") Integer rows);
+
+	Integer getCountByKey(@Param("key") String key);
 }
