@@ -73,7 +73,7 @@ loadEvent($("#eventUl"),0,1,function (data) {
 
     if(list.length > 0) {
         $.each(list, function (index, item) {
-            uLhtml += "<li><a href='/event/show/" + item.id + "'>" + item.name + "</a></li>"
+            uLhtml += "<li><a href='/event/" + item.id + ".htm'>" + item.name + "</a></li>"
         });
     }else {
         uLhtml = "暂无消息哦亲";

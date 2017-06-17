@@ -58,6 +58,14 @@
 		<filter-name>ftlFilter</filter-name>
 		<url-pattern>*.ftl</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ftlFilter</filter-name>
+		<url-pattern>*.xml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ftlFilter</filter-name>
+		<url-pattern>*.class</url-pattern>
+	</filter-mapping>
 
 	<filter>
 		<filter-name>shiroFilter</filter-name>
