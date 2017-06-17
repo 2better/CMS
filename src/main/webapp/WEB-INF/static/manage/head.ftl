@@ -65,8 +65,8 @@
 	                      </a>
 	                      <ul class="dropdown-menu extended logout">
 	                          <div class="log-arrow-up"></div>
-	                          <li><a href="${BASE_PATH}/manage/admin/update.htm"><i class="icon-cog"></i> 修改密码</a></li>
-	                          <li><a href="${BASE_PATH}/admin/logout.htm"><i class="icon-key"></i> 安全退出</a></li>
+	                          <li><a href="${BASE_PATH}/manage/admin/update.htm"><i class="fa fa-cog "></i> 修改密码</a></li>
+	                          <li><a href="${BASE_PATH}/admin/logout.htm"><i class="fa fa-external-link-square"></i> 安全退出</a></li>
 	                      </ul>
 	                  </li>
 	                  <!-- user login dropdown end -->
@@ -109,7 +109,7 @@
                         </ul>
                     </li>
                     <li id="a">
-                        <a class="link" ><i class="fa fa-cog fa-4x "></i>&nbsp;&nbsp;网站设置 &nbsp;&nbsp;<i class="fa fa-chevron-down"></i></a>
+                        <a class="link" ><i class="fa fa-cogs fa-4x "></i>&nbsp;&nbsp;网站设置 &nbsp;&nbsp;<i class="fa fa-chevron-down"></i></a>
                         <ul class="submenu" id="cog" >
                             <li><a  class="link <#if menu="system">active</#if>" href="${BASE_PATH}//manage/config/basic.htm">&nbsp;&nbsp;<span>基本设置</span> &nbsp;&nbsp;<#if menu="system"><i class="fa fa-chevron-right"></i></#if></a></li>
                             <li><a class="link <#if menu="menu">active</#if>" href="${BASE_PATH}/manage/menu/list.htm">&nbsp;&nbsp;<span>菜单管理</span> &nbsp;&nbsp;<#if menu="menu"><i class="fa fa-chevron-right"></i></#if></a></li>

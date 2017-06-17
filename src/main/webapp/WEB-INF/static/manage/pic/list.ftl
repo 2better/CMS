@@ -1,3 +1,4 @@
+
 <#assign menu="picture">
 <#assign submenu="picture_list">
 <#include "/manage/head.ftl">
@@ -48,8 +49,7 @@
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
         url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 1,
-        maxNumberOfFiles: 6,
-        data: {type: $("input:radio[name='type']:checked").val()},
+        maxNumberOfFiles:6,
         responseValidation: {
             validationKey: {
                 success: 'success',

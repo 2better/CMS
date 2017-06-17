@@ -32,14 +32,15 @@ public class ManagePictureAction extends ManageBaseAction {
 
     @RequestMapping(value = "/add.json", method = RequestMethod.POST)
     @ResponseBody
-    public String add(@RequestParam(value = "files[]") MultipartFile file,
+    public String add(@RequestParam(value = "file") MultipartFile file,
                       @RequestParam(value = "type", defaultValue = "0") Integer type) {
         String result = "{\"error\":\"error\"}";
         try {
             if (file != null && !file.isEmpty()) {
                 String picUrl = MediaUtils.save(file);
+                System.out.println(type);
                 pictureService.add(file.getOriginalFilename(), picUrl,type);
-                result = "{\"success\":\"ok\"}";
+                result = "{\"success\":\"success\"}";
             }
         } catch (Exception e) {
             e.printStackTrace();
