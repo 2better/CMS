@@ -25,9 +25,9 @@
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/msclass.js"></script>
 <script>
     var images_url = [
-        '${TEMPLATE_BASE_PATH}/img/1.jpg',
-        '${TEMPLATE_BASE_PATH}/img/2.jpg',
-        '${TEMPLATE_BASE_PATH}/img/3.jpg'
+        <#list pictures as p>
+            '${BASE_PATH}/${p.picUrl}',
+        </#list>
     ];
 </script>
 <script src="${TEMPLATE_BASE_PATH}/js/jquery-slider.js"></script>

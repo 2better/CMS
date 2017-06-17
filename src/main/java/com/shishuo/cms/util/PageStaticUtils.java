@@ -5,6 +5,7 @@ import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.FriendlylinkService;
 import com.shishuo.cms.service.MenuService;
+import com.shishuo.cms.service.PictureService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.log4j.Logger;
@@ -33,6 +34,8 @@ public class PageStaticUtils {
     private ConfigService configService;
     @Autowired
     private FriendlylinkService friendlylinkService;
+    @Autowired
+    private PictureService pictureService;
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -51,6 +54,10 @@ public class PageStaticUtils {
             data.put("seo_description", configService.getStringByKey("seo_description"));
             data.put("TEMPLATE_BASE_PATH",BASE_PATH  + "/static/template/blog");
             data.put("BASE_PATH", BASE_PATH);
+            //加载轮播图
+            data.put("pictures",pictureService.getAllByType(1));
+            //小图
+            data.put("pictures",pictureService.getAllByType(0));
             createHtml(headerHtmlFile, "header", data);
         }
         if (!footerHtmlFile.exists())
