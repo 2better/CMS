@@ -115,4 +115,11 @@ public class UserAction extends BaseAction {
         return json;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/isLogin.json", method = RequestMethod.POST)
+    public boolean isLogin(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("sessionUser");
+        return user!=null;
+    }
+
 }

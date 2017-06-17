@@ -49,9 +49,17 @@
 <div class="login-layer" style="display:none">
     <div class="login">
         <h1>用户登录</h1>
-        <form method="post" action="index.html">
-            <p><input type="text" name="login" value="" placeholder="用户名"></p>
+        <form method="post" action="${BASE_PATH}/user/login.json">
+            <p><input type="text" name="name" value="" placeholder="用户名"></p>
             <p><input type="password" name="password" value="" placeholder="密码"></p>
+            <p>
+                <input type="text" name="captcha" class="form-control"  required
+                       placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
+
+                    style="cursor: pointer; cursor: hand; margin-top: -13px;"
+                    onclick="this.src='${BASE_PATH}/admin/captcha.htm?'+Math.random();"
+                    src="${BASE_PATH}/admin/captcha.htm">
+            </p>
             <p class="remember_me">
                 <label>
                     <input type="checkbox" name="remember_me" id="remember_me">
@@ -115,4 +123,26 @@
         </ul>
     </div>
 </div>
+<script>
+    $(function () {
+
+       $("#nav li").click(function (e) {
+           if($(this).find('a').html()!=="智库专报") return;
+           e.preventDefault();
+               $.ajax( {
+                   url:'${BASE_PATH}/user/isLogin.json',
+                   type:'POST',
+                   cache:false,
+                   success:function(data) {
+                       if(data == false ){
+                           $(".login-layer").css('display','flex');
+                       }
+                   },
+                   error : function() {
+                       alert("系统繁忙，请稍后再试！");
+                   }
+               });
+       });
+    })
+</script>
 <div class="clear"></div>

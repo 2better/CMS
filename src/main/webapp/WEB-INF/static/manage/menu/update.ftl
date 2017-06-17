@@ -1,4 +1,4 @@
-<#assign menu="menu"> <#assign submenu="update_menu"> <#include
+<#assign menu="menu"> <#assign submenu="cog"> <#include
 "/manage/head.ftl">
 <!--main content start-->
 <section id="main-content">

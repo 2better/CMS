@@ -1,5 +1,5 @@
 <#assign menu="menu">
-<#assign submenu="add_menu">
+<#assign submenu="cog">
 <#include "/manage/head.ftl">
 <style type="text/css">
 .m-bot15 {

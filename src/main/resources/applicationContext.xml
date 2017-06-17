@@ -99,8 +99,8 @@
                 <entry key="logout" value-ref="logoutFilter" />
                 <entry key="userLogout" value-ref="userLogout" />
                 <entry key="userAuthc" value-ref="userFormAuthenticationFilter" />
-                <entry key="user" value-ref="userFilter" />
-                <entry key="admin" value-ref="adminFilter" />
+                <entry key="userl" value-ref="userFilter" />
+                <entry key="adminl" value-ref="adminFilter" />
                 <entry key="roles">
                     <bean class="com.shishuo.cms.shiro.CustomRolesAuthorizationFilter"/>
                 </entry>
@@ -112,8 +112,8 @@
                 /admin/logout.htm = logout,roles[admin]
                 /user/login.json = userAuthc
                 /user/logout.htm = userLogout,roles[user]
-                /manage/** = roles[admin]
-                /article/download.htm = user
+                /manage/** = adminl,roles[admin]
+                /article/download.htm = userl
 
                 /** = anon
 

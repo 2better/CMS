@@ -1,5 +1,5 @@
 <#assign menu="scholar">
-<#assign submenu="scholar_list">
+<#assign submenu="result">
 <#include "/manage/head.ftl">
 <!--main content start-->
 <section id="main-content">

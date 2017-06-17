@@ -1,5 +1,5 @@
 <#assign menu="user_list">
-<#assign submenu="user_list">
+<#assign submenu="user">
 <#include "/manage/head.ftl">
 <!--main content start-->
 <section id="main-content">

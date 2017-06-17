@@ -1,5 +1,5 @@
 <#assign menu="picture">
-<#assign submenu="picture_list">
+<#assign submenu="cog">
 <#include "/manage/head.ftl">
 <link rel="stylesheet" href="${BASE_PATH}/static/manage/pic/ssi-uploader.css"/>
 <section id="main-content">

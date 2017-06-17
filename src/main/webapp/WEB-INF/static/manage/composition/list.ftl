@@ -1,5 +1,5 @@
 <#assign menu="composition">
-<#assign submenu="composition_list">
+<#assign submenu="result">
 <#include "/manage/head.ftl">
 <!--main content start-->
 <section id="main-content">

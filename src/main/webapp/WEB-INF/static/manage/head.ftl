@@ -39,6 +39,7 @@
         kind = "article";
     </script>
     <script src="${BASE_PATH}/static/manage/js/jquery.js?v=${config_v}"></script>
+    <script src="${BASE_PATH}/static/manage/js/jquery-accordion-menu.js" type="text/javascript"></script>
 </head>
 <body class="boxed-page">
 	<div class="container">
@@ -94,65 +95,40 @@
                     <li>
                         <a class="link <#if menu="event">active</#if>" href="${BASE_PATH}/manage/event/listPage.htm"><i class="fa fa-play-circle fa-4x"></i>&nbsp;&nbsp;<span>活动管理</span> &nbsp;&nbsp;<#if menu="event"><i class="fa fa-chevron-right"></i></#if></a>
                     </li>
-                    <li>
-                        <a class="link"><i class="fa fa-edit fa-4x "></i>&nbsp;&nbsp;研究成果 &nbsp;&nbsp;<i class="fa fa-chevron-down"></i></a>
+                    <li id="result">
+                        <a  class="link" href="javascript:void(0);"><i class="fa fa-edit fa-4x "></i>&nbsp;&nbsp;研究成果 &nbsp;&nbsp;</a>
                         <ul class="submenu">
-                            <li><a class="link <#if menu="composition">active</#if>" href="${BASE_PATH}//manage/composition/listPage.htm">&nbsp;&nbsp;<span>学术著作</span> &nbsp;&nbsp;<#if menu="composition"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="scholar">active</#if>" href="${BASE_PATH}/manage/scholar/listPage.htm">&nbsp;&nbsp;<span>学着风采</span> &nbsp;&nbsp;<#if menu="scholar"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="composition">active</#if>" href="${BASE_PATH}//manage/composition/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>学术著作</span> &nbsp;&nbsp;<#if menu="composition"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="scholar">active</#if>" href="${BASE_PATH}/manage/scholar/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>学着风采</span> &nbsp;&nbsp;<#if menu="scholar"><i class="fa fa-chevron-right"></i></#if></a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="link"><i class="fa fa-user fa-4x "></i>&nbsp;&nbsp;用户管理 &nbsp;&nbsp;<i class="fa fa-chevron-down"></i></a>
+                    <li id="user">
+                        <a class="link" href="javascript:void(0);"><i class="fa fa-user fa-4x "></i>&nbsp;&nbsp;用户管理 &nbsp;&nbsp;</a>
                         <ul class="submenu">
-                            <li><a class="link <#if menu="user_list">active</#if>" href="${BASE_PATH}/manage/user/manage.htm">&nbsp;&nbsp;<span>用户管理</span> &nbsp;&nbsp;<#if menu="user_list"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="admin_list">active</#if>" href="${BASE_PATH}/manage/admin/manage.htm">&nbsp;<span>管理员管理</span> &nbsp;&nbsp;<#if menu="admin_list"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="user_list">active</#if>" href="${BASE_PATH}/manage/user/manage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>用户管理</span> &nbsp;&nbsp;<#if menu="user_list"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="admin_list">active</#if>" href="${BASE_PATH}/manage/admin/manage.htm"><i class="fa fa-caret-right"></i>&nbsp;<span>管理员管理</span> &nbsp;<#if menu="admin_list"><i class="fa fa-chevron-right"></i></#if></a></li>
                         </ul>
                     </li>
-                    <li id="a">
-                        <a class="link" ><i class="fa fa-cogs fa-4x "></i>&nbsp;&nbsp;网站设置 &nbsp;&nbsp;<i class="fa fa-chevron-down"></i></a>
-                        <ul class="submenu" id="cog" >
-                            <li><a  class="link <#if menu="system">active</#if>" href="${BASE_PATH}//manage/config/basic.htm">&nbsp;&nbsp;<span>基本设置</span> &nbsp;&nbsp;<#if menu="system"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="menu">active</#if>" href="${BASE_PATH}/manage/menu/list.htm">&nbsp;&nbsp;<span>菜单管理</span> &nbsp;&nbsp;<#if menu="menu"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="picture">active</#if>" href="${BASE_PATH}//manage/picture/listPage.htm">&nbsp;&nbsp;<span>展示图设置</span> &nbsp;&nbsp;<#if menu="picture"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="friendlyLink">active</#if>" href="${BASE_PATH}/manage/friendlyLink/friendlyLink.htm">&nbsp;&nbsp;<span>友情链接</span> &nbsp;&nbsp;<#if menu="friendlyLink"><i class="fa fa-chevron-right"></i></#if></a></li>
+                    <li id="cog">
+                        <a class="link" href="javascript:void(0);"><i class="fa fa-cogs fa-4x "></i>&nbsp;&nbsp;网站设置 &nbsp;&nbsp;</a>
+                        <ul class="submenu" >
+                            <li><a  class="link <#if menu="system">active</#if>" href="${BASE_PATH}//manage/config/basic.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>基本设置</span> &nbsp;&nbsp;<#if menu="system"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="menu">active</#if>" href="${BASE_PATH}/manage/menu/list.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>菜单管理</span> &nbsp;&nbsp;<#if menu="menu"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="picture">active</#if>" href="${BASE_PATH}//manage/picture/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;<span>展示图设置</span>&nbsp;&nbsp;<#if menu="picture"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="friendlyLink">active</#if>" href="${BASE_PATH}/manage/friendlyLink/friendlyLink.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>友情链接</span> &nbsp;&nbsp;<#if menu="friendlyLink"><i class="fa fa-chevron-right"></i></#if></a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <script>
+                jQuery(document).ready(function () {
 
-                $(document).ready(function(){
-                    $("#cog").parent().slideDown();
-                    $("#a").parent().toggleClass('open');
+                    $("#${submenu}").children(".submenu").delay(0).slideDown(300);
+                    $("#${submenu}").children(".submenu").siblings("a").addClass("active");
+                    jQuery("#sidebar").jqueryAccordionMenu();
+
                 });
 
-                $(function() {
-
-                    var Accordion = function(el, multiple) {
-                        this.el = el || {};
-                        this.multiple = multiple || false;
-
-                        // Variables privadas
-                        var links = this.el.find('.link');
-                        // Evento
-                        links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
-                    };
-
-                    Accordion.prototype.dropdown = function(e) {
-                        var $el = e.data.el;
-                        $this = $(this),
-                                $next = $this.next();
-
-                        $next.slideToggle();
-                        $this.parent().toggleClass('open');
-
-                        if (!e.data.multiple) {
-                            $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-                        };
-                    };
-
-                    var accordion = new Accordion($('#nav-accordion'), true);
-                });
             </script>
         </aside>
         <!--sidebar end-->

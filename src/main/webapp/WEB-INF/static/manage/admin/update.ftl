@@ -1,5 +1,5 @@
 <#assign menu="update_password">
-<#assign submenu="update_admin">
+<#assign submenu="user">
 <#include "/manage/head.ftl">
 <style type="text/css">
 </style>

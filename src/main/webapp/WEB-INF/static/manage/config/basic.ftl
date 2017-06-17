@@ -1,5 +1,5 @@
 <#assign menu="system">
-<#assign submenu="system_basic">
+<#assign submenu="cog">
 <#include "/manage/head.ftl">
 
 <!--main content start-->

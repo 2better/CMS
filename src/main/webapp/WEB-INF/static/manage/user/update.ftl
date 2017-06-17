@@ -1,5 +1,5 @@
 <#assign menu="user">
-<#assign submenu="update_user">
+<#assign submenu="user">
 <#include "/manage/head.ftl">
 <style type="text/css">
 </style>
