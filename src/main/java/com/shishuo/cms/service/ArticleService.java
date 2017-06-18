@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import com.shishuo.cms.entity.Menu;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -36,8 +37,6 @@ public class ArticleService {
 
     @Autowired
     private MenuService menuService;
-
-
     // ///////////////////////////////
     // ///// 增加 ////////
     // ///////////////////////////////
@@ -82,6 +81,7 @@ public class ArticleService {
 
     @CacheEvict(value = "article", allEntries = true)
     public boolean deleteArticleById(long articleId) {
+        PageStaticUtils.updateArticleTemplate(articleId + "");
         return articleDao.deleteArticleById(articleId);
     }
 
@@ -118,6 +118,7 @@ public class ArticleService {
             article.setCreateTime(date);
         }
         articleDao.updateArticle(article);
+        PageStaticUtils.updateArticleTemplate(articleId + "");
         return article;
     }
 

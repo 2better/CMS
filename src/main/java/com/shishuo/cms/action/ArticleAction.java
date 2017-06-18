@@ -35,13 +35,9 @@ public class ArticleAction extends BaseAction {
 	public String article(@PathVariable long articleId,
 						  ModelMap modelMap, HttpServletRequest request) {
 		try {
-			Article article = fileService.getArticleById(articleId);
-			List<Menu> menus = menuService.getWithChildById(article.getMenu().getPid());
-			modelMap.put("menus",menus.get(0));
-			modelMap.addAttribute("article", article);
-
-			pageStaticUtils.headerAndFooterStaticPage(request);
-			return themeService.getArticleTemplate();
+			pageStaticUtils.articleStaticPage(request,articleId);
+			request.setAttribute("htmlName",articleId);
+			return "/template/blog/article_template";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return themeService.get404();

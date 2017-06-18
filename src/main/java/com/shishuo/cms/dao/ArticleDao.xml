@@ -52,7 +52,7 @@
 		UPDATE article SET
 		menuId=#{menuId},
 		menuName = #{menuName},
-		name=#{name},
+		title=#{title},
 		content=#{content},
 		status=#{status},
 		createTime = #{createTime}
