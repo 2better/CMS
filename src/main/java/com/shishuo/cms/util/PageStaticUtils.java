@@ -57,7 +57,7 @@ public class PageStaticUtils {
             //加载轮播图
             data.put("pictures",pictureService.getAllByType(1));
             //小图
-            data.put("pictures",pictureService.getAllByType(0));
+            data.put("pics",pictureService.getAllByType(0));
             createHtml(headerHtmlFile, "header", data);
         }
         if (!footerHtmlFile.exists())

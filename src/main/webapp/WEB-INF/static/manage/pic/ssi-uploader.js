@@ -623,6 +623,7 @@
                     formData.append(key, value);
                 });
                 formData.append('file', thisS.toUpload[i]);
+                formData.append("type",$("input:radio[name='type']:checked").val());
                 ajaxLoopRequest(formData, i);
             }
         }

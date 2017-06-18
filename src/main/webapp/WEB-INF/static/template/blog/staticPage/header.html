@@ -24,11 +24,9 @@
 <script type="text/javascript" src="http://lan:8080/static/template/blog/js/msclass.js"></script>
 <script>
     var images_url = [
-            'http://lan:8080/upload/2017/06/16/3e26fd4dbd7644f38a6a47b40bba48b5.jpg',
-            'http://lan:8080/upload/2017/06/16/5f628813fe44499a8c9a5c2e32115d45.jpg',
-            'http://lan:8080/upload/2017/06/16/54ae379f8e9441f9b433f44feb9fb3c3.jpg',
-            'http://lan:8080/upload/2017/06/17/b5287658e5934d7aa1f195f6e992ffcd.jpg',
-            'http://lan:8080/upload/2017/06/17/305e389580544497934b721c7624d117.jpg',
+            'http://lan:8080/upload/2017/06/18/6cf26fd39ecd4adeaef2506c9f262c53.jpg',
+            'http://lan:8080/upload/2017/06/18/8ab7aa0597e44164a8e792dc302ef8e2.jpg',
+            'http://lan:8080/upload/2017/06/18/fce93f46ad274dc69f17854d91fd0415.jpg',
     ];
 </script>
 <script src="http://lan:8080/static/template/blog/js/jquery-slider.js"></script>
@@ -50,9 +48,17 @@
 <div class="login-layer" style="display:none">
     <div class="login">
         <h1>用户登录</h1>
-        <form method="post" action="index.html">
-            <p><input type="text" name="login" value="" placeholder="用户名"></p>
+        <form method="post" action="http://lan:8080/user/login.json">
+            <p><input type="text" name="name" value="" placeholder="用户名"></p>
             <p><input type="password" name="password" value="" placeholder="密码"></p>
+            <p>
+                <input type="text" name="captcha" class="form-control"  required
+                       placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
+
+                    style="cursor: pointer; cursor: hand; margin-top: -13px;"
+                    onclick="this.src='http://lan:8080/admin/captcha.htm?'+Math.random();"
+                    src="http://lan:8080/admin/captcha.htm">
+            </p>
             <p class="remember_me">
                 <label>
                     <input type="checkbox" name="remember_me" id="remember_me">
@@ -95,6 +101,12 @@
                 <li class="on">
                     <a href=""
                        target="0">首页</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149776534411285"
+                       target="0">测试</a>
                     <ul>
                     </ul>
                 </li>
@@ -225,4 +237,26 @@
         </ul>
     </div>
 </div>
+<script>
+    $(function () {
+
+       $("#nav li").click(function (e) {
+           if($(this).find('a').html()!=="智库专报") return;
+           e.preventDefault();
+               $.ajax( {
+                   url:'http://lan:8080/user/isLogin.json',
+                   type:'POST',
+                   cache:false,
+                   success:function(data) {
+                       if(data == false ){
+                           $(".login-layer").css('display','flex');
+                       }
+                   },
+                   error : function() {
+                       alert("系统繁忙，请稍后再试！");
+                   }
+               });
+       });
+    })
+</script>
 <div class="clear"></div>

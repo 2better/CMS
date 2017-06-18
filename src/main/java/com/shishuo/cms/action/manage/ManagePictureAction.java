@@ -72,8 +72,7 @@ public class ManagePictureAction extends ManageBaseAction {
 
     @RequestMapping(value = "/list.json", method = RequestMethod.GET)
     @ResponseBody
-    public PageVo<Picture> pictureList(@RequestParam(value = "type",defaultValue = "0") Integer type,
-                                       @RequestParam(value = "p",defaultValue = "1") Integer p) {
-        return pictureService.getByPageByType(p,configService.getIntKey("pagination_num"),type);
+    public PageVo<Picture> pictureList(@RequestParam(value = "p",defaultValue = "1") Integer p) {
+        return pictureService.getByPage(p,configService.getIntKey("pagination_num"));
     }
 }

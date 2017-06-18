@@ -5,6 +5,7 @@ import com.shishuo.cms.entity.Composition;
 import com.shishuo.cms.entity.Picture;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.util.MediaUtils;
+import com.shishuo.cms.util.PageStaticUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class PictureService {
         picture.setType(type);
         picture.setCreateTime(new Date());
         pictureDao.add(picture);
+        PageStaticUtils.updateTemplate("header");
     }
 
     public Picture getById(Integer id) {
@@ -40,13 +42,14 @@ public class PictureService {
         if (StringUtils.isNotBlank(picUrl))
             MediaUtils.deleteFile("/" + picUrl);
         pictureDao.delete(id);
+        PageStaticUtils.updateTemplate("header");
     }
 
-    public PageVo<Picture> getByPageByType(Integer p, Integer rows, Integer type) {
+    public PageVo<Picture> getByPage(Integer p, Integer rows) {
         PageVo<Picture> pv = new PageVo<Picture>(p);
         pv.setRows(rows);
-        pv.setCount(pictureDao.getCount(type));
-        pv.setList(pictureDao.getPictureList(type,pv.getOffset(),rows));
+        pv.setCount(pictureDao.getCount());
+        pv.setList(pictureDao.getPictureList(pv.getOffset(),rows));
         return pv;
     }
 
