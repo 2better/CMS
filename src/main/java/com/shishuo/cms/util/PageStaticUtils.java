@@ -1,11 +1,10 @@
 package com.shishuo.cms.util;
 
 import com.shishuo.cms.constant.SystemConstant;
+import com.shishuo.cms.entity.Article;
 import com.shishuo.cms.entity.Menu;
-import com.shishuo.cms.service.ConfigService;
-import com.shishuo.cms.service.FriendlylinkService;
-import com.shishuo.cms.service.MenuService;
-import com.shishuo.cms.service.PictureService;
+import com.shishuo.cms.exception.ArticleNotFoundException;
+import com.shishuo.cms.service.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.log4j.Logger;
@@ -36,6 +35,8 @@ public class PageStaticUtils {
     private FriendlylinkService friendlylinkService;
     @Autowired
     private PictureService pictureService;
+    @Autowired
+    protected ArticleService fileService;
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -52,16 +53,15 @@ public class PageStaticUtils {
             data.put("menuList", menuList);
             data.put("index_title", configService.getStringByKey("index_title"));
             data.put("seo_description", configService.getStringByKey("seo_description"));
-            data.put("TEMPLATE_BASE_PATH",BASE_PATH  + "/static/template/blog");
+            data.put("TEMPLATE_BASE_PATH", BASE_PATH + "/static/template/blog");
             data.put("BASE_PATH", BASE_PATH);
             //加载轮播图
-            data.put("pictures",pictureService.getAllByType(1));
+            data.put("pictures", pictureService.getAllByType(1));
             //小图
-            data.put("pictures",pictureService.getAllByType(0));
+            data.put("pics", pictureService.getAllByType(0));
             createHtml(headerHtmlFile, "header", data);
         }
-        if (!footerHtmlFile.exists())
-        {
+        if (!footerHtmlFile.exists()) {
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("linkList", friendlylinkService.getAllDisplay());
             data.put("copyright", configService.getStringByKey("copyright"));
@@ -72,10 +72,15 @@ public class PageStaticUtils {
         logger.info("页面静态化");
     }
 
-    public static void updateTemplate(String theme)
-    {
-        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT+"/WEB-INF/static/template/blog/staticPage/" + theme + ".html");
-        if(htmlFile.exists())
+    public static void updateTemplate(String theme) {
+        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + "/WEB-INF/static/template/blog/staticPage/" + theme + ".html");
+        if (htmlFile.exists())
+            htmlFile.delete();
+    }
+
+    public static void updateArticleTemplate(String theme) {
+        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + "/WEB-INF/static/template/blog/article/" + theme + ".html");
+        if (htmlFile.exists())
             htmlFile.delete();
     }
 
@@ -107,4 +112,18 @@ public class PageStaticUtils {
         }
     }
 
+    //文章静态化
+    public void articleStaticPage(HttpServletRequest request, Long articleId) throws ArticleNotFoundException {
+        String articleHtml = "/WEB-INF/static/template/blog/article/" + articleId + ".html";
+        String root = request.getSession().getServletContext().getRealPath("/");
+        File articleHtmlFile = new File(root + articleHtml);
+        if (!articleHtmlFile.exists()) {
+            Map<String, Object> data = new HashMap<String, Object>();
+            Article article = fileService.getArticleById(articleId);
+            List<Menu> menus = menuService.getWithChildById(article.getMenu().getPid());
+            data.put("menus", menus.get(0));
+            data.put("article", article);
+            createHtml(articleHtmlFile, "article" + "", data);
+        }
+    }
 }

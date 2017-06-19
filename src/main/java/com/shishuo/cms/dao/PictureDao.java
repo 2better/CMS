@@ -20,9 +20,9 @@ public interface PictureDao {
     //删除
     void delete(Integer id);
 
-    List<Picture> getPictureList(@Param("type") Integer type, @Param("offest")Integer offest, @Param("rows")Integer rows);
+    List<Picture> getPictureList(@Param("offest")Integer offest, @Param("rows")Integer rows);
 
-    int getCount(Integer type);
+    int getCount();
 
     List<Picture> getAllByType(Integer type);
 }

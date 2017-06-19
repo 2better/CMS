@@ -1,0 +1,2 @@
+<#include "article/${htmlName}.html">
+

@@ -72,7 +72,7 @@
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">标题</label>
                           <div class="col-sm-10">
-                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="name"
+                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="title"
                               	placeholder="文章标题" id="name" value="${article.title}">
                               </input>
                           </div>

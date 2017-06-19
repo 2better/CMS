@@ -45,11 +45,11 @@ public class PictureService {
         PageStaticUtils.updateTemplate("header");
     }
 
-    public PageVo<Picture> getByPageByType(Integer p, Integer rows, Integer type) {
+    public PageVo<Picture> getByPage(Integer p, Integer rows) {
         PageVo<Picture> pv = new PageVo<Picture>(p);
         pv.setRows(rows);
-        pv.setCount(pictureDao.getCount(type));
-        pv.setList(pictureDao.getPictureList(type,pv.getOffset(),rows));
+        pv.setCount(pictureDao.getCount());
+        pv.setList(pictureDao.getPictureList(pv.getOffset(),rows));
         return pv;
     }
 
