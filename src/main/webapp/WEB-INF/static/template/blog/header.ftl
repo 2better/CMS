@@ -81,7 +81,7 @@
     <div class="header-content">
         <div class="logo">
             <a href="${BASE_PATH}/index.htm">
-                <img src="${TEMPLATE_BASE_PATH}/images/logo-bg.png" alt=""/>
+                <img src="${TEMPLATE_BASE_PATH}/images/logo-new.png" alt=""/>
             </a>
         </div>
         <h3>
@@ -92,12 +92,10 @@
         <!--搜索-->
         <div class="search">
             <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
-            <input id="keywords" name="keywords" class="input-text" type="text" x-webkit-speech=""
-                   placeholder="请输入关键字搜索"
-                   onkeydown="if(event.keyCode==13){SiteSearch('/001lt269/search.html', '#keywords');return false};"
-            />
-            <input class="input-btn" type="submit" value=""
-                   onclick="SiteSearch('/001lt269/search.html', '#keywords');"/>
+            <div class="searchGroup">
+                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索">
+                <input type="button" value="搜索" class="searchButton">
+            </div>
         </div>
         <!--搜索-->
     </div>

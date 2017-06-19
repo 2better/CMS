@@ -35,7 +35,13 @@
             <div class="con-top-r">
                 <!--S 区域2-->
                 <div class="area2">
-                    <div class="area2-top"><img src="${TEMPLATE_BASE_PATH}/images/201505090952264356.jpg" /></div>
+                    <div class="area2-top">
+                        <div class="slider">
+                            <ul></ul>
+                            <ol></ol>
+                            <i class="left"></i><i class="right"></i>
+                        </div>
+                    </div>
                     <div class="area2-bot">
                         <div class="title-con-l">
                             <div class="title">
@@ -229,28 +235,28 @@
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="title-con-r" style="background-color:none;">
+                        <div class="title-con-r" style="background-color:#56628B;">
                             <!--<p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
                                 2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p>
                             <div id="area2-url" style="display:none">/001lt269/page/34.html</div>
                             <div id="area2-img" style="display:none">/001lt269/upload/201505/09/201505090952264356.jpg</div>-->
                             <div class="resource-top">
                                 <a href="">
-                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon.png" alt="" />
+                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon1.png" alt="" />
                                     <span>创新数据库</span>
                                 </a>
                                 <a href="">
-                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon.png" alt="" />
+                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon2.png" alt="" />
                                     <span>创新案例库</span>
                                 </a>
                             </div>
                             <div class="resource-bot">
                                 <a href="">
-                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon.png" alt="" />
+                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon3.png" alt="" />
                                     <span>政策资源库</span>
                                 </a>
                                 <a href="">
-                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon.png" alt="" />
+                                    <img src="${TEMPLATE_BASE_PATH}/images/database-icon4.png" alt="" />
                                     <span>智库专报</span>
                                 </a>
                             </div>

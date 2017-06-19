@@ -43,6 +43,25 @@
                 day = date.getDate();
         return year + "年" + month + "月" + day + "日";
     }
+
+    document.querySelector("i.close").addEventListener('click',()=>{
+        document.querySelector(".login-layer").style.display = 'none';
+    },false)
+
+    function trimStr(str){
+        var reg = /\s/g;
+        return str.replace(reg,"");
+    }
+
+    // 空值判断
+    $('.login-layer').submit(function (){
+        $.each($('input'),function (index,value){
+            if(!trimStr(value)){
+                $(".error").text("输入不能为空！");
+                return ;
+            }
+        })
+    });
 </script>
 <!--底部-->
 <!--底部-->

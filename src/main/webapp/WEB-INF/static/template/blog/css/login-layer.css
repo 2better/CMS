@@ -35,6 +35,7 @@
   border-radius: 4px;
 }
 .login h1 {
+  position: relative;
   margin: -20px -20px 21px;
   line-height: 40px;
   font-size: 15px;
@@ -52,6 +53,18 @@
   -webkit-box-shadow: 0 1px whitesmoke;
   box-shadow: 0 1px whitesmoke;
 }
+
+.login h1 > i{
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: url(../images/icon_close_alt2.png) no-repeat;
+}
+
 .login p {
   margin: 20px 0 0;
 }
@@ -90,7 +103,7 @@
   font-size:12px;
 }
 .login-help a {
-  color: #cce7fa;
+  color: #2890da;
   text-decoration: none;
 }
 .login-help a:hover {
@@ -115,7 +128,7 @@
 .login-layer input[type=text], input[type=password] {
   margin: 5px;
   padding: 0 10px;
-  width: 200px;
+  /*width: 200px;*/
   height: 34px;
   color: #404040;
   background: white;

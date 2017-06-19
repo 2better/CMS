@@ -63,8 +63,8 @@ input.error:focus {
 			action="${BASE_PATH}/admin/login.json" autocomplete="off"
 			method="post">
 			<h2 class="form-signin-heading">
-				<img src="${TEMPLATE_BASE_PATH}/images/logo-bg.png"
-					style="height: 38px;" />
+				<img src="${TEMPLATE_BASE_PATH}/images/logo-new.png"
+					style="height: 48px;" />
 			</h2>
 			<div class="login-wrap">
 				<div class="form-group">
