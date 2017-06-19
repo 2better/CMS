@@ -1,23 +1,21 @@
 
 package com.shishuo.cms.action;
 
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.User;
-import com.shishuo.cms.entity.User;
+
 import com.shishuo.cms.exception.ValidateException;
 import com.shishuo.cms.service.UserService;
 import com.shishuo.cms.util.SSUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,11 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.shishuo.cms.constant.SystemConstant;
+
 import com.shishuo.cms.entity.vo.JsonVo;
-import com.shishuo.cms.service.UserService;
-import com.shishuo.cms.util.HttpUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author Herbert
@@ -48,28 +47,30 @@ public class UserAction extends BaseAction {
         return "/manage/user/login";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/login.json", method = RequestMethod.POST)
-    public String userLogin(@RequestParam(value = "name") String name,
-                             @RequestParam(value = "password") String password, ModelMap
-                                     modelMap, HttpServletRequest request) {
+    public Map<String,String> userLogin(HttpServletRequest request) {
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
-        if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "账号不存在");
-        } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "用户名/密码错误");
-        } else if ("randomCodeError".equals(exceptionClassName)) {
-            modelMap.put("error", "验证码错误");
-        } else if ("valueError".equals(exceptionClassName)) {
-            modelMap.put("error", "用户名密码不能为空");
-        } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "密码重试次数过多");
-        } else {
-            System.out.println(exceptionClassName);
-            modelMap.put("error", "系统繁忙,请稍后再试");
+        String error = "";
+        if(exceptionClassName!=null) {
+            if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
+                error = "账号不存在";
+            } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+                error = "用户名/密码错误";
+            } else if ("randomCodeError".equals(exceptionClassName)) {
+                error = "验证码错误";
+            } else if ("valueError".equals(exceptionClassName)) {
+                error = "用户名密码不能为空";
+            } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
+                error = "密码重试次数过多,一小时后再试";
+            } else {
+                System.out.println(exceptionClassName);
+                error = "系统繁忙,请稍后再试";
+            }
         }
-        modelMap.put("name",name);
-        modelMap.put("password",password);
-        return login();
+        Map<String,String> map = new HashMap<String,String>(2);
+        map.put("error",error);
+        return map;
     }
 
     @RequestMapping(value = "/update.htm", method = RequestMethod.GET)
@@ -117,9 +118,9 @@ public class UserAction extends BaseAction {
 
     @ResponseBody
     @RequestMapping(value = "/isLogin.json", method = RequestMethod.POST)
-    public boolean isLogin(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("sessionUser");
-        return user!=null;
+    public boolean isLogin() {
+        Subject currentUser = SecurityUtils.getSubject();
+        return currentUser.isAuthenticated()||currentUser.isRemembered();
     }
 
 }

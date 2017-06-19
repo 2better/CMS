@@ -111,8 +111,6 @@ input.error:focus {
             alert("请输入验证码");
             return false;
         }
-
-
         return true;
     });
 </script>

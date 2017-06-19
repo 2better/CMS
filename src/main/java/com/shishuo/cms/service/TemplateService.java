@@ -30,10 +30,6 @@ public class TemplateService {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
-	@Autowired
-	private ConfigService configService;
-
-
 	/**
 	 * @return
 	 */
@@ -104,15 +100,12 @@ public class TemplateService {
 		String themePath = "/WEB-INF/static/template/blog/" + theme + ".ftl";
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + themePath);
 		if (file.exists()) {
-			logger.info("尝试使用模板：" + themePath+"【存在】");
+			//logger.info("尝试使用模板：" + themePath+"【存在】");
 			return true;
 		} else {
-			logger.info("尝试使用模板：" + themePath+"【不存在】");
+			//logger.info("尝试使用模板：" + themePath+"【不存在】");
 			return false;
 		}
 	}
 
-	// ///////////////////////////////
-	// ///// 查詢 ////////
-	// ///////////////////////////////
 }

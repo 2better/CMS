@@ -14,7 +14,7 @@ public class UserToken implements HostAuthenticationToken, RememberMeAuthenticat
 
     private char[] password;
 
-    private boolean rememberMe = false;
+    private boolean rememberMe;
 
     private String host;
 

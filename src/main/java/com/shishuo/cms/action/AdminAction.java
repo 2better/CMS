@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -56,19 +58,21 @@ public class AdminAction extends BaseAction {
                              @RequestParam(value = "password") String password, ModelMap
                                      modelMap, HttpServletRequest request) {
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
-        if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "账号不存在");
-        } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "用户名/密码错误");
-        } else if ("randomCodeError".equals(exceptionClassName)) {
-            modelMap.put("error", "验证码错误");
-        } else if ("valueError".equals(exceptionClassName)) {
-            modelMap.put("error", "用户名密码不能为空");
-        } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
-            modelMap.put("error", "密码重试次数过多");
-        } else {
-           System.out.println(exceptionClassName);
-            modelMap.put("error", "系统繁忙,请稍后再试");
+        if(exceptionClassName!=null) {
+            if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
+                modelMap.put("error", "账号不存在");
+            } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+                modelMap.put("error", "用户名/密码错误");
+            } else if ("randomCodeError".equals(exceptionClassName)) {
+                modelMap.put("error", "验证码错误");
+            } else if ("valueError".equals(exceptionClassName)) {
+                modelMap.put("error", "用户名密码不能为空");
+            } else if (ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
+                modelMap.put("error", "密码重试次数过多,一小时后再试");
+            } else {
+                System.out.println(exceptionClassName);
+                modelMap.put("error", "系统繁忙,请稍后再试");
+            }
         }
         modelMap.put("name",name);
         modelMap.put("password",password);
