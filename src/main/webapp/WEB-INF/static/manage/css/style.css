@@ -263,7 +263,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #aeb2b7;
+    color: #fff;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -282,7 +282,6 @@ ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     display: block;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -304,19 +303,13 @@ ul.sidebar-menu li a.active i {
     color: #FF6C60;
 }
 
-
 .sidebar-menu .link {
-
     margin-bottom: 5px;
     margin-left:10px;
     margin-right:10px;
-
     cursor: pointer;
     display: block;
-
     color: #FFF;
-
-
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -327,8 +320,6 @@ ul.sidebar-menu li a.active i {
 }
 
 .sidebar-menu li i {
-
-
     color: #595959;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;

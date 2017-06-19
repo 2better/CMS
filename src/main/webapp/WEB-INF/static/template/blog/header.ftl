@@ -24,13 +24,17 @@
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/msclass.js"></script>
 <script>
-    var images_url = [
-        <#list pictures as p>
-            '${BASE_PATH}/${p.picUrl}',
-        </#list>
+    var big = [
+    <#list pictures as p>
+        '${BASE_PATH}/${p.picUrl}',
+    </#list>];
+    var small = [
+    <#list pics as p>
+        '${BASE_PATH}/${p.picUrl}',
+    </#list>
     ];
 </script>
-<script src="${TEMPLATE_BASE_PATH}/js/jquery-slider.js"></script>
+<script src="${TEMPLATE_BASE_PATH}/js/slider.js"></script>
 <!--<script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.kinslideshow-1.2.1.min.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.media.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/dd_belatedpng_0.0.8a.js"></script>
@@ -49,11 +53,13 @@
 <div class="login-layer" style="display:none">
     <div class="login">
         <h1>用户登录</h1>
-        <form method="post" action="${BASE_PATH}/user/login.json">
-            <p><input type="text" name="name" value="" placeholder="用户名"></p>
-            <p><input type="password" name="password" value="" placeholder="密码"></p>
+        <form method="post" action="${BASE_PATH}/user/login.json" id="loginForm">
+            <span id="error" style="color:red;"></span>
+            <p><input type="text" name="name" value="user" placeholder="用户名" required></p>
+            <p><input type="password" name="password" value="123456" placeholder="密码" maxlength="16" minlength="6"
+                      required></p>
             <p>
-                <input type="text" name="captcha" class="form-control"  required
+                <input type="text" name="captcha" class="form-control" required maxlength="4" minlength="4"
                        placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
 
                     style="cursor: pointer; cursor: hand; margin-top: -13px;"
@@ -62,7 +68,7 @@
             </p>
             <p class="remember_me">
                 <label>
-                    <input type="checkbox" name="remember_me" id="remember_me">
+                    <input type="checkbox" name="rememberMe" id="remember_me" value="true">
                     记住密码
                 </label>
             </p>
@@ -77,10 +83,17 @@
 
 <!--头部-->
 <div class="header">
+    <!-- banner -->
+    <div class="banner">
+        <div class="slider">
+            <ul></ul>
+        </div>
+    </div>
+    <!-- banner -->
     <div class="header-content">
         <div class="logo">
             <a href="${BASE_PATH}/index.htm">
-                <img src="${TEMPLATE_BASE_PATH}/images/logo-bg.png" alt="" />
+                <img src="${TEMPLATE_BASE_PATH}/images/logo-new.png" alt=""/>
             </a>
         </div>
         <h3>
@@ -91,9 +104,10 @@
         <!--搜索-->
         <div class="search">
             <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
-            <input id="keywords" name="keywords" class="input-text" type="text" x-webkit-speech="" placeholder="请输入关键字搜索" onkeydown="if(event.keyCode==13){SiteSearch('/001lt269/search.html', '#keywords');return false};"
-            />
-            <input class="input-btn" type="submit" value="" onclick="SiteSearch('/001lt269/search.html', '#keywords');" />
+            <div class="searchGroup">
+                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索">
+                <input type="button" value="搜索" class="searchButton">
+            </div>
         </div>
         <!--搜索-->
     </div>
@@ -123,26 +137,43 @@
         </ul>
     </div>
 </div>
+<script src="${BASE_PATH}/static/manage/js/jquery.form.min.js"></script>
 <script>
     $(function () {
+        var ele = null;
+        $("#nav li").click(function (e) {
+            var temp = $(this).find('a');
+            if (temp.html() !== "智库专报") return;
+            ele = $(this).find('a');
+            e.preventDefault();
+            $.ajax({
+                url: '${BASE_PATH}/user/isLogin.json',
+                type: 'POST',
+                cache: false,
+                success: function (data) {
+                    if (data == false) {
+                        $(".login-layer").css('display', 'flex');
+                    } else {
+                        window.open(temp.attr("href"), "_blank");
+                    }
+                },
+                error: function () {
+                    alert("系统繁忙，请稍后再试！");
+                }
+            });
+        });
 
-       $("#nav li").click(function (e) {
-           if($(this).find('a').html()!=="智库专报") return;
-           e.preventDefault();
-               $.ajax( {
-                   url:'${BASE_PATH}/user/isLogin.json',
-                   type:'POST',
-                   cache:false,
-                   success:function(data) {
-                       if(data == false ){
-                           $(".login-layer").css('display','flex');
-                       }
-                   },
-                   error : function() {
-                       alert("系统繁忙，请稍后再试！");
-                   }
-               });
-       });
+        $('#loginForm').ajaxForm({
+            dataType: 'json',
+            success: function (data) {
+                if (data)
+                    $("#error").text(data.error);
+            },
+            error: function () {
+                window.location.href=ele.attr("href");
+            }
+        });
+
     })
 </script>
 <div class="clear"></div>

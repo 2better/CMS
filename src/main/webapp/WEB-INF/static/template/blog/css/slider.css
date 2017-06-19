@@ -1,21 +1,25 @@
-.banner{
+.slider{
     width: 100%;
     /*height: 560px;*/
     /*background: black;*/
     /*子绝父相*/
     position: relative;
+    height: 100%;
+    /*position: absolute;*/
     /*超出部分全部隐藏，解决横向滚动条*/
     overflow: hidden;
 }
-.banner ul{
+.slider ul{
     position: absolute;
+    height: 100%;
 }
-.banner ul li{
+.slider ul li{
     /*这个100%是相对于父盒子的（会把父盒子的宽度继承过来,如父盒子300%,这这里的100%就会相当于300%）*/
     width: 100%;
-    height: 560px;
+    height: 100%;
     float: left;
     background:  no-repeat center center;
+    background-size: cover;
 }
 /*.banner ul li:nth-child(1){*/
     /*background: url('./1.jpg') no-repeat center center;*/
@@ -26,18 +30,18 @@
 /*.banner ul li:nth-child(3){*/
     /*background: url('./3.jpg') no-repeat center center;*/
 /*}*/
-.banner ol{
+.slider ol{
     /*width: 60px;*/
     height: 20px;
     background: rgba(0,0,0,0.5);
     position: absolute;
     left:50%;
     /*margin-left: -40px;*/
-    bottom: 30px;
+    bottom: 5%;
     padding: 0 10px;
     border-radius: 10px;
 }
-.banner ol li{
+.slider ol li{
     width: 10px;
     height: 10px;
     float: left;
@@ -46,27 +50,27 @@
     border-radius: 50%;
     cursor: pointer;
 }
-.banner ol .current{
+.slider ol .current{
     background: rgba(255,255,255,1);
 }
-.banner i{
-    width: 58px;
-    height: 120px;
+.slider i{
+    width: 32px;
+    height: 80px;
     position: absolute;
     top: 50%;
-    margin-top: -60px;
+    transform: translateY(-50%);
     cursor: pointer;
     border-radius: 5px;
     display: none;
 }
-.banner .left{
-    left: 60px;
-    background: url('../img/left_right.png') no-repeat 0 0px;
+.slider .left{
+    left: 5%;
+    background: url('../images/arrows-30.png') no-repeat top left;
 }
-.banner .right{
-    right: 60px;
-    background: url('../img/left_right.png') no-repeat 0px -120px;
+.slider .right{
+    right: 5%;
+    background: url('../images/arrows-30.png') no-repeat bottom left;
 }
-.banner .left:hover , .banner .right:hover{
+.slider .left:hover , .slider .right:hover{
     background-color: rgba(0, 0, 0, 0.31);
 }

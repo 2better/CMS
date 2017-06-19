@@ -52,7 +52,7 @@
                 $(this.element).find(".submenu").siblings("a").append("<i class='fa fa-chevron-down'></i>")
             }
         },
-        addClickEffect: function() {
+        /*addClickEffect: function() {
             var ink, d, x, y;
             $(this.element).find("a").bind("click touchstart",
             function(e) {
@@ -76,7 +76,7 @@
                     left: x + 'px'
                 }).addClass("animate-ink")
             })
-        }
+        }*/
     });
     $.fn[pluginName] = function(options) {
         this.each(function() {
