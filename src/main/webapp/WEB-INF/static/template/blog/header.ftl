@@ -24,12 +24,17 @@
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/msclass.js"></script>
 <script>
-    var images_url = [
+    var big = [
     <#list pictures as p>
         '${BASE_PATH}/${p.picUrl}',
     </#list>];
+    var small = [
+    <#list pics as p>
+        '${BASE_PATH}/${p.picUrl}',
+    </#list>
+    ];
 </script>
-<script src="${TEMPLATE_BASE_PATH}/js/jquery-slider.js"></script>
+<script src="${TEMPLATE_BASE_PATH}/js/slider.js"></script>
 <!--<script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.kinslideshow-1.2.1.min.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.media.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/dd_belatedpng_0.0.8a.js"></script>
@@ -78,6 +83,13 @@
 
 <!--头部-->
 <div class="header">
+    <!-- banner -->
+    <div class="banner">
+        <div class="slider">
+            <ul></ul>
+        </div>
+    </div>
+    <!-- banner -->
     <div class="header-content">
         <div class="logo">
             <a href="${BASE_PATH}/index.htm">

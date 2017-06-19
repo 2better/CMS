@@ -5,7 +5,7 @@
  * @param {jsonObject[NodeElement]} $ctrl 轮播切换的按钮
  * @param {boolean} auto 是否自动轮播
  */
-function slider($container, auto = true, images = ['img/1.jpg','img/4.jpg']) {
+function slider($container, auto, images) {
 	// //图片路径/链接(数组形式)
     var images_url = images,
     	images_count = images.length;
@@ -124,6 +124,6 @@ function slider($container, auto = true, images = ['img/1.jpg','img/4.jpg']) {
 
 
 $(function (){
-  slider($('.banner'), true);
-  slider($('.area2-top'), false);
+  slider($('.banner'), true,big);
+  slider($('.area2-top'), false,small);
 })
