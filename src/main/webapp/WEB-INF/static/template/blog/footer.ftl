@@ -44,9 +44,13 @@
         return year + "年" + month + "月" + day + "日";
     }
 
-    document.querySelector("i.close").addEventListener('click',()=>{
+    document.querySelector("i.close").onclick(function () {
         document.querySelector(".login-layer").style.display = 'none';
-    },false)
+    });
+
+    /*document.querySelector("i.close").addEventListener('click',()=>{
+        document.querySelector(".login-layer").style.display = 'none';
+    },false)*/
 
     function trimStr(str){
         var reg = /\s/g;

@@ -20,7 +20,7 @@
             this.openSubmenu();
             this.submenuIndicators();
             if (defaults.clickEffect) {
-                this.addClickEffect()
+                // this.addClickEffect()
             }
         },
         openSubmenu: function() {
