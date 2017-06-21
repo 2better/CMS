@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:cache="http://www.springframework.org/schema/cache"
-       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd
 	         http://www.springframework.org/schema/tx   
@@ -14,7 +14,7 @@
 	         http://www.springframework.org/schema/cache
 	         http://www.springframework.org/schema/cache/spring-cache.xsd
 	         http://www.springframework.org/schema/task 
-	         http://www.springframework.org/schema/task/spring-task.xsd">
+	         http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 自动扫描的包名 -->
     <context:component-scan base-package="com.shishuo.cms">
@@ -25,31 +25,6 @@
 
     <task:annotation-driven/>
 
-    <cache:annotation-driven key-generator="keyGeneratorService"/>
-
-    <!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="default"/>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="config"/>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="article"/>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="media"/>
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="menu"/>
-            </set>
-        </property>
-    </bean>
-
     <!-- 在XML配置文件中加入外部属性文件，当然也可以指定外部文件的编码 -->
     <bean id="propertyConfigurer" class="com.shishuo.cms.util.PropertyUtils">
         <property name="locations">
@@ -59,11 +34,39 @@
         </property>
     </bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${jdbc.driverClass}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <property name="dbType" value = "mysql" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="5" />
+        <property name="minIdle" value="5" />
+        <property name="maxActive" value="20" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!-- 防御SQL注入攻击wall  -->
+        <property name="filters" value="wall"/>
+
     </bean>
 
     <!-- 创建SqlSessionFactory，同时指定数据源 -->
@@ -77,14 +80,37 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.shishuo.cms.service.*.*(..))"/>
+    </aop:config>
+
     <!--创建数据映射器，数据映射器必须为接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
         <property name="basePackage" value="com.shishuo.cms.dao"/>
     </bean>
 
-    <!-- shiro配置-->
 
+    <!-- ehcahce缓存配置 -->
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+    </bean>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache"/>
+    </bean>
+    <!-- 启用缓存注解开关 -->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <!-- shiro配置-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
         <!--<property name="loginUrl" value="/admin/login.htm" />-->
@@ -113,7 +139,9 @@
                 /user/update.htm = userAuthc,roles[user]
                 /user/update.json = userAuthc,roles[user]
 
-                /article/download.htm = userl
+                /paper/thinkTtank.htm = userl
+                /paper/thinkTtank.json = userl
+                /paper/download/*.htm = userl
 
                 /** = anon
 
@@ -125,7 +153,6 @@
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="authenticator" ref="authenticator"/>
-        <property name="cacheManager" ref="shiroCacheManager" />
         <property name="realms">
             <list>
                 <ref bean="adminRealm"/>
@@ -136,7 +163,6 @@
     </bean>
 
     <bean id="authenticator" class="com.shishuo.cms.shiro.CustomizedModularRealmAuthenticator">
-        <!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
         <property name="authenticationStrategy">
             <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
         </property>
@@ -153,20 +179,16 @@
     </bean>
 
     <bean id="userFilter" class="org.apache.shiro.web.filter.authc.UserFilter">
-        <property name="loginUrl" value="/user/login.htm"/>
+        <property name="loginUrl" value="/user/toLogin.htm"/>
     </bean>
 
     <!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
     <bean id="adminFormAuthenticationFilter"
           class="com.shishuo.cms.shiro.AdminFormAuthenticationFilter">
-        <!-- 表单中账号的input名称 -->
         <property name="usernameParam" value="name" />
-        <!-- 表单中密码的input名称 -->
         <property name="passwordParam" value="password" />
-        <!-- loginurl：用户登陆地址，此地址是可以http访问的url地址 -->
         <property name="loginUrl" value="/admin/login.htm" />
         <property name="readLoginUrl" value="/admin/login.json" />
-        <!--<property name="successUrl" value="/manage/index.htm" />-->
     </bean>
 
     <bean id="userFormAuthenticationFilter"
@@ -174,14 +196,14 @@
         <property name="usernameParam" value="name" />
         <property name="passwordParam" value="password" />
         <property name="rememberMeParam" value="rememberMe"/>
-        <property name="loginUrl" value="/user/login.htm" />
+        <property name="loginUrl" value="/user/toLogin.htm" />
         <property name="readLoginUrl" value="/user/login.json" />
         <property name="successUrl" value="/index.htm" />
     </bean>
 
     <bean id="credentialsMatcher"
           class="com.shishuo.cms.shiro.CustomizedHashedCredentialsMatcher">
-        <constructor-arg ref="shiroCacheManager"/>
+        <constructor-arg ref="cacheManager"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
         <property name="hashAlgorithmName" value="MD5" />
         <property name="hashIterations" value="1" />
@@ -196,11 +218,7 @@
     </bean>
 
     <bean id="userLogout" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-        <property name="redirectUrl" value="/user/login.htm" />
-    </bean>
-
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
+        <property name="redirectUrl" value="/index.htm" />
     </bean>
 
     <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">

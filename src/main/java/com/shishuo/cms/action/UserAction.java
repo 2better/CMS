@@ -42,11 +42,6 @@ public class UserAction extends BaseAction {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-    public String login() {
-        return "/manage/user/login";
-    }
-
     @ResponseBody
     @RequestMapping(value = "/login.json", method = RequestMethod.POST)
     public Map<String,String> userLogin(HttpServletRequest request) {
@@ -121,6 +116,11 @@ public class UserAction extends BaseAction {
     public boolean isLogin() {
         Subject currentUser = SecurityUtils.getSubject();
         return currentUser.isAuthenticated()||currentUser.isRemembered();
+    }
+
+    @RequestMapping(value = "/toLogin.htm", method = RequestMethod.GET)
+    public String toLogin(){
+        return "template/blog/login-tip";
     }
 
 }

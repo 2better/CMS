@@ -19,9 +19,9 @@
         init: function() {
             this.openSubmenu();
             this.submenuIndicators();
-            if (defaults.clickEffect) {
+            /*if (defaults.clickEffect) {
                 this.addClickEffect()
-            }
+            }*/
         },
         openSubmenu: function() {
             $(this.element).children("ul").find("li").bind("click touchstart",

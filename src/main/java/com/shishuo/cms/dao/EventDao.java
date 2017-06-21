@@ -15,4 +15,8 @@ public interface EventDao extends InformationDao<Event>{
     List<Event> getByPageByImportant(@Param("offest") int offest, @Param("rows") int rows, @Param("important") Integer important);
 
     Integer getCountByImportant(@Param("important") Integer important);
+
+    int getAllCount();
+
+    List<Event> getTop10();
 }

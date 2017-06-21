@@ -65,11 +65,23 @@
 		</where>
 	</select>
 
+	<select id="getCountByColumn" resultType="int">
+		SELECT count(*) from document where _column = #{column}
+	</select>
+
+	<select id="findByColumn" resultMap="baseMap">
+		select * from document where _column = #{column} ORDER BY created desc limit #{offset},#{rows}
+	</select>
+
 	<!--根据类别进行查询 按时间排序-->
 	<select id="getBy_Column" resultMap="baseMap">
 		SELECT * FROM document
 		WHERE _column = #{column}
 		ORDER BY created DESC
 		limit #{offest}, #{rows}
+	</select>
+
+	<select id="getAllCount" resultType="int">
+		SELECT COUNT(*) from document
 	</select>
 </mapper>  

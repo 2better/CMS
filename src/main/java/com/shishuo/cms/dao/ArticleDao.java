@@ -86,4 +86,8 @@ public interface ArticleDao {
 	List<Article> getArticlesBykey(@Param("key") String key,@Param("offest") Integer offest, @Param("rows") Integer rows);
 
 	Integer getCountByKey(@Param("key") String key);
+
+	int getAllCount();
+
+	List<Article> getTop10();
 }

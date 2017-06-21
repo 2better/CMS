@@ -52,7 +52,7 @@
 <!--登录遮罩层-->
 <div class="login-layer" style="display:none">
     <div class="login">
-        <h1>用户登录</h1>
+        <h1>用户登录<i class="close" title="关闭"></i></h1>
         <form method="post" action="${BASE_PATH}/user/login.json" id="loginForm">
             <span id="error" style="color:red;"></span>
             <p><input type="text" name="name" value="user" placeholder="用户名" required></p>
@@ -64,7 +64,7 @@
 
                     style="cursor: pointer; cursor: hand; margin-top: -13px;"
                     onclick="this.src='${BASE_PATH}/admin/captcha.htm?'+Math.random();"
-                    src="${BASE_PATH}/admin/captcha.htm">
+                    src="${BASE_PATH}/admin/captcha.htm" id="captchaImg">
             </p>
             <p class="remember_me">
                 <label>
@@ -154,7 +154,7 @@
                     if (data == false) {
                         $(".login-layer").css('display', 'flex');
                     } else {
-                        window.open(temp.attr("href"), "_blank");
+                        window.location.href = temp.attr("href");
                     }
                 },
                 error: function () {
@@ -166,8 +166,11 @@
         $('#loginForm').ajaxForm({
             dataType: 'json',
             success: function (data) {
-                if (data)
+                if (data) {
                     $("#error").text(data.error);
+                    $("#captcha").val("");
+                    $("#captchaImg").click();
+                }
             },
             error: function () {
                 window.location.href=ele.attr("href");

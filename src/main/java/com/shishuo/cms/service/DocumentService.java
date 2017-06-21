@@ -9,6 +9,8 @@ import com.shishuo.cms.util.IDUtils;
 import com.shishuo.cms.util.MediaUtils;
 import com.shishuo.cms.util.Office2PDFUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,7 @@ public class DocumentService {
     @Autowired
     private DocumentDao documentDao;
 
+    @CacheEvict(value = "document", allEntries = true)
     public void add(MultipartFile file, Admin admin, int column) throws IOException {
         Document document = new Document();
         document.setId(IDUtils.getId());
@@ -75,6 +78,7 @@ public class DocumentService {
         }
     }
 
+    @CacheEvict(value = "document", allEntries = true)
     public boolean delete(long id) {
         Document document = documentDao.getById(id);
         if (document != null) {
@@ -113,9 +117,27 @@ public class DocumentService {
         return documentDao.allCountByCondition(adminId, keywords, column);
     }
 
+    public List<Document> findByColumn(int column, int pageNum, int rows) {
+        return documentDao.findByColumn(column, (pageNum - 1) * rows, rows);
+    }
+
+    @Cacheable(value = "document", key = "#column")
+    public int getCountByColumn(int column) {
+        return documentDao.getCountByColumn(column);
+    }
+
+    public int getPageCount(int count, int rows) {
+        return (count + rows - 1) / rows;
+    }
+
     //根据类别查询
     public List<Document> getBy_Column(int column, int offset, int rows) {
         return documentDao.getBy_Column(column, offset, rows);
+    }
+
+    public int getAllCount()
+    {
+        return documentDao.getAllCount();
     }
 
 }

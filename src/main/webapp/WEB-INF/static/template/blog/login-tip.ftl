@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h3>不好意思，请先登录，<span class="timeInterval">5</span>秒后返回<a href="/index.html">首页</a></h3>
+    <h3>不好意思，请先登录，<span class="timeInterval">5</span>秒后返回<a href="${BASE_PATH}/index.htm">首页</a></h3>
 
 
     <script>
@@ -20,7 +20,7 @@
         setTimeout(()=>{
           n--;
           if(n==0){
-            window.location.href = "index.html";
+            window.location.href = "${BASE_PATH}/index.htm";
             return ;
           }
           ele.textContent = n;

@@ -176,4 +176,14 @@ public class ArticleService {
         pv.setList(articleDao.getArticlesBykey(key, pv.getOffset(),rows));
         return pv;
     }
+
+    public int getAllCount()
+    {
+        return articleDao.getAllCount();
+    }
+
+    public List<Article> getTop10()
+    {
+        return articleDao.getTop10();
+    }
 }

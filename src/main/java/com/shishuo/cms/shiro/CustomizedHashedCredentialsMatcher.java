@@ -1,12 +1,12 @@
 package com.shishuo.cms.shiro;
 
-import net.sf.ehcache.Element;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.Cache;
-import org.apache.shiro.cache.CacheManager;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CustomizedHashedCredentialsMatcher extends HashedCredentialsMatcher
 {
 
-    private Cache<String, AtomicInteger> passwordRetryCache;
+    private Cache passwordRetryCache;
 
     public CustomizedHashedCredentialsMatcher(CacheManager cacheManager) {
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
@@ -27,18 +27,20 @@ public class CustomizedHashedCredentialsMatcher extends HashedCredentialsMatcher
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String username = (String)token.getPrincipal();
-        AtomicInteger atomicInteger = passwordRetryCache.get(username);
-        if(atomicInteger == null) {
+        AtomicInteger atomicInteger = null;
+        Cache.ValueWrapper valueWrapper = passwordRetryCache.get(username);
+        if(valueWrapper == null) {
             atomicInteger = new AtomicInteger(1);
             passwordRetryCache.put(username,atomicInteger);
         }else {
+            atomicInteger = (AtomicInteger) valueWrapper.get();
             if (atomicInteger.incrementAndGet() > 4) {
                 throw new ExcessiveAttemptsException();
             }
         }
         boolean matches = super.doCredentialsMatch(token, info);
         if(matches) {
-            passwordRetryCache.remove(username);
+            passwordRetryCache.evict(username);
         }
         return matches;
     }

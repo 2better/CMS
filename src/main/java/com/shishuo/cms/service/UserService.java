@@ -71,4 +71,7 @@ public class UserService {
 		return userDao.getUserByName(name);
 	}
 
+	public int getAllCount(){
+		return userDao.getAllListCount();
+	}
 }

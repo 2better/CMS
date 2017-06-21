@@ -50,4 +50,12 @@
 		ORDER BY createTime DESC
 		limit #{offest}, #{rows}
 	</select>
+
+	<select id="getAllCount" resultType="int">
+		select count(*) from event
+	</select>
+
+	<select id="getTop10" resultType="com.shishuo.cms.entity.Event">
+		SELECT * from event ORDER BY createTime DESC limit 0,8
+	</select>
 </mapper>

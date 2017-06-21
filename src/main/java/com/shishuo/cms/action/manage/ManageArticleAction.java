@@ -177,8 +177,7 @@ public class ManageArticleAction extends ManageBaseAction {
 
 
 	@RequestMapping(value = "/preview.htm", method = RequestMethod.GET)
-	public String preview(@RequestParam(value = "articleId") long articleId,
-			ModelMap modelMap,HttpServletRequest request) {
-		return articleAction.article(articleId, modelMap,request);
+	public String preview(@RequestParam(value = "articleId") long articleId, HttpServletRequest request) {
+		return articleAction.article(articleId,request);
 	}
 }

@@ -141,5 +141,13 @@
 		SELECT count(*) FROM article
 		WHERE title LIKE concat('%','${key}','%');
 	</select>
+
+	<select id="getAllCount" resultType="int">
+		SELECT COUNT(*) from article
+	</select>
+
+	<select id="getTop10" resultMap="baseMap">
+		SELECT * from article ORDER BY createTime DESC limit 0,8
+	</select>
 </mapper>
 

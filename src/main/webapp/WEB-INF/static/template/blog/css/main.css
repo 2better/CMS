@@ -2209,6 +2209,7 @@ body {
 
 .f-cb {
   *zoom: 1;
+  margin-top:20px;
 }
 
 .f-cb:after {

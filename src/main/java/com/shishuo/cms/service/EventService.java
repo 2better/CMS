@@ -72,5 +72,15 @@ public class EventService {
         }
         return pv;
     }
+
+    public int getAllCount()
+    {
+        return eventDao.getAllCount();
+    }
+
+    public List<Event> getTop10()
+    {
+        return eventDao.getTop10();
+    }
 }
 

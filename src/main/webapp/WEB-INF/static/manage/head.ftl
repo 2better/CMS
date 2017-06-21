@@ -67,7 +67,7 @@
 	                      <ul class="dropdown-menu extended logout">
 	                          <div class="log-arrow-up"></div>
 	                          <li><a href="${BASE_PATH}/manage/admin/update.htm"><i class="fa fa-cog "></i> 修改密码</a></li>
-	                          <li><a href="${BASE_PATH}/admin/logout.htm"><i class="fa fa-external-link-square"></i> 安全退出</a></li>
+	                          <li><a href="${BASE_PATH}/admin/logout.htm"><i class="fa fa-sign-out"></i> 安全退出</a></li>
 	                      </ul>
 	                  </li>
 	                  <!-- user login dropdown end -->

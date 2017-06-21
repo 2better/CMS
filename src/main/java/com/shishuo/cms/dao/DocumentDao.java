@@ -40,4 +40,10 @@ public interface DocumentDao
     int allCountByCondition(@Param("adminId") long adminId, @Param("keywords") String keywords, @Param("column") int column);
 
     List<Document> getBy_Column(@Param("column") int column, @Param("offest") int offest, @Param("rows") int rows);
+
+    int getCountByColumn(int column);
+
+    List<Document> findByColumn(@Param("column") int column, @Param("offset") int offset, @Param("rows") int rows);
+
+    int getAllCount();
 }

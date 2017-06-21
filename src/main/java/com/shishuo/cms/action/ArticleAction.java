@@ -32,8 +32,7 @@ public class ArticleAction extends BaseAction {
 	private ConfigService configService;
 
 	@RequestMapping(value = "/{articleId}.htm", method = RequestMethod.GET)
-	public String article(@PathVariable long articleId,
-						  ModelMap modelMap, HttpServletRequest request) {
+	public String article(@PathVariable long articleId, HttpServletRequest request) {
 		try {
 			pageStaticUtils.articleStaticPage(request,articleId);
 			request.setAttribute("htmlName",articleId);
