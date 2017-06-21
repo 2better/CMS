@@ -6,7 +6,6 @@ import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.MenuService;
-import com.shishuo.cms.util.PageStaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +19,6 @@ import java.util.Map;
 
 /**
  * @author Herbert
- * 
  */
 @Controller
 @RequestMapping("/article")
@@ -102,4 +100,11 @@ public class ArticleAction extends BaseAction {
 										   @RequestParam(value = "p",defaultValue = "1") Integer p) {
 		return fileService.getArticlesBykey(configService.getIntKey("pagination_num"),p,key);
 	}
+
+    @RequestMapping(value = "/search.html", method = RequestMethod.GET)
+    public String brower(@RequestParam(value = "key", defaultValue = "") String key,ModelMap m) {
+        m.put("key",key);
+        return "/template/blog/browser";
+    }
+
 }

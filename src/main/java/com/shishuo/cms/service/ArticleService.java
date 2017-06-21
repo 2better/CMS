@@ -172,6 +172,7 @@ public class ArticleService {
 
     public PageVo<Article> getArticlesBykey(Integer rows, Integer p, String key) {
         PageVo<Article> pv = new PageVo<>(p);
+        pv.setRows(rows);
         pv.setCount(articleDao.getCountByKey(key));
         pv.setList(articleDao.getArticlesBykey(key, pv.getOffset(),rows));
         return pv;

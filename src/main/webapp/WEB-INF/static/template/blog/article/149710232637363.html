@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ITIMRC">
+    <link rel="icon" href="http://lan:80/static/template/blog/images/favicon.ico">
+
+    <title>ITIMRC</title>
+
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/slider.css"/>
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/login-layer.css"/>
+</head>
+
+<body>
+<noscript>
+    <div style="position:absolute;z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
+        <img src="http://lan:80/static/template/blog/images/noscript.gif" alt="抱歉，请开启脚本支持！"/></div>
+</noscript>
+<!--头部-->
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.min.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/msclass.js"></script>
+<script>
+    var big = [
+        'http://lan:80/upload/2017/06/19/e6c4209490d7494c83d87e64e3f72829.jpg',
+            'http://lan:80/upload/2017/06/19/8c7b644a4af34e9ea5a07d0678d617bc.jpg',
+            'http://lan:80/upload/2017/06/19/8d43f563fb2d4c89a9622ea262cd8993.jpg',
+            'http://lan:80/upload/2017/06/19/06752febbd5f42218c3d858074bf958f.jpg',
+            'http://lan:80/upload/2017/06/19/33a02468859640d6adfd3e1501dcc945.jpg',
+    ];
+    var small = [
+    ];
+</script>
+<script src="http://lan:80/static/template/blog/js/slider.js"></script>
+<!--<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.kinslideshow-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.media.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/dd_belatedpng_0.0.8a.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/base.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/tablist.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/comm.js"></script>-->
+<!--[if lte IE 6]>
+<script src="http://lan:80/static/template/blog/js/dd_belatedpng_0.0.8a.js" type="text/javascript"></script>
+<script type="text/javascript">
+    DD_belatedPNG.fix('div,ul,img,li,input,a,span,p');
+</script>
+<![endif]-->
+<!--登录遮罩层-->
+<div class="login-layer" style="display:none">
+    <div class="login">
+        <h1>用户登录</h1>
+        <form method="post" action="http://lan:80/user/login.json" id="loginForm">
+            <span id="error" style="color:red;"></span>
+            <p><input type="text" name="name" value="user" placeholder="用户名" required></p>
+            <p><input type="password" name="password" value="123456" placeholder="密码" maxlength="16" minlength="6"
+                      required></p>
+            <p>
+                <input type="text" name="captcha" class="form-control" required maxlength="4" minlength="4"
+                       placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
+
+                    style="cursor: pointer; cursor: hand; margin-top: -13px;"
+                    onclick="this.src='http://lan:80/admin/captcha.htm?'+Math.random();"
+                    src="http://lan:80/admin/captcha.htm">
+            </p>
+            <p class="remember_me">
+                <label>
+                    <input type="checkbox" name="rememberMe" id="remember_me" value="true">
+                    记住密码
+                </label>
+            </p>
+            <p class="submit"><input type="submit" name="commit" value="登录"></p>
+        </form>
+        <div class="login-help">
+            <p>忘记密码? <a href="index.html">联系工作人员</a>.</p>
+        </div>
+    </div>
+</div>
+<!--登录遮罩层-->
+
+<!--头部-->
+<div class="header">
+    <!-- banner -->
+    <div class="banner">
+        <div class="slider">
+            <ul></ul>
+        </div>
+    </div>
+    <!-- banner -->
+    <div class="header-content">
+        <div class="logo">
+            <a href="http://lan:80/index.htm">
+                <img src="http://lan:80/static/template/blog/images/logo-new.png" alt=""/>
+            </a>
+        </div>
+        <h3>
+            创新理论与创新管理研究中心
+            <span>INNOVATION THEORY AND INNOVATION MANAGEMENT RESERCH CENTER</span>
+            <p>——广州市人文社会科学重点研究基地</p>
+        </h3>
+        <!--搜索-->
+        <div class="search">
+            <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
+            <div class="searchGroup">
+                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索" id="key">
+                <input type="button" value="搜索" class="searchButton" id="keyButton">
+            </div>
+        </div>
+        <!--搜索-->
+    </div>
+    <div class="menu">
+        <ul id="nav">
+                <li class="on">
+                    <a href=""
+                       target="0">首页</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149776534411285"
+                       target="0">测试</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715128012317"
+                       target="0">关于我们</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715128012317" target="0">主任致辞</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715129668145" target="0">中心简介</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715135268713" target="0">学术委员会</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715137137918" target="0">组织机构</a>
+                                <ul>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715140882566"
+                       target="0">新闻动态</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715140882566" target="0">中心动态</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715141715540" target="0">学术前沿</a>
+                                <ul>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715143466311"
+                       target="0">研究人员</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715143466311" target="0">研究顾问</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715145693790" target="0">专职研究员</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715147705703" target="0">兼职研究员</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715148797574" target="0">其他人员</a>
+                                <ul>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715150497545"
+                       target="0">学术研究</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715150497545" target="0">研究方向</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715151450632" target="0">研究成果</a>
+                                <ul>
+                                        <li class=""><a href="/article/list.htm?menuId=149746273666579" target="0">学术论文</a>
+                                        <li class=""><a href="/article/list.htm?menuId=149746288288476" target="0">出版书籍</a>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715153341548"
+                       target="0">人才培养</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715153341548" target="0">本科生教育</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715154586939" target="0">研究生教育</a>
+                                <ul>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715156331056"
+                       target="0">合作交流</a>
+                    <ul>
+                            <li class=""><a href="/article/list.htm?menuId=149715156331056" target="0">高校合作</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715156997426" target="0">企业合作</a>
+                                <ul>
+                                </ul>
+                            </li>
+                            <li class=""><a href="/article/list.htm?menuId=149715157911011" target="0">政府合作</a>
+                                <ul>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715117020733"
+                       target="0">研究资源</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/list.htm?menuId=149715118080311"
+                       target="0">人才招聘</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li class="on">
+                    <a href="/article/download.htm"
+                       target="0">智库专报</a>
+                    <ul>
+                    </ul>
+                </li>
+        </ul>
+    </div>
+</div>
+<script src="http://lan:80/static/manage/js/jquery.form.min.js"></script>
+<script>
+    $(function () {
+        var ele = null;
+        $("#nav li").click(function (e) {
+            var temp = $(this).find('a');
+            if (temp.html() !== "智库专报") return;
+            ele = $(this).find('a');
+            e.preventDefault();
+            $.ajax({
+                url: 'http://lan:80/user/isLogin.json',
+                type: 'POST',
+                cache: false,
+                success: function (data) {
+                    if (data == false) {
+                        $(".login-layer").css('display', 'flex');
+                    } else {
+                        window.open(temp.attr("href"), "_blank");
+                    }
+                },
+                error: function () {
+                    alert("系统繁忙，请稍后再试！");
+                }
+            });
+        });
+
+        $('#loginForm').ajaxForm({
+            dataType: 'json',
+            success: function (data) {
+                if (data)
+                    $("#error").text(data.error);
+            },
+            error: function () {
+                window.location.href=ele.attr("href");
+            }
+        });
+
+    });
+
+    //搜索功能
+
+    $("#keyButton").click(function () {
+        window.location.href = "http://lan:80/article/search.html?key=" + $("#key").val();
+    });
+</script>
+<div class="clear"></div><div class="g-bd f-cb">
+    <div class="g-sd">
+        <div class="g-sd-header">
+            <span class="g-sd-header-title">关于我们</span>
+            <span class="circle"></span>
+        </div>
+        <ul class="g-sd-content">
+            <a href="/article/list.htm?menuId=149715128012317">
+                <li>
+                    <span>主任致辞</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715129668145">
+                <li>
+                    <span>中心简介</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715135268713">
+                <li>
+                    <span>学术委员会</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715137137918">
+                <li>
+                    <span>组织机构</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="g-mn">
+        <div class="g-mn-header">
+            <span class="g-sd-header-crumb"><a href="/article/list.htm?menuId=149715128012317" style="color:#fff;">主任致辞</a> > 广东工业大学创新理论与创新管理研究中心人员管理办法</span>
+        </div>
+        <div class="g-mn-content-out">
+        <div class="g-mn-content">
+            <p style="line-height:140%"><span style=";line-height:140%;font-family:楷体_GB2312">广东省决策咨询研究基地</span></p><p style="line-height:140%"><strong><span style="font-family:仿宋_GB2312">&nbsp;</span></strong></p><p style="text-align:center;line-height:140%"><strong><span style="font-size:21px;line-height:140%;font-family:幼圆">广 东 工 业 大 学</span></strong></p><p style="text-align:center;line-height:150%"><strong><span style="font-size:20px;line-height: 150%;font-family:幼圆">创新理论与创新管理研究中心人员</span></strong><strong><span style="font-size:20px;line-height:150%;font-family:幼圆">管理办法</span></strong></p><p style="line-height:150%"><span style="font-family: 仿宋_GB2312">&nbsp;</span></p><p style="text-indent:32px;line-height:140%"><span style="font-size:16px;line-height:140%;font-family: 仿宋_GB2312">广东工业大学创新理论与创新管理研究中心（以下简称</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">“研究中心”）</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">是广东省社会科学界联合会批准的</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">第三批广东省决策咨询研究基地</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">。参照《广东省普通高校人文社会科学重点研究基地管理办法》建设标准，充分发挥现有优势，深化改革，加大建设力度，特此制订本章程。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第一条</span><span style="font-size:16px;line-height:150%">&nbsp; </span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">研究中心人员由</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">专职研究人员——驻基地专职研究人员——校内外兼职研究人员等三个层次组成。专职人员属于研究中心的“核心层”，是专门从事研究和管理的工作人员；驻基地专职研究人员是研究中心骨干研究力量；校内外兼职研究人员从事一定科研工作和学术活动的兼职人员，分布在广东省内外一些高校和研究机构。校内专职研究人员保持</span><span style="font-size:16px;line-height:150%">5</span><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">人以上，校外专兼职人员保持</span><span style="font-size:16px;line-height:150%">3</span><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">人以上。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第二条</span><span style="font-size:16px;line-height:150%">&nbsp; </span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">研究中心人员管理实行过程管理与结果管理相结合，以激励与约束相结合的管理机制。大力提倡奉献精神，努力工作，不断创新，为研究中心（基地）的发展多做贡献。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第三条</span><span style="font-size:16px;line-height:150%">&nbsp; </span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">研究中心所有专职和兼职人员</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">服从广东工业大学有关规章制度，接受学校领导和</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">督促。研究中心</span><span style="font-size:16px;line-height: 150%;font-family:仿宋_GB2312">正、副主任接受学校年终考核，并每年向中心全体研究人员述职一次，其内容包括中心工作运行状况、本人在工作中所起的作用与执行规章制度情况、本人工作中的不足以及相应的改进措施等，并听取中心研究人员的评价、批评和建议。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第四条&nbsp; 驻基地专职研究人员与校、内外兼职研究人员接受研究中心的有关管理制度，主要实行合同管理方式。</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">不能完成合同所规定的任务者或完成课题后无新课题者不再驻基地。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第五条</span><span style="font-size:16px;line-height:150%">&nbsp; </span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">研究中心校内驻所专职研究人员系指厅级及厅级以上科研项目的第一或第二主持人（负责人）、按“带（给）课题和经费进基地、完成课题后出基地”要求、接受聘任后进驻研究中心（基地）从事课题研究的人员，其岗位要求：</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">（一）校内专职人员驻基地研究时间每年不得少于</span><span style="font-size:16px;line-height:150%">6</span><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">个月。</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">确需承担少量教学任务的校内驻所研究人员，每周兼课时数不得超过</span><span style="font-size:16px;line-height:150%">2</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">个自然课时。其课酬遵循广东工业大学有关管理制度。</span></p><p style="text-indent:32px;line-height:140%"><span style="font-size:16px;line-height:140%;font-family: 仿宋_GB2312">（二）校内驻所专职研究人员除完成所承担的研究项目外，每人每年须完成学校规定的专职科研人员工作量，其中包括在国内外权威期刊上独立发表学术论文</span><span style="font-size:16px;line-height:140%">1</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">篇或在核心期刊上独立发表学术论文</span><span style="font-size:16px;line-height:140%">2</span><span style="font-size:16px;line-height: 140%;font-family:仿宋_GB2312">篇。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">（三）除了完成规定的科研任务之外，每人均有义务分担研究中心一定事务性和学术性工作，如接待来访者，主持学术报告，组织学术论坛，筹办学术研讨会、讲习班、暑期班等。</span></p><p style="text-indent:32px;line-height:140%"><span style="font-size:16px;line-height:140%;font-family: 仿宋_GB2312">（四）驻基地专职研究人员年末须完成一份科研工作总结报告，并</span><span style="font-size:16px;line-height:140%;font-family:仿宋_GB2312">接受研究中心考核。</span><span style="font-size:16px;line-height: 140%;font-family:仿宋_GB2312">重点考核科研项目进展、研究成果、工作任务的完成情况等内容。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">第六条</span><span style="font-size:16px;line-height:150%">&nbsp; </span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">研究中心</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">校内兼职研究人员系指凡获得厅（局）级以上科研项目的校内人员，均可申请进入研究中心做兼职研究人员</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">，其岗位要求：</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">（一）兼职研究人员驻所的时间不超过</span><span style="font-size:16px;line-height:150%">5</span><span style="font-size:16px;line-height:150%;font-family:仿宋_GB2312">个月，在合同规定的时间里必须认真履行自己的职责。工作量参照专职研究人员的标准，按在研究中心工作的实际时间折算。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">（二）兼职人员进驻期间，学校承诺其原工资、津贴、福利待遇不变，研究中心为兼职研究人员提供必要的科研条件。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">（三）</span><span style="font-size:16px;line-height:150%;font-family: 仿宋_GB2312">兼职人员年终主要接受学校考核；其业绩及科研成果的考核具体遵照</span> <span style="font-size:16px;line-height: 150%;font-family:仿宋_GB2312">“广东工业大学绩效考核及奖惩条例”。</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%">&nbsp;</span></p><p style="text-indent:32px;line-height:150%"><span style="font-size:16px;line-height:150%">&nbsp;</span></p><p style="text-indent:350px;line-height:125%"><span style="font-size:16px;line-height:125%;font-family: 宋体">广东工业大学</span></p><p style="text-indent:350px;line-height:125%"><span style="font-size:16px;line-height:125%;font-family: 宋体">创新理论与创新管理研究中心</span></p><p style="text-indent:350px;line-height:125%"><span style="font-size:16px;line-height:125%;font-family:宋体">2017</span><span style="font-size:16px;line-height:125%;font-family:宋体">年4月15日</span></p><p><br/></p>
+        </div>
+		</div>
+    </div>
+</div>
+<!--底部-->
+<!--底部-->
+<div id="foot">
+    <div class="foot">
+        <div class="copy">
+                <span>
+                    Copyright <font class="foot-info">©ITIMRC 版权所有</font><br/>
+                    电话：
+                </span>
+        </div>
+        <div class="link2 right">
+            <!--<select name="select" onchange="if(this.options[this.selectedIndex].value!=''){window.open(this.options[this.selectedIndex].value,'_blank');}">
+            <option>--------友情链接--------</option>
+            <option value="#">快速链接1-1</option><option value="#t">东莞市力拓网络科技有限公司</option><option value="#">快速链接1-2</option><option value="#">快速链接1-3</option><option value="#">快速链接1-4</option><option value="#m">xx大学</option><option value="#">艾慕</option><option value="#/">北京大学</option>
+            </select>-->
+            <span>友情连接:</span>
+            <span style="display:inline-block;vertical-align:top">
+                    <a href="http://www.github.com/" target="_blank">github</a>
+                    <a href="http://www.weibo.com" target="_blank">新浪微博</a>
+                </span>
+        </div>
+    </div>
+</div>
+<!--<script language="javascript">
+    window.onload = menuFix;
+</script>-->
+<!--底部-->
+<!--底部-->
+<script>
+    // 设置时间
+    var timeEle = document.querySelector(".search > .widget > i");
+    timeEle.textContent = setDateStr();
+    function setDateStr() {
+        var date = new Date(),
+                year = date.getFullYear(),
+                month = date.getMonth() + 1,
+                day = date.getDate();
+        return year + "年" + month + "月" + day + "日";
+    }
+
+    document.querySelector("i.close").addEventListener('click',()=>{
+        document.querySelector(".login-layer").style.display = 'none';
+    },false)
+
+    function trimStr(str){
+        var reg = /\s/g;
+        return str.replace(reg,"");
+    }
+
+    // 空值判断
+    $('.login-layer').submit(function (){
+        $.each($('input'),function (index,value){
+            if(!trimStr(value)){
+                $(".error").text("输入不能为空！");
+                return ;
+            }
+        })
+    });
+</script>
+<!--底部-->
+<!--底部-->
+
+</body>
+
+</html>

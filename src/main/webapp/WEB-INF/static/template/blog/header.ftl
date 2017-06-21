@@ -48,7 +48,6 @@
     DD_belatedPNG.fix('div,ul,img,li,input,a,span,p');
 </script>
 <![endif]-->
-
 <!--登录遮罩层-->
 <div class="login-layer" style="display:none">
     <div class="login">
@@ -105,8 +104,8 @@
         <div class="search">
             <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
             <div class="searchGroup">
-                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索">
-                <input type="button" value="搜索" class="searchButton">
+                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索" id="key">
+                <input type="button" value="搜索" class="searchButton" id="keyButton">
             </div>
         </div>
         <!--搜索-->
@@ -177,6 +176,12 @@
             }
         });
 
-    })
+    });
+
+    //搜索功能
+
+    $("#keyButton").click(function () {
+        window.location.href = "${BASE_PATH}/article/search.html?key=" + $("#key").val();
+    });
 </script>
 <div class="clear"></div>

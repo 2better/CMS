@@ -48,7 +48,7 @@
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
-        url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 1,
+        url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 5,
         maxNumberOfFiles:6,
         responseValidation: {
             validationKey: {
