@@ -4,9 +4,9 @@
     <div class="content">
         <!-- banner -->
         <div class="banner">
-            <ul></ul>
-            <ol></ol>
-            <i class="left"></i><i class="right"></i>
+            <div class="slider">
+                <ul></ul>
+            </div>
         </div>
         <!-- banner -->
         <!--S 上部分-->
@@ -75,7 +75,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/event/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/event/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -101,7 +101,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715140882566"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715140882566">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -120,7 +120,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715156331056"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715156331056">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -142,7 +142,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/composition/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/composition/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -168,7 +168,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715140882566"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/article/list.htm?menuId=149715140882566">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -192,7 +192,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/scholar/list.htm"><img src="${TEMPLATE_BASE_PATH}/images/more.png" /></a>
+                            <a href="/scholar/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -208,12 +208,12 @@
 
         <!--E 下部分-->
         <div class="con-top" style="height:auto;margin:0;">
-            <div class="con-top-l" style="float:right;height:auto;">
+            <div class="con-top-l qrcode" style="float:right;height:auto;">
                 <!--S 区域1-->
                 <div class="area1">
                     <div class="title-con">
-                        <div class="title-con-l">
-                            <div class="title">
+                        <div class="title-con-l" style="background:none;">
+                            <div class="title" style="color:#000">
                                 <p class="tl-zh">公众号二维码</p>
                                 <p class="tl-en">QR Code</p>
                             </div>
@@ -224,7 +224,7 @@
                 </div>
                 <!--E 区域1-->
             </div>
-            <div class="con-top-r" style="float:left;height:auto;">
+            <div class="con-top-r resource" style="float:right;height:auto;">
                 <!--S 区域2-->
                 <div class="area2">
                     <div class="area2-bot">
@@ -235,11 +235,7 @@
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="title-con-r" style="background-color:#56628B;">
-                            <!--<p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
-                                2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p>
-                            <div id="area2-url" style="display:none">/001lt269/page/34.html</div>
-                            <div id="area2-img" style="display:none">/001lt269/upload/201505/09/201505090952264356.jpg</div>-->
+                        <div class="title-con-r">
                             <div class="resource-top">
                                 <a href="">
                                     <img src="${TEMPLATE_BASE_PATH}/images/database-icon1.png" alt="" />

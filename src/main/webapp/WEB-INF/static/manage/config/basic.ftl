@@ -9,7 +9,7 @@
         <section class="panel">
                     <div class="panel-body">
                         <form  action="${BASE_PATH}/manage/config/basic.json" role="form"
-                              class="form-horizontal basicForm" autocomplete="off" method="post">
+                              class="form-horizontal basicForm" autocomplete="off" method="POST">
                         <#list configs as c>
                             <div class="form-group">
                                 <label class="col-lg-2 col-sm-2 control-label"

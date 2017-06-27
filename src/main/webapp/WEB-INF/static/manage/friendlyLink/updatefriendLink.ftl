@@ -4,7 +4,7 @@
 </div>
 <form id="update_folder_form" method="post"
       class="form-horizontal" autocomplete="off"
-      action="${BASE_PATH}/manage/config/update.json">
+      action="${BASE_PATH}/manage/friendlyLink/update.json">
 <div class="modal-body">
 		<!-- page start-->
 		<div class="row">

@@ -34,8 +34,9 @@
 <!--底部-->
 <script>
     // 设置时间
-    var timeEle = document.querySelector(".search > .widget > i");
-    timeEle.textContent = setDateStr();
+    var $timeEle = $(".search > .widget > i").eq(0);
+    $timeEle.html( setDateStr() );
+
     function setDateStr() {
         var date = new Date(),
                 year = date.getFullYear(),
@@ -44,15 +45,14 @@
         return year + "年" + month + "月" + day + "日";
     }
 
-    document.querySelector("i.close").onclick(function () {
-        document.querySelector(".login-layer").style.display = 'none';
+    $("i.close").on('click',function (){
+        $(".login-layer").css('display', 'none');
     });
 
-    /*document.querySelector("i.close").addEventListener('click',()=>{
-        document.querySelector(".login-layer").style.display = 'none';
-    },false)*/
-
     function trimStr(str){
+        if(!str){
+            return false;
+        }
         var reg = /\s/g;
         return str.replace(reg,"");
     }

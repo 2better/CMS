@@ -123,4 +123,16 @@ public class UserAction extends BaseAction {
         return "template/blog/login-tip";
     }
 
+    @ResponseBody
+    @RequestMapping(value="/currentUser.json",method = RequestMethod.POST)
+    public String currentUser()
+    {
+        Subject currentUser = SecurityUtils.getSubject();
+        if(currentUser.getPrincipal()==null)
+            return "未登录";
+        else if(currentUser.getPrincipal() instanceof Admin)
+            return "未登录";
+        return ((User)currentUser.getPrincipal()).getName();
+    }
+
 }

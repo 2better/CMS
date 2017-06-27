@@ -31,8 +31,7 @@
     var small = [
     <#list pics as p>
         '${BASE_PATH}/${p.picUrl}',
-    </#list>
-    ];
+    </#list>];
 </script>
 <script src="${TEMPLATE_BASE_PATH}/js/slider.js"></script>
 <!--<script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.kinslideshow-1.2.1.min.js"></script>
@@ -82,13 +81,6 @@
 
 <!--头部-->
 <div class="header">
-    <!-- banner -->
-    <div class="banner">
-        <div class="slider">
-            <ul></ul>
-        </div>
-    </div>
-    <!-- banner -->
     <div class="header-content">
         <div class="logo">
             <a href="${BASE_PATH}/index.htm">
@@ -97,12 +89,13 @@
         </div>
         <h3>
             创新理论与创新管理研究中心
-            <span>INNOVATION THEORY AND INNOVATION MANAGEMENT RESERCH CENTER</span>
-            <p>——广州市人文社会科学重点研究基地</p>
+            <span>Innovation Theory And Innovation Management Research Center</span>
+            <p>广东省决策咨询研究基地</p>
         </h3>
         <!--搜索-->
         <div class="search">
-            <span class="widget"><i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
+            <span class="widget"><a href="javascript:;" class="" id="currentUser">未登录</a>&nbsp;<i>2017年5月20日</i>&nbsp;<a
+                    class="eng_ver" href="#">[English Version]</a></span>
             <div class="searchGroup">
                 <input type="text" value="" class="searchText" placeholder="请输入关键字搜索" id="key">
                 <input type="button" value="搜索" class="searchButton" id="keyButton">
@@ -114,23 +107,27 @@
         <ul id="nav">
         <#if menuList?? && menuList?size gt 0>
             <#list menuList?sort_by("sort") as p>
-                <li class="on">
-                    <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>"
-                       target="0">${p.name}</a>
-                    <ul>
-                        <#list p.children?sort_by("sort") as c>
-                            <li class=""><a href="${c.url}" target="0">${c.name}</a>
-                                <ul>
-                                    <#if (c.children?size > 0)>
-                                        <#list c.children?sort_by("sort") as s>
-                                        <li class=""><a href="${s.url}" target="0">${s.name}</a>
-                                        </#list>
-                                    </#if>
-                                </ul>
-                            </li>
-                        </#list>
-                    </ul>
-                </li>
+                <#if p_index = 0 >
+                    <li class="on">
+                <#else>
+                    <li>
+                </#if>
+                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>"
+                   target="0">${p.name}</a>
+                <ul>
+                    <#list p.children?sort_by("sort") as c>
+                        <li class=""><a href="${c.url}" target="0">${c.name}</a>
+                            <ul>
+                                <#if (c.children?size > 0)>
+                                    <#list c.children?sort_by("sort") as s>
+                                    <li class=""><a href="${s.url}" target="0">${s.name}</a>
+                                    </#list>
+                                </#if>
+                            </ul>
+                        </li>
+                    </#list>
+                </ul>
+            </li>
             </#list>
         </#if>
         </ul>
@@ -162,6 +159,10 @@
             });
         });
 
+        $(".widget").on('click','.toLogin',function(){
+            $(".login-layer").css('display', 'flex');
+        });
+
         $('#loginForm').ajaxForm({
             dataType: 'json',
             success: function (data) {
@@ -172,7 +173,27 @@
                 }
             },
             error: function () {
-                window.location.href=ele.attr("href");
+               if(ele!=null)
+                window.location.href = ele.attr("href");
+               else
+                   window.location.reload();
+            }
+        });
+
+        $.ajax({
+            url: '${BASE_PATH}/user/currentUser.json',
+            dataType: "text",
+            type: 'POST',
+            cache: false,
+            success: function (data) {
+                if(data=="未登录")
+                    $("#currentUser").attr("class","toLogin");
+                else
+                    $("#currentUser").removeAttr("class");
+                $("#currentUser").text(data);
+            },
+            error: function () {
+                $("#currentUser").text("未登录");
             }
         });
 

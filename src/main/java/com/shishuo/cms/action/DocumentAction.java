@@ -32,7 +32,7 @@ public class DocumentAction extends BaseAction{
     @Autowired
     private ConfigService configService;
 
-    @RequestMapping(value = "/download/{id}.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
     public String download(@PathVariable(value = "id") Long id, HttpServletResponse response) {
         if (id != null) {
             Document document = documentService.getById(id);
