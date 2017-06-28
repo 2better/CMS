@@ -66,7 +66,7 @@
             </p>
             <p class="remember_me">
                 <label>
-                    <input type="checkbox" name="rememberMe" id="remember_me" value="true">
+                    <input type="checkbox" name="rememberMe" id="remember_me">
                     记住密码
                 </label>
             </p>
@@ -165,6 +165,23 @@
 
         $('#loginForm').ajaxForm({
             dataType: 'json',
+            beforeSubmit:function(){
+                if(!trimStr($("input[name='name']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+
+                if(!trimStr($("input[name='password']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+
+                if(!trimStr($("input[name='captcha']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+                return true;
+            },
             success: function (data) {
                 if (data) {
                     $("#error").text(data.error);

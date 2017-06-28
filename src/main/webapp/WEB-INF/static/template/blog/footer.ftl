@@ -56,16 +56,6 @@
         var reg = /\s/g;
         return str.replace(reg,"");
     }
-
-    // 空值判断
-    $('.login-layer').submit(function (){
-        $.each($('input'),function (index,value){
-            if(!trimStr(value)){
-                $(".error").text("输入不能为空！");
-                return ;
-            }
-        })
-    });
 </script>
 <!--底部-->
 <!--底部-->
