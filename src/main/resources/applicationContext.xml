@@ -230,5 +230,4 @@
         <property name="httpOnly" value="true" />
         <property name="maxAge" value="${cookie.maxAge}" />
     </bean>
-
 </beans>

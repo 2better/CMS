@@ -149,5 +149,9 @@
 	<select id="getTop10" resultMap="baseMap">
 		SELECT * from article ORDER BY createTime DESC limit 0,8
 	</select>
+
+	<select id="getAllArticle" resultMap="baseMap">
+		SELECT content FROM Article
+	</select>
 </mapper>
 

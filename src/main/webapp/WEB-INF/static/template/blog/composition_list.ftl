@@ -1,5 +1,30 @@
 <#include "staticPage/header.html">
 <div class="g-bd f-cb">
+    <div class="g-sd">
+        <div class="g-sd-header">
+            <span class="g-sd-header-title">学术研究</span>
+            <span class="circle"></span>
+        </div>
+        <ul class="g-sd-content">
+            <a href="/article/list.htm?menuId=149715150497545">
+                <li>
+                    <span>研究方向</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715151450632">
+                <li>
+                    <span>研究成果</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+
     <div class="g-mn">
         <div class="g-mn-header">
             <span class="g-sd-header-crumb">著作列表</span>
@@ -9,21 +34,21 @@
                 <section id="main-content">
                     <section class="wrapper">
                         <!-- page start-->
-                    <section class="panel">
-                        <div class="panel-body">
-                            <div class="adv-table">
-                                <div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                                    <table class="table table-striped table-advance table-hover" id="con">
-                                    </table>
-                                    <div style="height: 30px;">
-                                        <div id="page" style="float:right"></div>
+                        <section class="panel">
+                            <div class="panel-body">
+                                <div class="adv-table">
+                                    <div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
+                                        <table class="table table-striped table-advance table-hover" id="con">
+                                        </table>
+                                        <div style="height: 30px;">
+                                            <div id="page" style="float:right"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
+                        <!-- page end-->
                     </section>
-                    <!-- page end-->
-                </section>
                 </section>
             </div>
         </div>
@@ -33,6 +58,36 @@
     var path = "${TEMPLATE_BASE_PATH}";
 </script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/laypage.js"></script>
+<style>
+    #con{
+        margin:0px;
+    }
+    .forTable .pic{
+        display: inline-block;
+        width:100px;
+        height: 125px;
+        background-color: rebeccapurple;
+        float: left;
+        margin: 17px;
+    }
+    .forTable .pic img{
+        max-width: 100%;
+    }
+    .forTable .name{
+        text-align: center;
+        font-size: 14px;
+    }
+    #con .forTable{
+        float: left;
+    }
+    #con tbody::after{
+        content: '';
+        display: block;
+        clear: both;
+        height: 0;
+        zoom: 1;
+    }
+</style>
 <script>
     pagination(1);
 
@@ -56,9 +111,13 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\">" + n.title + "</a></td>";
+                            trs += "<tr class=\"gradeA odd forTable\">" +
+                                    "<td>"+
+                                    "<div class=\"pic\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\"><img src='/" + n.picUrl +"'></a></div>"+
+                                    "<div class=\"name\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\">" + n.title + "</a></div>" +
+                                    "</td>";
                         });
-                        $("#con").append(trs + "</tbody>");
+                        $("#con").append(trs + "<tr/></tbody>");
 
                         laypage({
                             cont: 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>

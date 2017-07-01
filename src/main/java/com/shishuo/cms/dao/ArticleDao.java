@@ -90,4 +90,6 @@ public interface ArticleDao {
 	int getAllCount();
 
 	List<Article> getTop10();
+
+	List<Article> getAllArticle();
 }
