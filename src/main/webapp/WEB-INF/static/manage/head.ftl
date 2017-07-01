@@ -99,7 +99,7 @@
                         <a  class="link" href="javascript:void(0);"><i class="fa fa-edit fa-4x "></i>&nbsp;&nbsp;研究成果 &nbsp;&nbsp;</a>
                         <ul class="submenu">
                             <li><a class="link <#if menu="composition">active</#if>" href="${BASE_PATH}//manage/composition/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>学术著作</span> &nbsp;&nbsp;<#if menu="composition"><i class="fa fa-chevron-right"></i></#if></a></li>
-                            <li><a class="link <#if menu="scholar">active</#if>" href="${BASE_PATH}/manage/scholar/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>学着风采</span> &nbsp;&nbsp;<#if menu="scholar"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="scholar">active</#if>" href="${BASE_PATH}/manage/scholar/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>学者风采</span> &nbsp;&nbsp;<#if menu="scholar"><i class="fa fa-chevron-right"></i></#if></a></li>
                         </ul>
                     </li>
                     <li id="user">

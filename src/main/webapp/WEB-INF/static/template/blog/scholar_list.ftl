@@ -1,5 +1,46 @@
 <#include "staticPage/header.html">
 <div class="g-bd f-cb">
+    <div class="g-sd">
+        <div class="g-sd-header">
+            <span class="g-sd-header-title">研究人员</span>
+            <span class="circle"></span>
+        </div>
+        <ul class="g-sd-content">
+            <a href="/article/list.htm?menuId=149715143466311">
+                <li>
+                    <span>研究顾问</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715145693790">
+                <li>
+                    <span>专职研究员</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715147705703">
+                <li>
+                    <span>兼职研究院</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715148797574">
+                <li>
+                    <span>其它人员</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+
     <div class="g-mn">
         <div class="g-mn-header">
             <span class="g-sd-header-crumb">学者列表</span>
@@ -33,6 +74,36 @@
     var path = "${TEMPLATE_BASE_PATH}";
 </script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/laypage.js"></script>
+<style>
+    #con{
+        margin:0px;
+    }
+    .forTable .pic{
+        display: inline-block;
+        width:100px;
+        height: 125px;
+        background-color: rebeccapurple;
+        float: left;
+        margin: 17px;
+    }
+    .forTable .pic img{
+        max-width: 100%;
+    }
+    .forTable .name{
+        text-align: center;
+        font-size: 14px;
+    }
+    #con .forTable{
+        float: left;
+    }
+    #con tbody::after{
+        content: '';
+        display: block;
+        clear: both;
+        height: 0;
+        zoom: 1;
+    }
+</style>
 <script>
     pagination(1);
 
@@ -56,9 +127,13 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\">" + n.name + "</a></td>";
+                            trs += "<tr class=\"gradeA odd forTable\">" +
+                                    "<td>"+
+                                    "<div class=\"pic\"><a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\"><img src='/" + n.picUrl +"'></a></div>"+
+                                    "<div class=\"name\"><a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\">" + n.name + "</a></div>" +
+                                    "</td>";
                         });
-                        $("#con").append(trs + "</tbody>");
+                        $("#con").append(trs + "<tr/></tbody>");
 
                         laypage({
                             cont: 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>

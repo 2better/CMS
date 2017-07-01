@@ -187,4 +187,8 @@ public class ArticleService {
     {
         return articleDao.getTop10();
     }
+
+    public List<Article> getAllArticle() {
+        return articleDao.getAllArticle();
+    }
 }
