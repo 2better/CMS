@@ -454,7 +454,7 @@ body {
 #nav li ul li ul {
   display: none;
   top: -1px;
-  left: 183px;
+  left: 180px;
 }
 
 #nav li ul li:hover ul {
@@ -931,9 +931,10 @@ body {
 
 .foot .link2 a {
   color: #fff;
-  width: 66px;
+  width: 50px;
   text-align: left;
   margin: 0 8px;
+  display: inline-block;
 }
 
 .foot .link2 select {

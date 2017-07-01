@@ -112,15 +112,14 @@
                 <#else>
                     <li>
                 </#if>
-                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>"
-                   target="0">${p.name}</a>
+                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>" target="_blank">${p.name}</a>
                 <ul>
                     <#list p.children?sort_by("sort") as c>
-                        <li class=""><a href="${c.url}" target="0">${c.name}</a>
+                        <li class=""><a href="${c.url}" target="_blank">${c.name}</a>
                             <ul>
                                 <#if (c.children?size > 0)>
                                     <#list c.children?sort_by("sort") as s>
-                                    <li class=""><a href="${s.url}" target="0">${s.name}</a>
+                                    <li class=""><a href="${s.url}" target="_blank">${s.name}</a>
                                     </#list>
                                 </#if>
                             </ul>
