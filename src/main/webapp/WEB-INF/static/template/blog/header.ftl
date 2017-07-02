@@ -48,7 +48,7 @@
 </script>
 <![endif]-->
 <!--登录遮罩层-->
-<div class="login-layer" style="display:none">
+<div class="login-layer layer1" style="display:none">
     <div class="login">
         <h1>用户登录<i class="close" title="关闭"></i></h1>
         <form method="post" action="${BASE_PATH}/user/login.json" id="loginForm">
@@ -73,12 +73,26 @@
             <p class="submit"><input type="submit" name="commit" value="登录"></p>
         </form>
         <div class="login-help">
-            <p>忘记密码? <a href="index.html">联系工作人员</a>.</p>
+            <p>忘记密码? <a href="/index.htm">联系工作人员</a>.</p>
         </div>
     </div>
 </div>
 <!--登录遮罩层-->
 
+<!-- 修改密码-->
+<div class="login-layer layer2" style="display:none">
+    <div class="login">
+        <h1>修改密码<i class="close" title="关闭"></i></h1>
+        <form method="post" action="${BASE_PATH}/user/update.json" id="updateForm">
+            <span id="error1" style="color:red;"></span>
+            <p><input type="password" name="password" placeholder="原密码" maxlength="16" minlength="6"
+                      required></p>
+            <p><input type="password" name="newpwd"  placeholder="新密码" maxlength="16" minlength="6" required></p>
+            <p class="submit"><input type="submit" name="commit" value="修改"></p>
+        </form>
+    </div>
+</div>
+<!-- 修改密码-->
 <!--头部-->
 <div class="header">
     <div class="header-content">
@@ -94,8 +108,19 @@
         </h3>
         <!--搜索-->
         <div class="search">
-            <span class="widget"><a href="javascript:;" class="" id="currentUser">未登录</a>&nbsp;<i>2017年5月20日</i>&nbsp;<a
-                    class="eng_ver" href="#">[English Version]</a></span>
+            <span class="widget">
+                <div style="z-index: 99;position: relative;">
+                 <ul id="content" style="display: none;position: absolute;top:-64px;left:-30px;padding-left:13px;padding-top:10px;border-radius:10px;width: 70px;height:48px;background-color: #fff;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176);">
+                     <li style="margin-bottom: 8px;"><a style="font-size: 14px;" class="toupdate" href="javascript:void(0);"> 修改密码</a></li>
+                     <li><a style="font-size: 14px;" href="${BASE_PATH}/user/logout.htm">注销登录</a></li>
+                     <div class="log-arrow-up" style="background: url('${TEMPLATE_BASE_PATH}/images/arrow-up.png') no-repeat;width: 20px;height: 11px;position: absolute;right: 31px;top: 58px;"></div>
+                </ul>
+                <a href="javascript:;" class="" id="currentUser">未登录</a>
+
+                &nbsp;<i id="currentTime">2017年5月20日</i>&nbsp;
+                <a class="eng_ver" href="#">[English Version]</a>
+                     </div>
+            </span>
             <div class="searchGroup">
                 <input type="text" value="" class="searchText" placeholder="请输入关键字搜索" id="key">
                 <input type="button" value="搜索" class="searchButton" id="keyButton">
@@ -108,11 +133,12 @@
         <#if menuList?? && menuList?size gt 0>
             <#list menuList?sort_by("sort") as p>
                 <#if p_index = 0 >
-                    <li class="on">
+                <li class="on">
                 <#else>
-                    <li>
+                <li>
                 </#if>
-                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>" target="_blank">${p.name}</a>
+                <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>"
+                   target="_blank">${p.name}</a>
                 <ul>
                     <#list p.children?sort_by("sort") as c>
                         <li class=""><a href="${c.url}" target="_blank">${c.name}</a>
@@ -158,24 +184,28 @@
             });
         });
 
-        $(".widget").on('click','.toLogin',function(){
-            $(".login-layer").css('display', 'flex');
+        $(".widget").on('click', '.toLogin', function () {
+            $(".layer1").css('display', 'flex');
+        });
+
+        $(".toupdate").click(function () {
+            $(".layer2").css('display', 'flex');
         });
 
         $('#loginForm').ajaxForm({
             dataType: 'json',
-            beforeSubmit:function(){
-                if(!trimStr($("input[name='name']").val())) {
+            beforeSubmit: function () {
+                if (!trimStr($("input[name='name']").val())) {
                     $("#error").text("输入不能为空！");
                     return false;
                 }
 
-                if(!trimStr($("input[name='password']").val())) {
+                if (!trimStr($("#loginForm input[name='password']").val())) {
                     $("#error").text("输入不能为空！");
                     return false;
                 }
 
-                if(!trimStr($("input[name='captcha']").val())) {
+                if (!trimStr($("input[name='captcha']").val())) {
                     $("#error").text("输入不能为空！");
                     return false;
                 }
@@ -189,11 +219,38 @@
                 }
             },
             error: function () {
-               if(ele!=null)
-                window.location.href = ele.attr("href");
-               else
-                   window.location.reload();
+                if (ele != null)
+                    window.location.href = ele.attr("href");
+                else
+                    window.location.reload();
             }
+        });
+
+        $('#updateForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function () {
+                if (!trimStr($("input[name='newpwd']").val())) {
+                    $("#error1").text("输入不能为空！");
+                    return false;
+                }
+
+                if (!trimStr($("#updateForm input[name='password']").val())) {
+                    $("#error1").text("输入不能为空！");
+                    return false;
+                }
+                return true;
+            },
+            success: function (data) {
+                if (data) {
+                    $("#error1").text(data.error);
+                }
+            }
+        });
+
+
+        $(".widget").on('click', '.isLogin', function () {
+           // $(this).html( $("#content").is(":hidden") ?  "<img src='6.png'>" : "<img src='9.png'>");
+            $("#content").slideToggle();
         });
 
         $.ajax({
@@ -202,10 +259,10 @@
             type: 'POST',
             cache: false,
             success: function (data) {
-                if(data=="未登录")
-                    $("#currentUser").attr("class","toLogin");
+                if (data == "未登录")
+                    $("#currentUser").attr("class", "toLogin");
                 else
-                    $("#currentUser").removeAttr("class");
+                    $("#currentUser").attr("class", "isLogin");
                 $("#currentUser").text(data);
             },
             error: function () {

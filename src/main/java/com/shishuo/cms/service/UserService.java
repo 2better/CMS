@@ -74,4 +74,11 @@ public class UserService {
 	public int getAllCount(){
 		return userDao.getAllListCount();
 	}
+
+	public boolean checkPwd(long id,String pwd)
+	{
+		User user = userDao.getUserById(id);
+		SimpleHash hash = new SimpleHash("MD5", pwd, ByteSource.Util.bytes(user.getSalt()), 1);
+		return user.getPassword().equals(hash.toHex());
+	}
 }

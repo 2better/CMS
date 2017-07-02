@@ -3,7 +3,10 @@ package com.shishuo.cms.shiro;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -79,5 +82,14 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
 
     public void setReadLoginUrl(String readLoginUrl) {
         this.readLoginUrl = readLoginUrl;
+    }
+
+    protected void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
+        SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
+       if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase(AccessControlFilter.GET_METHOD)) {
+            WebUtils.redirectToSavedRequest(request, response, savedRequest.getRequestUrl());
+            return;
+        }
+        WebUtils.redirectToSavedRequest(request, response, "/manage/index.htm");
     }
 }

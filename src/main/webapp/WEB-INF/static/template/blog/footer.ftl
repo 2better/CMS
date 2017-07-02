@@ -34,7 +34,7 @@
 <!--底部-->
 <script>
     // 设置时间
-    var $timeEle = $(".search > .widget > i").eq(0);
+    var $timeEle = $("#currentTime").eq(0);
     $timeEle.html( setDateStr() );
 
     function setDateStr() {

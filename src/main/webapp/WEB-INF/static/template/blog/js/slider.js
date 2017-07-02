@@ -5,10 +5,11 @@
  * @param {jsonObject[NodeElement]} $ctrl 轮播切换的按钮
  * @param {boolean} auto 是否自动轮播
  */
-function slider($container, auto, images) {
+function slider($container, auto, images, interval) {
 	// //图片路径/链接(数组形式)
     var images_url = images,
-    	images_count = images.length;
+    	images_count = images.length,
+        interval = +interval || 1200;
 
     // 轮播起始值
     var num = 0;
@@ -45,7 +46,7 @@ function slider($container, auto, images) {
         //获取当前编号
         var i = $(this).index();
         //console.log(i);
-        $container.find('ul').stop().animate({left:-i*window_width},500);
+        $container.find('ul').stop().animate({left:-i*window_width},interval);
         num = i;
     });
 
@@ -66,11 +67,11 @@ function slider($container, auto, images) {
     	num--;
         if(num<0){
             //悄悄把图片跳到最后一张图(复制页,与第一张图相同),然后做出图片播放动画，left参数是定位而不是移动的长度
-            $container.find('ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},500);
+            $container.find('ul').css({left:-window_width*images_count}).stop().animate({left:-window_width*(images_count-1)},interval);
             num=images_count-1;
         }else{
             //console.log(num);
-            $container.find('ul').stop().animate({left:-num*window_width},500);
+            $container.find('ul').stop().animate({left:-num*window_width},interval);
         }
         if(num==images_count-1){
             $container.find('ol > li').eq(images_count-1).addClass('current').siblings().removeClass('current');
@@ -83,14 +84,14 @@ function slider($container, auto, images) {
         num++;
         if(num>images_count){
             //播放到最后一张(复制页)后,悄悄地把图片跳到第一张,因为和第一张相同,所以难以发觉,
-            $container.find('ul').css({left:0}).stop().animate({left:-window_width},500);
-            //css({left:0})是直接悄悄改变位置，animate({left:-window_width},500)是做出移动动画
+            $container.find('ul').css({left:0}).stop().animate({left:-window_width},interval);
+            //css({left:0})是直接悄悄改变位置，animate({left:-window_width},interval)是做出移动动画
             //随后要把指针指向第二张图片,表示已经播放至第二张了。
             num=1;
         }else{
             //在最后面加入一张和第一张相同的图片，如果播放到最后一张，继续往下播，悄悄回到第一张(肉眼看不见)，从第一张播放到第二张
             //console.log(num);
-            $container.find('ul').stop().animate({left:-num*window_width},500);
+            $container.find('ul').stop().animate({left:-num*window_width},interval);
         }
         if(num==images_count){
             $container.find('ol > li').eq(0).addClass('current').siblings().removeClass('current');
@@ -99,7 +100,7 @@ function slider($container, auto, images) {
         }
     }
 
-    $container.timer = auto ? setInterval(nextPlay,2000) : null;
+    $container.timer = auto ? setInterval(nextPlay,interval + 2000) : null;
 
     //鼠标经过banner，停止定时器,离开则继续播放
     $container.mouseenter(function(){
@@ -107,7 +108,7 @@ function slider($container, auto, images) {
         //左右箭头显示(淡入)
         $container.find('i').fadeIn();
     }).mouseleave(function(){
-        if(auto) $container.timer = setInterval(nextPlay,2000);
+        if(auto) $container.timer = setInterval(nextPlay,interval + 2000);
         //左右箭头隐藏(淡出)
         $container.find('i').fadeOut();
     });
@@ -122,8 +123,7 @@ function slider($container, auto, images) {
     });
 }
 
-
 $(function (){
-  slider($('.banner'), true,big);
-  slider($('.area2-top'), false,small);
+    slider($('.banner'), true,big);
+    slider($('.area2-top'), false,small);
 })

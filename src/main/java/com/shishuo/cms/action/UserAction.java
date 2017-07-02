@@ -44,10 +44,10 @@ public class UserAction extends BaseAction {
 
     @ResponseBody
     @RequestMapping(value = "/login.json", method = RequestMethod.POST)
-    public Map<String,String> userLogin(HttpServletRequest request) {
+    public Map<String, String> userLogin(HttpServletRequest request) {
         String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
         String error = "";
-        if(exceptionClassName!=null) {
+        if (exceptionClassName != null) {
             if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
                 error = "账号不存在";
             } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
@@ -63,8 +63,8 @@ public class UserAction extends BaseAction {
                 error = "系统繁忙,请稍后再试";
             }
         }
-        Map<String,String> map = new HashMap<String,String>(2);
-        map.put("error",error);
+        Map<String, String> map = new HashMap<String, String>(2);
+        map.put("error", error);
         return map;
     }
 
@@ -78,61 +78,56 @@ public class UserAction extends BaseAction {
 
     @ResponseBody
     @RequestMapping(value = "/update.json", method = RequestMethod.POST)
-    public JsonVo<String> updateUser(
+    public Map<String, String> updateUser(
             @RequestParam(value = "password") String password,
+            @RequestParam(value = "newpwd") String newpwd,
             HttpServletRequest request) {
-        JsonVo<String> json = new JsonVo<String>();
-        try {
-            if (StringUtils.isBlank(password)) {
-                json.getErrors().put("password", "密码不能为空");
-            }
-            if (password.length() < 6) {
-                json.getErrors().put("password", "密码不能小于6位数");
-            }
-            if (password.length() > 16) {
-                json.getErrors().put("password", "密码不能大于18位数");
-            }
-            
-            if (json.getErrors().size() > 0) {
-                json.setResult(false);
-                throw new ValidateException("有错误发生");
-            } else {
-                json.setResult(true);
-            }
-            SSUtils.toText(password);
-            User sessionUser = (User) request.getSession().getAttribute("sessionUser");
-            userService.updateUserByUserId(sessionUser.getUserId(),
-                    SSUtils.toText(password));
-            json.setResult(true);
-        } catch (Exception e) {
-            json.setResult(false);
-            json.setMsg(e.getMessage());
-        }
-        return json;
+        String error = "";
+        User sessionUser = (User) request.getSession().getAttribute("sessionUser");
+       try {
+           if (StringUtils.isBlank(newpwd)) {
+               error = "密码不能为空";
+           } else if (password.length() < 6) {
+               error = "密码不能小于6位数";
+           } else if (password.length() > 16) {
+               error = "密码不能大于16位数";
+           } else if (!userService.checkPwd(sessionUser.getUserId(), SSUtils.toText(password))) {
+               error = "密码错误";
+           } else {
+               userService.updateUserByUserId(sessionUser.getUserId(),
+                       SSUtils.toText(newpwd));
+               error = "修改成功";
+           }
+       }catch (Exception e)
+       {
+           error = "修改失败";
+       }
+        Map<String, String> map = new HashMap<String, String>(2);
+        map.put("error", error);
+        return map;
     }
 
     @ResponseBody
     @RequestMapping(value = "/isLogin.json", method = RequestMethod.POST)
     public boolean isLogin() {
         Subject currentUser = SecurityUtils.getSubject();
-        return currentUser.isAuthenticated()||currentUser.isRemembered();
+        return currentUser.isAuthenticated() || currentUser.isRemembered();
     }
 
     @RequestMapping(value = "/toLogin.htm", method = RequestMethod.GET)
-    public String toLogin(){
+    public String toLogin() {
         return "template/blog/login-tip";
     }
 
     @ResponseBody
-    @RequestMapping(value="/currentUser.json",method = RequestMethod.POST)
-    public String currentUser()
-    {
+    @RequestMapping(value = "/currentUser.json", method = RequestMethod.POST)
+    public String currentUser() {
         Subject currentUser = SecurityUtils.getSubject();
-        if(currentUser.getPrincipal()==null)
+        if (currentUser.getPrincipal() == null)
             return "未登录";
-        else if(currentUser.getPrincipal() instanceof Admin)
+        else if (currentUser.getPrincipal() instanceof Admin)
             return "未登录";
-        return ((User)currentUser.getPrincipal()).getName();
+        return ((User) currentUser.getPrincipal()).getName();
     }
 
 }
