@@ -1,0 +1,559 @@
+﻿<!DOCTYPE html PUBLIC "-/W3C/DTD XHTML 1.0 Transitional/EN" "#html1/DTD/xhtml1-transitional.dtd">
+<html xmlns="#/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>demo</title>
+    <meta name="keywords" content="demo">
+    <meta name="description" content="demo">
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="Css/main.css" />
+    <link rel="stylesheet" type="text/css" href="Css/slider.css" />
+    <link rel="stylesheet" type="text/css" href="Css/login-layer.css" />
+</head>
+
+<body>
+    <noscript>
+        <div style="position:absolute;z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;"><img src="images/noscript.gif" alt="抱歉，请开启脚本支持！" /></div>
+    </noscript>
+    <!--头部-->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/msclass.js"></script>
+    <script src="js/slider.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.kinslideshow-1.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.media.js"></script>
+    <script type="text/javascript" src="js/dd_belatedpng_0.0.8a.js"></script>
+    <script type="text/javascript" src="js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+    <script type="text/javascript" src="js/tablist.js"></script>
+    <script type="text/javascript" src="js/comm.js"></script>-->
+    <!--[if lte IE 6]>
+<script src="js/dd_belatedpng_0.0.8a.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix('div,ul,img,li,input,a,span,p');
+    </script>
+<![endif]-->
+    <!--头部-->
+
+    <!--登录遮罩层-->
+    <div class="login-layer" style="display:none">
+        <div class="login">
+            <h1>用户登录<i class="close" title="关闭"></i></h1>
+            <form method="post" action="index.html">
+                <p><input type="text" name="login" value="" placeholder="用户名"></p>
+                <p><input type="password" name="password" value="" placeholder="密码"></p>
+                <p class="remember_me">
+                    <label>
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    记住密码
+                </label>
+                </p>
+                <p class="submit"><input type="submit" name="commit" value="登录"></p>
+            </form>
+            <div class="login-help">
+                <p>忘记密码? <a href="index.html">联系工作人员</a>.</p>
+            </div>
+        </div>
+    </div>
+    <!--登录遮罩层-->
+
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="./Images/logo-new.png" alt="" />
+                </a>
+            </div>
+            <h3>
+                创新理论与创新管理研究中心
+                <span>Innovation Theory And Innovation Management Research Center</span>
+                <p>广东省决策咨询研究基地</p>
+            </h3>
+            <!--搜索-->
+            <div class="search">
+                <span class="widget"><a href="javascript:;">登录</a>&nbsp;<i>2017年5月20日</i>&nbsp;<a class="eng_ver" href="#">[English Version]</a></span>
+                <!--<input id="keywords" name="keywords" class="input-text" type="text" x-webkit-speech="" placeholder="请输入关键字搜索" onkeydown="if(event.keyCode==13){SiteSearch('/001lt269/search.html', '#keywords');return false};"
+                />
+                <input class="input-btn" type="submit" value="" onclick="SiteSearch('/001lt269/search.html', '#keywords');" />-->
+                <div class="searchGroup">
+                    <input type="text" value="" class="searchText" placeholder="请输入关键字搜索">
+                    <input type="button" value="搜索" class="searchButton">
+                </div>
+            </div>
+            <!--搜索-->
+        </div>
+        <div class="menu">
+            <ul id="nav">
+                <li class="on"><a href="/001lt269/index.html">首页</a></li>
+                <li><a href="/001lt269/page/33.html" target="0">关于我们</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/page/34.html" target="0">主任致辞</a>
+                            <ul>
+                                <li><a href="">测试</a></li>
+                                <li><a href="">测试</a></li>
+                                <li><a href="">测试</a></li>
+                                <li><a href="">测试</a></li>
+                            </ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/66.html" target="0">中心简介</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/67.html" target="0">学术委员会</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/68.html" target="0">组织机构</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/35.html" target="0">新闻动态</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/page/36.html" target="0">中心动态</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/37.html" target="0">学术前沿</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/39.html" target="0">研究人员</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/page/40.html" target="0">研究顾问</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/41.html" target="0">专职研究员</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/42.html" target="0">兼职研究员</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/43.html" target="0">其他人员</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/44.html" target="0">学术研究</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/page/45.html" target="0">研究方向</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/46.html" target="0">研究成果</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/48.html" target="0">人才培养</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/video3/49.html" target="0">本科生教育</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/news2/50.html" target="0">研究生教育</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/53.html" target="0">合作交流</a>
+                    <ul>
+                        <li class=""><a href="/001lt269/page/54.html" target="0">高校合作</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/55.html" target="0">企业合作</a>
+                            <ul></ul>
+                        </li>
+                        <li class=""><a href="/001lt269/page/56.html" target="0">政府合作</a>
+                            <ul></ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/88.html" target="0">研究资源</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/88.html" target="0">人才招聘</a>
+                    <ul>
+                    </ul>
+                </li>
+                <li><a href="/001lt269/news/88.html" target="0">智库专报</a>
+                    <ul>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--清除浮动-->
+    <div class="clear"></div>
+    <!--头部-->
+    <!--头部-->
+    <!--主体-->
+    <div class="container">
+        <div class="content">
+            <!-- banner -->
+            <div class="banner">
+                <div class="slider">
+                    <ul></ul>
+                </div>
+            </div>
+            <!-- banner -->
+            <!--S 上部分-->
+            <div class="con-top">
+                <div class="con-top-l">
+                    <!--S 区域1-->
+                    <div class="area1">
+                        <div class="title-con">
+                            <div class="title-con-l">
+                                <div class="title">
+                                    <p class="tl-zh">主任致辞</p>
+                                    <p class="tl-en">Master wodrs</p>
+                                </div>
+                                <div class="more"><img src="images/area1-more.png"></div>
+                            </div>
+                            <div class="title-con-r"><img src="images/20153271053847.Jpeg" /></div>
+                        </div>
+                        <div class="area-con">
+                            <p>XXX 大学文学院副教授、汉语国际教育专业硕士生导师 办公室：人文楼722 办公电话：88899966 邮箱：88888888@163.com 教育背景 1989-1993，1993-1995，就读北京语言大学，获得对外汉语专业和对外汉语教学（尤其对英语母语者）专业文学学士双学位（六年制）1998-2001，…</p>
+                            <div id="area1-url" style="display:none">/001lt269/page/36.html</div>
+                            <div id="area1-img" style="display:none">/001lt269/upload/201503/27/20153271053847.Jpeg</div>
+                        </div>
+                    </div>
+                    <!--E 区域1-->
+                </div>
+                <div class="con-top-r">
+                    <!--S 区域2-->
+                    <div class="area2">
+                        <div class="area2-top">
+                            <!--<img src="./Images/201505090952264356.jpg" />-->
+                            <div class="slider">
+                                <ul></ul>
+                                <ol></ol>
+                                <i class="left"></i><i class="right"></i>
+                            </div>
+                        </div>
+                        <div class="area2-bot">
+                            <div class="title-con-l">
+                                <div class="title">
+                                    <p class="tl-zh">重要活动</p>
+                                    <p class="tl-en">Vital Activity</p>
+                                </div>
+                                <div class="more"><img src="images/area1-more.png"></div>
+                            </div>
+                            <div class="title-con-r" style="padding:10px;height:150px;background-color:#F7F7F7;">
+                                <p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。
+                                    2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…
+                                </p>
+                                <div id="area2-url" style="display:none">/001lt269/page/34.html</div>
+                                <div id="area2-img" style="display:none">/001lt269/upload/201505/09/201505090952264356.jpg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--E 区域2-->
+                </div>
+            </div>
+            <!--E 上部分-->
+            <!--S 下部分-->
+            <div class="con-bot">
+                <div class="con-bot-l">
+                    <!--S 区域3-->
+                    <div class="area3">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">通知公告</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news2/89.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <div id="area3-list-content">
+                                <div id="area3-list">
+                                    <ul>
+                                        <li><a href="/001lt269/news2/show-219.html" target="#target">高校实验示范中心信息化教学管理体系研究及构建</a></li>
+                                        <li><a href="/001lt269/news2/show-220.html" target="#target">基于电子政务的高校基层党组织管理创新策略探讨</a></li>
+                                        <li><a href="/001lt269/news2/show-192.html" target="#target">贫困村信息化工作实施方案</a></li>
+                                        <li><a href="/001lt269/news2/show-267.html" target="#target">标本室温度高自动报警 物联网编织智慧校园</a></li>
+                                        <li><a href="/001lt269/news2/show-268.html" target="#target">中国电信提速智慧校园建设 网络升级破解教学资源失衡</a></li>
+                                        <li><a href="/001lt269/news2/show-233.html" target="#target">浪潮携手辽宁科技学院打造安全、高效数字化校园</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                var gda = new Marquee(["area3-list-content", "area3-list"], 0, 1, 350, 197, 60, 0, 0);
+                            </script>
+                        </div>
+                    </div>
+                    <!--E 区域3-->
+                </div>
+                <div class="con-bot-m">
+                    <!--S 区域4-->
+                    <div class="area4">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">新闻动态</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news/53.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <ul>
+                                <li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>
+                                <li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>
+                                <li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>
+                                <li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>
+                                <li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--E 区域4-->
+                </div>
+                <div class="con-bot-r">
+                    <!--S 区域5-->
+                    <div class="area5">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">合作交流</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news/39.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <ul>
+                                <li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>
+                                <li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>
+                                <li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>
+                                <li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>
+                                <li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>
+                                <li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--E 区域5-->
+                </div>
+            </div>
+            <!--again plus-->
+            <div class="con-bot">
+                <div class="con-bot-l">
+                    <!--S 区域3-->
+                    <div class="area3">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">最新著作</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news2/89.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <div id="area3-list-content">
+                                <div id="area3-list">
+                                    <ul>
+                                        <li><a href="/001lt269/news2/show-219.html" target="#target">高校实验示范中心信息化教学管理体系研究及构建</a></li>
+                                        <li><a href="/001lt269/news2/show-220.html" target="#target">基于电子政务的高校基层党组织管理创新策略探讨</a></li>
+                                        <li><a href="/001lt269/news2/show-192.html" target="#target">贫困村信息化工作实施方案</a></li>
+                                        <li><a href="/001lt269/news2/show-267.html" target="#target">标本室温度高自动报警 物联网编织智慧校园</a></li>
+                                        <li><a href="/001lt269/news2/show-268.html" target="#target">中国电信提速智慧校园建设 网络升级破解教学资源失衡</a></li>
+                                        <li><a href="/001lt269/news2/show-233.html" target="#target">浪潮携手辽宁科技学院打造安全、高效数字化校园</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                var gda = new Marquee(["area3-list-content", "area3-list"], 0, 1, 350, 197, 60, 0, 0);
+                            </script>
+                        </div>
+                    </div>
+                    <!--E 区域3-->
+                </div>
+                <div class="con-bot-m">
+                    <!--S 区域4-->
+                    <div class="area4">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">学术论文</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news/53.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <ul>
+                                <li><a href="/001lt269/page/84.html" target="#target">教学评估</a></li>
+                                <li><a href="/001lt269/page/83.html" target="#target">社会评价</a></li>
+                                <li><a href="/001lt269/page/56.html" target="#target">校内学生评价</a></li>
+                                <li><a href="/001lt269/page/55.html" target="#target">校内专家评价</a></li>
+                                <li><a href="/001lt269/page/54.html" target="#target">校外专家评价</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--E 区域4-->
+                </div>
+                <div class="con-bot-r">
+                    <!--S 区域5-->
+                    <div class="area5">
+                        <div class="titie-con">
+                            <div class="area-title">
+                                <p class="tl-zh">学者风采</p>
+                                <p class="tl-en"></p>
+                            </div>
+                            <div class="more">
+                                <a href="/001lt269/news/39.html">MORE >></a>
+                            </div>
+                        </div>
+                        <div class="area-con">
+                            <ul>
+                                <li><a href="/001lt269/page/42.html" target="#target">教学内容组织形式</a></li>
+                                <li><a href="/001lt269/page/75.html" target="#target">教学要求</a></li>
+                                <li><a href="/001lt269/page/76.html" target="#target">教学方法与手段</a></li>
+                                <li><a href="/001lt269/page/74.html" target="#target">学习重点难点</a></li>
+                                <li><a href="/001lt269/page/43.html" target="#target">单元教学目标</a></li>
+                                <li><a href="/001lt269/page/41.html" target="#target">教学目标</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--E 区域5-->
+                </div>
+            </div>
+            <!--E 下部分-->
+            <div class="con-top" style="height:auto;margin:0;">
+                <div class="con-top-l qrcode" style="float:right;height:auto;">
+                    <!--S 区域1-->
+                    <div class="area1">
+                        <div class="title-con">
+                            <div class="title-con-l" style="background:none;">
+                                <div class="title" style="color:#000">
+                                    <p class="tl-zh">公众号二维码</p>
+                                    <p class="tl-en">QR Code</p>
+                                </div>
+                                <div class="more"><img src="images/area1-more.png"></div>
+                            </div>
+                            <div class="title-con-r"><img src="./Images/qr_code.jpg" /></div>
+                        </div>
+                    </div>
+                    <!--E 区域1-->
+                </div>
+                <div class="con-top-r resource" style="float:right;height:auto;">
+                    <!--S 区域2-->
+                    <div class="area2">
+                        <div class="area2-bot">
+                            <div class="title-con-l">
+                                <div class="title">
+                                    <p class="tl-zh">研究资源库</p>
+                                    <p class="tl-en">Resource DataBase</p>
+                                </div>
+                                <div class="more"><img src="images/area1-more.png"></div>
+                            </div>
+                            <div class="title-con-r">
+                                <div class="resource-top">
+                                    <a href="">
+                                        <img src="Images/database-icon.png" alt="" />
+                                        <span>创新数据库</span>
+                                    </a>
+                                    <a href="">
+                                        <img src="Images/database-icon2.png" alt="" />
+                                        <span>创新案例库</span>
+                                    </a>
+                                </div>
+                                <div class="resource-bot">
+                                    <a href="">
+                                        <img src="Images/database-icon3.png" alt="" />
+                                        <span>政策资源库</span>
+                                    </a>
+                                    <a href="">
+                                        <img src="Images/database-icon4.png" alt="" />
+                                        <span>智库专报</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--E 区域2-->
+                </div>
+            </div>
+
+
+            <!--S 区域1-->
+            <!--E 区域1-->
+            <!--S 区域1-->
+            <!--E 区域1-->
+        </div>
+    </div>
+    <!--主体-->
+    <!--底部-->
+    <!--底部-->
+    <div id="foot">
+        <div class="foot">
+            <div class="copy">
+                <span>
+                    Copyright <font class="foot-info">@ 创新理论与创新管理研究中心</font><br />
+                    电话：xxx-xxx-xxxxxx
+                </span>
+            </div>
+            <div class="link2 right">
+                <!--<select name="select" onchange="if(this.options[this.selectedIndex].value!=''){window.open(this.options[this.selectedIndex].value,'_blank');}">
+                <option>--------友情链接--------</option>
+                <option value="#">快速链接1-1</option><option value="#t">东莞市力拓网络科技有限公司</option><option value="#">快速链接1-2</option><option value="#">快速链接1-3</option><option value="#">快速链接1-4</option><option value="#m">xx大学</option><option value="#">艾慕</option><option value="#/">北京大学</option>
+                </select>-->
+                <span>友情连接:</span>
+                <span style="display:inline-block;vertical-align:top">
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                    <br>
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                    <a href="#">快速链接1-1</a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--<script language="javascript">
+        window.onload = menuFix;
+    </script>-->
+    <!--底部-->
+    <!--底部-->
+
+    <script>
+        // 设置时间
+        var $timeEle = $(".search > .widget > i").eq(0);
+        $timeEle.html( setDateStr() );
+
+        function setDateStr() {
+            var date = new Date(),
+                year = date.getFullYear(),
+                month = date.getMonth() + 1,
+                day = date.getDate();
+            return year + "年" + month + "月" + day + "日";
+        }
+
+        $("i.close").on('click',function (){
+            $(".login-layer").css('display', 'none');
+        });
+
+        function trimStr(str){
+            if(!str){
+                return false;
+            }
+            var reg = /\s/g;
+            return str.replace(reg,"");
+        }
+
+        // 空值判断
+        $('.login-layer').submit(function (){
+            $.each($('input'),function (index,value){
+                if(!trimStr(value)){
+                    $(".error").text("输入不能为空！");
+                    return ;
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
