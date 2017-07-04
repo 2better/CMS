@@ -4605,29 +4605,10 @@ ul.sidebar-menu li a.active i {
     width: 100%;
 }
 
-a.logo {
-    font-size: 21px;
-    color: #2e2e2e;
-    float: left;
-    margin-top: 15px;
-    text-transform: uppercase;
-}
-
-a.logo:hover, a.logo:focus {
-    text-decoration: none;
-    outline: none;
-}
-
-a.logo span {
-    color: #FF6C60;
-}
-
 
 /*notification*/
 
-#top_menu .nav > li, ul.top-menu > li {
-    float: left;
-}
+
 
 .notify-row {
     float: left;

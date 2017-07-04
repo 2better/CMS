@@ -46,16 +46,22 @@
 	<section id="container" class="">
 		<!--header start-->
 		<header class="white-bg">
-			<div class="container" style="background-color: #ffffff; padding: 10px;">
+			<div class="container" style="background-color: #ffffff; padding: 10px;height:130px;">
 				<!--logo start-->
-				<a href="${BASE_PATH}/index.htm" class="logo" title="访问前台页面" target="_blank">
-					<img src="${TEMPLATE_BASE_PATH}/images/logo.png" style="height: 38px;width:140px;" />
-				</a>
+                <div class="logo" style="float: left;width: 100px;height:96px;margin-right: 1em;">
+                    <a style="display: inline-block;width: 100%;height: 100%;" href="${BASE_PATH}/index.htm"  title="访问前台页面" target="_blank">
+                        <img src="${TEMPLATE_BASE_PATH}/images/logo-new.png" style="height:  width: 100%;height: 100%;" />
+                    </a>
+                </div>
 				<!--logo end-->
-				<div class="nav notify-row" id="top_menu">
-					<!--  notification goes here -->
-				</div>
-				<div class="top-nav ">
+
+                    <h3 id="top_menu" style="font-weight: bold;position: relative;bottom: 42px;display: inline-block;font-size: 2.8em;line-height: 110px;vertical-align: text-bottom;color: #a82e17;font-family: "黑体", sans-serif;">
+                        创新理论与创新管理研究中心
+                        <span style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 17px;white-space: nowrap;text-align: center;left: 0;bottom: 16px;">Innovation Theory And Innovation Management Research Center</span>
+                        <p style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 15px;white-space: nowrap;text-align: center;bottom: -18px;font-size: 20px;font-weight: bold;text-align: left;color: #333;background: url(${TEMPLATE_BASE_PATH}/images/line.png) no-repeat center right;">广东省决策咨询研究基地</p>
+                    </h3>
+
+				<div class="top-nav" style="float: right;margin-right:20px;">
 
 					<ul class="nav pull-right top-menu">
 	                  <!-- user login dropdown start-->
