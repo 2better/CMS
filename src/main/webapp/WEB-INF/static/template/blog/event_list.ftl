@@ -13,7 +13,7 @@
                             <div class="panel-body">
                                 <div class="adv-table">
                                     <div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                                        <table class="table table-striped table-advance table-hover" id="con">
+                                        <table class="table table-striped table-advance table-hover" id="tableCon">
                                         </table>
                                         <div style="height: 30px;">
                                             <div id="page" style="float:right"></div>
@@ -46,19 +46,18 @@
 
                     success: function (data) {
                         console.log(data);
-                        $("#con tbody").remove();
+                        $("#tableCon tbody").remove();
                         if (jQuery.isEmptyObject(data.list)) {
                             $("#page").hide();
-
                             return false;
                         }
 
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/event/"+ n.id +".htm\">" + n.name + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/event/"+ n.id +".htm\">" + n.name + "</a></td></tr>";
                         });
-                        $("#con").append(trs + "</tbody>");
+                        $("#tableCon").append(trs + "</tbody>");
 
                         laypage({
                             cont: 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>

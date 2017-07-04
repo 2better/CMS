@@ -54,7 +54,7 @@
                             <div class="panel-body">
                                 <div class="adv-table">
                                     <div role="grid" class="dataTables_wrapper" id="hidden-table-info_wrapper">
-                                        <table class="table table-striped table-advance table-hover" id="con">
+                                        <table class="table table-striped table-advance table-hover" id="tableCon">
                                         </table>
                                         <div style="height: 30px;">
                                             <div id="page" style="float:right"></div>
@@ -75,7 +75,7 @@
 </script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/laypage.js"></script>
 <style>
-    #con{
+    #tableCon{
         margin:0px;
     }
     .forTable .pic{
@@ -92,10 +92,10 @@
         text-align: center;
         font-size: 14px;
     }
-    #con .forTable{
+    #tableCon .forTable{
         float: left;
     }
-    #con tbody::after{
+    #tableCon tbody::after{
         content: '';
         display: block;
         clear: both;
@@ -116,7 +116,7 @@
 
                     success: function (data) {
                         console.log(data);
-                        $("#con tbody").remove();
+                        $("#tableCon tbody").remove();
                         if (jQuery.isEmptyObject(data.list)) {
                             $("#page").hide();
 
@@ -130,9 +130,9 @@
                                     "<td>"+
                                     "<div class=\"pic\"><a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\"><img src='/" + n.picUrl +"'></a></div>"+
                                     "<div class=\"name\"><a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\">" + n.name + "</a></div>" +
-                                    "</td>";
+                                    "</td></tr>";
                         });
-                        $("#con").append(trs + "<tr/></tbody>");
+                        $("#tableCon").append(trs + "</tbody>");
 
                         laypage({
                             cont: 'page', //容器。值支持id名、原生dom对象，jquery对象。【如该容器为】：<div id="page1"></div>
