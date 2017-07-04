@@ -20,7 +20,7 @@
                                 <p class="tl-zh">主任致辞</p>
                                 <p class="tl-en">Master wodrs</p>
                             </div>
-                            <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
+                            <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more-left.png"></div>
                         </div>
                         <div class="title-con-r"><img src="${TEMPLATE_BASE_PATH}/images/20153271053847.Jpeg" /></div>
                     </div>
@@ -196,8 +196,32 @@
                         </div>
                     </div>
                     <div class="area-con">
-                        <ul id="scholarUl">
-                        </ul>
+                       <#-- <ul id="scholarUl">
+                        </ul>-->
+                           <table class="professors">
+                               <tbody>
+                               <tr>
+                                   <td><a href="/001lt269/page/42.html" target="#target">张云龙</a></td>
+                                   <td><a href="/001lt269/page/75.html" target="#target">李四</a></td>
+                                   <td><a href="/001lt269/page/76.html" target="#target">王五</a></td>
+                               </tr>
+                               <tr>
+                                   <td><a href="/001lt269/page/42.html" target="#target">张云龙</a></td>
+                                   <td><a href="/001lt269/page/75.html" target="#target">李四</a></td>
+                                   <td><a href="/001lt269/page/76.html" target="#target">王五</a></td>
+                               </tr>
+                               <tr>
+                                   <td><a href="/001lt269/page/42.html" target="#target">张云龙</a></td>
+                                   <td><a href="/001lt269/page/75.html" target="#target">李四</a></td>
+                                   <td><a href="/001lt269/page/76.html" target="#target">王五</a></td>
+                               </tr>
+                               <tr>
+                                   <td><a href="/001lt269/page/42.html" target="#target">张云龙</a></td>
+                                   <td><a href="/001lt269/page/75.html" target="#target">李四</a></td>
+                                   <td><a href="/001lt269/page/76.html" target="#target">王五</a></td>
+                               </tr>
+                               </tbody>
+                           </table>
                     </div>
                 </div>
                 <!--E 区域5-->
