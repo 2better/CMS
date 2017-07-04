@@ -7,12 +7,13 @@ function ajax(url, type, data, dataType, successDo, errorDo) {
         type: type,
         data: data,
         dataType: dataType,
+        async: true,
         success: successDo,
         error: errorDo
     });
 }
 
-function getArticles(url,data,jqObj) {
+function getArticles(url,data,jqObj,aUrl) {
     ajax(url, "GET", data, "JSON",function (data) {
         var list = data;
         var uLhtml = "";
@@ -20,7 +21,7 @@ function getArticles(url,data,jqObj) {
         if(list.length > 0) {
             $.each(list, function (index, item) {
                 console.log(index + ":-->" + item.title);
-                uLhtml += "<li><a href='/article/" + item.articleId + ".htm'>" + item.title + "</a></li>"
+                uLhtml += "<li><a href='"+ aUrl +"'>" + item.title + "</a></li>"
             });
         }else {
             uLhtml = "暂无消息哦亲";
@@ -32,9 +33,9 @@ function getArticles(url,data,jqObj) {
 }
 
 //获取新闻动态
-getArticles("/article/listNews", null, $("#newsUl"));
+getArticles("/article/listNews", null, $("#newsUl"),"/article/list.htm?menuId=149715140882566");
 //获取合作交流动态
-getArticles("/article/listCooperation",null,$("#cooperationUl"));
+getArticles("/article/listCooperation",null,$("#cooperationUl"),"/article/list.htm?menuId=149715156331056");
 //获取学术论文
 function getPaper() {
     ajax("/paper/list","GET",null,"JSON",function (data) {
@@ -43,7 +44,7 @@ function getPaper() {
 
         if(list.length > 0) {
             $.each(list, function (index, item) {
-                uLhtml += "<li><a href='/paper/download/" + item.id + "'>" + item.name + "</a></li>"
+                uLhtml += "<li><a href='/paper/scholar.htm'>" + item.name + "</a></li>"
             });
         }else {
             uLhtml = "暂无消息哦亲";
@@ -73,7 +74,7 @@ loadEvent($("#eventUl"),0,1,function (data) {
 
     if(list.length > 0) {
         $.each(list, function (index, item) {
-            uLhtml += "<li><a href='/event/" + item.id + ".htm'>" + item.name + "</a></li>"
+            uLhtml += "<li><a href='/event/list.htm'>" + item.name + "</a></li>"
         });
     }else {
         uLhtml = "暂无消息哦亲";
@@ -89,7 +90,7 @@ function getComposition() {
 
         if(list.length > 0) {
             $.each(list, function (index, item) {
-                uLhtml += "<li><a href='/composition/"+ item.id +".htm/'>" + item.title + "</a></li>"
+                uLhtml += "<li><a href='/composition/list.htm'>" + item.title + "</a></li>"
             });
         }else {
             uLhtml = "暂无消息哦亲";
@@ -108,7 +109,7 @@ function getScholar() {
 
         if(list.length > 0) {
             $.each(list, function (index, item) {
-                uLhtml += "<li><a href='/scholar/"+ item.id +".htm/'>" + item.name + "</a></li>"
+                uLhtml += "<li><a href='/scholar/list.htm'>" + item.name + "</a></li>"
             });
         }else {
             uLhtml = "暂无消息哦亲";

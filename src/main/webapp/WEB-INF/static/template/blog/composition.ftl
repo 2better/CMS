@@ -1,43 +1,31 @@
 <#include "staticPage/header.html">
 <div class="g-bd f-cb">
-<#--<div class="g-sd">-->
-<#--<div class="g-sd-header">-->
-<#--<span class="g-sd-header-name">${menus.name}</span>-->
-<#--<span class="circle"></span>-->
-<#--</div>-->
-<#--<ul class="g-sd-content">-->
-<#--<#list menus.children?sort_by("sort") as p>-->
-<#--<a href="${p.url}">-->
-<#--<li>-->
-<#--<span>${p.name}</span>-->
-<#--<div class="triangle_border_right">-->
-<#--<span></span>-->
-<#--</div>-->
-<#--</li>-->
-<#--</a>-->
-<#--</#list>-->
-<#--</ul>-->
-<#--</div>-->
+    <div class="g-sd">
+        <div class="g-sd-header">
+            <span class="g-sd-header-title">著作</span>
+            <span class="circle" style="display:none;"></span>
+        </div>
+        <ul class="g-sd-content">
+            <div style="text-align:center;padding-bottom:14px;">
+                <img style="max-width: 100%;height: auto;" src="/${composition.picUrl}">
+            </div>
+        </ul>
+    </div>
     <div class="g-mn">
         <div class="g-mn-header">
             <span class="g-sd-header-crumb">著作简介</span>
         </div>
-        <div class="g-mn-content-out">
-            <div class="g-mn-content">
+        <div class="g-mn-content-out2">
+            <div class="g-mn-content2">
+            <p style="font-size:14px;line-height:22px;margin:10px auto;">
                 <#if composition??>
-                    <h2>${composition.title}</h2>
-                    <div>
-                        <div>
-                            <img src="/${composition.picUrl}">
-                        </div>
-                        <div>
-                            ${composition.content}
-                        </div>
-                    </div>
+                    <h1 style="margin-bottom: 20px;text-align: center;">${composition.title}</h1>
+                    <hr style="margin-bottom: 20px;">
+                    ${composition.content}
                 <#else >
                     暂无内容
                 </#if>
-
+            </p>
             </div>
         </div>
     </div>

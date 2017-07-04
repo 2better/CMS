@@ -21,7 +21,7 @@
                             <thead>
                             <tr>
                                 <th>学者名称</th>
-                                <th>图片url</th>
+                                <th>图片</th>
                                 <th>编辑时间</th>
                                 <th>操作</th>
                             </tr>
@@ -100,7 +100,7 @@
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
                             trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/scholar/update.htm?id=" + n.id + "\">" + n.name + "</a></td>";
-                            trs += "<td>" + n.picUrl + "</td><td>" + n.createTimeView + "</td>";
+                            trs += "<td><img src='/" + n.picUrl + "' width='100' height='50'/></td><td>" + n.createTimeView + "</td>";
 
                             trs += "<td><a name=\"编辑\" href=\"${BASE_PATH}/manage/scholar/update.htm?id=" + n.id + "\" >编辑</a> | <a name=\"是否删除活动\" href=\"javascript:void(0);\"  class=\"js_scholar_delete\" id=\"" + n.id + "\">删除</a> | <a href=\"${BASE_PATH}/scholar/"+ n.id +".htm\" target=\"_blank\">预览</a></td></tr>";
 

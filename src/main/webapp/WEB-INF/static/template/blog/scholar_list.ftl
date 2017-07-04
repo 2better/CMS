@@ -46,7 +46,7 @@
             <span class="g-sd-header-crumb">学者列表</span>
         </div>
         <div class="g-mn-content-out">
-            <div class="g-mn-content">
+            <div class="g-mn-content2">
                 <section id="main-content">
                     <section class="wrapper">
                         <!-- page start-->
@@ -83,7 +83,6 @@
         width:100px;
         height: 125px;
         background-color: rebeccapurple;
-        float: left;
         margin: 17px;
     }
     .forTable .pic img{

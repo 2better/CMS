@@ -39,7 +39,7 @@ public class CompositionAction extends BaseAction {
     @ResponseBody
     public PageVo<Composition> list(@RequestParam(value = "p", defaultValue = "0") Integer p,
                                     @RequestParam(value = "rows",required = false) Integer rows) {
-        Integer r = configService.getIntKey("pagination_num");
+        Integer r = configService.getIntKey("pic_pagination_num");
          r = (rows == null || rows <= 0 || rows > 6) ? r : rows;
         return compositionService.getByPage(p, r);
     }

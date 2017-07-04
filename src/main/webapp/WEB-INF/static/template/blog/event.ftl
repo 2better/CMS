@@ -23,7 +23,7 @@
             <span class="g-sd-header-crumb">活动通知</span>
         </div>
         <div class="g-mn-content-out">
-            <div class="g-mn-content">
+            <div class="g-mn-content2">
                 <#if event??>
                     <h2>${event.name}</h2>
                     <div>

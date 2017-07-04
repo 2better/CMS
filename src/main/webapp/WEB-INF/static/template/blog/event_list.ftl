@@ -5,7 +5,7 @@
             <span class="g-sd-header-crumb">公告列表</span>
         </div>
         <div class="g-mn-content-out">
-            <div class="g-mn-content">
+            <div class="g-mn-content2">
                 <section id="main-content">
                     <section class="wrapper">
                         <!-- page start-->

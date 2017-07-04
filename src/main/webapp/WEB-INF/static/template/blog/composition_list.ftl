@@ -30,7 +30,7 @@
             <span class="g-sd-header-crumb">著作列表</span>
         </div>
         <div class="g-mn-content-out">
-            <div class="g-mn-content">
+            <div class="g-mn-content2">
                 <section id="main-content">
                     <section class="wrapper">
                         <!-- page start-->
@@ -65,9 +65,8 @@
     .forTable .pic{
         display: inline-block;
         width:100px;
-        height: 125px;
-        background-color: rebeccapurple;
-        float: left;
+        /*height: 125px;*/
+        /*background-color: rebeccapurple;*/
         margin: 17px;
     }
     .forTable .pic img{
@@ -111,10 +110,14 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
+                            var title = n.title;
+                            if(title.length > 6) {
+                                title = title.substring(0,5) + "...";
+                            }
                             trs += "<tr class=\"gradeA odd forTable\">" +
                                     "<td>"+
                                     "<div class=\"pic\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\"><img src='/" + n.picUrl +"'></a></div>"+
-                                    "<div class=\"name\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\">" + n.title + "</a></div>" +
+                                    "<div class=\"name\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\">" + title + "</a></div>" +
                                     "</td>";
                         });
                         $("#con").append(trs + "<tr/></tbody>");

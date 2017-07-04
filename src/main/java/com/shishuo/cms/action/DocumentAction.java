@@ -83,30 +83,57 @@ public class DocumentAction extends BaseAction{
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public List<Document> getPapers() {
-        return documentService.getBy_Column(1,0,6);
+        return documentService.getBy_Column(2,0,6);
     }
 
 
     @RequestMapping("/thinkTtank.htm")
     public String thinkTtankPage(ModelMap modelMap, HttpServletRequest request)
     {
-        int count = documentService.getCountByColumn(1);
+        return documentPage(modelMap,request,1);
+    }
+
+    //学术论文列表
+    @RequestMapping("/scholar.htm")
+    public String scholarPage(ModelMap modelMap, HttpServletRequest request)
+    {
+        return documentPage(modelMap,request,2);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/thinkTtank.json",method = RequestMethod.POST)
+    public Map<String,Object> think_tank(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+                    ,@RequestParam(value = "column", defaultValue = "1") int column) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        int rows = configService.getIntKey("pagination_num");
+        map.put("list",documentService.findByColumn(column, pageNum, rows));
+        map.put("pageNum",pageNum);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/scholar.json",method = RequestMethod.POST)
+    public Map<String,Object> scholarList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        int rows = configService.getIntKey("pagination_num");
+        map.put("list",documentService.findByColumn(2, pageNum, rows));
+        map.put("pageNum",pageNum);
+        return map;
+    }
+
+    //封装一下下这个方法
+    private String documentPage(ModelMap modelMap, HttpServletRequest request,int column) {
+        int count = documentService.getCountByColumn(column);
         int rows = configService.getIntKey("pagination_num");
         int pageCount = documentService.getPageCount(count,rows);
 
         modelMap.put("count",count);
         modelMap.put("pageCount",pageCount);
         pageStaticUtils.headerAndFooterStaticPage(request);
-        return "template/blog/document_list";
-    }
-
-    @ResponseBody
-    @RequestMapping(value="/thinkTtank.json",method = RequestMethod.POST)
-    public Map<String,Object> think_tank(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
-        Map<String,Object> map = new HashMap<String,Object>();
-        int rows = configService.getIntKey("pagination_num");
-        map.put("list",documentService.findByColumn(1, pageNum, rows));
-        map.put("pageNum",pageNum);
-        return map;
+        String page = "document_list";
+        if(column == 2) {
+            page = "scholar_download_list";
+        }
+        return "template/blog/" + page;
     }
 }

@@ -79,6 +79,7 @@ public class ArticleAction extends BaseAction {
 	@RequestMapping(value = "listNews", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Article> listNewsJson() {
+		System.out.println(listArtice("149715108805446"));
 		return listArtice("149715108805446");
 	}
 
@@ -86,6 +87,7 @@ public class ArticleAction extends BaseAction {
 	@RequestMapping(value = "listCooperation", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Article> listCooperationJson() {
+		System.out.println(listArtice("149715115964151"));
 		return listArtice("149715115964151");
 	}
 

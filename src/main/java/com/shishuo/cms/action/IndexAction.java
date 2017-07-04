@@ -4,6 +4,7 @@ package com.shishuo.cms.action;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.MenuService;
 import com.shishuo.cms.util.PageStaticUtils;
+import com.shishuo.cms.util.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
