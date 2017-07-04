@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Warning : Baseed off jquery
  * @param {NodeElement} $container 轮播的容器
  * @param {Array[srcString]} imgaes 轮播的图片

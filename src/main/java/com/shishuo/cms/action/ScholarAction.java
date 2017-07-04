@@ -38,7 +38,7 @@ public class ScholarAction extends BaseAction {
     @ResponseBody
     public PageVo<Scholar> list(@RequestParam(value = "p", defaultValue = "0") Integer p,
                                 @RequestParam(value = "rows",required = false) Integer rows) {
-        Integer r = configService.getIntKey("pagination_num");
+        Integer r = configService.getIntKey("pic_pagination_num");
         r = (rows == null || rows <= 0 || rows > 6) ? r : rows;
         return scholarService.getByPage(p, r);
     }

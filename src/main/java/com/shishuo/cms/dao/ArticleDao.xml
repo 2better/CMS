@@ -124,8 +124,7 @@
 	<select id="getArticeByMenuIdByTime" resultType="com.shishuo.cms.entity.Article">
 		SELECT ar.articleId,ar.title,ar.createTime from article ar
 		INNER JOIN menu m
-		ON (m.id = ar.menuId OR m.pId = ar.menuId)
-		AND ar.menuId = #{menuId}
+		ON (m.id = ar.menuId AND m.pId IN (0,#{menuId}))
 		AND ar.status = 'display'
 		ORDER BY ar.createTime DESC limit 0 ,#{num};
 	</select>

@@ -48,7 +48,7 @@
 <script src="${BASE_PATH}/static/manage/pic/ssi-uploader.js"></script>
 <script type="text/javascript">
     $('#ssi-upload').ssi_uploader({
-        url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 5,
+        url: '${BASE_PATH}/manage/picture/add.json', allowed: ['jpg', 'gif', 'png'], maxFileSize: 50,
         maxNumberOfFiles:6,
         responseValidation: {
             validationKey: {
@@ -118,7 +118,7 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href='/" + n.picUrl + "'>" + n.picUrl + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td><img src='/" + n.picUrl + "'width='100' height='50'/></td>";
                             trs += "<td>" + n.picType + "</td>";
                             trs += "<td>" + n.createTimeView + "</td>";
                             trs += "<td><a name=\"是否删除活动\" href=\"javascript:void(0);\"  class=\"js_picture_delete\" id=\"" + n.id + "\">删除</a></td></tr>";

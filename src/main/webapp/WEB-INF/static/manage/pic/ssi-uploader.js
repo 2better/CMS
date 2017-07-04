@@ -823,7 +823,7 @@
         en: {
             success: 'Success',
             sucUpload: 'Successful upload',
-            chooseFiles: 'Choose files',
+            chooseFiles: '选择图片',
             uploadFailed: 'Upload failed',
             serverError: 'Internal server error',
             error: 'Error',

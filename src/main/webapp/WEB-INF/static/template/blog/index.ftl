@@ -75,7 +75,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/event/list.htm">MORE >></a>
+                            <a href="${BASE_PATH}/event/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -101,7 +101,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715140882566">MORE >></a>
+                            <a href="${BASE_PATH}/article/list.htm?menuId=149715140882566">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -120,7 +120,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715156331056">MORE >></a>
+                            <a href="${BASE_PATH}/article/list.htm?menuId=149715156331056">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -142,7 +142,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/composition/list.htm">MORE >></a>
+                            <a href="${BASE_PATH}/composition/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -168,7 +168,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/article/list.htm?menuId=149715140882566">MORE >></a>
+                            <a href="${BASE_PATH}/paper/scholar.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
@@ -192,7 +192,7 @@
                             <p class="tl-en"></p>
                         </div>
                         <div class="more">
-                            <a href="/scholar/list.htm">MORE >></a>
+                            <a href="${BASE_PATH}/scholar/list.htm">MORE >></a>
                         </div>
                     </div>
                     <div class="area-con">
