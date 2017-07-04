@@ -664,6 +664,23 @@ body {
 }
 
 
+/* 学者风采表格 */
+.professors{
+  width: 100%;
+  margin: 0;
+}
+
+.professors tbody tr td{
+  border-bottom: 1px dashed #333;
+}
+
+.professors tr td a{
+  padding-left: 15px;
+  /*background: url(../images/area5-li-icon.png) no-repeat left center;*/
+  background: url(../images/cec_17.png) no-repeat left center;
+  line-height: 33px;
+}
+
 /*area2*/
 
 .area2 .area2-top {
