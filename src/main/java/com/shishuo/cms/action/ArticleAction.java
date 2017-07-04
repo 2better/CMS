@@ -46,14 +46,17 @@ public class ArticleAction extends BaseAction {
 		try {
 
 			Menu menu = menuService.getByid(menuId);
-			List<Menu> menus = menuService.getWithChildById(menu.getPid());
+
+			Menu menus = null;
+			if(menu.getPid()!=0)
+				menus = menuService.getWithChildById(menu.getPid());
 			int count = fileService.getArticleCountByMenuId(menuId,"display");
 			int rows = configService.getIntKey("pagination_num");
 			int pageCount = fileService.getPageCount(count,rows);
 
 
 			modelMap.put("Menu",menu);
-			modelMap.put("menus",menus.get(0));
+			modelMap.put("menus",menus);
 			modelMap.put("count",count);
 			modelMap.put("pageCount",pageCount);
 

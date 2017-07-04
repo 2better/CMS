@@ -55,7 +55,7 @@ public class MenuService
         return menuDao.getChildren(0);
     }
 
-    public List<Menu> getWithChildById(long id)
+    public Menu getWithChildById(long id)
     {
         return menuDao.getWithChildById(id);
     }

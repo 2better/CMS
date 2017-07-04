@@ -110,10 +110,10 @@
         <div class="search">
             <span class="widget">
                 <div style="z-index: 99;position: relative;">
-                 <ul id="content" style="display: none;position: absolute;top:-64px;left:-30px;padding-left:13px;padding-top:10px;border-radius:10px;width: 70px;height:48px;background-color: #fff;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176);">
+                 <ul id="con" style="display: none;position: absolute;top:22px;left:-30px;padding-left:13px;padding-top:10px;border-radius:10px;width: 70px;height:48px;background-color: #fff;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176);z-index:99;">
                      <li style="margin-bottom: 8px;"><a style="font-size: 14px;" class="toupdate" href="javascript:void(0);"> 修改密码</a></li>
                      <li><a style="font-size: 14px;" href="${BASE_PATH}/user/logout.htm">注销登录</a></li>
-                     <div class="log-arrow-up" style="background: url('${TEMPLATE_BASE_PATH}/images/arrow-up.png') no-repeat;width: 20px;height: 11px;position: absolute;right: 31px;top: 58px;"></div>
+                     <div class="log-arrow-up" style="background: url('${TEMPLATE_BASE_PATH}/images/arrow-up.png') no-repeat;width: 20px;height: 11px;position: absolute;right: 31px;top: -11px;"></div>
                 </ul>
                 <a href="javascript:;" class="" id="currentUser">未登录</a>
 
@@ -138,14 +138,14 @@
                 <li>
                 </#if>
                 <a href="<#if p.children?size gt 0>${p.children[0].url}<#else>${p.url}</#if>"
-                   target="_blank">${p.name}</a>
+                   target="_blank" class="p">${p.name}</a>
                 <ul>
                     <#list p.children?sort_by("sort") as c>
-                        <li class=""><a href="${c.url}" target="_blank">${c.name}</a>
+                        <li class=""><a class="c" href="${c.url}" target="_blank">${c.name}</a>
                             <ul>
                                 <#if (c.children?size > 0)>
                                     <#list c.children?sort_by("sort") as s>
-                                    <li class=""><a href="${s.url}" target="_blank">${s.name}</a>
+                                    <li class=""><a class="c" href="${s.url}" target="_blank">${s.name}</a>
                                     </#list>
                                 </#if>
                             </ul>
@@ -161,6 +161,9 @@
 <script src="${BASE_PATH}/static/manage/js/jquery.form.min.js"></script>
 <script>
     $(function () {
+
+       getTitle();
+
         var ele = null;
         $("#nav li").click(function (e) {
             var temp = $(this).find('a');
@@ -173,7 +176,7 @@
                 cache: false,
                 success: function (data) {
                     if (data == false) {
-                        $(".login-layer").css('display', 'flex');
+                        $(".layer1").css('display', 'flex');
                     } else {
                         window.location.href = temp.attr("href");
                     }
@@ -247,10 +250,13 @@
             }
         });
 
+        $(".widget").on('click', '.isLogin', function (event) {
+            event.stopPropagation();
+            $("#con").slideToggle();
+        });
 
-        $(".widget").on('click', '.isLogin', function () {
-           // $(this).html( $("#content").is(":hidden") ?  "<img src='6.png'>" : "<img src='9.png'>");
-            $("#content").slideToggle();
+        $(document).on('click', function () {
+                $("#con").slideUp();
         });
 
         $.ajax({
@@ -277,5 +283,25 @@
     $("#keyButton").click(function () {
         window.location.href = "${BASE_PATH}/article/search.html?key=" + $("#key").val();
     });
+
+    function getTitle() {
+        var As = $(".c");
+        for (var i = 0; i < As.length; i++) {
+            if (window.location.href.indexOf(As[i].href) >= 0) {
+                document.title = As[i].innerText;
+                return;
+            }
+            if(i===As.length-1)
+            {
+                As = $(".p");
+                for(i=1;i<As.length;i++)
+                    if (window.location.href.indexOf(As[i].href) >= 0) {
+                        document.title = As[i].innerText;
+                        return;
+                    }
+            }
+        }
+    }
+
 </script>
 <div class="clear"></div>

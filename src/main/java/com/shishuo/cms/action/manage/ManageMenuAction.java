@@ -38,16 +38,13 @@ public class ManageMenuAction extends ManageBaseAction
     public String list(@RequestParam(value = "id", defaultValue = "0") long id, ModelMap modelMap)
     {
         List<Menu> menuParentsList = menuService.getAll();
-        List<Menu> menuList = menuService.getWithChildById(id);
-        Menu menu = null;
-        if(menuList.size()>0) {
-            menu = menuList.get(0);
-        }else{
-            menu = new Menu();
-            menu.setName("");
+        Menu menuList = menuService.getWithChildById(id);
+        if(menuList==null) {
+            menuList = new Menu();
+            menuList.setName("");
         }
         modelMap.put("menuParentsList", menuParentsList);
-        modelMap.put("Menu",menu);
+        modelMap.put("Menu",menuList);
         return "manage/menu/list";
     }
 

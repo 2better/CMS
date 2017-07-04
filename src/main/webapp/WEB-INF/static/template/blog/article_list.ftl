@@ -2,10 +2,11 @@
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
-            <span class="g-sd-header-title">${menus.name}</span>
+            <span class="g-sd-header-title"><#if menus??>${menus.name}</#if></span>
             <span class="circle"></span>
         </div>
         <ul class="g-sd-content">
+<#if menus??>
         <#list menus.children?sort_by("sort") as p>
             <a href="${p.url}">
                 <li>
@@ -16,12 +17,13 @@
                 </li>
             </a>
         </#list>
+</#if>
         </ul>
     </div>
 
     <div class="g-mn">
         <div class="g-mn-header">
-            <span class="g-sd-header-crumb">${menus.name} > ${Menu.name}</span>
+            <span class="g-sd-header-crumb"><#if menus??>${menus.name} > </#if>${Menu.name}</span>
         </div>
         <div class="g-mn-content-out2">
             <div class="g-mn-content2">
@@ -55,7 +57,7 @@
         var newPage = 0;//新的一页
         var btnId = null;//按钮的id
         var toPage = 0;//跳转到哪一页
-        var url = "${BASE_PATH}/article/listJson.json"//url
+        var url = "${BASE_PATH}/article/listJson.json";//url
         var menuid = "${Menu.id}";
 
         $(function() {

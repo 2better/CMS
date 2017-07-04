@@ -321,7 +321,7 @@ body {
 .menu {
   width: 100%;
   position: relative;
-  z-index: 99;
+ /* z-index: 99;*/
   background: url(../images/header_bg.png) repeat-x;
 }
 
@@ -341,7 +341,7 @@ body {
   color: #fff;
   text-align: center;
   position: relative;
-  z-index: 990;
+  /*z-index: 990;*/
 }
 
 #nav li.on:after{
@@ -933,13 +933,19 @@ body {
   margin: 22px 0 0 10px;
   padding-left: 2em;
   border-left: 1px solid #fff;
+  height:58px;
 }
+
+
 
 .foot .link2 a {
   color: #fff;
-  width: 66px;
+  width: 54px;
   text-align: left;
   margin: 0 8px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .foot .link2 select {

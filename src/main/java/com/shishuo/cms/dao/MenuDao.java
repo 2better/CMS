@@ -20,7 +20,7 @@ public interface MenuDao
     List<Menu> getAll();
     List<Menu> getAllDisplay();
     List<Menu> getAllDisplayExceptLeaf();
-    List<Menu> getWithChildById(long id);
+    Menu getWithChildById(long id);
     void modifySortById(long id,int sort);
     Menu getById(long id);
     int getCountOfChilden(long pid);
