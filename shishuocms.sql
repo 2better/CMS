@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50533
 File Encoding         : 65001
 
-Date: 2017-06-15 21:23:02
+Date: 2017-07-05 14:11:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,12 +27,12 @@ CREATE TABLE `admin` (
   `createTime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`adminId`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理员';
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('3', 'admin', 'bc9ebb893e70f3ab2173a80a492e0109', '7633241aa83e08c68e0b0053f9d01c58', '2017-06-13 15:59:58');
+INSERT INTO `admin` VALUES ('3', 'admin', '4877757411f504f656ddfe6f6db6c3fe', 'eb84dc47d10570535568d82a30e64341', '2017-06-13 15:59:58');
 
 -- ----------------------------
 -- Table structure for `article`
@@ -66,6 +66,24 @@ INSERT INTO `article` VALUES ('149749576725342', '149746288288476', '出版书�
 -- ----------------------------
 -- Table structure for `comment`
 -- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `commentId` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '评论ID',
+  `userId` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `fatherId` bigint(20) DEFAULT NULL COMMENT '父评论ID',
+  `kindId` bigint(20) DEFAULT NULL,
+  `kind` varchar(45) DEFAULT NULL COMMENT '文件ID',
+  `name` varchar(45) DEFAULT NULL COMMENT '评论者',
+  `email` varchar(45) DEFAULT NULL COMMENT '评论者邮件地址',
+  `url` varchar(200) DEFAULT NULL COMMENT '评论者网址',
+  `phone` bigint(20) DEFAULT NULL,
+  `content` text COMMENT '内容',
+  `ip` varchar(45) DEFAULT NULL COMMENT 'Ip',
+  `status` varchar(20) DEFAULT NULL COMMENT '状态',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`commentId`),
+  KEY `idx_status` (`status`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='评论';
 
 -- ----------------------------
 -- Records of comment
@@ -93,20 +111,26 @@ CREATE TABLE `composition` (
 -- ----------------------------
 DROP TABLE IF EXISTS `config`;
 CREATE TABLE `config` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `key` varchar(45) NOT NULL COMMENT 'Key',
-  `value` varchar(45) DEFAULT NULL COMMENT '值',
+  `value` varchar(45) NOT NULL COMMENT '值',
   `description` text COMMENT '描述',
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='网站配置';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='网站配置';
 
 -- ----------------------------
 -- Records of config
 -- ----------------------------
-INSERT INTO `config` VALUES ('copyright', '©ITIMRC 版权所有', '网站版权');
-INSERT INTO `config` VALUES ('ICP', 'aa', '备案号');
-INSERT INTO `config` VALUES ('index_title', 'ITIMRC', '首页title');
-INSERT INTO `config` VALUES ('pagination_num', '2', '分页每页显示条数');
-INSERT INTO `config` VALUES ('seo_description', 'ITIMRC', '网站描述');
+INSERT INTO `config` VALUES ('1', 'index_title', '创新理论与创新管理研究中心', '首页title');
+INSERT INTO `config` VALUES ('2', 'seo_description', 'ITIMRC', '网站描述');
+INSERT INTO `config` VALUES ('3', 'ICP', 'ICP备13010980号', '备案号');
+INSERT INTO `config` VALUES ('4', 'phonenum', '123456', '联系电话');
+INSERT INTO `config` VALUES ('5', 'copyright', '@创新理论与创新管理研究中心', '网站版权');
+INSERT INTO `config` VALUES ('6', 'pagination_num', '2', '分页每页显示条数');
+INSERT INTO `config` VALUES ('7', 'bigheight', '330', '首页展示图大图高');
+INSERT INTO `config` VALUES ('8', 'bigwidth', '1200', '首页展示图大图宽');
+INSERT INTO `config` VALUES ('9', 'smallheight', '280', '首页展示图小图高');
+INSERT INTO `config` VALUES ('10', 'smallwidth', '790', '首页展示图小图宽');
 
 -- ----------------------------
 -- Table structure for `document`
@@ -144,12 +168,14 @@ CREATE TABLE `event` (
   `name` varchar(100) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of event
 -- ----------------------------
-INSERT INTO `event` VALUES ('1', '1', '<p>活动</p>', '活动', '2017-06-15 00:00:00');
+INSERT INTO `event` VALUES ('1', '1', '<p>《某某课程》是我校理、工、经管类本科生必修的一门重要的基础课。也是工学、 经济学硕士研究生入学考试的一门必考科目。概率论是一门研究随机现象统计规律性数量关系的数学学科，而数理统计是研究如何有效地收集整理和分析受随机影响的数据，并作出统计推断、预测或者决策的一门学科，它是以概率论为基础的。</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2004年获精品课程以来，我们不断加强师资队伍建设：吸收安心基础课教学的优秀博士毕业生到概率论与数理统计课程教学队伍…</p><p><br/></p>', '活动', '2017-06-15 00:00:00');
+INSERT INTO `event` VALUES ('2', '0', '<p>高校实验示范中心信息化教学管理体系研究及构建</p>', '高校实验示范中心信息化教学管理体系研究及构建', '2017-06-28 00:00:00');
+INSERT INTO `event` VALUES ('3', '0', '<p>基于电子政务的高校基层党组织管理创新策略探讨</p>', '基于电子政务的高校基层党组织管理创新策略探讨', '2017-06-28 00:00:00');
 
 -- ----------------------------
 -- Table structure for `friendlylink`
@@ -162,18 +188,41 @@ CREATE TABLE `friendlylink` (
   `sort` tinyint(4) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of friendlylink
 -- ----------------------------
 INSERT INTO `friendlylink` VALUES ('2', 'github', 'http://www.github.com/', '1', 'display');
-INSERT INTO `friendlylink` VALUES ('3', '新浪微博', 'http://www.weibo.com', '1', 'display');
-INSERT INTO `friendlylink` VALUES ('4', '知乎', 'https://www.zhihu.com', '2', 'hidden');
+INSERT INTO `friendlylink` VALUES ('3', '新浪微博', 'http://www.weibo.com', '3', 'display');
+INSERT INTO `friendlylink` VALUES ('4', '知乎', 'https://www.zhihu.com', '2', 'display');
+INSERT INTO `friendlylink` VALUES ('5', '  百度  ', 'http://www.baidu.com', '1', 'display');
+INSERT INTO `friendlylink` VALUES ('6', '腾讯', 'http://www.qq.com', '1', 'display');
+INSERT INTO `friendlylink` VALUES ('7', '京东', 'http://www.jd.com', '1', 'display');
+INSERT INTO `friendlylink` VALUES ('8', '淘宝', 'http://www.taobao.com', '1', 'display');
 
+-- ----------------------------
+-- Table structure for `media`
+-- ----------------------------
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE `media` (
+  `mediaId` bigint(20) NOT NULL AUTO_INCREMENT,
+  `kindId` bigint(20) DEFAULT '0',
+  `name` varchar(200) DEFAULT NULL,
+  `path` varchar(200) DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `kind` varchar(20) DEFAULT NULL,
+  `createTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`mediaId`),
+  KEY `idx_kind` (`kind`,`kindId`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=ucs2 ROW_FORMAT=COMPACT;
 
+-- ----------------------------
+-- Records of media
+-- ----------------------------
 
-
+-- ----------------------------
 -- Table structure for `menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `menu`;
@@ -200,8 +249,8 @@ INSERT INTO `menu` VALUES ('149715114562973', '人才培养', '/article/list.htm
 INSERT INTO `menu` VALUES ('149715115964151', '合作交流', '/article/list.htm?menuId=149715115964151', '0', '7', 'display', '0');
 INSERT INTO `menu` VALUES ('149715117020733', '研究资源', '/article/list.htm?menuId=149715117020733', '0', '8', 'display', '1');
 INSERT INTO `menu` VALUES ('149715118080311', '人才招聘', '/article/list.htm?menuId=149715118080311', '0', '9', 'display', '1');
-INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/article/download.htm', '0', '10', 'display', '1');
-INSERT INTO `menu` VALUES ('149715122468202', '首页', '', '0', '1', 'display', '1');
+INSERT INTO `menu` VALUES ('149715120950670', '智库专报', '/paper/thinkTtank.htm', '0', '10', 'display', '1');
+INSERT INTO `menu` VALUES ('149715122468202', '首页', '/index.htm', '0', '1', 'display', '1');
 INSERT INTO `menu` VALUES ('149715128012317', '主任致辞', '/article/list.htm?menuId=149715128012317', '149715099586609', '1', 'display', '1');
 INSERT INTO `menu` VALUES ('149715129668145', '中心简介', '/article/list.htm?menuId=149715129668145', '149715099586609', '1', 'display', '1');
 INSERT INTO `menu` VALUES ('149715135268713', '学术委员会', '/article/list.htm?menuId=149715135268713', '149715099586609', '1', 'display', '1');
@@ -231,13 +280,19 @@ CREATE TABLE `picture` (
   `picUrl` varchar(100) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type` tinyint(4) DEFAULT '0',
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `size` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of picture
 -- ----------------------------
+INSERT INTO `picture` VALUES ('43', 'upload/images/2017/07/05/c5f1ba7b5cc2438999c481786f793c75.jpg', 'blob', '2017-07-05 13:53:39', '1', '68');
+INSERT INTO `picture` VALUES ('44', 'upload/images/2017/07/05/e100e29ca04a43218a5bbcd08c6bbaeb.jpg', 'blob', '2017-07-05 13:53:52', '1', '47');
+INSERT INTO `picture` VALUES ('45', 'upload/images/2017/07/05/3631772f39084c498ce3ac7a9c73aad4.jpg', 'blob', '2017-07-05 13:54:09', '1', '36');
+INSERT INTO `picture` VALUES ('49', 'upload/images/2017/07/05/3b086c8dd514495ca8beb4b8671ee48e.jpg', 'blob', '2017-07-05 13:58:26', '0', '41');
+INSERT INTO `picture` VALUES ('51', 'upload/images/2017/07/05/1f605ab588f241cbb012b980d67c6fdb.jpg', 'blob', '2017-07-05 13:59:19', '0', '26');
 
 -- ----------------------------
 -- Table structure for `scholar`
@@ -250,11 +305,12 @@ CREATE TABLE `scholar` (
   `name` varchar(100) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholar
 -- ----------------------------
+INSERT INTO `scholar` VALUES ('1', '<p>456</p>', '', '测试', '2017-07-04 00:00:00');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -272,6 +328,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('149737071298860', '74e77f19b10bd9a72ab2bd5b5270363a', '0f79680132f4a387948d2a1210475091', 'user', '2017-06-14 00:18:32');
+INSERT INTO `user` VALUES ('149737071298860', '0bf0230e128230755a58403e05180085', 'd7c7170199b62be0a1716ac6d3a542ca', 'user', '2017-06-14 00:18:32');
 INSERT INTO `user` VALUES ('149749213497248', '207db224d7d70bd55db33a01d1f2bcbd', '2210e4d2eb0324b4ca0a17b59cbfc82a', 'a', '2017-06-15 10:02:14');
 INSERT INTO `user` VALUES ('149749214321594', 'a73cf946b2d4aafc32444e1d1f4415bd', 'ac1b9cdf614b3200b9337125f9172857', 'b', '2017-06-15 10:02:23');

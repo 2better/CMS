@@ -4,8 +4,8 @@
 <mapper namespace="com.shishuo.cms.dao.PictureDao">
 	<insert id="add" parameterType="com.shishuo.cms.entity.Picture">
 		insert into
-		Picture(name, createTime, picUrl, type)
-		values(#{name},#{createTime},#{picUrl}, #{type})
+		Picture(name, createTime, picUrl,size, type)
+		values(#{name},#{createTime},#{picUrl},#{size}, #{type})
 	</insert>
 
 	<select id="getById" resultType="com.shishuo.cms.entity.Picture">

@@ -30,12 +30,20 @@
                                 <div class="form-group">
                                     <label class="col-xs-3 control-label">链接状态</label>
                                     <div class="col-xs-9">
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="display" checked/> 显示
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="status" value="hidden"/> 隐藏
-                                        </label>
+                                        <div class="col-sm-10" style="margin-bottom:10px;">
+                                            <div class="checkbox checkbox-info" style="display: inline-block;margin: 0;padding:0">
+                                                <input type="radio" name="status" id="radio1" value="display" checked>
+                                                <label for="radio1">
+                                                    显示
+                                                </label>
+                                            </div>
+                                            <div class="checkbox checkbox-info" style="display: inline-block;padding-top:0">
+                                                <input type="radio" name="status" id="radio2" value="hidden" >
+                                                <label for="radio2">
+                                                    隐藏
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -19,6 +19,7 @@
     <!--external css-->
     <link href="${BASE_PATH}/static/manage/assets/font-awesome/css/font-awesome.min.css"
             rel="stylesheet"/>
+    <link rel="stylesheet" href="${BASE_PATH}/static/manage/css/awesome-bootstrap-checkbox.css"/>
     <link href="${BASE_PATH}/static/manage/assets/fancybox/source/jquery.fancybox.css?v=${config_v}" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="${BASE_PATH}/static/manage/css/style.css?v=${config_v}" rel="stylesheet">
@@ -57,8 +58,8 @@
 
                     <h3 id="top_menu" style="font-weight: bold;position: relative;bottom: 42px;display: inline-block;font-size: 2.8em;line-height: 110px;vertical-align: text-bottom;color: #a82e17;font-family: "黑体", sans-serif;">
                         创新理论与创新管理研究中心
-                        <span style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 17px;white-space: nowrap;text-align: center;left: 0;bottom: 16px;">Innovation Theory And Innovation Management Research Center</span>
-                        <p style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 15px;white-space: nowrap;text-align: center;bottom: -18px;font-size: 20px;font-weight: bold;text-align: left;color: #333;background: url(${TEMPLATE_BASE_PATH}/images/line.png) no-repeat center right;">广东省决策咨询研究基地</p>
+                        <span style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 17px;white-space: nowrap;text-align: center;left: 0;bottom: 13px;">Innovation Theory And Innovation Management Research Center</span>
+                        <p style=" position: absolute;display: block;width: 100%;line-height: 1.6;font-weight: normal;font-size: 15px;white-space: nowrap;text-align: center;bottom: -20px;font-size: 20px;font-weight: bold;text-align: left;color: #333;background: url(${TEMPLATE_BASE_PATH}/images/line.png) no-repeat center right;">广东省决策咨询研究基地</p>
                     </h3>
 
 				<div class="top-nav" style="float: right;margin-right:20px;">

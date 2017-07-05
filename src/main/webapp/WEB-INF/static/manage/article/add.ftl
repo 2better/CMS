@@ -151,9 +151,18 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">文章状态</label>
                                 <div class="col-sm-10" style="margin-bottom:10px;">
-                                    <input name="status" value="display" type="radio" checked> 显示
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="status" value="hidden" type="radio"> 隐藏
+                                    <div class="checkbox checkbox-info" style="display: inline-block">
+                                        <input type="radio" name="status" id="radio1" value="display" checked>
+                                        <label for="radio1">
+                                            显示
+                                        </label>
+                                    </div>
+                                    <div class="checkbox checkbox-info" style="display: inline-block">
+                                        <input type="radio" name="status" id="radio2" value="hidden" >
+                                        <label for="radio2">
+                                            隐藏
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

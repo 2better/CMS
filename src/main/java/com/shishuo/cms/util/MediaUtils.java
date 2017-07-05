@@ -1,8 +1,3 @@
-/*
- *	Copyright © 2013 Changsha Shishuo Network Technology Co., Ltd. All rights reserved.
- *	长沙市师说网络科技有限公司 版权所有
- *	http://www.shishuo.com
- */
 
 package com.shishuo.cms.util;
 
@@ -10,9 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.imageio.ImageIO;
 
@@ -41,7 +34,7 @@ public class MediaUtils {
 	/**
 	 * 图片允许格式
 	 */
-	public static String[] PHOTO_TYPE = { ".gif", ".png", ".jpg", ".jpeg",
+	public static String[] PHOTO_TYPE = { ".gif", ".jpg", ".jpg", ".jpeg",
 			".bmp" };
 
 	public static boolean isFileType(String fileName, String[] typeArray) {
@@ -121,11 +114,10 @@ public class MediaUtils {
 	 * @param height
 	 * @throws IOException
 	 */
-	public static String saveImage(MultipartFile multipartFile, int width,
+	public static Map<String,Object> saveImage(MultipartFile multipartFile, int width,
 			int height) throws IOException {
-		logger.info("压缩图片尺寸："+width+" x "+height);
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String path = "upload/" + formater.format(new Date()) + "/"
+		String path = "upload/images/" + formater.format(new Date()) + "/"
 				+ UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
 		String filePath = SystemConstant.SHISHUO_CMS_ROOT + "/" + path;
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + path);
@@ -166,7 +158,10 @@ public class MediaUtils {
 		}
 		// FileOutputStream fos = new FileOutputStream(file);
 		// baos.writeTo(fos);
-		return path;
+		Map<String,Object> map = new HashMap<String,Object>(2);
+		map.put("path",path);
+		map.put("size",(int)(file.length()/1024));
+		return map;
 	}
 
 	/**

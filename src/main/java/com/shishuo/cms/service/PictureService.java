@@ -24,10 +24,11 @@ public class PictureService {
     @Autowired
     private PictureDao pictureDao;
 
-    public void add(String name, String picUrl, Integer type) {
+    public void add(String name, String picUrl,int size, Integer type) {
         Picture picture = new Picture();
         picture.setName(name);
         picture.setPicUrl(picUrl);
+        picture.setSize(size);
         picture.setType(type);
         picture.setCreateTime(new Date());
         pictureDao.add(picture);

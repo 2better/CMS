@@ -33,9 +33,18 @@
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">重要活动</label>
                             <div class="col-sm-10" style="margin-bottom:10px;">
-                                <input name="important" value="1" type="radio" checked> 是
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input name="important" value="2" type="radio"> 否
+                                <div class="checkbox checkbox-info" style="display: inline-block">
+                                    <input type="radio" name="important" id="radio1" value="1" checked>
+                                    <label for="radio1">
+                                        是
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-info" style="display: inline-block">
+                                    <input type="radio" name="important" id="radio2" value="2" >
+                                    <label for="radio2">
+                                       否
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <#--<div class="form-group">-->
