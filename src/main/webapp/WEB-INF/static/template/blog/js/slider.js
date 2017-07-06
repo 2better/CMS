@@ -51,9 +51,11 @@ function slider($container, auto, images, interval) {
     });
 
     //载入图片
-    $container.find('ul > li').css('background-image','url('+images_url[0]+')');
+    images_url.push(images_url[0]);
     $.each(images_url,function(key,value){
         $container.find('ul > li').eq(key).css('background-image','url('+value+')');
+        $container.find('ul > li').eq(key).css('-ms-filter','progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+value+'",sizingMethod="scale")');
+        $container.find('ul > li').eq(key).css('filter','progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+value+'",sizingMethod="scale")');
     });
 
     // 设置图片宽度
