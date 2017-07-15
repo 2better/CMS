@@ -39,4 +39,16 @@
     if (isEdge) { return "Edge";} 
   }//myBrowser() end 
 
-  alert(BrowserType());
+//   alert(BrowserType());
+
+(function () {
+
+    var browser = BrowserType();
+
+    var reg = /IE[5-8]/;
+
+    if (reg.test(browser)) {
+        alert('该网站在高级浏览器效果更好，请使用IE8+现代浏览器！');
+    }
+
+})();
