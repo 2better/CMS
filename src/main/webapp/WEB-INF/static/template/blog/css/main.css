@@ -158,6 +158,7 @@ body {
 
 .header-content {
   /*background: url(../images/header-content-bg.png) no-repeat;*/
+  position: relative;
   width: 1200px;
   padding: 0.5em 0;
   margin: 0 auto;
@@ -241,7 +242,7 @@ body {
 .search .widget{
   position: absolute;
   top: 80px;
-  right: 88px;
+  right: 14px;
   font-size: 12px;
 }
 

@@ -23,6 +23,7 @@
 <!--头部-->
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/msclass.js"></script>
+<script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/browser.js"></script>
 <script>
     var big = [
     <#list pictures as p>
