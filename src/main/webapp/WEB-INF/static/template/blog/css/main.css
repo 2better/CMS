@@ -827,9 +827,6 @@ body {
 
 .area4 .area-con ul li {
   border-bottom: 1px dashed #333;
-  overflow-x: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .area4 .area-con ul li a {
@@ -901,6 +898,12 @@ body {
 
 .qrcode .area1 .title-con-l{
   float: left;
+}
+
+.con-bot div > ul > li {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 
