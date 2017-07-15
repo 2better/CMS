@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -87,13 +88,18 @@ public class ManagePictureAction extends ManageBaseAction {
 
     @ResponseBody
     @RequestMapping(value="/add.action",method = RequestMethod.POST)
-    public String shearphoto(@RequestParam("UpFile")MultipartFile file,
-                             @RequestParam(value = "type", defaultValue = "0") Integer type) throws IOException  {
-
+    public String shearphoto(@RequestParam("img")MultipartFile file,
+                             @RequestParam(value = "type", defaultValue = "0") Integer type,
+                             @RequestParam(value = "x") Double x,
+                             @RequestParam(value = "y") Double y,
+                             @RequestParam(value = "height") Double h,
+                             @RequestParam(value = "width") Double w,
+                             @RequestParam(value = "rotate",defaultValue = "0") Integer r
+                             ) throws IOException  {
         String str = "";
         try {
             if (file != null && !file.isEmpty()) {
-                int height = 0;
+                /*int height = 0;
                 int width = 0;
                 if(type==1){
                     height = configService.getIntKey("bigheight");
@@ -101,16 +107,22 @@ public class ManagePictureAction extends ManageBaseAction {
                 }else{
                     height = configService.getIntKey("smallheight");
                     width = configService.getIntKey("smallwidth");
+                }*/
+
+                if(MediaUtils.isFileType(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")), MediaUtils.PHOTO_TYPE)) {
+
+                    Map<String, Object> map = MediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
+                    pictureService.add(file.getOriginalFilename(), (String) map.get("path"), (Integer) map.get("size"), type);
+                    str = "0";
+                }else{
+                    str =  "1";
                 }
-                Map<String,Object> map = MediaUtils.saveImage(file,width,height);
-                pictureService.add(file.getOriginalFilename(), (String)map.get("path"),(Integer)map.get("size"),type);
-                str =  "{\"status\":\"success\"}";
             }else{
-                str =  "{\"status\":\"false\"}";
+                str =  "2";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            str =   "{'status':'false'}";
+            str =   "3";
         }
         return str;
     }

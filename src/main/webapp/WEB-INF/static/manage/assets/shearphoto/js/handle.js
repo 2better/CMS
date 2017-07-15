@@ -16,10 +16,10 @@ window.ShearPhoto.MINGGE(function() {
         translate3d: false, //是否开启3D移动，CPU加速。可选true  false。默认关闭的，作者认为PC端没必要！在PC端开启后，有部份浏览器页面走位的问题。主要是各大浏览器不统一所致，手机端效果会明显！PC端没什么感觉。 原来是采用left top进行定位的，那么3D移动就是CSS3的translate3d属性。去百度一下translate3D吧
 
 		/*HTML5重点功能*/
-        HTML5: true, //可选 true,false  是否使用HTML5进行切图 ，支持HTML5浏览器会使用HTML5进行切图，没有HTML5浏览器则采用原始的方式(先上传大图再截取)，SHEARPHOTO这个方案无可挑剔了吧！
+        HTML5: false, //可选 true,false  是否使用HTML5进行切图 ，支持HTML5浏览器会使用HTML5进行切图，没有HTML5浏览器则采用原始的方式(先上传大图再截取)，SHEARPHOTO这个方案无可挑剔了吧！
 
 		/*HTML5重点功能*/
-        HTML5MAX: 500, //默认请设0 (最大尺寸做事)， HTML上传截图最大宽度， 宽度越大，HTML5截出来的图片容量越大，服务器压力就大，截图就更清淅！ 设得越小 HTML5截出来的图片容量越小.但是造成一定程序的不清淅，请适量设置 当然开启HTML5切图，该设置才有效
+        HTML5MAX: 1200, //默认请设0 (最大尺寸做事)， HTML上传截图最大宽度， 宽度越大，HTML5截出来的图片容量越大，服务器压力就大，截图就更清淅！ 设得越小 HTML5截出来的图片容量越小.但是造成一定程序的不清淅，请适量设置 当然开启HTML5切图，该设置才有效
 
 		/*HTML5重点功能*/
         HTML5Quality: 0.9, //截好的截图  0至1范围可选（可填小数）   HTML5切图的质量   为1时 最高	，当然开启HTML5切图，该设置才有效,设得越高，越清淅，但文件体积越大，同上！

@@ -15,9 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by labber on 2017/6/12.
- */
 @Service
 public class PictureService {
 
