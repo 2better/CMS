@@ -1,5 +1,6 @@
 package com.shishuo.cms.shiro;
 
+import com.shishuo.cms.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
@@ -20,8 +21,7 @@ import javax.servlet.http.HttpSession;
  * @create 2016/11/24
  */
 
-public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
-{
+public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
 
     private String readLoginUrl;
 
@@ -32,7 +32,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
 
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if (isLoginRequest(request, response)) {
-            HttpSession session = ((HttpServletRequest)request).getSession();
+            HttpSession session = ((HttpServletRequest) request).getSession();
             String captcha = request.getParameter("captcha");
             String kaptcha = (String) session.getAttribute(
                     com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
@@ -44,7 +44,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
             }*/
             String password = request.getParameter("password");
             String name = request.getParameter("name");
-            if (StringUtils.isBlank(name)||StringUtils.isBlank(password) || password.length() < 6) {
+            if (StringUtils.isBlank(name) || StringUtils.isBlank(password) || password.length() < 6) {
                 request.setAttribute("shiroLoginFailure", "valueError");
                 return true;
             }
@@ -63,7 +63,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
                                      ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        httpServletRequest.getSession().setAttribute("SESSION_ADMIN",subject.getPrincipal());
+        httpServletRequest.getSession().setAttribute("SESSION_ADMIN", subject.getPrincipal());
         issueSuccessRedirect(request, response);
         return false;
     }
@@ -86,10 +86,28 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter
 
     protected void issueSuccessRedirect(ServletRequest request, ServletResponse response) throws Exception {
         SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(request);
-       if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase(AccessControlFilter.GET_METHOD)) {
+        if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase(AccessControlFilter.GET_METHOD)) {
             WebUtils.redirectToSavedRequest(request, response, savedRequest.getRequestUrl());
             return;
         }
         WebUtils.redirectToSavedRequest(request, response, "/manage/index.htm");
     }
+
+    @Override
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        if (isLoginRequest(request, response))
+        {
+            if (isLoginSubmission(request, response))
+            {
+                Subject subject = this.getSubject(request, response);
+                if (subject.getPrincipal() != null && subject.getPrincipal() instanceof User)
+                {
+                    subject.logout();
+                }
+            }
+        }
+
+        return super.isAccessAllowed(request, response, mappedValue);
+    }
+
 }

@@ -2,10 +2,11 @@
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
-            <span class="g-sd-header-title">${menus.name}</span>
+            <span class="g-sd-header-title"><#if menus??>${menus.name}</#if></span>
             <span class="circle"></span>
         </div>
         <ul class="g-sd-content">
+<#if menus??>
         <#list menus.children?sort_by("sort") as p>
             <a href="${p.url}">
                 <li>
@@ -16,6 +17,7 @@
                 </li>
             </a>
         </#list>
+</#if>
         </ul>
     </div>
     <div class="g-mn">

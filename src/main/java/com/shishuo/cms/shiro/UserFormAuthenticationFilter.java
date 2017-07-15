@@ -1,5 +1,6 @@
 package com.shishuo.cms.shiro;
 
+import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -81,6 +82,19 @@ public class UserFormAuthenticationFilter  extends FormAuthenticationFilter
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+
+        if (isLoginRequest(request, response))
+        {
+            if (isLoginSubmission(request, response))
+            {
+                Subject subject = this.getSubject(request, response);
+                if (subject.getPrincipal() != null && subject.getPrincipal() instanceof Admin)
+                {
+                    subject.logout();
+                }
+            }
+        }
+
         Subject subject = getSubject(request, response);
         if(!subject.isAuthenticated() && subject.isRemembered()){
             Session session = subject.getSession(true);

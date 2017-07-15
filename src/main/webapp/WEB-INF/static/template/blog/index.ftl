@@ -257,7 +257,7 @@
                             </div>
                             <div class="more"><img src="${TEMPLATE_BASE_PATH}/images/area1-more.png"></div>
                         </div>
-                        <div class="title-con-r">
+                        <div class="title-con-r" id="title-con">
                             <div class="resource-top">
                                 <a href="">
                                     <img src="${TEMPLATE_BASE_PATH}/images/database-icon1.png" alt="" />
