@@ -1,16 +1,21 @@
 
 package com.shishuo.cms.util;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.imageio.ImageIO;
 
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
+
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
@@ -106,58 +111,20 @@ public class MediaUtils {
 		file.delete();
 	}
 
-	/**
-	 * 保存，并裁剪图片
-	 * 
-	 * @param multipartFile
-	 * @param width
-	 * @param height
-	 * @throws IOException
-	 */
-	public static Map<String,Object> saveImage(MultipartFile multipartFile, int width,
-			int height) throws IOException {
+	public static Map<String,Object> saveImage(MultipartFile multipartFile, int x, int y, int desWidth,
+											   int desHeight,int rotate) throws IOException {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
 		String path = "upload/images/" + formater.format(new Date()) + "/"
 				+ UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-		String filePath = SystemConstant.SHISHUO_CMS_ROOT + "/" + path;
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}
-		if (width > 0 && height > 0) {
-			BufferedImage bufferedImage = ImageIO.read(multipartFile
-					.getInputStream());
-			int imageWidth = bufferedImage.getWidth();
-			int imageHeitht = bufferedImage.getHeight();
-			BufferedImage image = null;
-			if (width / height < imageWidth / imageHeitht) {
-				image = Thumbnails.of(multipartFile.getInputStream())
-						.height(height).asBufferedImage();
-			} else {
-				image = Thumbnails.of(multipartFile.getInputStream())
-						.width(width).asBufferedImage();
-			}
-			Thumbnails.of(image).sourceRegion(Positions.CENTER, width, height)
-					.size(width, height).outputFormat("jpg").toFile(filePath);
-
-		} else {
-			if (width == 0 && height == 0) {
-				multipartFile.transferTo(file);
-			} else {
-				if (width > 0) {
-					Thumbnails.of(multipartFile.getInputStream()).width(width)
-							.keepAspectRatio(true).outputFormat("jpg")
-							.toFile(filePath);
-				}
-				if (height > 0) {
-					Thumbnails.of(multipartFile.getInputStream())
-							.height(height).keepAspectRatio(true)
-							.outputFormat("jpg").toFile(filePath);
-				}
-			}
+		multipartFile.transferTo(file);
+		if(desWidth>0&&desHeight>0) {
+			imgCut(file, x, y, desWidth, desHeight, rotate);
 		}
-		// FileOutputStream fos = new FileOutputStream(file);
-		// baos.writeTo(fos);
+		resize(file);
 		Map<String,Object> map = new HashMap<String,Object>(2);
 		map.put("path",path);
 		map.put("size",(int)(file.length()/1024));
@@ -179,6 +146,103 @@ public class MediaUtils {
 		}
 		multipartFile.transferTo(file);
 		return path;
+	}
+
+	private static void imgCut(File file, int x, int y, int desWidth, int desHeight,int rotate) {
+		try {
+			Image img;
+			ImageFilter cropFilter;
+			BufferedImage bi = ImageIO.read(file);
+			int srcWidth = bi.getWidth();
+			int srcHeight = bi.getHeight();
+			if (srcWidth >= desWidth && srcHeight >= desHeight) {
+				Image image = bi.getScaledInstance(srcWidth, srcHeight,Image.SCALE_DEFAULT);
+				if(rotate!=0){
+					bi = Rotate(image,rotate);
+					image = bi.getScaledInstance(srcWidth, srcHeight,Image.SCALE_DEFAULT);
+				}
+				cropFilter = new CropImageFilter(x, y, desWidth, desHeight);
+				img = Toolkit.getDefaultToolkit().createImage(
+						new FilteredImageSource(image.getSource(), cropFilter));
+				BufferedImage tag = new BufferedImage(desWidth, desHeight,
+						BufferedImage.TYPE_INT_RGB);
+				Graphics g = tag.getGraphics();
+				g.drawImage(img, 0, 0, null);
+				g.dispose();
+				//输出文件
+				ImageIO.write(tag, "JPEG", file);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static BufferedImage  Rotate(Image src, int angel) {
+		int src_width = src.getWidth(null);
+		int src_height = src.getHeight(null);
+		// calculate the new image size
+		Rectangle rect_des = CalcRotatedSize(new Rectangle(new Dimension(
+				src_width, src_height)), angel);
+
+		BufferedImage res = null;
+		res = new BufferedImage(rect_des.width, rect_des.height,
+				BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = res.createGraphics();
+		// transform
+		g2.translate((rect_des.width - src_width) / 2,
+				(rect_des.height - src_height) / 2);
+		g2.rotate(Math.toRadians(angel), src_width / 2, src_height / 2);
+
+		g2.drawImage(src, null, null);
+		return res;
+	}
+
+	private static Rectangle CalcRotatedSize(Rectangle src, int angel) {
+		if (angel >= 90) {
+			if(angel / 90 % 2 == 1){
+				int temp = src.height;
+				src.height = src.width;
+				src.width = temp;
+			}
+			angel = angel % 90;
+		}
+
+		double r = Math.sqrt(src.height * src.height + src.width * src.width) / 2;
+		double len = 2 * Math.sin(Math.toRadians(angel) / 2) * r;
+		double angel_alpha = (Math.PI - Math.toRadians(angel)) / 2;
+		double angel_dalta_width = Math.atan((double) src.height / src.width);
+		double angel_dalta_height = Math.atan((double) src.width / src.height);
+
+		int len_dalta_width = (int) (len * Math.cos(Math.PI - angel_alpha
+				- angel_dalta_width));
+		int len_dalta_height = (int) (len * Math.cos(Math.PI - angel_alpha
+				- angel_dalta_height));
+		int des_width = src.width + len_dalta_width * 2;
+		int des_height = src.height + len_dalta_height * 2;
+		return new java.awt.Rectangle(new Dimension(des_width, des_height));
+	}
+
+	private static void resize(File file) throws IOException {
+
+		int w = 0;
+		int h = 0;
+		Image img = ImageIO.read(file);
+		int width = img.getWidth(null);    // 得到源图宽
+		int height = img.getHeight(null);  // 得到源图长
+
+		if(width>1200) {
+			w = 1200;
+			h = (int) (height * w / width);
+			// SCALE_SMOOTH 的缩略算法 生成缩略图片的平滑度的 优先级比速度高 生成的图片质量比较好 但速度慢
+			BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+			image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
+			//FileOutputStream out = new FileOutputStream(file); // 输出到文件流
+			// 可以正常实现bmp、png、gif转jpg
+			//JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			//encoder.encode(image); // JPEG编码
+			//out.close();
+			ImageIO.write(image, "JPEG", file);
+		}
 	}
 
 }
