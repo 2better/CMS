@@ -45,9 +45,9 @@
                 <div>
                     <h4>可以尝试：</h4>
                     <ol>
-                        <li><a href="http://yigujin.cn/">返回首页</a></li>
-                        <li><a href="http://yigujin.cn/2017lyb/">留言反馈</a></li>
-                        <li><a href="http://boke112.com/">联系站长</a></li>
+                        <li><a href="${BASE_PATH}/index.htm">返回首页</a></li>
+                        <li><a href="#">留言反馈</a></li>
+                        <li><a href="#">联系站长</a></li>
                     </ol>
                 </div>
             </div>
