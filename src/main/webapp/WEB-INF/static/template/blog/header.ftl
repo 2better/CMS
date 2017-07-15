@@ -188,6 +188,26 @@
             });
         });
 
+        $("#title-con a").click(function (e) {
+            e.preventDefault();
+            var temp = $(this);
+            $.ajax({
+                url: '${BASE_PATH}/user/isLogin.json',
+                type: 'POST',
+                cache: false,
+                success: function (data) {
+                    if (data == false) {
+                        $(".layer1").css('display', 'flex');
+                    } else {
+                        window.location.href = temp.attr("href");
+                    }
+                },
+                error: function () {
+                    alert("系统繁忙，请稍后再试！");
+                }
+            });
+        });
+
         $(".widget").on('click', '.toLogin', function () {
             $(".layer1").css('display', 'flex');
         });

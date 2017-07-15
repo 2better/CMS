@@ -120,7 +120,9 @@ public class PageStaticUtils {
         if (!articleHtmlFile.exists()) {
             Map<String, Object> data = new HashMap<String, Object>();
             Article article = fileService.getArticleById(articleId);
-            Menu menus = menuService.getWithChildById(article.getMenu().getPid());
+            Menu menus = null;
+            if(article.getMenu().getPid()!=0)
+                menus = menuService.getWithChildById(article.getMenu().getPid());
             data.put("menus", menus);
             data.put("article", article);
             createHtml(articleHtmlFile, "article" + "", data);
