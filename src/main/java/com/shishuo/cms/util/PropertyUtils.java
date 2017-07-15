@@ -57,7 +57,7 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer {
 	 */
 	public static String getRoot() {
 		String rootKey = "shishuo.cms.root";
-//		System.setProperty("shishuo.cms.root","C:\\server\\tomcat8_1\\apache-tomcat-8.0.26\\webapps\\ROOT");
+//		System.setProperty("shishuo.cms.root","C:\\server\\nginx\\nginx-1.11.10\\tomcat8_1\\apache-tomcat-8.0.26\\webapps\\ROOT");
 		String cmsRoot = System.getProperty(rootKey);
 		Enumeration<?> enu = System.getProperties().propertyNames();
 		if(cmsRoot.endsWith(java.io.File.separatorChar+"")){

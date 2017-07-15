@@ -199,7 +199,6 @@
                        <#-- <ul id="scholarUl">
                         </ul>-->
                            <table class="professors">
-                               <tbody>
                                <#--<tr>-->
                                    <#--<td><a href="/001lt269/page/42.html" target="#target">张云龙</a></td>-->
                                    <#--<td><a href="/001lt269/page/75.html" target="#target">李四</a></td>-->
@@ -220,7 +219,6 @@
                                    <#--<td><a href="/001lt269/page/75.html" target="#target">李四</a></td>-->
                                    <#--<td><a href="/001lt269/page/76.html" target="#target">王五</a></td>-->
                                <#--</tr>-->
-                               </tbody>
                            </table>
                     </div>
                 </div>

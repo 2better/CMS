@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ITIMRC">
+    <link rel="icon" href="http://lan:80/static/template/blog/images/favicon.ico">
+
+    <title>创新理论与创新管理研究中心</title>
+
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/slider.css"/>
+    <link rel="stylesheet" type="text/css" href="http://lan:80/static/template/blog/css/login-layer.css"/>
+</head>
+
+<body>
+<noscript>
+    <div style="position:absolute;z-index:100000; height:2046px;top:0px;left:0px; width:100%; background:white; text-align:center;">
+        <img src="http://lan:80/static/template/blog/images/noscript.gif" alt="抱歉，请开启脚本支持！"/></div>
+</noscript>
+<!--头部-->
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.min.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/msclass.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/browser.js"></script>
+<script>
+    var big = [
+];
+    var small = [
+];
+</script>
+<script src="http://lan:80/static/template/blog/js/slider.js"></script>
+<!--<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.kinslideshow-1.2.1.min.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.media.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/dd_belatedpng_0.0.8a.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/base.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/tablist.js"></script>
+<script type="text/javascript" src="http://lan:80/static/template/blog/js/comm.js"></script>-->
+<!--[if lte IE 6]>
+<script src="http://lan:80/static/template/blog/js/dd_belatedpng_0.0.8a.js" type="text/javascript"></script>
+<script type="text/javascript">
+    DD_belatedPNG.fix('div,ul,img,li,input,a,span,p');
+</script>
+<![endif]-->
+<!--登录遮罩层-->
+<div class="login-layer layer1" style="display:none">
+    <div class="login">
+        <h1>用户登录<i class="close" title="关闭"></i></h1>
+        <form method="post" action="http://lan:80/user/login.json" id="loginForm">
+            <span id="error" style="color:red;"></span>
+            <p><input type="text" name="name" value="user" placeholder="用户名" required></p>
+            <p><input type="password" name="password" value="123456" placeholder="密码" maxlength="16" minlength="6"
+                      required></p>
+            <p>
+                <input type="text" name="captcha" class="form-control" required maxlength="4" minlength="4"
+                       placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
+
+                    style="cursor: pointer; cursor: hand; margin-top: -13px;"
+                    onclick="this.src='http://lan:80/admin/captcha.htm?'+Math.random();"
+                    src="http://lan:80/admin/captcha.htm" id="captchaImg">
+            </p>
+            <p class="remember_me">
+                <label>
+                    <input type="checkbox" name="rememberMe" id="remember_me">
+                    记住密码
+                </label>
+            </p>
+            <p class="submit"><input type="submit" name="commit" value="登录"></p>
+        </form>
+        <div class="login-help">
+            <p>忘记密码? <a href="/index.htm">联系工作人员</a>.</p>
+        </div>
+    </div>
+</div>
+<!--登录遮罩层-->
+
+<!-- 修改密码-->
+<div class="login-layer layer2" style="display:none">
+    <div class="login">
+        <h1>修改密码<i class="close" title="关闭"></i></h1>
+        <form method="post" action="http://lan:80/user/update.json" id="updateForm">
+            <span id="error1" style="color:red;"></span>
+            <p><input type="password" name="password" placeholder="原密码" maxlength="16" minlength="6"
+                      required></p>
+            <p><input type="password" name="newpwd"  placeholder="新密码" maxlength="16" minlength="6" required></p>
+            <p class="submit"><input type="submit" name="commit" value="修改"></p>
+        </form>
+    </div>
+</div>
+<!-- 修改密码-->
+<!--头部-->
+<div class="header">
+    <div class="header-content">
+        <div class="logo">
+            <a href="http://lan:80/index.htm">
+                <img src="http://lan:80/static/template/blog/images/logo-new.png" alt=""/>
+            </a>
+        </div>
+        <h3>
+            创新理论与创新管理研究中心
+            <span>Innovation Theory And Innovation Management Research Center</span>
+            <p>广东省决策咨询研究基地</p>
+        </h3>
+        <!--搜索-->
+        <div class="search">
+            <span class="widget">
+                <div style="z-index: 99;position: relative;">
+                 <ul id="con" style="display: none;position: absolute;top:22px;left:-30px;padding-left:13px;padding-top:10px;border-radius:10px;width: 70px;height:48px;background-color: #fff;box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176);z-index:99;">
+                     <li style="margin-bottom: 8px;"><a style="font-size: 14px;" class="toupdate" href="javascript:void(0);"> 修改密码</a></li>
+                     <li><a style="font-size: 14px;" href="http://lan:80/user/logout.htm">注销登录</a></li>
+                     <div class="log-arrow-up" style="background: url('http://lan:80/static/template/blog/images/arrow-up.png') no-repeat;width: 20px;height: 11px;position: absolute;right: 31px;top: -11px;"></div>
+                </ul>
+                <a href="javascript:;" class="" id="currentUser">未登录</a>
+
+                &nbsp;<i id="currentTime">2017年5月20日</i>&nbsp;
+                <a class="eng_ver" href="#">[English Version]</a>
+                     </div>
+            </span>
+            <div class="searchGroup">
+                <input type="text" value="" class="searchText" placeholder="请输入关键字搜索" id="key">
+                <input type="button" value="搜索" class="searchButton" id="keyButton">
+            </div>
+        </div>
+        <!--搜索-->
+    </div>
+    <div class="menu">
+        <ul id="nav">
+                <li class="on">
+                <a href="/index.htm"
+                   target="_blank" class="p">首页</a>
+                <ul>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715128012317"
+                   target="_blank" class="p">关于我们</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715128012317" target="_blank">主任致辞</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715129668145" target="_blank">中心简介</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715135268713" target="_blank">学术委员会</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715137137918" target="_blank">组织机构</a>
+                            <ul>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715140882566"
+                   target="_blank" class="p">新闻动态</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715140882566" target="_blank">中心动态</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715141715540" target="_blank">学术前沿</a>
+                            <ul>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715143466311"
+                   target="_blank" class="p">研究人员</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715143466311" target="_blank">研究顾问</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715145693790" target="_blank">专职研究员</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715147705703" target="_blank">兼职研究员</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715148797574" target="_blank">其他人员</a>
+                            <ul>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715150497545"
+                   target="_blank" class="p">学术研究</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715150497545" target="_blank">研究方向</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715151450632" target="_blank">研究成果</a>
+                            <ul>
+                                    <li class=""><a class="c" href="/article/list.htm?menuId=149746273666579" target="_blank">学术论文</a>
+                                    <li class=""><a class="c" href="/article/list.htm?menuId=149746288288476" target="_blank">出版书籍</a>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715153341548"
+                   target="_blank" class="p">人才培养</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715153341548" target="_blank">本科生教育</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715154586939" target="_blank">研究生教育</a>
+                            <ul>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715156331056"
+                   target="_blank" class="p">合作交流</a>
+                <ul>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715156331056" target="_blank">高校合作</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715156997426" target="_blank">企业合作</a>
+                            <ul>
+                            </ul>
+                        </li>
+                        <li class=""><a class="c" href="/article/list.htm?menuId=149715157911011" target="_blank">政府合作</a>
+                            <ul>
+                            </ul>
+                        </li>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715117020733"
+                   target="_blank" class="p">研究资源</a>
+                <ul>
+                </ul>
+            </li>
+                <li>
+                <a href="/article/list.htm?menuId=149715118080311"
+                   target="_blank" class="p">人才招聘</a>
+                <ul>
+                </ul>
+            </li>
+                <li>
+                <a href="/paper/thinkTtank.htm"
+                   target="_blank" class="p">智库专报</a>
+                <ul>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="http://lan:80/static/manage/js/jquery.form.min.js"></script>
+<script>
+    $(function () {
+
+       getTitle();
+
+        var ele = null;
+        $("#nav li").click(function (e) {
+            var temp = $(this).find('a');
+            if (temp.html() !== "智库专报") return;
+            ele = $(this).find('a');
+            e.preventDefault();
+            $.ajax({
+                url: 'http://lan:80/user/isLogin.json',
+                type: 'POST',
+                cache: false,
+                success: function (data) {
+                    if (data == false) {
+                        $(".layer1").css('display', 'flex');
+                    } else {
+                        window.location.href = temp.attr("href");
+                    }
+                },
+                error: function () {
+                    alert("系统繁忙，请稍后再试！");
+                }
+            });
+        });
+
+        $(".widget").on('click', '.toLogin', function () {
+            $(".layer1").css('display', 'flex');
+        });
+
+        $(".toupdate").click(function () {
+            $(".layer2").css('display', 'flex');
+        });
+
+        $('#loginForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function () {
+                if (!trimStr($("input[name='name']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+
+                if (!trimStr($("#loginForm input[name='password']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+
+                if (!trimStr($("input[name='captcha']").val())) {
+                    $("#error").text("输入不能为空！");
+                    return false;
+                }
+                return true;
+            },
+            success: function (data) {
+                if (data) {
+                    $("#error").text(data.error);
+                    $("#captcha").val("");
+                    $("#captchaImg").click();
+                }
+            },
+            error: function () {
+                if (ele != null)
+                    window.location.href = ele.attr("href");
+                else
+                    window.location.reload();
+            }
+        });
+
+        $('#updateForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function () {
+                if (!trimStr($("input[name='newpwd']").val())) {
+                    $("#error1").text("输入不能为空！");
+                    return false;
+                }
+
+                if (!trimStr($("#updateForm input[name='password']").val())) {
+                    $("#error1").text("输入不能为空！");
+                    return false;
+                }
+                return true;
+            },
+            success: function (data) {
+                if (data) {
+                    $("#error1").text(data.error);
+                }
+            }
+        });
+
+        $(".widget").on('click', '.isLogin', function (event) {
+            event.stopPropagation();
+            $("#con").slideToggle();
+        });
+
+        $(document).on('click', function () {
+                $("#con").slideUp();
+        });
+
+        $.ajax({
+            url: 'http://lan:80/user/currentUser.json',
+            dataType: "text",
+            type: 'POST',
+            cache: false,
+            success: function (data) {
+                if (data == "未登录")
+                    $("#currentUser").attr("class", "toLogin");
+                else
+                    $("#currentUser").attr("class", "isLogin");
+                $("#currentUser").text(data);
+            },
+            error: function () {
+                $("#currentUser").text("未登录");
+            }
+        });
+
+    });
+
+    //搜索功能
+
+    $("#keyButton").click(function () {
+        window.location.href = "http://lan:80/article/search.html?key=" + $("#key").val();
+    });
+
+    function getTitle() {
+        var As = $(".c");
+        for (var i = 0; i < As.length; i++) {
+            if (window.location.href.indexOf(As[i].href) >= 0) {
+                document.title = As[i].innerText;
+                return;
+            }
+            if(i===As.length-1)
+            {
+                As = $(".p");
+                for(i=1;i<As.length;i++)
+                    if (window.location.href.indexOf(As[i].href) >= 0) {
+                        document.title = As[i].innerText;
+                        return;
+                    }
+            }
+        }
+    }
+
+</script>
+<div class="clear"></div><div class="g-bd f-cb">
+    <div class="g-sd">
+        <div class="g-sd-header">
+            <span class="g-sd-header-title">新闻动态</span>
+            <span class="circle"></span>
+        </div>
+        <ul class="g-sd-content">
+            <a href="/article/list.htm?menuId=149715140882566">
+                <li>
+                    <span>中心动态</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+            <a href="/article/list.htm?menuId=149715141715540">
+                <li>
+                    <span>学术前沿</span>
+                    <div class="triangle_border_right">
+                        <span></span>
+                    </div>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="g-mn">
+        <div class="g-mn-header">
+            <span class="g-sd-header-crumb"><a href="/article/list.htm?menuId=149715141715540" style="color:#fff;">学术前沿</a> > 生态位视域中技术进化的经验研究</span>
+        </div>
+        <div class="g-mn-content-out">
+        <div class="g-mn-content">
+            <p style="margin-right:0;margin-left:0;text-autospace:ideograph-numeric"><span style="font-family: 宋体;font-size: 16px">（1）</span><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">标题：</span></span><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">生态位视域中技术进化的经验研究</span></span></p><p style="margin-right:0;margin-left:0;text-autospace:ideograph-numeric"><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">作者：</span></span><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">叶芬斌</span>,<span style="font-family:宋体">盛晓明</span></span></p><p style="margin-right:0;margin-left:0;text-autospace:ideograph-numeric"><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">出处：</span></span><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">自然辩证法研究</span>,2011,12:46-52.</span></p><p style="margin-right:0;margin-left:0;text-autospace:ideograph-numeric"><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">时间：</span>2011<span style="font-family:宋体">年</span></span></p><p style="margin-right:0;margin-left:0;text-autospace:ideograph-numeric"><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">摘要：</span></span><span style="font-family: 宋体;font-size: 16px"><span style="font-family:宋体">技术进化研究领域</span>,<span style="font-family:宋体">基于生态位理论的经验分析</span><span style="font-family:Verdana">,</span><span style="font-family:宋体">在方法论上给技术哲学的经验转向研究提供了有益的启发。战略生态位管理</span><span style="font-family:Verdana">(SNM)</span><span style="font-family:宋体">理论是一种结合多学科而建立的典型的技术生态位进化模型</span><span style="font-family:Verdana">,</span><span style="font-family:宋体">从技术生态位到市场利基及技术政体的微观考察</span><span style="font-family:Verdana">,</span><span style="font-family:宋体">再到技术</span><span style="font-family:Verdana">-</span><span style="font-family:宋体">社会地景的宏观分析</span><span style="font-family:Verdana">,SNM</span><span style="font-family:宋体">理论有别于生物进化类比的经验分析</span><span style="font-family:Verdana">,</span><span style="font-family:宋体">其独特视野具有实证有效性和简单性的特征。一些隐喻概念和归纳尚不够精确</span><span style="font-family:Verdana">,</span><span style="font-family:宋体">但其思想方法拓展了技术进化研究的经验分析路径。</span></span></p><p style="line-height:150%"><span style="font-family: 宋体;line-height: 150%;font-size: 16px">Keyword-<span style="font-family:宋体">关键词</span><span style="font-family:Verdana">: </span><span style="font-family:宋体">生态位</span><span style="font-family:Verdana">;</span><span style="font-family:宋体">技术进化</span><span style="font-family:Verdana">;SNM</span><span style="font-family:宋体">理论</span><span style="font-family:Verdana">;</span><span style="font-family:宋体">经验转向</span></span></p><p><br/></p>
+        </div>
+		</div>
+    </div>
+</div>
+<!--底部-->
+<!--底部-->
+<div id="foot">
+    <div class="foot">
+        <div class="copy">
+                <span>
+                    Copyright <font class="foot-info">@创新理论与创新管理研究中心</font><br/>
+                    电话：123456
+                </span>
+        </div>
+        <div class="link2 right">
+            <!--<select name="select" onchange="if(this.options[this.selectedIndex].value!=''){window.open(this.options[this.selectedIndex].value,'_blank');}">
+            <option>--------友情链接--------</option>
+            <option value="#">快速链接1-1</option><option value="#t">东莞市力拓网络科技有限公司</option><option value="#">快速链接1-2</option><option value="#">快速链接1-3</option><option value="#">快速链接1-4</option><option value="#m">xx大学</option><option value="#">艾慕</option><option value="#/">北京大学</option>
+            </select>-->
+            <span>友情连接:</span>
+            <span style="display:inline-block;vertical-align:top">
+                    <a href="http://www.github.com/" target="_blank">github</a>
+                    <a href="http://www.baidu.com" target="_blank">  百度  </a>
+                    <a href="http://www.qq.com" target="_blank">腾讯</a>
+                    <a href="http://www.jd.com" target="_blank">京东</a>
+                    <br>
+                    <a href="http://www.taobao.com" target="_blank">淘宝</a>
+                    <a href="https://www.zhihu.com" target="_blank">知乎</a>
+                    <a href="http://www.weibo.com" target="_blank">新浪微博</a>
+                </span>
+        </div>
+    </div>
+</div>
+<!--<script language="javascript">
+    window.onload = menuFix;
+</script>-->
+<!--底部-->
+<!--底部-->
+<script>
+    // 设置时间
+    var $timeEle = $("#currentTime").eq(0);
+    $timeEle.html( setDateStr() );
+
+    function setDateStr() {
+        var date = new Date(),
+                year = date.getFullYear(),
+                month = date.getMonth() + 1,
+                day = date.getDate();
+        return year + "年" + month + "月" + day + "日";
+    }
+
+    $("i.close").on('click',function (){
+        $(".login-layer").css('display', 'none');
+    });
+
+    function trimStr(str){
+        if(!str){
+            return false;
+        }
+        var reg = /\s/g;
+        return str.replace(reg,"");
+    }
+</script>
+<!--底部-->
+<!--底部-->
+
+</body>
+
+</html>

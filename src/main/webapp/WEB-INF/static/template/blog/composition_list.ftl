@@ -118,7 +118,7 @@
                                     "<td>"+
                                     "<div class=\"pic\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\"><img src='/" + n.picUrl +"'></a></div>"+
                                     "<div class=\"name\"><a href=\"${BASE_PATH}/composition/"+ n.id +".htm\">" + title + "</a></div>" +
-                                    "</td><tr/>";
+                                    "</td></tr>";
                         });
                         $("#tableCon").append(trs + "</tbody>");
 
