@@ -13,7 +13,7 @@ function ajax(url, type, data, dataType, successDo, errorDo) {
     });
 }
 
-function getArticles(url,data,jqObj,aUrl) {
+function getArticles(url,data,jqObj) {
     ajax(url, "GET", data, "JSON",function (data) {
         var list = data;
         var uLhtml = "";
@@ -21,7 +21,7 @@ function getArticles(url,data,jqObj,aUrl) {
         if(list.length > 0) {
             $.each(list, function (index, item) {
                 console.log(index + ":-->" + item.title);
-                uLhtml += "<li><a href='"+ aUrl +"'>" + item.title + "</a></li>"
+                uLhtml += "<li><a href='/article/"+ item.articleId +".htm'>" + item.title + "</a></li>"
             });
         }else {
             uLhtml = "暂无消息哦亲";
@@ -33,9 +33,9 @@ function getArticles(url,data,jqObj,aUrl) {
 }
 
 //获取新闻动态
-getArticles("/article/listNews", null, $("#newsUl"),"/article/list.htm?menuId=149715140882566");
+getArticles("/article/listNews", null, $("#newsUl"));
 //获取合作交流动态
-getArticles("/article/listCooperation",null,$("#cooperationUl"),"/article/list.htm?menuId=149715156331056");
+getArticles("/article/listCooperation",null,$("#cooperationUl"));
 //获取学术论文
 function getPaper() {
     ajax("/paper/list","GET",null,"JSON",function (data) {
@@ -105,16 +105,28 @@ function getComposition() {
 function getScholar() {
     ajax("/scholar/list.json","GET",null,"JSON",function (data) {
         var list = data.list;
-        var uLhtml = "";
+        var uLhtml = "<tbody>";
 
         if(list.length > 0) {
+            var count = 0;
             $.each(list, function (index, item) {
-                uLhtml += "<li><a href='/scholar/list.htm'>" + item.name + "</a></li>"
+                // uLhtml += "<li><a href='/scholar/list.htm'>" + item.name + "</a></li>"
+                count++;
+                if(count == 0) {
+                    uLhtml += "<tr>";
+                }
+                if(count < 4) {
+                    uLhtml += "<td><a href='/scholar/list.htm' target='#target'>"+ item.name +"</a></td>"
+                }
+                if(count == 3) {
+                    uLhtml += "</tr>";
+                    count = 0;
+                }
             });
         }else {
             uLhtml = "暂无消息哦亲";
         }
-        $("#scholarUl").html(uLhtml);
+        $(".professors").html("</tbody>" + uLhtml);
     },function () {
         $("#scholarUl").html("服务器出错啦");
     })
