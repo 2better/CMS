@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 /**
  * Created by labber on 2017/6/12.
  */
@@ -46,12 +48,20 @@ public class ManageCompositionAction extends ManageBaseAction {
     public JsonVo add(@RequestParam("title") String title,
                       @RequestParam("content") String content,
                       @RequestParam(value = "createTime", required = false) String createTime,
-                      @RequestParam(value = "file", required = false) MultipartFile file) {
+                      @RequestParam(value = "file", required = false) MultipartFile file,
+                      @RequestParam(value = "x") Double x,
+                      @RequestParam(value = "y") Double y,
+                      @RequestParam(value = "height") Double h,
+                      @RequestParam(value = "width") Double w,
+                      @RequestParam(value = "rotate",defaultValue = "0") Integer r) {
         JsonVo jv = new JsonVo();
         try {
             String picUrl = "";
             if (file != null && !file.isEmpty()) {
-                picUrl = MediaUtils.save(file);
+                if(MediaUtils.isFileType(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")), MediaUtils.PHOTO_TYPE)) {
+                    Map<String, Object> map = MediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
+                    picUrl = (String) map.get("path");
+                }
             }
             compositionService.add(title,content, createTime, picUrl);
             jv.setResult(true);
