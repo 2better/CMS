@@ -149,8 +149,7 @@ body {
 .header {
   position: relative;
   width: 100%;
-  /*height: 140px;*/
-  height: 124px;
+  height: 140px;
   position: relative;
   /*background: url(../images/header-bg.png) repeat-x;*/
   background-color: #F7F7F7;
@@ -160,7 +159,7 @@ body {
   /*background: url(../images/header-content-bg.png) no-repeat;*/
   position: relative;
   width: 1200px;
-  padding: 0.5em 0;
+  padding: 0.5em 0 2em;
   margin: 0 auto;
   overflow: hidden;
   z-index: 99;
@@ -235,15 +234,15 @@ body {
   height: 35px;
   /*background: url(../images/search+bg.png) no-repeat;*/
   float: right;
-  margin-top: 35px;
+  margin-top: 15px;
   color: #58362a;
 }
 
 .search .widget{
-  position: absolute;
-  top: 80px;
-  right: 14px;
-  font-size: 12px;
+    position: absolute;
+    top: 60px;
+    right: 14px;
+    font-size: 12px;
 }
 
 .search a:hover{
