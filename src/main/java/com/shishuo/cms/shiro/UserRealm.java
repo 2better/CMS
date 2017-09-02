@@ -2,6 +2,7 @@ package com.shishuo.cms.shiro;
 
 import com.shishuo.cms.entity.User;
 import com.shishuo.cms.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -19,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class UserRealm extends AuthorizingRealm {
+
+    private final Logger logger = Logger.getLogger(this.getClass());
     @Autowired
     private UserService userService;
 
@@ -40,7 +43,7 @@ public class UserRealm extends AuthorizingRealm {
         try {
             user = userService.getUserByName(name);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
         if (user == null) {
             throw new UnknownAccountException("账号不存在");

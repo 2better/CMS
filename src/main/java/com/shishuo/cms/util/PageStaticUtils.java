@@ -99,15 +99,15 @@ public class PageStaticUtils {
             template.process(data, out);
             out.flush();
         } catch (IOException e) {
-            logger.error(e);
+            logger.error(e.getMessage(),e);
         } catch (TemplateException e) {
-            logger.error(e);
+            logger.error(e.getMessage(),e);
         } finally {
             try {
                 if (out != null)
                     out.close();
             } catch (IOException e) {
-                logger.error(e);
+                logger.error(e.getMessage(),e);
             }
         }
     }

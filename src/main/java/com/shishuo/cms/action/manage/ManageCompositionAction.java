@@ -66,6 +66,7 @@ public class ManageCompositionAction extends ManageBaseAction {
             compositionService.add(title,content, createTime, picUrl);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -97,6 +98,7 @@ public class ManageCompositionAction extends ManageBaseAction {
             compositionService.update(id, title,  content, createTime, picUrl);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -117,7 +119,7 @@ public class ManageCompositionAction extends ManageBaseAction {
                 compositionService.delete(id, composition.getPicUrl());
                 jv.setResult(true);
             }catch (Exception e) {
-
+                logger.error(e.getMessage(),e);
             }
         }
         return jv;

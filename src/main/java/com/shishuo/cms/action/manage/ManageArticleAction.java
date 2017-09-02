@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.shishuo.cms.constant.SystemConstant;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.service.MenuService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,6 +42,8 @@ import com.shishuo.cms.util.SSUtils;
 @Controller
 @RequestMapping("/manage/article")
 public class ManageArticleAction extends ManageBaseAction {
+
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@Autowired
 	private ArticleAction articleAction;
@@ -77,7 +80,7 @@ public class ManageArticleAction extends ManageBaseAction {
 			json.setResult(true);
 			return json;
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("add",e);
 			json.setResult(false);
 			return json;
 		}
@@ -151,7 +154,7 @@ public class ManageArticleAction extends ManageBaseAction {
 			json.setResult(true);
 			return json;
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("update",e);
 			json.setResult(false);
 			return json;
 		}

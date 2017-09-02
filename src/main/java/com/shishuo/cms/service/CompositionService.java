@@ -7,6 +7,7 @@ import com.shishuo.cms.entity.Event;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.util.MediaUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ import java.util.List;
  */
 @Service
 public class CompositionService {
+
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private CompositionDao compositionDao;
@@ -39,6 +42,7 @@ public class CompositionService {
             try {
                 date = sdf.parse(createTime);
             } catch (ParseException ee) {
+                logger.error("",ee);
                 date = now;
             }
             composition.setCreateTime(date);
@@ -62,6 +66,7 @@ public class CompositionService {
                 try {
                     date = sdf.parse(createTime);
                 } catch (ParseException ee) {
+                    logger.error("",ee);
                     date = now;
                 }
                 composition.setCreateTime(date);

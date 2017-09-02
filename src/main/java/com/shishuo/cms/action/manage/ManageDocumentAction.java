@@ -74,7 +74,7 @@ public class ManageDocumentAction {
             json.setResult(true);
             return json;
         } catch (IOException e) {
-            logger.error(e);
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             return json;
         }
@@ -112,20 +112,20 @@ public class ManageDocumentAction {
                             i = bis.read(buffer);
                         }
                     } catch (Exception e) {
-                        logger.error(e);
+                        logger.error(e.getMessage(),e);
                     } finally {
                         if (bis != null) {
                             try {
                                 bis.close();
                             } catch (IOException e) {
-                                logger.error(e);
+                                logger.error(e.getMessage(),e);
                             }
                         }
                         if (fis != null) {
                             try {
                                 fis.close();
                             } catch (IOException e) {
-                                logger.error(e);
+                                logger.error(e.getMessage(),e);
                             }
                         }
                     }
@@ -152,15 +152,15 @@ public class ManageDocumentAction {
                 json.setResult(true);
                 json.setT(pdfFilePath);
             } catch (FileNotFoundException e) {
-                logger.error(e);
+                logger.error(e.getMessage(),e);
                 json.setResult(false);
                 json.setMsg("该文档不存在");
             } catch (ConnectException e) {
-                logger.error(e);
+                logger.error(e.getMessage(),e);
                 json.setResult(false);
                 json.setMsg("系统繁忙，请重试");
             } catch (Exception e) {
-                logger.error(e);
+                logger.error(e.getMessage(),e);
                 json.setResult(false);
                 json.setMsg("系统繁忙，请重试");
             }

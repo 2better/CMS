@@ -82,12 +82,11 @@ public class ManageMediaAction extends ManageBaseAction {
 			attachmentService.addUploadFile(file, file.getOriginalFilename(),
 					kindId, kind);
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		} catch (UploadException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		JSONObject json = new JSONObject();
 		return json.toString();
@@ -173,10 +172,13 @@ public class ManageMediaAction extends ManageBaseAction {
 			json.put("state", "SUCCESS");
 			return json.toString();
 		} catch (IllegalStateException e) {
+			logger.error(e.getMessage(),e);
 			json.put("state", e.getMessage());
 		} catch (IOException e) {
+			logger.error(e.getMessage(),e);
 			json.put("state", e.getMessage());
 		} catch (UploadException e) {
+			logger.error(e.getMessage(),e);
 			json.put("state", e.getMessage());
 		}
 		return json.toString();

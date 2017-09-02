@@ -100,6 +100,7 @@ public class UserAction extends BaseAction {
            }
        }catch (Exception e)
        {
+           logger.error(e.getMessage(),e);
            error = "修改失败";
        }
         Map<String, String> map = new HashMap<String, String>(2);

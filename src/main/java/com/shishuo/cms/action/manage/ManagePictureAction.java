@@ -53,7 +53,7 @@ public class ManagePictureAction extends ManageBaseAction {
                 result = "{\"success\":\"success\"}";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
         return result;
     }
@@ -74,6 +74,7 @@ public class ManagePictureAction extends ManageBaseAction {
                 pictureService.delete(id, pic.getPicUrl());
                 jv.setResult(true);
             } catch (Exception e) {
+                logger.error(e.getMessage(),e);
             }
         }
         return jv;
@@ -121,7 +122,7 @@ public class ManagePictureAction extends ManageBaseAction {
                 str =  "2";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
             str =   "3";
         }
         return str;

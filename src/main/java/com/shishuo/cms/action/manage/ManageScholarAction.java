@@ -66,6 +66,7 @@ public class ManageScholarAction extends ManageBaseAction {
             scholarService.add(name,content, createTime, picUrl);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -97,6 +98,7 @@ public class ManageScholarAction extends ManageBaseAction {
             scholarService.update(id, name,  content, createTime, picUrl);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -117,7 +119,7 @@ public class ManageScholarAction extends ManageBaseAction {
                 scholarService.delete(id, scholar.getPicUrl());
                 jv.setResult(true);
             }catch (Exception e) {
-
+                logger.error(e.getMessage(),e);
             }
         }
         return jv;

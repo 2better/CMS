@@ -13,6 +13,7 @@ import java.util.List;
 import com.shishuo.cms.entity.Menu;
 import com.shishuo.cms.util.PageStaticUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,6 +32,8 @@ import com.shishuo.cms.exception.ArticleNotFoundException;
  */
 @Service
 public class ArticleService {
+
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private ArticleDao articleDao;
@@ -66,6 +69,7 @@ public class ArticleService {
             try {
                 date = sdf.parse(createTime);
             } catch (ParseException e) {
+                logger.error(e.getMessage(),e);
                 date = now;
             }
             article.setCreateTime(date);
@@ -113,6 +117,7 @@ public class ArticleService {
             try {
                 date = sdf.parse(time);
             } catch (ParseException e) {
+                logger.error(e.getMessage(),e);
                 date = now;
             }
             article.setCreateTime(date);

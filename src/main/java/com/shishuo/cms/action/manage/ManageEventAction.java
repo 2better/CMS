@@ -53,6 +53,7 @@ public class ManageEventAction extends ManageBaseAction {
             eventService.add(name,content, createTime, important);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -80,6 +81,7 @@ public class ManageEventAction extends ManageBaseAction {
             eventService.update(id, name,  content, createTime, important);
             jv.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             jv.setResult(false);
         }
         return jv;
@@ -100,7 +102,7 @@ public class ManageEventAction extends ManageBaseAction {
                 eventService.delete(id);
                 jv.setResult(true);
             }catch (Exception e) {
-
+                logger.error(e.getMessage(),e);
             }
         }
         return jv;

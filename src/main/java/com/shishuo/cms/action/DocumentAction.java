@@ -57,20 +57,20 @@ public class DocumentAction extends BaseAction{
                             i = bis.read(buffer);
                         }
                     } catch (Exception e) {
-                        logger.error(e);
+                        logger.error(e.getMessage(),e);
                     } finally {
                         if (bis != null) {
                             try {
                                 bis.close();
                             } catch (IOException e) {
-                                logger.error(e);
+                                logger.error(e.getMessage(),e);
                             }
                         }
                         if (fis != null) {
                             try {
                                 fis.close();
                             } catch (IOException e) {
-                                logger.error(e);
+                                logger.error(e.getMessage(),e);
                             }
                         }
                     }

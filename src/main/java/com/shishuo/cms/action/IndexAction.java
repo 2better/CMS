@@ -47,7 +47,7 @@ public class IndexAction extends BaseAction {
 			pageStaticUtils.headerAndFooterStaticPage(request);
 			return themeService.getDefaultTemplate();
 		} catch (TemplateNotFoundException e) {
-			logger.fatal(e.getMessage());
+			logger.error(e.getMessage(),e);
 			return themeService.get404();
 		}
 	}

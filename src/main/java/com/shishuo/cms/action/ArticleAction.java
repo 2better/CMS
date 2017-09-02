@@ -36,7 +36,7 @@ public class ArticleAction extends BaseAction {
 			request.setAttribute("htmlName",articleId);
 			return "/template/blog/article_template";
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			return themeService.get404();
 		}
 	}
@@ -63,7 +63,7 @@ public class ArticleAction extends BaseAction {
 			pageStaticUtils.headerAndFooterStaticPage(request);
 			return "template/blog/article_list";
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			return themeService.get404();
 		}
 	}

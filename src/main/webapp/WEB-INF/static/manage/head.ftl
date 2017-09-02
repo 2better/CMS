@@ -117,12 +117,13 @@
                         </ul>
                     </li>
                     <li id="cog">
-                        <a class="link" href="javascript:void(0);"><i class="fa fa-cogs fa-4x "></i>&nbsp;&nbsp;网站设置 &nbsp;&nbsp;</a>
+                        <a class="link" href="javascript:void(0);"><i class="fa fa-cogs fa-4x "></i>&nbsp;&nbsp;系统设置 &nbsp;&nbsp;</a>
                         <ul class="submenu" >
                             <li><a  class="link <#if menu="system">active</#if>" href="${BASE_PATH}//manage/config/basic.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>基本设置</span> &nbsp;&nbsp;<#if menu="system"><i class="fa fa-chevron-right"></i></#if></a></li>
                             <li><a class="link <#if menu="menu">active</#if>" href="${BASE_PATH}/manage/menu/list.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>菜单管理</span> &nbsp;&nbsp;<#if menu="menu"><i class="fa fa-chevron-right"></i></#if></a></li>
                             <li><a class="link <#if menu="picture">active</#if>" href="${BASE_PATH}//manage/picture/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;<span>展示图设置</span>&nbsp;&nbsp;<#if menu="picture"><i class="fa fa-chevron-right"></i></#if></a></li>
                             <li><a class="link <#if menu="friendlyLink">active</#if>" href="${BASE_PATH}/manage/friendlyLink/friendlyLink.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>友情链接</span> &nbsp;&nbsp;<#if menu="friendlyLink"><i class="fa fa-chevron-right"></i></#if></a></li>
+                            <li><a class="link <#if menu="log">active</#if>" href="${BASE_PATH}/manage/log/listPage.htm"><i class="fa fa-caret-right"></i>&nbsp;&nbsp;<span>系统日志</span> &nbsp;&nbsp;<#if menu="log"><i class="fa fa-chevron-right"></i></#if></a></li>
                         </ul>
                     </li>
                 </ul>

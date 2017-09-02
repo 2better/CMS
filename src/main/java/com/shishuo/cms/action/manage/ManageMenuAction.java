@@ -84,7 +84,7 @@ public class ManageMenuAction extends ManageBaseAction
 
             json.setResult(true);
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             json.setMsg(e.getMessage());
         }
@@ -149,6 +149,7 @@ public class ManageMenuAction extends ManageBaseAction
 
             json.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             json.setMsg(e.getMessage());
         }

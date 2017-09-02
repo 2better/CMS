@@ -58,7 +58,7 @@ public class ManageFriendlyLinkAction extends ManageBaseAction{
             friendlylinkService.addFriendlylink(friendlylink);
             json.setResult(true);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             json.setMsg(e.getMessage());
         }
@@ -73,6 +73,7 @@ public class ManageFriendlyLinkAction extends ManageBaseAction{
             friendlylinkService.deleteFriendlylink(id);
             json.setResult(true);
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             json.setMsg(e.getMessage());
         }
@@ -97,7 +98,7 @@ public class ManageFriendlyLinkAction extends ManageBaseAction{
             json.setResult(true);
             return json;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
             json.setResult(false);
             return json;
         }
