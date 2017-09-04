@@ -100,7 +100,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
             if (isLoginSubmission(request, response))
             {
                 Subject subject = this.getSubject(request, response);
-                if (subject.getPrincipal() != null && subject.getPrincipal() instanceof User)
+                if (subject.getPrincipal() != null)
                 {
                     subject.logout();
                 }

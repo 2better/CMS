@@ -83,19 +83,18 @@ public class UserFormAuthenticationFilter  extends FormAuthenticationFilter
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
 
+        Subject subject = this.getSubject(request, response);
         if (isLoginRequest(request, response))
         {
             if (isLoginSubmission(request, response))
             {
-                Subject subject = this.getSubject(request, response);
-                if (subject.getPrincipal() != null && subject.getPrincipal() instanceof Admin)
+                if (subject.getPrincipal() != null)
                 {
                     subject.logout();
                 }
             }
         }
 
-        Subject subject = getSubject(request, response);
         if(!subject.isAuthenticated() && subject.isRemembered()){
             Session session = subject.getSession(true);
             if(session.getAttribute("sessionUser") == null){
