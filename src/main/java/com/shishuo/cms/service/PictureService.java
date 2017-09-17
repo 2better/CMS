@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class PictureService {
 
     public void delete(Integer id, String picUrl) {
         if (StringUtils.isNotBlank(picUrl))
-            MediaUtils.deleteFile("/" + picUrl);
+            MediaUtils.deleteFile(File.separator + picUrl);
         pictureDao.delete(id);
         PageStaticUtils.updateTemplate("header");
     }

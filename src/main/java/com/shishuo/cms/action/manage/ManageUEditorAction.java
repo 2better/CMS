@@ -5,6 +5,7 @@
  */
 package com.shishuo.cms.action.manage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ManageUEditorAction extends ManageBaseAction {
 	public String config(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("application/json");
 		response.setHeader("Content-Type" , "text/html");
-		String root = request.getSession().getServletContext().getRealPath( "/" );
+		String root = request.getSession().getServletContext().getRealPath( File.separator );
 		return new ActionEnter(request, root).exec();
 	}
 
@@ -55,7 +56,7 @@ public class ManageUEditorAction extends ManageBaseAction {
 		if (imgStr != "") {
 			imgStr = imgStr.substring(0,
 					imgStr.lastIndexOf("ue_separate_ue"))
-					.replace(java.io.File.separator, "/")
+					.replace(java.io.File.separator, File.separator)
 					.trim();
 		}
 		return imgStr;

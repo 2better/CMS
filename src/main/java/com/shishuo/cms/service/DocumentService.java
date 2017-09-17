@@ -54,7 +54,7 @@ public class DocumentService {
     }
 
     public String getPreview(long id) throws Exception {
-        String filepath = "upload/preview/";
+        String filepath = "upload"+File.separator+"preview"+File.separator;
         Document document = documentDao.getById(id);
         if (document != null) {
             if (document.getPreview() == null || document.getPreview().isEmpty()) {
@@ -62,7 +62,8 @@ public class DocumentService {
                 String pdfFile = "";
                 if (!document.getType().equalsIgnoreCase("pdf")) {
                     pdfFile = filepath + new Date().getTime() + ".pdf";
-                    new Office2PDFUtil().office2PDF(SystemConstant.SHISHUO_CMS_ROOT + "/" + document.getPath(), SystemConstant.SHISHUO_CMS_ROOT + "/" + pdfFile);
+                    new Office2PDFUtil().office2PDF(SystemConstant.SHISHUO_CMS_ROOT + File.separator + document.getPath(), SystemConstant.SHISHUO_CMS_ROOT + File.separator + pdfFile);
+                    pdfFile = pdfFile.replace("\\","/");
                 } else {
                     pdfFile = document.getPath();
                 }
@@ -83,14 +84,14 @@ public class DocumentService {
         Document document = documentDao.getById(id);
         if (document != null) {
             String filePath = document.getPath();
-            File file = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + filePath);
+            File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + filePath);
             if (file.exists()) {
                 file.delete();
             }
 
             String previewFilePath = document.getPreview();
             if (previewFilePath != null && !previewFilePath.equals("")) {
-                File previewFile = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + previewFilePath);
+                File previewFile = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + previewFilePath);
                 if (previewFile.exists()) {
                     previewFile.delete();
                 }

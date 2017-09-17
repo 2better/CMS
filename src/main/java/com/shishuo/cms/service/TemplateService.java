@@ -82,11 +82,11 @@ public class TemplateService {
 	/**
 	 * 得到当前请求需要渲染的模板相对路径
 	 * 
-	 * @param theme
+	 * @param
 	 * @return
 	 */
 	private String getTemplatePath(String template) {
-		return "/template/blog/" + template;
+		return File.separator+"template"+File.separator+"blog"+ File.separator + template;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class TemplateService {
 	 */
 	@Cacheable("default")
 	public Boolean isExist(String theme) {
-		String themePath = "/WEB-INF/static/template/blog/" + theme + ".ftl";
+		String themePath = File.separator+"WEB-INF"+File.separator+"static"+File.separator+"template"+File.separator+"blog"+ File.separator + theme + ".ftl";
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + themePath);
 		if (file.exists()) {
 			//logger.info("尝试使用模板：" + themePath+"【存在】");

@@ -16,7 +16,7 @@ import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConv
  */
 public class Office2PDFUtil {
 
-	private String OpenOffice_HOME = PropertyUtils.getValue("OpenOffice_HOME");
+	//private String OpenOffice_HOME = PropertyUtils.getValue("OpenOffice_HOME");
 
 	/**
 	 * 将Office文档转换为PDF. 运行该函数需要用到OpenOffice, OpenOffice下载地址为
@@ -54,15 +54,15 @@ public class Office2PDFUtil {
 			 * 但是需要注意的是：要用"\\"代替"\",用"\:"代替":" . 如果大家嫌麻烦,
 			 * 可以直接给OpenOffice_HOME变量赋值为自己OpenOffice的安装目录
 			 */
-			if (OpenOffice_HOME == null) //java.net.ConnectException
-				throw new FileNotFoundException();
+			//if (OpenOffice_HOME == null) //java.net.ConnectException
+			//	throw new FileNotFoundException();
 			// 如果从文件中读取的URL地址最后一个字符不是 '\'，则添加'\'
-			if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '\\') {
+			/*if (OpenOffice_HOME.charAt(OpenOffice_HOME.length() - 1) != '\\') {
 				OpenOffice_HOME += "\\";
-			}
+			}*/
 			// 启动OpenOffice的服务
-			String command = OpenOffice_HOME + "program\\soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard";
-			Process pro = Runtime.getRuntime().exec(command);
+			//String command = OpenOffice_HOME + "program"+File.separator+"soffice.exe -headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard";
+			//Process pro = Runtime.getRuntime().exec(command);
 			// connect to an OpenOffice.org instance running on port 8100
 			OpenOfficeConnection connection = new SocketOpenOfficeConnection(
 					"127.0.0.1", 8100);
@@ -76,6 +76,6 @@ public class Office2PDFUtil {
 			// close the connection
 			connection.disconnect();
 			// 关闭OpenOffice服务的进程
-			pro.destroy();
+			//pro.destroy();
 	}
 }

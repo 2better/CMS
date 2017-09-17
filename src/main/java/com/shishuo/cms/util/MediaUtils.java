@@ -86,7 +86,7 @@ public class MediaUtils {
 	 */
 	public static String getPath(String fileName) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String uploadPath = "upload/" + formater.format(new Date()) + "/"
+		String uploadPath = "upload"+ File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "")
 				+ getFileExt(fileName);
 		return uploadPath;
@@ -114,9 +114,9 @@ public class MediaUtils {
 	public static Map<String,Object> saveImage(MultipartFile multipartFile, int x, int y, int desWidth,
 											   int desHeight,int rotate) throws IOException {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String path = "upload/images/" + formater.format(new Date()) + "/"
+		String path = "upload"+File.separator+"images"+File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + path);
+		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}
@@ -126,7 +126,7 @@ public class MediaUtils {
 		}
 		resize(file);
 		Map<String,Object> map = new HashMap<String,Object>(2);
-		map.put("path",path);
+		map.put("path",path.replace("\\","/"));
 		map.put("size",(int)(file.length()/1024));
 		return map;
 	}
@@ -137,10 +137,10 @@ public class MediaUtils {
 	 */
 	public static String save(MultipartFile multipartFile) throws IOException {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
-		String path = "upload/" + formater.format(new Date()) + "/"
+		String path = "upload"+File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "")
 				+ getFileExt(multipartFile.getOriginalFilename());
-		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + "/" + path);
+		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}

@@ -69,7 +69,7 @@ public class ManageLogAction extends ManageBaseAction {
         if (name != null&&!name.equals("")) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String now = format.format(new Date());
-            String realPath = SystemConstant.SHISHUO_CMS_ROOT+"/WEB-INF/log/";
+            String realPath = SystemConstant.SHISHUO_CMS_ROOT+File.separator+"WEB-INF"+File.separator+"log"+File.separator;
             File file = null;
             if(now.equals(name)){
               file = new File(realPath+"error.log");

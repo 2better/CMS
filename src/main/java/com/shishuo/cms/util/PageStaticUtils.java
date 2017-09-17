@@ -38,11 +38,15 @@ public class PageStaticUtils {
     @Autowired
     protected ArticleService fileService;
 
+    private static String basePath = File.separator+"WEB-INF"+File.separator+"static"+File.separator+"template"+File.separator+"blog"+File.separator+"staticPage"+File.separator;
+    private static String basePath1 = File.separator+"WEB-INF"+File.separator+"static"+File.separator+"template"+File.separator+"blog"+File.separator+"article"+File.separator;
+
     private final Logger logger = Logger.getLogger(this.getClass());
 
     public void headerAndFooterStaticPage(HttpServletRequest request) {
-        String headerHtmlPath = "/WEB-INF/static/template/blog/staticPage/header.html";
-        String footerHtmlPath = "/WEB-INF/static/template/blog/staticPage/footer.html";
+
+        String headerHtmlPath = basePath+"header.html";
+        String footerHtmlPath = basePath+"footer.html";
         String root = request.getSession().getServletContext().getRealPath("/");
         File headerHtmlFile = new File(root + headerHtmlPath);
         File footerHtmlFile = new File(root + footerHtmlPath);
@@ -53,7 +57,7 @@ public class PageStaticUtils {
             data.put("menuList", menuList);
             data.put("index_title", configService.getStringByKey("index_title"));
             data.put("seo_description", configService.getStringByKey("seo_description"));
-            data.put("TEMPLATE_BASE_PATH", BASE_PATH + "/static/template/blog");
+            data.put("TEMPLATE_BASE_PATH", BASE_PATH + File.separator+"static"+File.separator+"template"+File.separator+"blog");
             data.put("BASE_PATH", BASE_PATH);
             //加载轮播图
             data.put("pictures", pictureService.getAllByType(1));
@@ -73,13 +77,13 @@ public class PageStaticUtils {
     }
 
     public static void updateTemplate(String theme) {
-        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + "/WEB-INF/static/template/blog/staticPage/" + theme + ".html");
+        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + basePath + theme + ".html");
         if (htmlFile.exists())
             htmlFile.delete();
     }
 
     public static void updateArticleTemplate(String theme) {
-        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + "/WEB-INF/static/template/blog/article/" + theme + ".html");
+        File htmlFile = new File(SystemConstant.SHISHUO_CMS_ROOT + basePath1 + theme + ".html");
         if (htmlFile.exists())
             htmlFile.delete();
     }
@@ -94,7 +98,7 @@ public class PageStaticUtils {
             htmlFile.createNewFile();
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlFile), "UTF-8"));
             //获得模板
-            Template template = freeMarkerConfigurer.getConfiguration().getTemplate("template/blog/" + theme + ".ftl", "utf-8");
+            Template template = freeMarkerConfigurer.getConfiguration().getTemplate("template"+File.separator+"blog"+File.separator + theme + ".ftl", "utf-8");
             //生成文件（这里是我们是生成html）
             template.process(data, out);
             out.flush();
@@ -114,7 +118,7 @@ public class PageStaticUtils {
 
     //文章静态化
     public void articleStaticPage(HttpServletRequest request, Long articleId) throws ArticleNotFoundException {
-        String articleHtml = "/WEB-INF/static/template/blog/article/" + articleId + ".html";
+        String articleHtml = basePath1 + articleId + ".html";
         String root = request.getSession().getServletContext().getRealPath("/");
         File articleHtmlFile = new File(root + articleHtml);
         if (!articleHtmlFile.exists()) {

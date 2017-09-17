@@ -37,7 +37,7 @@ public class LogService {
     public void clean()
     {
         logDao.clean();
-        String path = SystemConstant.SHISHUO_CMS_ROOT+"/WEB-INF/log";
+        String path = SystemConstant.SHISHUO_CMS_ROOT+File.separator+"WEB-INF"+File.separator+"log";
         File file = new File(path);
         if (file.exists()) {
             String[] tempList = file.list();

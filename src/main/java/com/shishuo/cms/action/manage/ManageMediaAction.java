@@ -6,6 +6,7 @@
 
 package com.shishuo.cms.action.manage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +142,7 @@ public class ManageMediaAction extends ManageBaseAction {
 		for (Media attachment : attachmentList) {
 			if (attachment.getType().equals(MediaConstant.Type.photo)) {
 				picturePathList.add(attachment.getPath().replace(
-						java.io.File.separator, "/"));
+						java.io.File.separator, File.separator));
 			}
 		}
 		return StringUtils.join(picturePathList.toArray(), "ue_separate_ue");
