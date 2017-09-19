@@ -39,7 +39,7 @@ public class MediaUtils {
 	/**
 	 * 图片允许格式
 	 */
-	public static String[] PHOTO_TYPE = { ".gif", ".jpg", ".jpg", ".jpeg",
+	public static String[] PHOTO_TYPE = { ".gif", ".jpg", ".png", ".jpeg",
 			".bmp" };
 
 	public static boolean isFileType(String fileName, String[] typeArray) {

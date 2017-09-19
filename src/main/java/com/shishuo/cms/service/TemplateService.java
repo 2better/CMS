@@ -86,7 +86,7 @@ public class TemplateService {
 	 * @return
 	 */
 	private String getTemplatePath(String template) {
-		return File.separator+"template"+File.separator+"blog"+ File.separator + template;
+		return "/template/blog/"+ template;
 	}
 
 	/**

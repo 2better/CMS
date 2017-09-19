@@ -1,4 +1,4 @@
-<#include "template/blog/staticPage/header.html">
+<#include "staticPage/header.html">
 <!--主体-->
 <div class="container">
     <div class="content">
@@ -293,4 +293,4 @@
     </div>
 </div>
 <!--主体-->
-<#include "template/blog/staticPage/footer.html">
+<#include "staticPage/footer.html">

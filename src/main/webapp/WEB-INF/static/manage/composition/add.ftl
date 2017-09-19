@@ -42,7 +42,7 @@
                                         著作封面
                                     </label>
                                     <div class="col-sm-10">
-                                        <a href="#demo" data-toggle="collapse" style="font-size: 16px;">点击上传头像&nbsp;&nbsp;<i
+                                        <a href="#demo" data-toggle="collapse" style="font-size: 16px;">点击上传封面&nbsp;&nbsp;<i
                                                 class="fa fa-chevron-right" id="ix"
                                                 style="float: none;right:6px;font-size: 16px;position: static;"></i></a>
                                     </div>
