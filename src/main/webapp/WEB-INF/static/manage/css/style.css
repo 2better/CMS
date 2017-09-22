@@ -7,6 +7,10 @@ body {
     font-size:14px;
 }
 
+.container{
+    width:100%;
+}
+
 ul li {
     list-style: none;
 }
