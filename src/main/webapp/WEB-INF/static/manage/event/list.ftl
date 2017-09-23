@@ -2,6 +2,18 @@
 <#assign submenu="event_list">
 <#include "/manage/head.ftl">
 <!--main content start-->
+<style>
+    #con {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    #con td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
@@ -20,10 +32,10 @@
                         <table class="table table-striped table-advance table-hover" id="con">
                             <thead>
                             <tr>
-                                <th>活动名称</th>
-                                <th>重要活动</th>
-                                <th>编辑时间</th>
-                                <th>操作</th>
+                                <th width='60%'>活动名称</th>
+                                <th width='10%'>重要活动</th>
+                                <th width='15%'>编辑时间</th>
+                                <th width='15%'>操作</th>
                             </tr>
                             </thead>
 

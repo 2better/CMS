@@ -54,8 +54,8 @@
         <h1>用户登录<i class="close" title="关闭"></i></h1>
         <form method="post" action="${BASE_PATH}/user/login.json" id="loginForm">
             <span id="error" style="color:red;"></span>
-            <p><input type="text" name="name" value="user" placeholder="用户名" required></p>
-            <p><input type="password" name="password" value="123456" placeholder="密码" maxlength="16" minlength="6"
+            <p><input type="text" name="name" value="" placeholder="用户名" required></p>
+            <p><input type="password" name="password" value="" placeholder="密码" maxlength="16" minlength="6"
                       required></p>
             <p>
                 <input type="text" name="captcha" class="form-control" required maxlength="4" minlength="4"
