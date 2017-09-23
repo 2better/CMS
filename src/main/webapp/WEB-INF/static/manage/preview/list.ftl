@@ -33,6 +33,16 @@
     .arrticle_status {
         float: left;
     }
+    #con {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    #con td {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 </style>
 <!--main content start-->
 <section id="main-content">
@@ -83,12 +93,12 @@
                         <table id="con" class="table table-striped table-advance table-hover">
                             <thead>
                             <tr>
-                                <th>文档名称</th>
-                                <th>所属类目</th>
-                                <th>上传者</th>
-                                <th>文档类型</th>
-                                <th>上传时间</th>
-                                <th>操作</th>
+                                <th width='40%'>文档名称</th>
+                                <th width='10%'>所属类目</th>
+                                <th width='10%'>上传者</th>
+                                <th width='10%'>文档类型</th>
+                                <th width='15%'>上传时间</th>
+                                <th width='15%'>操作</th>
                             </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
