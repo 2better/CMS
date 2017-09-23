@@ -77,6 +77,16 @@ a:hover {
   color: #8592bb;
 }
 
+/* 详情页-无序列表宽度控制 */
+
+#content li > a {
+  overflow: hidden;
+  display: inline-block;
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .tRight {
   text-align: right;
 }
@@ -2259,6 +2269,11 @@ body {
   top: 9px;
   left: 14px;
   color: white;
+  /* 面包屑宽度控制 */
+  overflow: hidden;
+  white-space: nowrap;
+  width: 80%;
+  text-overflow: ellipsis;
 }
 
 .g-sd-content {
@@ -2306,14 +2321,13 @@ body {
 
 .g-mn-content {
   width: 92%;
-  height: 1700px;
-  margin: 30px auto;
+  margin: 30px auto 0;
 }
 
 .g-mn-content-out {
   width: 100%;
-  overflow-y: scroll;
-  height: 652px;
+  overflow-y: auto;
+  height: 700px;
   margin: 0px auto;
 }
 
