@@ -69,15 +69,15 @@ input.error:focus {
 			<div class="login-wrap">
 				<div class="form-group">
                                       <label for="exampleInputEmail1">用户名</label>
-                                      <input type="text" name="name" id="name" required class="form-control" placeholder="用户名" value="admin" style="*width: 250px;" autofocus>
+                                      <input type="text" name="name" id="name" required class="form-control" placeholder="用户名" value="" style="*width: 250px;" autofocus>
                                   </div>
  				<div class="form-group">
                                       <label for="exampleInputEmail1">密码</label>
-                                      <input type="password" required id="password" name="password" required class="form-control" placeholder="密码" value="123456" style="*width: 250px;">
+                                      <input type="password" required id="password" name="password" required class="form-control" placeholder="密码" value="" style="*width: 250px;">
                                   </div>	                                 	
 				<div class="form-group">
 					<input type="text" name="captcha" class="form-control"  required
-						placeholder="验证码" style="width: 100px; float: left;" id="captcha" value="abcd"> <img
+						placeholder="验证码" style="width: 100px; float: left;" id="captcha" value=""> <img
 
 						style="cursor: pointer; cursor: hand; margin-top: -13px;"
 						onclick="this.src='${BASE_PATH}/admin/captcha.htm?'+Math.random();"

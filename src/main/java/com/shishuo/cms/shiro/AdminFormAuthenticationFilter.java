@@ -36,12 +36,12 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
             String captcha = request.getParameter("captcha");
             String kaptcha = (String) session.getAttribute(
                     com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
-            /*if (StringUtils.isBlank(captcha)||!captcha.equalsIgnoreCase(kaptcha)) {
+            if (StringUtils.isBlank(captcha)||!captcha.equalsIgnoreCase(kaptcha)) {
                 // randomCodeError表示验证码错误
                 request.setAttribute("shiroLoginFailure", "randomCodeError");
                 //拒绝访问，不再校验账号和密码
                 return true;
-            }*/
+            }
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             if (StringUtils.isBlank(name) || StringUtils.isBlank(password) || password.length() < 6) {
