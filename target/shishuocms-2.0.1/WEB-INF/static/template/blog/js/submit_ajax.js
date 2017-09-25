@@ -1,1 +1,0 @@
-document.write('<img src="/001lt269/count/6/1.gif" /><img src="/001lt269/count/6/2.gif" /><img src="/001lt269/count/6/2.gif" /><img src="/001lt269/count/6/5.gif" />');
