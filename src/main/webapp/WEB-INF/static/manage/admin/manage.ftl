@@ -69,10 +69,12 @@
                                         <td>${e.name}</td>
                                         <td>
                                             <!-- Icons -->
+                                        <#if e.adminId != SESSION_ADMIN.adminId>
                                             <a href="javascript:void(0);" adminId="${e.adminId}" title="删除"
                                                class="js_delete_admin">
                                                 删除
                                             </a>
+                                        </#if>
                                         </td>
                                     </tr>
                                     </#list>

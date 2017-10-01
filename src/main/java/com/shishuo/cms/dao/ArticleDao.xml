@@ -95,7 +95,7 @@
 				and status = #{status}
 			 </if>
 			 <if test="keywords!=''">
-				 and name like "%${keywords}%"
+				 and title like "%${keywords}%"
 			 </if>
 		 </where>
 		 limit #{offset},#{rows}
@@ -114,7 +114,7 @@
 				and status = #{status}
 			</if>
 			<if test="keywords!=''">
-				and name like "%${keywords}%"
+				and title like "%${keywords}%"
 			</if>
 		</where>
 	</select>

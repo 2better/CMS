@@ -69,10 +69,10 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
                     <li>
-                        <a href="${BASE_PATH}/manage/article/list.htm">全部文章(${allCount})</a>
+                        <a href="${BASE_PATH}/manage/article/listPage.htm">全部文章(${allCount})</a>
                     </li>
                     <li>
-                        <a href="${BASE_PATH}/manage/article/list.htm?check=init">我的文章(${admidArtCount})</a>
+                        <a href="${BASE_PATH}/manage/article/listPage.htm?check=init">我的文章(${admidArtCount})</a>
                     </li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -297,7 +297,7 @@
                                 trs += "显示";
                             else
                                 trs += "<span style=\"color:red;\">隐藏</span>";
-                            trs += "</td><td>" + n.adminName + "</td><td><a href=\"${BASE_PATH}/manage/article/list.htm?menuId=" + n.menuId + "\">" + n.menuName + "</a></td><td>" + n.createTimeView + "</td>";
+                            trs += "</td><td>" + n.adminName + "</td><td><a href=\"${BASE_PATH}/article/list.htm?menuId=" + n.menuId + "\">" + n.menuName + "</a></td><td>" + n.createTimeView + "</td>";
 
                             trs += "<td><a name=\"编辑\" href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\" >编辑</a> | <a name=\"是否删除文章\" href=\"javascript:void(0);\"  class=\"js_article_delete\" articleId=\"" + n.articleId + "\">删除</a> | <a href=\"${BASE_PATH}/manage/article/preview.htm?articleId=" + n.articleId + "\" target=\"_blank\">预览</a></td></tr>";
 

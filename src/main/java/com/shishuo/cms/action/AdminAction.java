@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -49,7 +50,10 @@ public class AdminAction extends BaseAction {
     private DefaultKaptcha captchaProducer;
 
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-    public String login() {
+    public String login(HttpSession session) {
+        if (null != session.getAttribute("SESSION_ADMIN")) {
+            return "redirect:/manage/index.htm";
+        }
         return "/manage/login";
     }
 
@@ -76,7 +80,7 @@ public class AdminAction extends BaseAction {
         }
         modelMap.put("name",name);
         modelMap.put("password",password);
-        return login();
+        return login(request.getSession());
     }
 
     /**
