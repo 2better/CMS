@@ -1,9 +1,9 @@
 ﻿/**
- * Warning : Baseed off jquery
+ * Warning : Based off jquery
  * @param {NodeElement} $container 轮播的容器
- * @param {Array[srcString]} imgaes 轮播的图片
- * @param {jsonObject[NodeElement]} $ctrl 轮播切换的按钮
  * @param {boolean} auto 是否自动轮播
+ * @param {Array[srcString]} imgaes 轮播的图片
+ * @param {Boolean} interval 轮播间隔控制
  */
 function slider($container, auto, images, interval) {
 	// //图片路径/链接(数组形式)
