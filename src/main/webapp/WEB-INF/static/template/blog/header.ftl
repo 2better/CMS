@@ -61,7 +61,7 @@
                 <input type="text" name="captcha" class="form-control" required maxlength="4" minlength="4"
                        placeholder="验证码" style="width: 100px; float: left;" id="captcha"> <img
 
-                    style="cursor: pointer; cursor: hand; margin-top: -13px;"
+                    style="cursor: pointer; cursor: hand; margin-left: 20px;"
                     onclick="this.src='${BASE_PATH}/admin/captcha.htm?'+Math.random();"
                     src="${BASE_PATH}/admin/captcha.htm" id="captchaImg">
             </p>

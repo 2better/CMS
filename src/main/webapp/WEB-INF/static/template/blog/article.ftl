@@ -1,4 +1,4 @@
-<#include "staticPage/header.html">
+<#include "/template/blog/staticPage/header.html">
 <div class="g-bd f-cb">
     <div class="g-sd">
         <div class="g-sd-header">
@@ -31,4 +31,4 @@
 		</div>
     </div>
 </div>
-<#include "staticPage/footer.html">
+<#include "/template/blog/staticPage/footer.html">

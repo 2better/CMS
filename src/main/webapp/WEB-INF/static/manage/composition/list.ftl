@@ -2,18 +2,6 @@
 <#assign submenu="result">
 <#include "/manage/head.ftl">
 <!--main content start-->
-<style>
-    #con {
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    #con td {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-</style>
 <section id="main-content">
     <section class="wrapper">
         <!-- page start-->
@@ -32,10 +20,10 @@
                         <table class="table table-striped table-advance table-hover" id="con">
                             <thead>
                             <tr>
-                                <th width='50%'>著作名称</th>
-                                <th width='20%'>封面</th>
-                                <th width='15%'>编辑时间</th>
-                                <th width='15%'>操作</th>
+                                <th>著作名称</th>
+                                <th>图片</th>
+                                <th>编辑时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                         </table>

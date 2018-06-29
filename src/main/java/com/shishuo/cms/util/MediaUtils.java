@@ -28,7 +28,7 @@ import com.shishuo.cms.constant.SystemConstant;
  */
 public class MediaUtils {
 	
-	private static Logger logger = Logger.getLogger(MediaUtils.class);
+	//private String uploadpath;
 
 	/**
 	 * 文件允许格式
@@ -140,6 +140,7 @@ public class MediaUtils {
 		String path = "upload"+File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "")
 				+ getFileExt(multipartFile.getOriginalFilename());
+		path = path.replace("/",File.separator);
 		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
@@ -245,4 +246,11 @@ public class MediaUtils {
 		}
 	}
 
+	/*public String getUploadpath() {
+		return uploadpath;
+	}
+
+	public void setUploadpath(String uploadpath) {
+		this.uploadpath = uploadpath;
+	}*/
 }

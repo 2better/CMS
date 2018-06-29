@@ -81,8 +81,11 @@
                     <ul class="list-group">
                     <#list eventTop10 as event>
                         <li class="list-group-item " style="background-color:#f0f0f0;height:33px;">
-                            <a style="width:50% float:left" href="${BASE_PATH}/manage/event/update.htm?id=${event.id}">
+                            <div class="zxx_text_overflow">
+                            <a class="text_con" href="${BASE_PATH}/manage/event/update.htm?id=${event.id}">
                             <i class="fa fa-paw"></i>&nbsp;${event.name}</a>
+                                <div class="text_dotted" >…</div>
+                            </div>
                                 <a href="${BASE_PATH}/manage/event/update.htm?id=${event.id}"
                                    title="修改" style="float:right;">
                                     [修改]

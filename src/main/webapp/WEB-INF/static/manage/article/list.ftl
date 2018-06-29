@@ -49,16 +49,6 @@
         -moz-border-radius: 6px 0 6px 6px;
         border-radius: 6px 0 6px 6px;
     }
-    #con {
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    #con td {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
 </style>
 <!--main content start-->
 <section id="main-content">
@@ -182,12 +172,12 @@
                         <table class="table table-striped table-advance table-hover" id="con">
                             <thead>
                             <tr>
-                                <th width='45%'>文章名称</th>
-                                <th width='5%'>状态</th>
-                                <th width='10%'>作者</th>
-                                <th width='10%'>所属栏目</th>
-                                <th width='15%'>编辑时间</th>
-                                <th width='15%'>操作</th>
+                                <th>文章名称</th>
+                                <th>状态</th>
+                                <th>作者</th>
+                                <th>所属栏目</th>
+                                <th>编辑时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
 
@@ -291,7 +281,7 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.title + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td style='width:46%'><a href=\"${BASE_PATH}/manage/article/update.htm?articleId=" + n.articleId + "\">" + n.title + "</a></td>";
                             trs += "<td>";
                             if (n.status == "display")
                                 trs += "显示";

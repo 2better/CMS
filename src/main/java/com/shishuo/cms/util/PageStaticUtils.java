@@ -57,7 +57,7 @@ public class PageStaticUtils {
             data.put("menuList", menuList);
             data.put("index_title", configService.getStringByKey("index_title"));
             data.put("seo_description", configService.getStringByKey("seo_description"));
-            data.put("TEMPLATE_BASE_PATH", BASE_PATH + File.separator+"static"+File.separator+"template"+File.separator+"blog");
+            data.put("TEMPLATE_BASE_PATH", BASE_PATH + "/static/template/blog");
             data.put("BASE_PATH", BASE_PATH);
             //加载轮播图
             data.put("pictures", pictureService.getAllByType(1));

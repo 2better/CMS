@@ -62,7 +62,8 @@ public class DocumentService {
                 String pdfFile = "";
                 if (!document.getType().equalsIgnoreCase("pdf")) {
                     pdfFile = filepath + new Date().getTime() + ".pdf";
-                    new Office2PDFUtil().office2PDF(SystemConstant.SHISHUO_CMS_ROOT + File.separator + document.getPath(), SystemConstant.SHISHUO_CMS_ROOT + File.separator + pdfFile);
+                    String fp = SystemConstant.SHISHUO_CMS_ROOT + File.separator + document.getPath().replace("/",File.separator);
+                    Office2PDFUtil.office2PDF(fp, SystemConstant.SHISHUO_CMS_ROOT + File.separator + pdfFile);
                     pdfFile = pdfFile.replace("\\","/");
                 } else {
                     pdfFile = document.getPath();

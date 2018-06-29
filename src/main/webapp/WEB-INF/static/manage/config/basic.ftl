@@ -10,23 +10,16 @@
                     <div class="panel-body">
                         <form  action="${BASE_PATH}/manage/config/basic.json" role="form"
                               class="form-horizontal basicForm" autocomplete="off" method="POST">
-                        <#if configs??>
                         <#list configs as c>
                             <div class="form-group">
                                 <label class="col-lg-2 col-sm-2 control-label"
-                                       for="inputEmail1">${c.description}</label>
+                                       for="inputEmail1">${c.description!}</label>
                                 <div class="col-lg-10">
                                     <input type="text" id="inputEmail1" name="${c.key}" required
                                            class="form-control" value="${c.value!}">
                                 </div>
                             </div>
                         </#list>
-                        <#else>
-                            <div class="form-group">
-                                无相关内容
-                            </div>
-
-                            </#if>
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
                                     <button class="btn btn-danger" type="submit">保存</button>

@@ -45,7 +45,7 @@
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="5" />
         <property name="minIdle" value="5" />
-        <property name="maxActive" value="40" />
+        <property name="maxActive" value="20" />
 
         <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="60000" />
@@ -231,5 +231,9 @@
         <property name="httpOnly" value="true" />
         <property name="maxAge" value="${cookie.maxAge}" />
     </bean>
+
+   <!-- <bean id="mediaUtils" class="com.shishuo.cms.util.MediaUtils">
+        <property name="uploadpath" value="${file.uploadpath}" />
+    </bean>-->
 
 </beans>

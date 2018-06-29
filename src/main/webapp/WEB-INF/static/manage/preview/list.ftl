@@ -1,6 +1,8 @@
 <#assign menu="preview">
 <#assign submenu="preview_list">
 <#include "/manage/head.ftl">
+<link href="${TEMPLATE_BASE_PATH}/css/jquery.mloading.css"
+      rel="stylesheet"/>
 <style type="text/css">
     .pagination {
         border-radius: 4px;
@@ -32,16 +34,6 @@
 
     .arrticle_status {
         float: left;
-    }
-    #con {
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    #con td {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
 </style>
 <!--main content start-->
@@ -93,12 +85,12 @@
                         <table id="con" class="table table-striped table-advance table-hover">
                             <thead>
                             <tr>
-                                <th width='40%'>文档名称</th>
-                                <th width='10%'>所属类目</th>
-                                <th width='10%'>上传者</th>
-                                <th width='10%'>文档类型</th>
-                                <th width='15%'>上传时间</th>
-                                <th width='15%'>操作</th>
+                                <th>文档名称</th>
+                                <th>所属类目</th>
+                                <th>上传者</th>
+                                <th>文档类型</th>
+                                <th>上传时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -117,10 +109,14 @@
     </section>
 </section>
 <!--main content end-->
+
+<div id="myspin"></div>
+
 <script>
     var path = "${TEMPLATE_BASE_PATH}";
 </script>
 <script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/laypage.js"></script>
+<script type="text/javascript" src="${TEMPLATE_BASE_PATH}/js/jquery.mloading.js"></script>
 <script>
 
     var adminId = $("#myArt").val();
@@ -179,13 +175,28 @@
 
         $(document).on("click", ".js_article_preview", function () {
             var articleId = $(this).attr('articleId');
-            $.post("${BASE_PATH}/manage/preview/preview.json", {"id": articleId}, function (data) {
-                if (data.result) {
-                    window.open("${BASE_PATH}/manage/preview/previewPage.htm?pdfFilePath="+data.t,'_blank',"fullscreen=yes");
-                }else{
-                    bootbox.alert(data.msg);
+
+
+            $.ajax({
+                url:"${BASE_PATH}/manage/preview/preview.json",
+                type:"post",
+                data:{"id": articleId},
+                dataType:"json",
+                beforeSend:function () {//ajax处理之前出现spin图标
+                    $("body").mLoading("show");
+                },
+                success:function (data) {
+                    if (data.result) {
+                        window.open("${BASE_PATH}/manage/preview/previewPage.htm?pdfFilePath="+data.t,'_blank',"fullscreen=yes");
+                    }else{
+                        bootbox.alert(data.msg);
+                    }
+                },
+                complete:function () {//ajax请求成功0.3秒以后，关闭loading图标
+                    $("body").mLoading("hide");
                 }
-            }, "json");
+        });
+
         });
 
     });
@@ -209,7 +220,7 @@
                         $("#page").show();
                         var trs = "<tbody  role=\"alert\" aria-live=\"polite\" aria-relevant=\"all\">";
                         $.each(data.list, function (i, n) {
-                            trs += "<tr class=\"gradeA odd\"><td><a href=\"${BASE_PATH}/manage/preview/download.htm?id=" + n.id + "\">" + n.name + "</a></td>";
+                            trs += "<tr class=\"gradeA odd\"><td style='width:46%'><a href=\"${BASE_PATH}/manage/preview/download.htm?id=" + n.id + "\">" + n.name + "</a></td>";
                             trs += "<td>" + n.columnView + "</td>";
                             trs += "<td>" + n.adminName + "</td>";
                             trs += "<td>" + n.type + "</td>";
@@ -240,4 +251,5 @@
         );
     }
 </script>
+
 <#include "/manage/foot.ftl">

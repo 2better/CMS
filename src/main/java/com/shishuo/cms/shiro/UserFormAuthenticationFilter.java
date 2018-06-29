@@ -1,6 +1,5 @@
 package com.shishuo.cms.shiro;
 
-import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -39,8 +38,7 @@ public class UserFormAuthenticationFilter  extends FormAuthenticationFilter
 
             HttpSession session = ((HttpServletRequest)request).getSession();
             String captcha = request.getParameter("captcha");
-            String kaptcha = (String) session.getAttribute(
-                    com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+            String kaptcha = (String) session.getAttribute("captcha");
             if (StringUtils.isBlank(captcha)||!captcha.equalsIgnoreCase(kaptcha)) {
                 request.setAttribute("shiroLoginFailure", "randomCodeError");
                 return true;
@@ -48,7 +46,7 @@ public class UserFormAuthenticationFilter  extends FormAuthenticationFilter
             String password = request.getParameter("password");
             String name = request.getParameter("name");
 
-            if (StringUtils.isBlank(name)||StringUtils.isBlank(password) || password.length() < 6) {
+            if (StringUtils.isBlank(name)||StringUtils.isBlank(password)) {
                 request.setAttribute("shiroLoginFailure", "valueError");
                 return true;
             }

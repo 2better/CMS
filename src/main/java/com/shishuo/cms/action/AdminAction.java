@@ -6,33 +6,20 @@
 
 package com.shishuo.cms.action;
 
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.CircleCaptcha;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.shishuo.cms.constant.SystemConstant;
-import com.shishuo.cms.entity.vo.JsonVo;
-import com.shishuo.cms.service.AdminService;
-import com.shishuo.cms.util.HttpUtils;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Herbert
@@ -41,12 +28,6 @@ import com.shishuo.cms.util.HttpUtils;
 @Controller
 @RequestMapping("/admin")
 public class AdminAction extends BaseAction {
-
-    /**
-     * Kaptcha 验证码
-     */
-    @Autowired
-    private DefaultKaptcha captchaProducer;
 
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
     public String login() {
@@ -89,22 +70,10 @@ public class AdminAction extends BaseAction {
     @RequestMapping(value = "captcha.htm", method = RequestMethod.GET)
     public void captcha(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        response.setDateHeader("Expires", 0);
-        response.setHeader("Cache-Control",
-                "no-store, no-cache, must-revalidate");
-        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-        response.setHeader("Pragma", "no-cache");
-        response.setContentType("image/jpeg");
-        String capText = captchaProducer.createText();
-        request.getSession().setAttribute(
-                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY, capText);
-        BufferedImage bi = captchaProducer.createImage(capText);
-        ServletOutputStream out = response.getOutputStream();
-        ImageIO.write(bi, "jpg", out);
-        try {
+        CircleCaptcha captcha = CaptchaUtil.createCircleCaptcha(120, 40, 4, 15);
+            request.getSession().setAttribute("captcha",captcha.getCode());
+            ServletOutputStream out = response.getOutputStream();
+            captcha.write(out);
             out.flush();
-        } finally {
-            out.close();
-        }
     }
 }
