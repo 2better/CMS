@@ -23,6 +23,8 @@ public class ScholarService {
 
     @Autowired
     private ScholarDao scholarDao;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     public void add(String name, String content,  String createTime, String picUrl) {
         Scholar scholar = new Scholar();
@@ -59,7 +61,7 @@ public class ScholarService {
 
     public void delete(Integer id, String picUrl) {
         if (StringUtils.isNotBlank(picUrl))
-            MediaUtils.deleteFile(picUrl);
+            mediaUtils.deleteFile(picUrl);
         scholarDao.delete(id);
     }
 

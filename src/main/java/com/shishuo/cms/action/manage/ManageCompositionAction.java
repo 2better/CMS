@@ -6,6 +6,7 @@ import com.shishuo.cms.entity.vo.JsonVo;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.CompositionService;
 import com.shishuo.cms.util.MediaUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +27,8 @@ public class ManageCompositionAction extends ManageBaseAction {
 
     @Autowired
     private CompositionService compositionService;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
     public String listPage() {
@@ -59,7 +62,7 @@ public class ManageCompositionAction extends ManageBaseAction {
             String picUrl = "";
             if (file != null && !file.isEmpty()) {
                 if(MediaUtils.isFileType(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")), MediaUtils.PHOTO_TYPE)) {
-                    Map<String, Object> map = MediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
+                    Map<String, Object> map = mediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
                     picUrl = (String) map.get("path");
                 }
             }
@@ -89,12 +92,26 @@ public class ManageCompositionAction extends ManageBaseAction {
                          @RequestParam("content") String content,
                          @RequestParam(value = "createTime", required = false) String createTime,
                          @RequestParam(value = "picUrl") String picUrl,
-                         @RequestParam(value = "file", required = false) MultipartFile file) {
+                         @RequestParam(value = "file", required = false) MultipartFile file,
+                         @RequestParam(value = "x") Double x,
+                         @RequestParam(value = "y") Double y,
+                         @RequestParam(value = "height") Double h,
+                         @RequestParam(value = "width") Double w,
+                         @RequestParam(value = "rotate",defaultValue = "0") Integer r) {
         JsonVo jv = new JsonVo();
         try {
+
             if (file != null && !file.isEmpty()) {
-                picUrl = MediaUtils.save(file);
+                if(MediaUtils.isFileType(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")), MediaUtils.PHOTO_TYPE)) {
+                    Map<String, Object> map = mediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
+
+                    if (StringUtils.isNotBlank(picUrl))
+                        mediaUtils.deleteFile(picUrl);
+
+                    picUrl = (String) map.get("path");
+                }
             }
+
             compositionService.update(id, title,  content, createTime, picUrl);
             jv.setResult(true);
         } catch (Exception e) {

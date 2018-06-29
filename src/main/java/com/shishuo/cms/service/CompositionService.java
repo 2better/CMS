@@ -26,6 +26,8 @@ public class CompositionService {
 
     @Autowired
     private CompositionDao compositionDao;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     public void add(String title, String content,  String createTime, String picUrl) {
         Composition composition = new Composition();
@@ -90,7 +92,7 @@ public class CompositionService {
 
     public void delete(Integer id, String picUrl) {
         if (StringUtils.isNotBlank(picUrl))
-            MediaUtils.deleteFile(picUrl);
+            mediaUtils.deleteFile(picUrl);
         compositionDao.delete(id);
     }
 

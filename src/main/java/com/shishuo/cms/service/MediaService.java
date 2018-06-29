@@ -28,6 +28,8 @@ public class MediaService {
 
 	@Autowired
 	private MediaDao mediaDao;
+	@Autowired
+	private MediaUtils mediaUtils;
 
 	/*
 	 * 上传附件
@@ -45,7 +47,7 @@ public class MediaService {
 			throw new UploadException("文件类型有误");
 		}
 		Date now = new Date();
-		String path = MediaUtils.save(multipartFile);
+		String path = mediaUtils.save(multipartFile);
 		Media attachment = new Media();
 		attachment.setKindId(kindId);
 		attachment.setName(fileName);
@@ -65,7 +67,7 @@ public class MediaService {
 	@CacheEvict(value = "media", allEntries = true)
 	public void deleteMedia(long attachmentId, String path) {
 		mediaDao.deleteMedia(attachmentId);
-		MediaUtils.deleteFile(path);
+		mediaUtils.deleteFile(path);
 	}
 
 	/**

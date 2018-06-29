@@ -21,6 +21,8 @@ public class PictureService {
 
     @Autowired
     private PictureDao pictureDao;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     public void add(String name, String picUrl,int size, Integer type) {
         Picture picture = new Picture();
@@ -39,7 +41,7 @@ public class PictureService {
 
     public void delete(Integer id, String picUrl) {
         if (StringUtils.isNotBlank(picUrl))
-            MediaUtils.deleteFile(File.separator + picUrl);
+            mediaUtils.deleteFile(File.separator + picUrl);
         pictureDao.delete(id);
         PageStaticUtils.updateTemplate("header");
     }

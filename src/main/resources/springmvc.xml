@@ -50,8 +50,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"
 				   cache-period="31556926"/>
-	<mvc:resources mapping="/upload/**" location="/upload/"
-				   cache-period="31556926"/>
+	<!--<mvc:resources mapping="/upload/**" location="/upload/"
+				   cache-period="31556926"/>-->
 	<mvc:default-servlet-handler/>
 
 	<mvc:interceptors>

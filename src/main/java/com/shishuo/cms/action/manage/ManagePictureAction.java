@@ -23,6 +23,8 @@ public class ManagePictureAction extends ManageBaseAction {
 
     @Autowired
     private PictureService pictureService;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     @RequestMapping(value = "/listPage.htm", method = RequestMethod.GET)
     public String listPage() {
@@ -42,7 +44,7 @@ public class ManagePictureAction extends ManageBaseAction {
         String result = "{\"error\":\"error\"}";
         try {
             if (file != null && !file.isEmpty()) {
-                String picUrl = MediaUtils.save(file);
+                String picUrl = mediaUtils.save(file);
                 pictureService.add(file.getOriginalFilename(), picUrl,0,type);
                 result = "{\"success\":\"success\"}";
             }
@@ -106,7 +108,7 @@ public class ManagePictureAction extends ManageBaseAction {
 
                 if(MediaUtils.isFileType(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")), MediaUtils.PHOTO_TYPE)) {
 
-                    Map<String, Object> map = MediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
+                    Map<String, Object> map = mediaUtils.saveImage(file, x.intValue(), y.intValue(),w.intValue(),h.intValue(),r.intValue());
                     pictureService.add(file.getOriginalFilename(), (String) map.get("path"), (Integer) map.get("size"), type);
                     str = "0";
                 }else{

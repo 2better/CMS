@@ -28,7 +28,15 @@ import com.shishuo.cms.constant.SystemConstant;
  */
 public class MediaUtils {
 	
-	//private String uploadpath;
+	private String uploadpath;
+
+	public MediaUtils(String uploadpath){
+		File file = new File(uploadpath+File.separator+"upload");
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		this.uploadpath = uploadpath;
+	}
 
 	/**
 	 * 文件允许格式
@@ -106,17 +114,17 @@ public class MediaUtils {
 	 * 
 	 * @param path
 	 */
-	public static void deleteFile(String path) {
-		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + path);
+	public void deleteFile(String path) {
+		File file = new File(uploadpath +File.separator+ path);
 		file.delete();
 	}
 
-	public static Map<String,Object> saveImage(MultipartFile multipartFile, int x, int y, int desWidth,
+	public Map<String,Object> saveImage(MultipartFile multipartFile, int x, int y, int desWidth,
 											   int desHeight,int rotate) throws IOException {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
 		String path = "upload"+File.separator+"images"+File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
-		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + path);
+		File file = new File(uploadpath + File.separator + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}
@@ -135,13 +143,13 @@ public class MediaUtils {
 	 * @param multipartFile
 	 * @return
 	 */
-	public static String save(MultipartFile multipartFile) throws IOException {
+	public String save(MultipartFile multipartFile) throws IOException {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
 		String path = "upload"+File.separator + formater.format(new Date()) + File.separator
 				+ UUID.randomUUID().toString().replaceAll("-", "")
 				+ getFileExt(multipartFile.getOriginalFilename());
 		path = path.replace("/",File.separator);
-		File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + path);
+		File file = new File( uploadpath + File.separator + path);
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}
@@ -246,11 +254,7 @@ public class MediaUtils {
 		}
 	}
 
-	/*public String getUploadpath() {
+	public String getUploadpath() {
 		return uploadpath;
 	}
-
-	public void setUploadpath(String uploadpath) {
-		this.uploadpath = uploadpath;
-	}*/
 }

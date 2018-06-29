@@ -6,6 +6,7 @@ import com.shishuo.cms.entity.Document;
 import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.DocumentService;
+import com.shishuo.cms.util.MediaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,13 +32,15 @@ public class DocumentAction extends BaseAction{
     private DocumentService documentService ;
     @Autowired
     private ConfigService configService;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
     public String download(@PathVariable(value = "id") Long id, HttpServletResponse response) {
         if (id != null) {
             Document document = documentService.getById(id);
             if (document != null) {
-                String realPath = SystemConstant.SHISHUO_CMS_ROOT + "/" + document.getPath();
+                String realPath = mediaUtils.getUploadpath() + "/" + document.getPath();
                 File file = new File(realPath);
                 if (file.exists()) {
                     response.setContentType("application/force-download");// 设置强制下载不打开

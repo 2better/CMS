@@ -28,6 +28,8 @@ import java.util.List;
 public class DocumentService {
     @Autowired
     private DocumentDao documentDao;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     @CacheEvict(value = "document", allEntries = true)
     public void add(MultipartFile file, Admin admin, int column) throws IOException {
@@ -38,7 +40,7 @@ public class DocumentService {
         String fileName = file.getOriginalFilename();
         if (!file.isEmpty()) {
             document.setName(fileName);
-            document.setPath(MediaUtils.save(file));
+            document.setPath(mediaUtils.save(file));
         }
 
         document.setType(fileName.substring(fileName.lastIndexOf(".") + 1));
@@ -62,8 +64,8 @@ public class DocumentService {
                 String pdfFile = "";
                 if (!document.getType().equalsIgnoreCase("pdf")) {
                     pdfFile = filepath + new Date().getTime() + ".pdf";
-                    String fp = SystemConstant.SHISHUO_CMS_ROOT + File.separator + document.getPath().replace("/",File.separator);
-                    Office2PDFUtil.office2PDF(fp, SystemConstant.SHISHUO_CMS_ROOT + File.separator + pdfFile);
+                    String fp = mediaUtils.getUploadpath() + File.separator + document.getPath().replace("/",File.separator);
+                    Office2PDFUtil.office2PDF(fp, mediaUtils.getUploadpath() + File.separator + pdfFile);
                     pdfFile = pdfFile.replace("\\","/");
                 } else {
                     pdfFile = document.getPath();
@@ -85,14 +87,14 @@ public class DocumentService {
         Document document = documentDao.getById(id);
         if (document != null) {
             String filePath = document.getPath();
-            File file = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + filePath);
+            File file = new File(mediaUtils.getUploadpath() + File.separator + filePath);
             if (file.exists()) {
                 file.delete();
             }
 
             String previewFilePath = document.getPreview();
             if (previewFilePath != null && !previewFilePath.equals("")) {
-                File previewFile = new File(SystemConstant.SHISHUO_CMS_ROOT + File.separator + previewFilePath);
+                File previewFile = new File(mediaUtils.getUploadpath() + File.separator + previewFilePath);
                 if (previewFile.exists()) {
                     previewFile.delete();
                 }

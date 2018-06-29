@@ -232,8 +232,8 @@
         <property name="maxAge" value="${cookie.maxAge}" />
     </bean>
 
-   <!-- <bean id="mediaUtils" class="com.shishuo.cms.util.MediaUtils">
-        <property name="uploadpath" value="${file.uploadpath}" />
-    </bean>-->
+    <bean id="mediaUtils" class="com.shishuo.cms.util.MediaUtils">
+        <constructor-arg value="${file.uploadpath}" />
+    </bean>
 
 </beans>

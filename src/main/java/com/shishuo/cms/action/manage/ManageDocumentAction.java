@@ -8,6 +8,7 @@ import com.shishuo.cms.entity.vo.PageVo;
 import com.shishuo.cms.exception.UploadException;
 import com.shishuo.cms.service.ConfigService;
 import com.shishuo.cms.service.DocumentService;
+import com.shishuo.cms.util.MediaUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class ManageDocumentAction {
     private DocumentService documentService;
     @Autowired
     private ConfigService configService;
+    @Autowired
+    private MediaUtils mediaUtils;
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -92,7 +95,7 @@ public class ManageDocumentAction {
         if (id != null) {
             Document document = documentService.getById(id);
             if (document != null) {
-                String realPath = SystemConstant.SHISHUO_CMS_ROOT + "/" + document.getPath();
+                String realPath = mediaUtils.getUploadpath() + File.separator + document.getPath();
                 File file = new File(realPath);
                 if (file.exists()) {
                     response.setContentType("application/force-download");// 设置强制下载不打开
