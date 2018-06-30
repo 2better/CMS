@@ -5,6 +5,7 @@ import com.shishuo.cms.dao.DocumentDao;
 import com.shishuo.cms.entity.Admin;
 import com.shishuo.cms.entity.Document;
 import com.shishuo.cms.entity.vo.PageVo;
+import com.shishuo.cms.exception.UploadException;
 import com.shishuo.cms.util.IDUtils;
 import com.shishuo.cms.util.MediaUtils;
 import com.shishuo.cms.util.Office2PDFUtil;
@@ -60,19 +61,18 @@ public class DocumentService {
         Document document = documentDao.getById(id);
         if (document != null) {
             if (document.getPreview() == null || document.getPreview().isEmpty()) {
-
                 String pdfFile = "";
-                if (!document.getType().equalsIgnoreCase("pdf")) {
+                if (document.getType().equalsIgnoreCase("docx")||document.getType().equalsIgnoreCase("doc")) {
                     pdfFile = filepath + new Date().getTime() + ".pdf";
                     String fp = mediaUtils.getUploadpath() + File.separator + document.getPath().replace("/",File.separator);
                     Office2PDFUtil.office2PDF(fp, mediaUtils.getUploadpath() + File.separator + pdfFile);
                     pdfFile = pdfFile.replace("\\","/");
-                } else {
-                    pdfFile = document.getPath();
+                } else if (document.getType().equalsIgnoreCase("pdf")) {
+                    pdfFile = document.getPath().replace("\\","/");
+                }else{
+                    throw new UploadException("该文件不支持预览");
                 }
-
                 documentDao.modifyPreviewById(document.getId(), pdfFile);
-
                 return pdfFile;
             } else {
                 return document.getPreview();

@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.ConnectException;
 import java.net.URLEncoder;
 
 /**
@@ -155,21 +154,19 @@ public class ManageDocumentAction {
                 json.setResult(true);
                 json.setT(pdfFilePath);
             } catch (FileNotFoundException e) {
-                logger.error(e.getMessage(),e);
                 json.setResult(false);
                 json.setMsg("该文档不存在");
-            } catch (ConnectException e) {
-                logger.error(e.getMessage(),e);
+            } catch (UploadException e) {
                 json.setResult(false);
-                json.setMsg("系统繁忙，请重试");
+                json.setMsg("该文档不支持预览");
             } catch (Exception e) {
                 logger.error(e.getMessage(),e);
                 json.setResult(false);
-                json.setMsg("系统繁忙，请重试");
+                json.setMsg("系统繁忙，请稍后重试");
             }
         }else {
             json.setResult(false);
-            json.setMsg("找不到该文档");
+            json.setMsg("该文档不存在");
         }
         return json;
 
