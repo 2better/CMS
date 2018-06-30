@@ -14,7 +14,7 @@ public class Picture implements Serializable{
     private String name;
     private String picUrl;
     private Date createTime;
-    private Integer type;//0是轮播图 1是大图
+    private Integer type;//0是轮播图 1是重要活动 2主任致辞
     private int size;
 
     public Integer getType() {
@@ -64,8 +64,15 @@ public class Picture implements Serializable{
     }
 
     public String getPicType() {
-        if (this.type == 1)return "是";
-        return "否";
+        switch (this.type){
+            case 0:
+                return "轮播图";
+            case 1:
+                return "重要活动";
+            default:
+                return "主任致辞";
+        }
+
     }
 
     public int getSize() {

@@ -27,6 +27,6 @@
 
 	<select id="getAllByType" resultType="com.shishuo.cms.entity.Picture">
 		SELECT * FROM picture
-		WHERE type = #{0}
+		WHERE type = #{0} order by createTime desc
 	</select>
 </mapper>

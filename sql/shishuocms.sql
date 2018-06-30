@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS `config`;
 CREATE TABLE `config`  (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `key` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Key',
-  `value` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '值',
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '值',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '描述',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '网站配置' ROW_FORMAT = Compact;

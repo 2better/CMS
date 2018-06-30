@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">展示图类型</label>
                                 <div class="col-sm-10">
-                                    <div class="checkbox checkbox-info" style="display: inline-block">
+                                    <#--<div class="checkbox checkbox-info" style="display: inline-block">
                                         <input type="radio" name="type" id="radio1" value="1" checked>
                                         <label for="radio1">
                                             大图
@@ -31,7 +31,13 @@
                                         <label for="radio2">
                                             小图
                                         </label>
-                                    </div>
+                                    </div>-->
+                                        <select class="form-control input-lg m-bot15"
+                                                style="font-size:15px;width: 200px;" name="type">
+                                            <option value="0">轮播图</option>
+                                            <option value="1">重要活动</option>
+                                            <option value="2">主任致辞</option>
+                                        </select>
                                 </div>
                             </div>
 

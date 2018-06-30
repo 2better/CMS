@@ -65,6 +65,8 @@ function loadEvent(jqObj,important,p,success) {
 //重要活动
 loadEvent($("#importantEvent"),1,0,function(data) {
     $("#importantEvent").html(data[0].content);
+    var a = $('#importantEventJump');
+    a.attr("href",a.attr("tar")+data[0].id+'.htm');
 });
 //公告
 loadEvent($("#eventUl"),0,1,function (data) {

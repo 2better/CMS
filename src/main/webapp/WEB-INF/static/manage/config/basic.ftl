@@ -15,8 +15,14 @@
                                 <label class="col-lg-2 col-sm-2 control-label"
                                        for="inputEmail1">${c.description!}</label>
                                 <div class="col-lg-10">
-                                    <input type="text" id="inputEmail1" name="${c.key}" required
-                                           class="form-control" value="${c.value!}">
+                                    <#if c.key == 'brief_introduction'>
+                                        <textarea name="${c.key}" id="inputEmail1" class="form-control" required class="form-control" rows="4">
+                                            ${c.value!}
+                                        </textarea>
+                                    <#else>
+                                        <input type="text" id="inputEmail1" name="${c.key}" required
+                                               class="form-control" value="${c.value!}">
+                                    </#if>
                                 </div>
                             </div>
                         </#list>

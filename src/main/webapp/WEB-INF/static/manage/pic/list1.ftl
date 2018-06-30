@@ -27,7 +27,7 @@
                                     <thead>
                                     <tr>
                                         <th>图片</th>
-                                        <th>是否为大图</th>
+                                        <th>类别</th>
                                         <th>大小</th>
                                         <th>编辑时间</th>
                                         <th>操作</th>
@@ -109,7 +109,7 @@
                             trs += "<td>" + n.picType + "</td>";
                             trs += "<td>" + n.size + "KB</td>";
                             trs += "<td>" + n.createTimeView + "</td>";
-                            trs += "<td><a name=\"是否删除活动\" href=\"javascript:void(0);\"  class=\"js_picture_delete\" id=\"" + n.id + "\">删除</a></td></tr>";
+                            trs += "<td><a name=\"是否删除图片\" href=\"javascript:void(0);\"  class=\"js_picture_delete\" id=\"" + n.id + "\">删除</a></td></tr>";
                         });
                         $("#con").append(trs + "</tbody>");
 
