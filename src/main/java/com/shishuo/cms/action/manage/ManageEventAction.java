@@ -47,10 +47,11 @@ public class ManageEventAction extends ManageBaseAction {
     public JsonVo add(@RequestParam("name") String name,
                       @RequestParam("content") String content,
                       @RequestParam(value = "createTime", required = false) String createTime,
-                      @RequestParam(value = "important") int important) {
+                      @RequestParam(value = "important") int important,
+                      @RequestParam(value = "link", required = false) String link) {
         JsonVo jv = new JsonVo();
         try {
-            eventService.add(name,content, createTime, important);
+            eventService.add(name,content, createTime, important,link);
             jv.setResult(true);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
@@ -75,10 +76,11 @@ public class ManageEventAction extends ManageBaseAction {
                          @RequestParam("name") String name,
                          @RequestParam("content") String content,
                          @RequestParam(value = "createTime", required = false) String createTime,
-                         @RequestParam(value = "important") int important) {
+                         @RequestParam(value = "important") int important,
+                         @RequestParam(value = "link", required = false) String link) {
         JsonVo jv = new JsonVo();
         try {
-            eventService.update(id, name,  content, createTime, important);
+            eventService.update(id, name,  content, createTime, important,link);
             jv.setResult(true);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);

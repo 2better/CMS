@@ -6,6 +6,7 @@ package com.shishuo.cms.entity;
 public class Event extends Information{
     private Integer important;//1是重要活动，0不是
     private String name;
+    private String link;
 
     public Integer getImportant() {
         return important == 1 ? 1 : 0;
@@ -25,5 +26,13 @@ public class Event extends Information{
 
     public String getImportance() {
         return this.important == 1 ? "是" : "否";
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

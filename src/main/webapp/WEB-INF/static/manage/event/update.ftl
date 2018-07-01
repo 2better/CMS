@@ -43,6 +43,14 @@
                                 <input name="important" value="2" type="radio" <#if event.important != 1>checked</#if>> 否
                             </div>
                         </div>
+                        <div class="form-group" id="linkDiv" <#if event.important != 1>style="display:none;"</#if>>
+                            <label class="col-sm-2 col-sm-2 control-label">详情链接</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="link"
+                                       placeholder="详情链接" id="link" value="${event.link!}">
+                                </input>
+                            </div>
+                        </div>
                         <#--<div class="form-group">-->
                             <#--<label class="col-sm-2 col-sm-2 control-label">选择封面</label>-->
                             <#--<div class="col-sm-10">-->
@@ -184,6 +192,14 @@ $(function(){
             <#--}-->
         <#--}-->
     <#--});-->
+
+    $('input:radio[name="important"]').change(function () {
+        if($('input:radio[name="important"]:checked').val() === '1'){
+            $('#linkDiv').show();
+        }else{
+            $('#linkDiv').hide();
+        }
+    });
 
 	$('#update_event_form').ajaxForm({
 			dataType : 'json',

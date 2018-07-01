@@ -66,7 +66,8 @@ function loadEvent(jqObj,important,p,success) {
 loadEvent($("#importantEvent"),1,0,function(data) {
     $("#importantEvent").html(data[0].content);
     var a = $('#importantEventJump');
-    a.attr("href",a.attr("tar")+data[0].id+'.htm');
+    //a.attr("href",a.attr("tar")+data[0].id+'.htm');
+    a.attr("href",data[0].link);
 });
 //公告
 loadEvent($("#eventUl"),0,1,function (data) {

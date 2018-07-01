@@ -22,21 +22,24 @@ public class EventService {
     @Autowired
     private EventDao eventDao;
 
-    public void add(String name, String content,  String createTime, int important) {
+    public void add(String name, String content,  String createTime, int important,String link) {
         Event e = new Event();
         e.setImportant(important);
         e.setName(name);
         e.setContent(content);
         e.setCreateTime(e.setTime(createTime));
+        e.setLink(link);
         eventDao.add(e);
     }
 
-    public void update(Integer id,String name, String content,  String createTime, int important) {
+    public void update(Integer id,String name, String content,  String createTime, int important,String link) {
         Event event = getById(id);
         if(event != null && event.getId() != null) {
             event.setImportant(important);
             event.setContent(content);
             event.setCreateTime(event.setTime(createTime));
+            event.setLink(link);
+            event.setName(name);
             eventDao.update(event);
         }
     }

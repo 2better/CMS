@@ -123,6 +123,7 @@ CREATE TABLE `event`  (
   `content` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 

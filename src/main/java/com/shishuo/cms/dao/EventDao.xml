@@ -4,8 +4,8 @@
 <mapper namespace="com.shishuo.cms.dao.EventDao">
 	<insert id="add" parameterType="com.shishuo.cms.entity.Event">
 		insert into
-		event(important, content, name, createTime)
-		values(#{important},#{content},#{name},#{createTime})
+		event(important, content, name, createTime,link)
+		values(#{important},#{content},#{name},#{createTime},#{link})
 	</insert>
 
 	<select id="getById" resultType="com.shishuo.cms.entity.Event">
@@ -17,7 +17,8 @@
 		SET important = #{important},
 		content = #{content},
 		name = #{name},
-		createTime = #{createTime}
+		createTime = #{createTime},
+		link = #{link}
 		WHERE
 		id = #{id}
 	</update>

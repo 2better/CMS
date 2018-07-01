@@ -17,7 +17,7 @@
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">活动名称</label>
                           <div class="col-sm-10">
-                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="name"
+                              <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="name" required
                               	placeholder="活动名称" id="name" >
                               </input>
                           </div>
@@ -45,6 +45,14 @@
                                        否
                                     </label>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="linkDiv">
+                            <label class="col-sm-2 col-sm-2 control-label">详情链接</label>
+                            <div class="col-sm-10">
+                                <input type="text" style="font-size:15px;width: 300px;" class="form-control" name="link"
+                                       placeholder="详情链接" id="link" >
+                                </input>
                             </div>
                         </div>
                         <#--<div class="form-group">-->
@@ -85,6 +93,15 @@
 <script type="text/javascript">
 
 $(function(){
+
+    $('input:radio[name="important"]').change(function () {
+        if($('input:radio[name="important"]:checked').val() === '1'){
+            $('#linkDiv').show();
+        }else{
+            $('#linkDiv').hide();
+        }
+    });
+
     $('#add_event_form').ajaxForm({
 		dataType : 'json',
 		success : function(data) {
