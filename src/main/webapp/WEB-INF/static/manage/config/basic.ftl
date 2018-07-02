@@ -16,9 +16,7 @@
                                        for="inputEmail1">${c.description!}</label>
                                 <div class="col-lg-10">
                                     <#if c.key == 'brief_introduction'>
-                                        <textarea name="${c.key}" id="inputEmail1" class="form-control" required class="form-control" rows="4">
-                                            ${c.value!}
-                                        </textarea>
+                                        <textarea name="${c.key}" id="inputEmail1" class="form-control" required class="form-control" rows="4">${c.value!}</textarea>
                                     <#else>
                                         <input type="text" id="inputEmail1" name="${c.key}" required
                                                class="form-control" value="${c.value!}">
