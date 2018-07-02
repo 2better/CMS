@@ -4,7 +4,7 @@
 	<groupId>edu.gdut</groupId>
 	<artifactId>itimrc</artifactId>
 	<packaging>war</packaging>
-	<version>2.0.1</version>
+	<version>1.0.0</version>
 	<name>CMS</name>
 
 	<dependencies>
@@ -304,13 +304,12 @@
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
-
 			</resource>
 		</resources>
 	</build>
-	<properties>
+	<!--<properties>
 		<webapp.port>80</webapp.port>
 		<webapp.stopPort>9090</webapp.stopPort>
 		<webapp.path>/</webapp.path>
-	</properties>
+	</properties>-->
 </project>

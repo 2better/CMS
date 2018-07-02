@@ -2,13 +2,16 @@ package com.shishuo.cms.entity;
 
 import com.shishuo.cms.constant.ArticleConstant;
 
+import java.io.Serializable;
+
 /**
  * @author zyl
  * @create 2017/6/15
  */
 
-public class Friendlylink
+public class Friendlylink implements Serializable
 {
+    private static final long serialVersionUID = -2180152511028055777L;
     private int id;
     private String name;
     private String url;

@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class Picture implements Serializable{
 
+    private static final long serialVersionUID = -3556914912312334759L;
     private Integer id;
     private String name;
     private String picUrl;

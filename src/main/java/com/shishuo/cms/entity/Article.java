@@ -6,6 +6,7 @@
 
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,8 +20,9 @@ import com.shishuo.cms.constant.ArticleConstant;
  * 
  */
 
-public class Article {
+public class Article implements Serializable {
 
+	private static final long serialVersionUID = 4239429214469324210L;
 	private long articleId;
 	private long menuId;
 	private String menuName;

@@ -6,13 +6,14 @@
 
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.shishuo.cms.constant.MediaConstant;
 
-//TODO media
-public class Media {
+public class Media implements Serializable {
 
+	private static final long serialVersionUID = -5035651055479558030L;
 	private long mediaId;
 	private long kindId;
 	private String name;

@@ -6,7 +6,7 @@
 
 package com.shishuo.cms.entity;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * 网站配置实体
@@ -15,8 +15,9 @@ import java.util.Date;
  * 
  */
 
-public class Config {
+public class Config implements Serializable {
 
+	private static final long serialVersionUID = 2365707960513401199L;
 	private String key;
 	private String value;
 	private String description;

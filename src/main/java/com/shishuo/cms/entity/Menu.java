@@ -2,6 +2,7 @@ package com.shishuo.cms.entity;
 
 import com.shishuo.cms.constant.FolderConstant;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,9 @@ import java.util.List;
  * @create 2017/6/6
  */
 
-public class Menu
+public class Menu implements Serializable
 {
+    private static final long serialVersionUID = -4873761410301711375L;
     private long id;
     private String name;
     private String url;

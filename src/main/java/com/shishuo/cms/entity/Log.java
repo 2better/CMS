@@ -1,5 +1,6 @@
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +10,9 @@ import java.util.Date;
  * @create 2017/9/2
  */
 
-public class Log
+public class Log implements Serializable
 {
+    private static final long serialVersionUID = 49433378385328893L;
     private String id;
     private String userName;
     private String className;

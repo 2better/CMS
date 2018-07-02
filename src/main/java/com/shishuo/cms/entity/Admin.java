@@ -6,6 +6,7 @@
 
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.util.Date;
  * 
  */
 
-public class Admin {
+public class Admin implements Serializable {
 
+	private static final long serialVersionUID = -3752217404053559248L;
 	/**
 	 * 管理员Id
 	 */

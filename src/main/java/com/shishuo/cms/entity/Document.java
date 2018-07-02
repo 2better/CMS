@@ -1,5 +1,6 @@
 package com.shishuo.cms.entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,8 +12,8 @@ import java.util.Map;
  * @create 2017/5/31
  */
 
-public class Document
-{
+public class Document implements Serializable {
+    private static final long serialVersionUID = 115489014392653715L;
     private long id;
     private long adminId;
     private String adminName;
@@ -23,10 +24,11 @@ public class Document
     private int column;//所属栏目
     private Date created;
 
-    private static Map<Integer,String> columnMap = new HashMap<Integer,String>();
-    static{
-        columnMap.put(1,"智库专报");
-        columnMap.put(2,"学术论文");
+    private static Map<Integer, String> columnMap = new HashMap<Integer, String>();
+
+    static {
+        columnMap.put(1, "智库专报");
+        columnMap.put(2, "学术论文");
     }
 
     public long getId() {
@@ -94,7 +96,7 @@ public class Document
     }
 
     public String getCreatedView() {
-        if(this.created == null ) return "";
+        if (this.created == null) return "";
         DateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
         return df.format(this.created);
     }
@@ -107,8 +109,7 @@ public class Document
         this.column = column;
     }
 
-    public String getColumnView()
-    {
+    public String getColumnView() {
         return columnMap.get(this.column);
     }
 }

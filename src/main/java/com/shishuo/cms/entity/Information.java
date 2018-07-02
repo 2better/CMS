@@ -13,6 +13,7 @@ import java.util.Date;
  */
 //活动、学者、著作的共同信息
 public class Information implements Serializable{
+    private static final long serialVersionUID = 3037659467953902547L;
     private Integer id;
     private String content;
     private String picUrl;
